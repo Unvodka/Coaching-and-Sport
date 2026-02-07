@@ -1,0 +1,1551 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arnaud Chevallier - Coach Sportif & Maître-Nageur Valbonne</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init('YOUR_PUBLIC_KEY');
+      })();
+    </script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          'Inter',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+        line-height: 1.7;
+        color: #1f2937;
+        overflow-x: hidden;
+        background: #ffffff;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        color: #1a2a56;
+      }
+
+      /* Header - Mix of V1 spacious and V5 structured */
+      header {
+        background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+        color: white;
+        padding: 1.5rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 20px rgba(37, 99, 235, 0.15);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .logo {
+        font-size: 1.7rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        z-index: 1001;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+      }
+
+      .menu-toggle span {
+        width: 28px;
+        height: 3px;
+        background-color: white;
+        margin: 3px 0;
+        transition: all 0.3s ease;
+        border-radius: 3px;
+      }
+
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+      }
+
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+      }
+
+      nav a:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      /* Hero Section - V1 spacious with V5 structure */
+      .hero {
+        background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+        color: white;
+        padding: 0;
+        text-align: center;
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+          radial-gradient(
+            circle at 20% 50%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 50%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+          );
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        padding: 2rem;
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+        color: white;
+        animation: fadeInUp 0.8s ease;
+      }
+
+      .hero p {
+        font-size: 1.4rem;
+        margin-bottom: 2.5rem;
+        font-weight: 400;
+        opacity: 0.95;
+        animation: fadeInUp 0.8s ease 0.2s both;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: white;
+        color: #1e3a8a;
+        padding: 1.2rem 3rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.05rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        animation: fadeInUp 0.8s ease 0.4s both;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        background: #f0f7ff;
+      }
+
+      section {
+        padding: 6rem 2rem;
+        width: 100%;
+      }
+
+      h2 {
+        text-align: center;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        color: #6b7280;
+        font-size: 1.15rem;
+        margin-bottom: 4rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Services Section - V1 cards with V5 grid */
+      .services-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2.5rem;
+      }
+
+      .service-card {
+        flex: 1 1 0%;
+        min-width: 0;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border: 1px solid #e5e7eb;
+      }
+
+      .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 40px rgba(37, 99, 235, 0.15);
+        border-color: #2563eb;
+      }
+
+      .service-image {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+      }
+
+      .service-content {
+        padding: 2rem;
+      }
+
+      .service-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #1a2a56;
+        font-weight: 700;
+      }
+
+      .service-card p {
+        color: #6b7280;
+        line-height: 1.7;
+        font-size: 0.98rem;
+      }
+
+      /* Offres & Tarifs Section - Mix B Style */
+      #offres {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        padding: 6rem 2rem;
+      }
+
+      .offers-container {
+        width: 100%;
+      }
+
+      .programs-grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2.5rem;
+        margin-bottom: 4rem;
+      }
+
+      /* Mix B Card Style - 50/50 balance */
+      .program-card {
+        flex: 1 1 0%;
+        min-width: 0;
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      }
+
+      .program-card:hover {
+        box-shadow: 0 12px 35px rgba(37, 99, 235, 0.12);
+        border-color: #2563eb;
+        transform: translateY(-4px);
+      }
+
+      .program-card.featured {
+        border-color: #2563eb;
+        border-width: 3px;
+      }
+
+      .program-left {
+        flex: 1;
+        padding: 2.5rem;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      }
+
+      .program-right {
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: white;
+        border-top: 1px solid #e5e7eb;
+      }
+
+      .program-card h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: #1a2a56;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .program-description {
+        color: #6b7280;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+        font-size: 1.05rem;
+      }
+
+      .program-features {
+        list-style: none;
+        padding: 0;
+      }
+
+      .program-features li {
+        padding: 0.7rem 0;
+        color: #4b5563;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.95rem;
+      }
+
+      .program-features li::before {
+        content: '✓';
+        color: #2563eb;
+        font-weight: bold;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+      }
+
+      .program-price {
+        font-size: 4rem;
+        font-weight: 700;
+        color: #1a2a56;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+
+      .program-price small {
+        font-size: 1.3rem;
+        color: #6b7280;
+        font-weight: 400;
+      }
+
+      .price-details {
+        color: #6b7280;
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+      }
+
+      .program-cta {
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        color: white;
+        padding: 1.1rem 2.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .program-cta:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+      }
+
+      .featured-badge {
+        background: #2563eb;
+        color: white;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 1rem;
+        display: inline-block;
+      }
+
+      /* Pricing Packs Section */
+      .pricing-divider {
+        text-align: center;
+        margin: 4rem auto 3rem;
+        max-width: 800px;
+      }
+
+      .pricing-divider h3 {
+        font-size: 2.2rem;
+        color: #1a2a56;
+        margin-bottom: 0.8rem;
+        font-weight: 700;
+      }
+
+      .pricing-divider p {
+        color: #6b7280;
+        font-size: 1.05rem;
+      }
+
+      .pricing-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .pricing-card {
+        flex: 1 1 0%;
+        min-width: 0;
+        background: white;
+        padding: 2.5rem 2rem;
+        border-radius: 12px;
+        border: 2px solid #e5e7eb;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .pricing-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+        border-color: #2563eb;
+      }
+
+      .pricing-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #1a2a56;
+      }
+
+      .pricing-card .price {
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: #1a2a56;
+        margin: 1rem 0;
+        line-height: 1;
+      }
+
+      .pricing-card .duration {
+        color: #6b7280;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+        font-style: italic;
+      }
+
+      .pricing-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 1.5rem 0;
+        text-align: left;
+      }
+
+      .pricing-card ul li {
+        padding: 0.6rem 0;
+        color: #4b5563;
+        font-size: 0.92rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.7rem;
+      }
+
+      .pricing-card ul li::before {
+        content: '✓';
+        color: #2563eb;
+        font-weight: bold;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+      }
+
+      .buy-button {
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 1.5rem;
+      }
+
+      .buy-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+      }
+
+      .info-note {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        margin-top: 3rem;
+        border: 2px solid #e5e7eb;
+        border-left: 4px solid #2563eb;
+      }
+
+      .info-note p {
+        margin: 0.75rem 0;
+        color: #4b5563;
+        line-height: 1.7;
+      }
+
+      .info-note strong {
+        color: #1a2a56;
+      }
+
+      .info-note a {
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .info-note a:hover {
+        text-decoration: underline;
+      }
+
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+      }
+
+      .modal-content {
+        background-color: white;
+        margin: 8% auto;
+        border-radius: 16px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+      }
+
+      .modal-header {
+        background: linear-gradient(135deg, #1e3a8a, #2563eb);
+        color: white;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-header h2 {
+        margin: 0;
+        font-size: 1.8rem;
+        color: white;
+      }
+
+      .close-modal {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s;
+      }
+
+      .close-modal:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: rotate(90deg);
+      }
+
+      .modal-body {
+        padding: 2.5rem;
+      }
+
+      .payment-summary {
+        background: #f8fafc;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        text-align: center;
+        border: 1px solid #e5e7eb;
+      }
+
+      .payment-summary h3 {
+        color: #1a2a56;
+        margin-bottom: 0.5rem;
+        font-size: 1.3rem;
+      }
+
+      .payment-summary .total {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2563eb;
+        margin-top: 0.5rem;
+      }
+
+      .card-input {
+        margin-bottom: 1.5rem;
+      }
+
+      .card-input label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #374151;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      .card-input input {
+        width: 100%;
+        padding: 0.9rem;
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s;
+        font-family: 'Inter', sans-serif;
+      }
+
+      .card-input input:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      .card-row {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .card-row .card-input {
+        flex: 1;
+      }
+
+      .payment-button {
+        width: 100%;
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        color: white;
+        padding: 1.2rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 1rem;
+      }
+
+      .payment-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+      }
+
+      .payment-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .security-note {
+        text-align: center;
+        margin-top: 1rem;
+        color: #6b7280;
+        font-size: 0.85rem;
+      }
+
+      /* About Section */
+      .about {
+        background: white;
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        width: 100%;
+      }
+
+      .about-text h3 {
+        color: #1a2a56;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+      }
+
+      .about-text p {
+        color: #4b5563;
+        margin-bottom: 1.3rem;
+        line-height: 1.8;
+        font-size: 1.05rem;
+      }
+
+      .about-image {
+        font-size: 10rem;
+        text-align: center;
+      }
+
+      /* Contact Section */
+      #contact {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      }
+
+      .contact-form {
+        max-width: 700px;
+        margin: 0 auto;
+        background: white;
+        padding: 3rem;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e5e7eb;
+      }
+
+      .form-group {
+        margin-bottom: 1.8rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.6rem;
+        color: #374151;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s;
+        font-family: 'Inter', sans-serif;
+      }
+
+      .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      .submit-button {
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        color: white;
+        padding: 1.2rem 3rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+        width: 100%;
+      }
+
+      .submit-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+      }
+
+      .submit-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      /* Footer */
+      footer {
+        background: linear-gradient(135deg, #1e3a8a, #1e40af);
+        color: white;
+        text-align: center;
+        padding: 2.5rem;
+        font-size: 0.95rem;
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: flex;
+        }
+
+        nav ul {
+          position: fixed;
+          left: -100%;
+          top: 0;
+          flex-direction: column;
+          background: linear-gradient(135deg, #1e3a8a, #2563eb);
+          width: 70%;
+          height: 100vh;
+          padding: 5rem 0 2rem;
+          transition: left 0.4s ease;
+          box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+          gap: 0;
+          z-index: 999;
+        }
+
+        nav ul.active {
+          left: 0;
+        }
+
+        nav ul li {
+          width: 100%;
+        }
+
+        nav a {
+          display: block;
+          padding: 1rem 2rem;
+          border-radius: 0;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.2rem;
+        }
+
+        h2 {
+          font-size: 2.2rem;
+        }
+
+        section {
+          padding: 4rem 1.5rem;
+        }
+
+        .services-grid {
+          flex-direction: column;
+        }
+
+        .service-card {
+          flex: 1 1 100%;
+        }
+
+        .programs-grid {
+          flex-direction: column;
+        }
+
+        .program-card {
+          flex: 1 1 100%;
+        }
+
+        .pricing-grid {
+          flex-direction: column;
+        }
+
+        .pricing-card {
+          flex: 1 1 100%;
+        }
+
+        .about-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .contact-form {
+          padding: 2rem;
+        }
+
+        .modal-content {
+          width: 95%;
+          margin: 15% auto;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+
+        h2 {
+          font-size: 1.8rem;
+        }
+
+        .program-price {
+          font-size: 3rem;
+        }
+
+        .pricing-card .price {
+          font-size: 2.8rem;
+        }
+
+        .contact-form {
+          padding: 1.5rem;
+        }
+
+        .modal-body {
+          padding: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">🏊 Arnaud Chevallier</div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul id="navMenu">
+          <li><a href="#accueil">Accueil</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#offres">Offres & Tarifs</a></li>
+          <li><a href="#apropos">À Propos</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="accueil" class="hero">
+      <div class="hero-content">
+        <h1>Arnaud Chevallier</h1>
+        <p>
+          Maître-nageur et coach sportif spécialisé en perte de poids et remise
+          en forme
+        </p>
+        <a href="#contact" class="cta-button">Commencer ma transformation</a>
+      </div>
+    </section>
+
+    <section id="services">
+      <h2>Mes Services</h2>
+      <p class="section-subtitle">
+        Un accompagnement complet adapté à vos objectifs
+      </p>
+      <div class="services-grid">
+        <div class="service-card">
+          <img
+            src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=800&q=80"
+            alt="Natation"
+            class="service-image"
+          />
+          <div class="service-content">
+            <h3>Natation</h3>
+            <p>
+              Cours de natation adaptés à tous les niveaux. Perfectionnement
+              technique, endurance et perte de poids grâce à une activité
+              complète et douce pour les articulations.
+            </p>
+          </div>
+        </div>
+        <div class="service-card">
+          <img
+            src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80"
+            alt="Fitness"
+            class="service-image"
+          />
+          <div class="service-content">
+            <h3>Fitness</h3>
+            <p>
+              Entraînements personnalisés en salle pour renforcer votre
+              musculature, brûler des calories et sculpter votre silhouette avec
+              des exercices adaptés à vos objectifs.
+            </p>
+          </div>
+        </div>
+        <div class="service-card">
+          <img
+            src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&q=80"
+            alt="Activités Extérieures"
+            class="service-image"
+          />
+          <div class="service-content">
+            <h3>Activités Extérieures</h3>
+            <p>
+              Sessions en plein air combinant course à pied, circuit training et
+              exercices fonctionnels. Profitez de la nature tout en vous
+              dépassant dans un cadre motivant.
+            </p>
+          </div>
+        </div>
+        <div class="service-card">
+          <img
+            src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80"
+            alt="Nutrition Équilibrée"
+            class="service-image"
+          />
+          <div class="service-content">
+            <h3>Nutrition Équilibrée</h3>
+            <p>
+              Conseils nutritionnels personnalisés pour une alimentation variée
+              et équilibrée. Apprenez à mieux manger sans frustration pour des
+              résultats durables et un bien-être optimal.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="offres">
+      <h2>Offres & Tarifs</h2>
+      <p class="section-subtitle">
+        Choisissez la formule qui correspond le mieux à vos besoins et objectifs
+      </p>
+
+      <div class="offers-container">
+        <div class="programs-grid">
+          <div class="program-card">
+            <div class="program-left">
+              <h3>🏊 Cours Particuliers</h3>
+              <p class="program-description">
+                Un accompagnement 100% personnalisé pour atteindre vos objectifs
+                rapidement avec un suivi individuel de qualité.
+              </p>
+              <ul class="program-features">
+                <li>Séances individuelles d'1 heure</li>
+                <li>Programme entièrement sur mesure</li>
+                <li>Horaires ultra-flexibles</li>
+                <li>Corrections techniques en temps réel</li>
+                <li>Suivi nutritionnel personnalisé</li>
+              </ul>
+            </div>
+            <div class="program-right">
+              <div class="program-price">À partir de<br />45€</div>
+              <p class="price-details">par séance</p>
+              <a href="#pricing-packs" class="program-cta">Voir les packs</a>
+            </div>
+          </div>
+
+          <div class="program-card featured">
+            <div class="program-left">
+              <span class="featured-badge">⭐ POPULAIRE</span>
+              <h3>📱 Coaching en Ligne</h3>
+              <p class="program-description">
+                Un programme complet à distance avec suivi quotidien pour
+                progresser où que vous soyez, à votre rythme.
+              </p>
+              <ul class="program-features">
+                <li>Programme d'entraînement personnalisé hebdomadaire</li>
+                <li>Plan alimentaire adapté à vos objectifs</li>
+                <li>Vidéos d'exercices détaillées</li>
+                <li>Ajustements hebdomadaires selon résultats</li>
+                <li>Support illimité par message (24h)</li>
+                <li>Application de suivi mobile</li>
+              </ul>
+            </div>
+            <div class="program-right">
+              <div class="program-price">79€<small>/mois</small></div>
+              <p class="price-details">Engagement 3 mois</p>
+              <a href="#contact" class="program-cta">Commencer maintenant</a>
+            </div>
+          </div>
+
+          <div class="program-card">
+            <div class="program-left">
+              <h3>🎯 Programme Transformation</h3>
+              <p class="program-description">
+                La formule premium combinant coaching en ligne ET séances en
+                personne pour des résultats exceptionnels.
+              </p>
+              <ul class="program-features">
+                <li>4 séances particulières par mois</li>
+                <li>Programme d'entraînement complet quotidien</li>
+                <li>Plan nutritionnel détaillé avec recettes</li>
+                <li>Suivi quotidien par application</li>
+                <li>Support prioritaire 7j/7</li>
+                <li>Analyses corporelles régulières</li>
+                <li>Garantie résultats en 3 mois</li>
+              </ul>
+            </div>
+            <div class="program-right">
+              <div class="program-price">299€<small>/mois</small></div>
+              <p class="price-details">Programme 3-6 mois</p>
+              <a href="#contact" class="program-cta">Transformer mon corps</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pricing-divider" id="pricing-packs">
+          <h3>Packs Cours Particuliers</h3>
+          <p>Réservez vos séances individuelles avec des packs avantageux</p>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h3>Séance Découverte</h3>
+            <div class="price">45€</div>
+            <div class="duration">1 séance / 1 heure</div>
+            <ul>
+              <li>Évaluation personnalisée</li>
+              <li>Définition des objectifs</li>
+              <li>Plan d'action sur mesure</li>
+              <li>Conseils nutrition de base</li>
+            </ul>
+            <button
+              class="buy-button"
+              onclick="openPayment('Séance Découverte', 45)"
+            >
+              Réserver maintenant
+            </button>
+          </div>
+
+          <div class="pricing-card">
+            <h3>Pack 5 Séances</h3>
+            <div class="price">200€</div>
+            <div class="duration">5 séances / Validité 2 mois</div>
+            <ul>
+              <li>5 séances d'1 heure</li>
+              <li>Programme personnalisé complet</li>
+              <li>Suivi nutritionnel détaillé</li>
+              <li>Support par message</li>
+              <li>Économie de 25€</li>
+            </ul>
+            <button
+              class="buy-button"
+              onclick="openPayment('Pack 5 Séances', 200)"
+            >
+              Réserver maintenant
+            </button>
+          </div>
+
+          <div class="pricing-card">
+            <h3>Pack 10 Séances</h3>
+            <div class="price">380€</div>
+            <div class="duration">10 séances / Validité 3 mois</div>
+            <ul>
+              <li>10 séances d'1 heure</li>
+              <li>Programme évolutif complet</li>
+              <li>Suivi nutrition approfondi</li>
+              <li>Support illimité par message</li>
+              <li>Bilan mensuel détaillé</li>
+              <li>Économie de 70€</li>
+            </ul>
+            <button
+              class="buy-button"
+              onclick="openPayment('Pack 10 Séances', 380)"
+            >
+              Réserver maintenant
+            </button>
+          </div>
+
+          <div class="pricing-card">
+            <h3>Pack 20 Séances</h3>
+            <div class="price">700€</div>
+            <div class="duration">20 séances / Validité 6 mois</div>
+            <ul>
+              <li>20 séances d'1 heure</li>
+              <li>Programme transformation complète</li>
+              <li>Suivi nutrition et analyses corporelles</li>
+              <li>Support prioritaire 7j/7</li>
+              <li>Bilan bi-mensuel détaillé</li>
+              <li>Économie de 200€ !</li>
+            </ul>
+            <button
+              class="buy-button"
+              onclick="openPayment('Pack 20 Séances', 700)"
+            >
+              Réserver maintenant
+            </button>
+          </div>
+        </div>
+
+        <div class="info-note">
+          <p>
+            💡 <strong>Tous les programmes incluent :</strong> Bilan initial
+            gratuit • Suivi personnalisé • Conseils nutrition • Motivation
+            continue
+          </p>
+          <p>
+            💳 <strong>Paiement sécurisé</strong> • Plusieurs moyens de paiement
+            acceptés
+          </p>
+          <p>
+            Les séances peuvent être utilisées pour n'importe quelle activité :
+            natation, fitness ou activités extérieures
+          </p>
+          <p>
+            📞 Besoin de conseils pour choisir ?
+            <a href="#contact">Contactez-moi</a>
+            pour un entretien gratuit de 15 minutes !
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div id="paymentModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Paiement Sécurisé</h2>
+          <button class="close-modal" onclick="closePayment()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="payment-summary">
+            <h3 id="selectedService">Service sélectionné</h3>
+            <div class="total" id="totalPrice">0€</div>
+          </div>
+
+          <form id="paymentForm" onsubmit="processPayment(event)">
+            <div class="card-input">
+              <label for="cardName">Nom sur la carte *</label>
+              <input
+                type="text"
+                id="cardName"
+                required
+                placeholder="Jean Dupont"
+              />
+            </div>
+
+            <div class="card-input">
+              <label for="cardNumber">Numéro de carte *</label>
+              <input
+                type="text"
+                id="cardNumber"
+                required
+                placeholder="1234 5678 9012 3456"
+                maxlength="19"
+              />
+            </div>
+
+            <div class="card-row">
+              <div class="card-input">
+                <label for="cardExpiry">Date d'expiration *</label>
+                <input
+                  type="text"
+                  id="cardExpiry"
+                  required
+                  placeholder="MM/AA"
+                  maxlength="5"
+                />
+              </div>
+              <div class="card-input">
+                <label for="cardCvv">CVV *</label>
+                <input
+                  type="text"
+                  id="cardCvv"
+                  required
+                  placeholder="123"
+                  maxlength="3"
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="payment-button" id="payButton">
+              Payer maintenant
+            </button>
+            <div class="security-note">Paiement 100% sécurisé et crypté</div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <section id="apropos" class="about">
+      <h2>À Propos</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <h3>Arnaud Chevallier - Votre Coach Dédié à Votre Réussite</h3>
+          <p>
+            Maître-nageur diplômé et coach sportif certifié, je me consacre
+            depuis plusieurs années à accompagner mes clients dans leur parcours
+            de transformation physique.
+          </p>
+          <p>
+            Spécialisé dans la perte de poids et la remise en forme, j'ai
+            développé une approche globale qui combine plusieurs disciplines
+            sportives pour des résultats durables et harmonieux.
+          </p>
+          <p>
+            Ma philosophie : un accompagnement bienveillant, des objectifs
+            réalistes et une progression adaptée à votre rythme. Chaque personne
+            est unique, et votre programme le sera aussi.
+          </p>
+          <p>
+            <strong>Basé à Valbonne</strong>, j'interviens dans toute la région
+            pour vous offrir le meilleur service possible.
+          </p>
+        </div>
+        <div class="about-image">🏅</div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contactez-Moi</h2>
+      <p class="section-subtitle">
+        Prêt à commencer votre transformation ? Parlons-en !
+      </p>
+      <form class="contact-form" id="contactForm">
+        <div class="form-group">
+          <label for="nom">Nom Complet *</label>
+          <input type="text" id="nom" name="from_name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="from_email" required />
+        </div>
+        <div class="form-group">
+          <label for="telephone">Téléphone</label>
+          <input type="tel" id="telephone" name="phone" />
+        </div>
+        <div class="form-group">
+          <label for="formule">Type de cours souhaité *</label>
+          <select id="formule" name="formule" required>
+            <option value="">-- Sélectionnez --</option>
+            <option value="particulier">Cours Particuliers</option>
+            <option value="programmation">Programmation Sur Mesure</option>
+            <option value="info">Demande d'information</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Votre Message *</label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            placeholder="Parlez-moi de vos objectifs, votre niveau actuel..."
+          ></textarea>
+        </div>
+        <button type="submit" class="submit-button">Envoyer ma Demande</button>
+      </form>
+    </section>
+
+    <footer>
+      <p>
+        &copy; 2026 Arnaud Chevallier - Coach Sportif & Maître-Nageur - Valbonne
+        - Tous droits réservés
+      </p>
+    </footer>
+
+    <script>
+      // Menu toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+
+      menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+      });
+
+      const navLinks = document.querySelectorAll('#navMenu a');
+      navLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          menuToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+          menuToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+        }
+      });
+
+      // Payment modal
+      let selectedService = '';
+      let selectedPrice = 0;
+
+      function openPayment(service, price) {
+        selectedService = service;
+        selectedPrice = price;
+        document.getElementById('selectedService').textContent = service;
+        document.getElementById('totalPrice').textContent = price + '€';
+        document.getElementById('paymentModal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closePayment() {
+        document.getElementById('paymentModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+        document.getElementById('paymentForm').reset();
+      }
+
+      // Card formatting
+      document
+        .getElementById('cardNumber')
+        .addEventListener('input', function (e) {
+          let value = e.target.value.replace(/\s/g, '');
+          let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+          e.target.value = formattedValue;
+        });
+
+      document
+        .getElementById('cardExpiry')
+        .addEventListener('input', function (e) {
+          let value = e.target.value.replace(/\D/g, '');
+          if (value.length >= 2) {
+            value = value.slice(0, 2) + '/' + value.slice(2, 4);
+          }
+          e.target.value = value;
+        });
+
+      document
+        .getElementById('cardCvv')
+        .addEventListener('input', function (e) {
+          e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+      function processPayment(event) {
+        event.preventDefault();
+        const payButton = document.getElementById('payButton');
+        payButton.disabled = true;
+        payButton.textContent = 'Traitement en cours...';
+
+        setTimeout(() => {
+          alert(
+            `Paiement réussi !\n\nService : ${selectedService}\nMontant : ${selectedPrice}€\n\nVous recevrez un email de confirmation.`,
+          );
+          closePayment();
+          payButton.disabled = false;
+          payButton.textContent = 'Payer maintenant';
+        }, 2000);
+      }
+
+      window.onclick = function (event) {
+        const modal = document.getElementById('paymentModal');
+        if (event.target === modal) {
+          closePayment();
+        }
+      };
+
+      // Contact form
+      document
+        .getElementById('contactForm')
+        .addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          const submitButton = this.querySelector('.submit-button');
+          const originalText = submitButton.textContent;
+          submitButton.disabled = true;
+          submitButton.textContent = 'Envoi en cours...';
+
+          if (typeof emailjs === 'undefined') {
+            alert(
+              "EmailJS n'est pas configuré. Contactez : chevallier.a06@gmail.com",
+            );
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
+            return;
+          }
+
+          const formData = new FormData(this);
+          const templateParams = {
+            from_name: formData.get('from_name'),
+            from_email: formData.get('from_email'),
+            phone: formData.get('phone') || 'Non renseigné',
+            formule: formData.get('formule'),
+            message: formData.get('message'),
+            to_email: 'chevallier.a06@gmail.com',
+          };
+
+          emailjs
+            .send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+            .then(
+              function (response) {
+                alert('✅ Message envoyé avec succès !');
+                document.getElementById('contactForm').reset();
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+              },
+              function (error) {
+                alert(
+                  "❌ Erreur lors de l'envoi. Contactez : chevallier.a06@gmail.com",
+                );
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+              },
+            );
+        });
+
+      // Smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

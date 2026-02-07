@@ -1,0 +1,30 @@
+# macOS system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Claude Code
+.claude/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Node (if added later)
+node_modules/
+npm-debug.log*
+
+# Build output
+dist/
+build/
