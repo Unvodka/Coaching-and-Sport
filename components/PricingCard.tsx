@@ -1,0 +1,48 @@
+import { PricingPack } from "@/lib/types";
+
+interface PricingCardProps extends PricingPack {
+  onBuy: () => void;
+  isLoading?: boolean;
+  index?: number;
+}
+
+export default function PricingCard({
+  title,
+  price,
+  duration,
+  features,
+  onBuy,
+  isLoading = false,
+  index = 0,
+}: PricingCardProps) {
+  return (
+    <div
+      onClick={!isLoading ? onBuy : undefined}
+      data-aos="zoom-in-up"
+      data-aos-delay={index * 150}
+      className={`flex-1 min-w-0 bg-white py-10 px-8 rounded-xl border-2 border-gray-200 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_35px_rgba(0,0,0,0.1)] hover:border-brand-blue ${
+        isLoading ? "opacity-60 cursor-not-allowed" : "cursor-pointer"
+      }`}
+    >
+      <h3 className="font-heading text-2xl mb-4 text-heading">{title}</h3>
+      <div className="text-[2.2rem] font-bold text-heading my-4 leading-none max-[480px]:text-[1.8rem]">
+        {price}
+      </div>
+      <div className="text-gray-500 text-[0.9rem] mb-6 italic">{duration}</div>
+      <ul className="list-none p-0 my-6 text-left">
+        {features.map((feature) => (
+          <li
+            key={feature}
+            className="py-[0.6rem] text-gray-600 text-[0.92rem] flex items-start gap-[0.7rem]"
+          >
+            <span className="text-brand-blue font-bold text-lg shrink-0">✓</span>
+            {feature}
+          </li>
+        ))}
+      </ul>
+      <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-8 rounded-lg font-bold text-[0.95rem] transition-all duration-300 w-full mt-6 inline-block text-center">
+        {isLoading ? "Redirection..." : "Réserver maintenant"}
+      </span>
+    </div>
+  );
+}
