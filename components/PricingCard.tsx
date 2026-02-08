@@ -3,7 +3,6 @@ import { PricingPack } from "@/lib/types";
 interface PricingCardProps extends PricingPack {
   onBuy: () => void;
   isLoading?: boolean;
-  index?: number;
 }
 
 export default function PricingCard({
@@ -13,14 +12,11 @@ export default function PricingCard({
   features,
   onBuy,
   isLoading = false,
-  index = 0,
 }: PricingCardProps) {
   return (
     <div
       onClick={!isLoading ? onBuy : undefined}
-      data-aos="zoom-in-up"
-      data-aos-delay={index * 150}
-      className={`flex-1 min-w-0 bg-white py-10 px-8 rounded-xl border-2 border-gray-200 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_35px_rgba(0,0,0,0.1)] hover:border-brand-blue ${
+      className={`h-full bg-white py-10 px-8 rounded-xl border-2 border-gray-200 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_35px_rgba(0,0,0,0.1)] hover:border-brand-blue ${
         isLoading ? "opacity-60 cursor-not-allowed" : "cursor-pointer"
       }`}
     >

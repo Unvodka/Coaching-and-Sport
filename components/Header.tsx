@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { NAV_LINKS } from "@/lib/constants";
 
 export default function Header() {
@@ -24,7 +25,12 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="text-white py-6 fixed w-full top-0 z-[1000] backdrop-blur-md bg-black/40">
+    <motion.header
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 80, damping: 20, delay: 0.2 }}
+      className="text-white py-6 fixed w-full top-0 z-[1000] backdrop-blur-md bg-black/40"
+    >
       <nav className="flex justify-between items-center w-full px-12">
         <div className="font-heading text-[1.7rem] font-bold tracking-tight">
           🏊 Arnaud Chevallier
@@ -61,8 +67,14 @@ export default function Header() {
             menuOpen ? "max-md:left-0" : "max-md:left-[-100%]"
           }`}
         >
-          {NAV_LINKS.map((link) => (
-            <li key={link.href} className="max-md:w-full">
+          {NAV_LINKS.map((link, i) => (
+            <motion.li
+              key={link.href}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 + i * 0.1, duration: 0.4 }}
+              className="max-md:w-full"
+            >
               <a
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
@@ -70,10 +82,10 @@ export default function Header() {
               >
                 {link.label}
               </a>
-            </li>
+            </motion.li>
           ))}
         </ul>
       </nav>
-    </header>
+    </motion.header>
   );
 }
