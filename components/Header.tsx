@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { NAV_LINKS } from "@/lib/constants";
 
 export default function Header() {
@@ -32,9 +33,9 @@ export default function Header() {
       className="text-white py-6 fixed w-full top-0 z-[1000] backdrop-blur-md bg-black/40"
     >
       <nav className="flex justify-between items-center w-full px-12">
-        <div className="font-heading text-[1.7rem] font-bold tracking-tight">
+        <Link href="/" className="font-heading text-[1.7rem] font-bold tracking-tight text-white no-underline">
           🏊 Arnaud Chevallier
-        </div>
+        </Link>
 
         {/* Hamburger Toggle */}
         <button
@@ -75,13 +76,13 @@ export default function Header() {
               transition={{ delay: 0.4 + i * 0.1, duration: 0.4 }}
               className="max-md:w-full"
             >
-              <a
+              <Link
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
                 className="text-white no-underline font-semibold text-[0.95rem] transition-all duration-300 py-2 px-4 rounded-md hover:bg-white/15 max-md:block max-md:py-4 max-md:px-8 max-md:rounded-none"
               >
                 {link.label}
-              </a>
+              </Link>
             </motion.li>
           ))}
         </ul>

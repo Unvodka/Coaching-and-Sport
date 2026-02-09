@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -14,13 +14,6 @@ export default function StaggerContainer({
   className,
   staggerDelay = 0.15,
 }: Props) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  if (!mounted) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
     <motion.div
       variants={{

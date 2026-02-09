@@ -57,9 +57,9 @@ export default function OffersSection() {
 
       <div className="w-full">
         {/* Programs Grid */}
-        <StaggerContainer className="flex flex-row flex-wrap gap-10 mb-16 max-md:flex-col" staggerDelay={0.2}>
+        <StaggerContainer className="grid grid-cols-3 gap-8 mb-16 max-md:grid-cols-1" staggerDelay={0.2}>
           {PROGRAMS.map((program) => (
-            <StaggerItem key={program.title} className="flex-1 min-w-0 max-md:min-w-full">
+            <StaggerItem key={program.title} className="max-md:min-w-full">
               <ProgramCard
                 {...program}
                 isLoading={loadingPack === program.title}
