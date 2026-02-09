@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 interface Props {
   children: ReactNode;
@@ -18,6 +18,9 @@ export default function FadeInWhenVisible({
   duration = 0.6,
   direction = "up",
 }: Props) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const directionMap = {
     up: { y: 40, x: 0 },
     down: { y: -40, x: 0 },
@@ -27,6 +30,10 @@ export default function FadeInWhenVisible({
   };
 
   const offset = directionMap[direction];
+
+  if (!mounted) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div
