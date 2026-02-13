@@ -1,4 +1,7 @@
+"use client";
+
 import { PricingPack } from "@/lib/types";
+import { useLanguage } from "@/lib/i18n/useLanguage";
 
 interface PricingCardProps extends PricingPack {
   onBuy: () => void;
@@ -13,6 +16,8 @@ export default function PricingCard({
   onBuy,
   isLoading = false,
 }: PricingCardProps) {
+  const { t } = useLanguage();
+
   return (
     <div
       onClick={!isLoading ? onBuy : undefined}
@@ -37,7 +42,7 @@ export default function PricingCard({
         ))}
       </ul>
       <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-8 rounded-lg font-bold text-[0.95rem] transition-all duration-300 w-full mt-6 inline-block text-center">
-        {isLoading ? "Redirection..." : "Réserver maintenant"}
+        {isLoading ? t("offers.redirecting") : t("offers.bookNow")}
       </span>
     </div>
   );

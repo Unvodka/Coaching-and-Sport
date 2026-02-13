@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/useLanguage";
 
 export default function HeroSection() {
+  const { t } = useLanguage();
+
   return (
     <section
       id="accueil"
@@ -36,8 +39,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-[1.4rem] mb-10 font-normal opacity-95 max-md:text-[1.2rem] max-[480px]:text-base"
         >
-          Maître-nageur et coach sportif spécialisé en perte de poids et remise
-          en forme
+          {t("hero.subtitle")}
         </motion.p>
         <motion.a
           href="#contact"
@@ -52,7 +54,7 @@ export default function HeroSection() {
           whileTap={{ scale: 0.95, y: 0 }}
           className="inline-block bg-white text-brand-dark py-5 px-12 rounded-lg no-underline font-bold text-[1.05rem] transition-colors duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:bg-brand-blue hover:text-white"
         >
-          Commencer ma transformation
+          {t("hero.cta")}
         </motion.a>
       </div>
     </section>

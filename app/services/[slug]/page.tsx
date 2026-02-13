@@ -30,5 +30,5 @@ export default function ServicePage({ params }: Props) {
     notFound();
   }
 
-  return <ServiceDetailContent service={service} />;
+  return <ServiceDetailContent slug={params.slug} />;
 }

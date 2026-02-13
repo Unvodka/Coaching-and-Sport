@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Service } from "@/lib/types";
+import { getServiceBySlug } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n/useLanguage";
 import Header from "./Header";
 import Footer from "./Footer";
 import FadeInWhenVisible from "./animations/FadeInWhenVisible";
@@ -10,10 +11,15 @@ import StaggerContainer from "./animations/StaggerContainer";
 import StaggerItem from "./animations/StaggerItem";
 
 interface Props {
-  service: Service;
+  slug: string;
 }
 
-export default function ServiceDetailContent({ service }: Props) {
+export default function ServiceDetailContent({ slug }: Props) {
+  const { locale, t } = useLanguage();
+  const service = getServiceBySlug(slug, locale);
+
+  if (!service) return null;
+
   const { title, detail } = service;
 
   return (
@@ -47,7 +53,7 @@ export default function ServiceDetailContent({ service }: Props) {
           href="/#services"
           className="text-brand-blue font-semibold hover:underline text-[0.95rem] inline-flex items-center gap-2"
         >
-          &larr; Retour aux services
+          &larr; {t("detail.backToServices")}
         </Link>
       </div>
 
@@ -66,7 +72,7 @@ export default function ServiceDetailContent({ service }: Props) {
       <section className="bg-gradient-to-br from-slate-50 to-slate-100 py-24 px-16 max-md:py-16 max-md:px-6">
         <FadeInWhenVisible>
           <h2 className="font-heading text-center text-4xl mb-16 font-extrabold tracking-tight text-heading max-md:text-[2rem]">
-            Les Bienfaits
+            {t("detail.benefits")}
           </h2>
         </FadeInWhenVisible>
         <StaggerContainer className="grid grid-cols-2 gap-8 max-w-[900px] mx-auto max-md:grid-cols-1">
@@ -90,7 +96,7 @@ export default function ServiceDetailContent({ service }: Props) {
       <section className="py-24 px-16 max-md:py-16 max-md:px-6">
         <FadeInWhenVisible>
           <h2 className="font-heading text-center text-4xl mb-12 font-extrabold tracking-tight text-heading max-md:text-[2rem]">
-            Pour Qui ?
+            {t("detail.targetAudience")}
           </h2>
         </FadeInWhenVisible>
         <div className="max-w-[600px] mx-auto">
@@ -117,7 +123,7 @@ export default function ServiceDetailContent({ service }: Props) {
             href="/#offres"
             className="inline-block bg-white text-brand-dark py-4 px-10 rounded-lg font-bold text-base transition-all duration-300 no-underline hover:-translate-y-[2px] hover:shadow-[0_8px_25px_rgba(255,255,255,0.3)]"
           >
-            Voir les offres &amp; tarifs
+            {t("detail.seeOffers")}
           </Link>
         </FadeInWhenVisible>
       </section>

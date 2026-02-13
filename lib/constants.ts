@@ -1,6 +1,8 @@
-import { NavLink, Service, Program, PricingPack } from "./types";
+import { NavLink, Service, Program, PricingPack, Locale } from "./types";
 
-export const NAV_LINKS: NavLink[] = [
+// ─── NAV LINKS ──────────────────────────────────────────────
+
+const NAV_LINKS_FR: NavLink[] = [
   { href: "/#accueil", label: "Accueil" },
   { href: "/#services", label: "Services" },
   { href: "/#offres", label: "Offres & Tarifs" },
@@ -8,7 +10,23 @@ export const NAV_LINKS: NavLink[] = [
   { href: "/#contact", label: "Contact" },
 ];
 
-export const SERVICES: Service[] = [
+const NAV_LINKS_EN: NavLink[] = [
+  { href: "/#accueil", label: "Home" },
+  { href: "/#services", label: "Services" },
+  { href: "/#offres", label: "Offers & Pricing" },
+  { href: "/#apropos", label: "About" },
+  { href: "/#contact", label: "Contact" },
+];
+
+export function getNavLinks(locale: Locale): NavLink[] {
+  return locale === "en" ? NAV_LINKS_EN : NAV_LINKS_FR;
+}
+
+export const NAV_LINKS = NAV_LINKS_FR;
+
+// ─── SERVICES ───────────────────────────────────────────────
+
+const SERVICES_FR: Service[] = [
   {
     slug: "natation",
     imageSrc:
@@ -28,30 +46,10 @@ export const SERVICES: Service[] = [
         "Chaque séance est structurée pour combiner travail technique, renforcement musculaire aquatique et exercices de cardio dans l'eau. Vous progresserez à votre rythme dans un environnement bienveillant et motivant.",
       ],
       benefits: [
-        {
-          icon: "💪",
-          title: "Sport complet",
-          description:
-            "La natation travaille l'ensemble des groupes musculaires : bras, jambes, dos, abdominaux. Un entraînement global sans impact sur les articulations.",
-        },
-        {
-          icon: "🦴",
-          title: "Doux pour les articulations",
-          description:
-            "L'eau porte votre poids corporel, réduisant le stress articulaire de 90%. Idéal pour la rééducation ou les personnes souffrant de douleurs chroniques.",
-        },
-        {
-          icon: "🔥",
-          title: "Brûleur de calories",
-          description:
-            "Une séance de natation intensive permet de brûler jusqu'à 500 calories par heure, tout en affinant la silhouette et en améliorant l'endurance cardiovasculaire.",
-        },
-        {
-          icon: "🧘",
-          title: "Anti-stress naturel",
-          description:
-            "Le contact avec l'eau procure un effet apaisant immédiat. La natation réduit le cortisol et favorise la production d'endorphines pour un bien-être durable.",
-        },
+        { icon: "💪", title: "Sport complet", description: "La natation travaille l'ensemble des groupes musculaires : bras, jambes, dos, abdominaux. Un entraînement global sans impact sur les articulations." },
+        { icon: "🦴", title: "Doux pour les articulations", description: "L'eau porte votre poids corporel, réduisant le stress articulaire de 90%. Idéal pour la rééducation ou les personnes souffrant de douleurs chroniques." },
+        { icon: "🔥", title: "Brûleur de calories", description: "Une séance de natation intensive permet de brûler jusqu'à 500 calories par heure, tout en affinant la silhouette et en améliorant l'endurance cardiovasculaire." },
+        { icon: "🧘", title: "Anti-stress naturel", description: "Le contact avec l'eau procure un effet apaisant immédiat. La natation réduit le cortisol et favorise la production d'endorphines pour un bien-être durable." },
       ],
       targetAudience: [
         "Débutants souhaitant apprendre à nager en toute confiance",
@@ -64,111 +62,37 @@ export const SERVICES: Service[] = [
     },
   },
   {
-    slug: "fitness",
+    slug: "fitness-plein-air",
     imageSrc:
       "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
-    imageAlt: "Fitness",
-    title: "Fitness",
+    imageAlt: "Fitness & Plein Air",
+    title: "Fitness & Plein Air",
     description:
-      "Entraînements personnalisés en salle pour renforcer votre musculature, brûler des calories et sculpter votre silhouette avec des exercices adaptés à vos objectifs.",
+      "Entraînements personnalisés en salle ou en extérieur : musculation, HIIT, circuit training et exercices fonctionnels pour sculpter votre corps et vous dépasser.",
     detail: {
       heroImageSrc:
         "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80",
-      heroImageAlt: "Entraînement fitness en salle de sport",
-      subtitle: "Sculptez votre corps, dépassez vos limites",
+      heroImageAlt: "Entraînement fitness en salle et en plein air",
+      subtitle: "Sculptez votre corps, en salle comme en plein air",
       longDescription: [
-        "Le fitness est bien plus qu'un simple entraînement physique — c'est un véritable mode de vie. Mes séances de fitness sont conçues pour vous aider à atteindre vos objectifs, que ce soit la perte de poids, la prise de masse musculaire, la tonification ou simplement l'amélioration de votre condition physique générale.",
-        "Chaque programme est élaboré sur mesure en fonction de votre morphologie, votre niveau actuel et vos objectifs personnels. J'utilise une combinaison de musculation, de HIIT, de circuits training et d'exercices fonctionnels pour maximiser vos résultats.",
-        "Lors de nos séances, je vous enseigne les bonnes postures et les techniques correctes pour chaque exercice, afin de prévenir les blessures et d'optimiser chaque mouvement. Vous bénéficiez d'un accompagnement professionnel qui fait toute la différence.",
+        "Le fitness est bien plus qu'un simple entraînement physique — c'est un véritable mode de vie. Mes séances sont conçues pour vous aider à atteindre vos objectifs, que ce soit la perte de poids, la prise de masse musculaire, la tonification ou l'amélioration de votre condition physique générale.",
+        "Chaque programme est élaboré sur mesure en fonction de votre morphologie, votre niveau actuel et vos objectifs personnels. J'utilise une combinaison de musculation, de HIIT, de circuits training et d'exercices fonctionnels pour maximiser vos résultats — en salle ou en plein air selon vos préférences.",
+        "Les séances en extérieur se déroulent dans les plus beaux espaces verts de Valbonne et ses alentours. L'air frais oxygène mieux les muscles, la vitamine D naturelle du soleil renforce les os, et le contact avec la nature réduit considérablement le stress. Une combinaison gagnante pour des résultats optimaux.",
       ],
       benefits: [
-        {
-          icon: "🏋️",
-          title: "Renforcement musculaire",
-          description:
-            "Développez votre force et votre masse musculaire grâce à des exercices ciblés et progressifs adaptés à votre niveau.",
-        },
-        {
-          icon: "⚡",
-          title: "Boost métabolique",
-          description:
-            "Le fitness accélère votre métabolisme, vous aidant à brûler des calories même au repos. Résultats visibles en quelques semaines.",
-        },
-        {
-          icon: "🎯",
-          title: "Objectifs personnalisés",
-          description:
-            "Programme entièrement adapté à vos besoins : perte de poids, prise de muscle, tonification, préparation sportive ou remise en forme générale.",
-        },
-        {
-          icon: "📈",
-          title: "Progression mesurable",
-          description:
-            "Suivi régulier de vos performances et de vos mensurations pour visualiser vos progrès et ajuster le programme en continu.",
-        },
+        { icon: "🏋️", title: "Renforcement musculaire", description: "Développez votre force et votre masse musculaire grâce à des exercices ciblés et progressifs adaptés à votre niveau, en salle ou en extérieur." },
+        { icon: "🌳", title: "Entraînement en plein air", description: "Profitez de la nature comme terrain de jeu : course, sprint, circuit training en extérieur pour un entraînement varié et motivant." },
+        { icon: "⚡", title: "Boost métabolique", description: "Le fitness accélère votre métabolisme, vous aidant à brûler des calories même au repos. Résultats visibles en quelques semaines." },
+        { icon: "🎯", title: "Objectifs personnalisés", description: "Programme entièrement adapté à vos besoins : perte de poids, prise de muscle, tonification, préparation sportive ou remise en forme générale." },
       ],
       targetAudience: [
         "Débutants souhaitant se mettre au sport avec un encadrement professionnel",
         "Sportifs intermédiaires cherchant à franchir un palier",
         "Personnes en surpoids voulant perdre du gras efficacement",
-        "Athlètes souhaitant un programme de préparation physique spécifique",
+        "Personnes préférant s'entraîner en plein air plutôt qu'en salle",
         "Toute personne motivée par un changement physique durable",
       ],
       ctaText: "Prêt à vous transformer ? Découvrez nos offres",
-    },
-  },
-  {
-    slug: "activites-exterieures",
-    imageSrc:
-      "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&q=80",
-    imageAlt: "Activités Extérieures",
-    title: "Activités Extérieures",
-    description:
-      "Sessions en plein air combinant course à pied, circuit training et exercices fonctionnels. Profitez de la nature tout en vous dépassant dans un cadre motivant.",
-    detail: {
-      heroImageSrc:
-        "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1600&q=80",
-      heroImageAlt: "Entraînement en plein air dans la nature",
-      subtitle: "La nature comme terrain de jeu, le plein air comme motivation",
-      longDescription: [
-        "Rien ne vaut un entraînement en plein air pour se sentir vivant et connecté à la nature. Mes séances d'activités extérieures se déroulent dans les plus beaux espaces verts de Valbonne et ses alentours, offrant un cadre incomparable pour se dépenser.",
-        "Les sessions combinent course à pied, circuit training, exercices au poids du corps et entraînement fonctionnel. Chaque séance est variée et stimulante, utilisant le terrain naturel comme support : bancs, escaliers, collines, parcours de santé.",
-        "L'entraînement en extérieur offre des avantages uniques : l'air frais oxygène mieux les muscles, la vitamine D naturelle du soleil renforce les os, et le contact avec la nature réduit considérablement le stress et l'anxiété.",
-      ],
-      benefits: [
-        {
-          icon: "🌳",
-          title: "Connexion avec la nature",
-          description:
-            "S'entraîner en plein air réduit le stress de 40% par rapport à une salle. Le contact avec la nature améliore l'humeur et la motivation.",
-        },
-        {
-          icon: "🏃",
-          title: "Entraînement varié",
-          description:
-            "Course, sprint, exercices au poids du corps, circuit training — chaque séance est unique et stimulante, sans routine ni ennui.",
-        },
-        {
-          icon: "☀️",
-          title: "Vitamine D naturelle",
-          description:
-            "L'exposition au soleil pendant l'effort favorise la synthèse de vitamine D, essentielle pour la santé osseuse et le système immunitaire.",
-        },
-        {
-          icon: "🫁",
-          title: "Meilleure oxygénation",
-          description:
-            "L'air frais améliore l'apport en oxygène aux muscles, augmentant l'endurance et les performances physiques de manière naturelle.",
-        },
-      ],
-      targetAudience: [
-        "Personnes qui préfèrent s'entraîner en plein air plutôt qu'en salle",
-        "Coureurs souhaitant améliorer leurs performances",
-        "Personnes stressées cherchant une activité physique apaisante",
-        "Groupes d'amis ou collègues souhaitant s'entraîner ensemble",
-        "Toute personne voulant varier ses entraînements et sortir de la routine",
-      ],
-      ctaText: "Envie de prendre l'air ? Découvrez nos offres",
     },
   },
   {
@@ -190,30 +114,10 @@ export const SERVICES: Service[] = [
         "Grâce à un bilan nutritionnel complet, j'identifie vos carences, vos excès et vos habitudes à ajuster. Ensemble, nous construisons un plan alimentaire réaliste et agréable qui soutient vos objectifs sportifs tout en respectant vos goûts et votre mode de vie.",
       ],
       benefits: [
-        {
-          icon: "🥗",
-          title: "Plan alimentaire sur mesure",
-          description:
-            "Un programme nutritionnel adapté à vos goûts, votre mode de vie et vos objectifs. Pas de régime strict, juste un rééquilibrage intelligent.",
-        },
-        {
-          icon: "📊",
-          title: "Bilan nutritionnel complet",
-          description:
-            "Analyse détaillée de vos habitudes alimentaires, identification des carences et des excès pour des ajustements ciblés et efficaces.",
-        },
-        {
-          icon: "🍳",
-          title: "Recettes et idées repas",
-          description:
-            "Des idées de repas simples, rapides et savoureux pour chaque moment de la journée. Manger sain n'a jamais été aussi facile.",
-        },
-        {
-          icon: "⚖️",
-          title: "Résultats durables",
-          description:
-            "Fini l'effet yoyo des régimes. Mon approche vise des changements progressifs et durables pour une santé optimale sur le long terme.",
-        },
+        { icon: "🥗", title: "Plan alimentaire sur mesure", description: "Un programme nutritionnel adapté à vos goûts, votre mode de vie et vos objectifs. Pas de régime strict, juste un rééquilibrage intelligent." },
+        { icon: "📊", title: "Bilan nutritionnel complet", description: "Analyse détaillée de vos habitudes alimentaires, identification des carences et des excès pour des ajustements ciblés et efficaces." },
+        { icon: "🍳", title: "Recettes et idées repas", description: "Des idées de repas simples, rapides et savoureux pour chaque moment de la journée. Manger sain n'a jamais été aussi facile." },
+        { icon: "⚖️", title: "Résultats durables", description: "Fini l'effet yoyo des régimes. Mon approche vise des changements progressifs et durables pour une santé optimale sur le long terme." },
       ],
       targetAudience: [
         "Personnes souhaitant perdre du poids de manière saine et durable",
@@ -227,11 +131,125 @@ export const SERVICES: Service[] = [
   },
 ];
 
-export function getServiceBySlug(slug: string): Service | undefined {
-  return SERVICES.find((s) => s.slug === slug);
+const SERVICES_EN: Service[] = [
+  {
+    slug: "natation",
+    imageSrc:
+      "https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=800&q=80",
+    imageAlt: "Swimming",
+    title: "Swimming",
+    description:
+      "Swimming lessons adapted to all levels. Technical improvement, endurance and weight loss through a complete activity that is gentle on the joints.",
+    detail: {
+      heroImageSrc:
+        "https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=1600&q=80",
+      heroImageAlt: "Swimming lesson in a pool",
+      subtitle: "Master the water, transform your body",
+      longDescription: [
+        "Swimming is one of the most complete sports in existence. It engages all muscle groups while preserving your joints, making it an ideal activity at any age and for all fitness levels.",
+        "As a state-certified lifeguard, I offer individual or small group lessons adapted to your level and goals. Whether you want to learn the basics, perfect your crawl or butterfly technique, or simply enjoy the health benefits of water, I support you every step of the way.",
+        "Each session is structured to combine technical work, aquatic muscle strengthening and cardio exercises in the water. You will progress at your own pace in a supportive and motivating environment.",
+      ],
+      benefits: [
+        { icon: "💪", title: "Complete sport", description: "Swimming works all muscle groups: arms, legs, back, abs. A full-body workout with no impact on joints." },
+        { icon: "🦴", title: "Gentle on joints", description: "Water supports your body weight, reducing joint stress by 90%. Ideal for rehabilitation or people with chronic pain." },
+        { icon: "🔥", title: "Calorie burner", description: "An intensive swimming session burns up to 500 calories per hour, while toning the body and improving cardiovascular endurance." },
+        { icon: "🧘", title: "Natural stress relief", description: "Contact with water provides an immediate soothing effect. Swimming reduces cortisol and promotes endorphin production for lasting well-being." },
+      ],
+      targetAudience: [
+        "Beginners wanting to learn to swim with confidence",
+        "Intermediate swimmers looking to perfect their technique",
+        "Athletes in rehabilitation or returning to physical activity",
+        "People looking for a gentle activity to lose weight",
+        "Seniors wanting to maintain their fitness and mobility",
+      ],
+      ctaText: "Ready to dive in? Discover our offers",
+    },
+  },
+  {
+    slug: "fitness-plein-air",
+    imageSrc:
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
+    imageAlt: "Fitness & Outdoor Training",
+    title: "Fitness & Outdoor Training",
+    description:
+      "Personalized workouts indoors or outdoors: weight training, HIIT, circuit training and functional exercises to sculpt your body and push your limits.",
+    detail: {
+      heroImageSrc:
+        "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80",
+      heroImageAlt: "Fitness training indoors and outdoors",
+      subtitle: "Sculpt your body, indoors or outdoors",
+      longDescription: [
+        "Fitness is much more than just physical training — it's a true lifestyle. My sessions are designed to help you reach your goals, whether it's weight loss, muscle gain, toning or improving your overall fitness.",
+        "Each program is tailor-made based on your body type, current level and personal goals. I use a combination of weight training, HIIT, circuit training and functional exercises to maximize your results — in the gym or outdoors, as you prefer.",
+        "Outdoor sessions take place in the most beautiful green spaces of Valbonne and its surroundings. Fresh air oxygenates muscles better, natural vitamin D from the sun strengthens bones, and contact with nature significantly reduces stress. A winning combination for optimal results.",
+      ],
+      benefits: [
+        { icon: "🏋️", title: "Muscle strengthening", description: "Build your strength and muscle mass with targeted, progressive exercises adapted to your level, indoors or outdoors." },
+        { icon: "🌳", title: "Outdoor training", description: "Enjoy nature as your playground: running, sprinting, outdoor circuit training for a varied and motivating workout." },
+        { icon: "⚡", title: "Metabolic boost", description: "Fitness accelerates your metabolism, helping you burn calories even at rest. Visible results in just a few weeks." },
+        { icon: "🎯", title: "Personalized goals", description: "Program fully adapted to your needs: weight loss, muscle gain, toning, sports preparation or general fitness." },
+      ],
+      targetAudience: [
+        "Beginners wanting to get into sports with professional guidance",
+        "Intermediate athletes looking to break through a plateau",
+        "Overweight individuals wanting to lose fat effectively",
+        "People who prefer training outdoors rather than in a gym",
+        "Anyone motivated by lasting physical change",
+      ],
+      ctaText: "Ready to transform? Discover our offers",
+    },
+  },
+  {
+    slug: "nutrition-equilibree",
+    imageSrc:
+      "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
+    imageAlt: "Balanced Nutrition",
+    title: "Balanced Nutrition",
+    description:
+      "Personalized nutritional advice for a varied and balanced diet. Learn to eat better without frustration for lasting results and optimal well-being.",
+    detail: {
+      heroImageSrc:
+        "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1600&q=80",
+      heroImageAlt: "Healthy and balanced food",
+      subtitle: "Eat better, live better — without frustration",
+      longDescription: [
+        "Nutrition is the fundamental pillar of any fitness program. Without a proper diet, even the best training won't deliver the expected results. That's why I offer personalized nutritional support, complementary to your sports sessions.",
+        "My approach is based on balance and enjoyment, not restrictive diets. I help you understand your nutritional needs, create delicious and balanced meals, and adopt lasting eating habits that naturally fit into your daily life.",
+        "Through a comprehensive nutritional assessment, I identify your deficiencies, excesses and habits to adjust. Together, we build a realistic and enjoyable eating plan that supports your sports goals while respecting your tastes and lifestyle.",
+      ],
+      benefits: [
+        { icon: "🥗", title: "Custom meal plan", description: "A nutritional program tailored to your tastes, lifestyle and goals. No strict diets, just smart rebalancing." },
+        { icon: "📊", title: "Complete nutritional assessment", description: "Detailed analysis of your eating habits, identification of deficiencies and excesses for targeted and effective adjustments." },
+        { icon: "🍳", title: "Recipes and meal ideas", description: "Simple, quick and delicious meal ideas for every time of day. Eating healthy has never been easier." },
+        { icon: "⚖️", title: "Lasting results", description: "No more yo-yo dieting. My approach targets progressive and lasting changes for optimal long-term health." },
+      ],
+      targetAudience: [
+        "People wanting to lose weight in a healthy and sustainable way",
+        "Athletes wanting to optimize their performance through diet",
+        "People suffering from digestive issues or chronic fatigue",
+        "Anyone looking to adopt a more balanced diet",
+        "Parents wanting to improve the whole family's nutrition",
+      ],
+      ctaText: "Ready to eat better? Discover our offers",
+    },
+  },
+];
+
+export function getServices(locale: Locale): Service[] {
+  return locale === "en" ? SERVICES_EN : SERVICES_FR;
 }
 
-export const PROGRAMS: Program[] = [
+export const SERVICES = SERVICES_FR;
+
+export function getServiceBySlug(slug: string, locale: Locale = "fr"): Service | undefined {
+  const services = locale === "en" ? SERVICES_EN : SERVICES_FR;
+  return services.find((s) => s.slug === slug);
+}
+
+// ─── PROGRAMS ───────────────────────────────────────────────
+
+const PROGRAMS_FR: Program[] = [
   {
     imageSrc:
       "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80",
@@ -244,6 +262,11 @@ export const PROGRAMS: Program[] = [
       "Horaires ultra-flexibles",
       "Corrections techniques en temps réel",
       "Suivi nutritionnel personnalisé",
+    ],
+    goals: [
+      "Apprendre les bases ou perfectionner votre technique",
+      "Progresser à votre rythme avec un encadrement dédié",
+      "Obtenir des résultats rapides et visibles",
     ],
     price: "45€",
     priceDetails: "par séance",
@@ -259,10 +282,14 @@ export const PROGRAMS: Program[] = [
     features: [
       "Programme d'entraînement personnalisé hebdomadaire",
       "Plan alimentaire adapté à vos objectifs",
-      "Vidéos d'exercices détaillées",
       "Ajustements hebdomadaires selon résultats",
       "Support illimité par message (24h)",
       "Application de suivi mobile",
+    ],
+    goals: [
+      "Perdre du poids durablement",
+      "Améliorer votre condition physique générale",
+      "Adopter un mode de vie plus sain",
     ],
     price: "79€",
     priceNumeric: 79,
@@ -275,27 +302,168 @@ export const PROGRAMS: Program[] = [
   {
     imageSrc:
       "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=800&q=80",
-    title: "Programme Transformation",
+    title: "Advanced Training",
     description:
-      "La formule premium combinant coaching en ligne ET séances en personne pour des résultats exceptionnels.",
+      "La formule premium combinant coaching en ligne ET séances en personne pour repousser vos limites.",
     features: [
       "4 séances particulières par mois",
       "Programme d'entraînement complet quotidien",
       "Plan nutritionnel détaillé avec recettes",
-      "Suivi quotidien par application",
       "Support prioritaire 7j/7",
       "Analyses corporelles régulières",
-      "Garantie résultats en 3 mois",
+      "Amélioration des performances",
     ],
-    price: "249€",
-    priceNumeric: 249,
+    goals: [
+      "Franchir un palier dans vos performances",
+      "Développer force, endurance et puissance",
+      "Atteindre un niveau sportif avancé",
+    ],
+    price: "125€",
+    priceNumeric: 125,
+    priceUnit: "/mois",
+    priceDetails: "Programme 3-6 mois",
+    ctaText: "Passer au niveau supérieur",
+  },
+  {
+    imageSrc:
+      "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&q=80",
+    title: "Transformation",
+    description:
+      "Le programme ultime pour une transformation physique complète. Corps, nutrition et mental — tout est inclus.",
+    features: [
+      "8 séances particulières par mois",
+      "Programme d'entraînement quotidien personnalisé",
+      "Plan nutritionnel complet avec recettes",
+      "Suivi quotidien par application",
+      "Support prioritaire 7j/7",
+      "Analyses corporelles bi-mensuelles",
+    ],
+    goals: [
+      "Transformation physique complète",
+      "Perte de poids significative et durable",
+      "Changement radical de mode de vie",
+      "Gagner en confiance et en énergie",
+    ],
+    price: "399€",
+    priceNumeric: 399,
     priceUnit: "/mois",
     priceDetails: "Programme 3-6 mois",
     ctaText: "Transformer mon corps",
   },
 ];
 
-export const PRICING_PACKS: PricingPack[] = [
+const PROGRAMS_EN: Program[] = [
+  {
+    imageSrc:
+      "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80",
+    title: "Private Lessons",
+    description:
+      "100% personalized coaching to reach your goals quickly with quality individual follow-up.",
+    features: [
+      "1-hour individual sessions",
+      "Fully customized program",
+      "Ultra-flexible schedule",
+      "Real-time technical corrections",
+      "Personalized nutritional follow-up",
+    ],
+    goals: [
+      "Learn the basics or perfect your technique",
+      "Progress at your own pace with dedicated guidance",
+      "Achieve quick and visible results",
+    ],
+    price: "45€",
+    priceDetails: "per session",
+    ctaText: "See packs",
+    ctaHref: "#pricing-packs",
+  },
+  {
+    imageSrc:
+      "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80",
+    title: "Online Coaching",
+    description:
+      "A complete remote program with daily follow-up to progress wherever you are, at your own pace.",
+    features: [
+      "Weekly personalized training program",
+      "Meal plan tailored to your goals",
+      "Weekly adjustments based on results",
+      "Unlimited messaging support (24h)",
+      "Mobile tracking app",
+    ],
+    goals: [
+      "Lose weight sustainably",
+      "Improve your overall fitness",
+      "Adopt a healthier lifestyle",
+    ],
+    price: "79€",
+    priceNumeric: 79,
+    priceUnit: "/month",
+    priceDetails: "3-month commitment",
+    ctaText: "Start now",
+    isFeatured: true,
+    featuredBadge: "⭐ POPULAR",
+  },
+  {
+    imageSrc:
+      "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=800&q=80",
+    title: "Advanced Training",
+    description:
+      "The premium formula combining online coaching AND in-person sessions to push your limits.",
+    features: [
+      "4 private sessions per month",
+      "Complete daily training program",
+      "Detailed nutrition plan with recipes",
+      "Priority support 7 days/week",
+      "Regular body analysis",
+      "Performance improvement",
+    ],
+    goals: [
+      "Break through your performance plateau",
+      "Build strength, endurance and power",
+      "Reach an advanced athletic level",
+    ],
+    price: "125€",
+    priceNumeric: 125,
+    priceUnit: "/month",
+    priceDetails: "3-6 month program",
+    ctaText: "Level up",
+  },
+  {
+    imageSrc:
+      "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&q=80",
+    title: "Transformation",
+    description:
+      "The ultimate program for a complete physical transformation. Body, nutrition and mindset — everything is included.",
+    features: [
+      "8 private sessions per month",
+      "Daily personalized training program",
+      "Complete nutrition plan with recipes",
+      "Daily tracking via app",
+      "Priority support 7 days/week",
+      "Bi-monthly body analysis",
+    ],
+    goals: [
+      "Complete physical transformation",
+      "Significant and lasting weight loss",
+      "Radical lifestyle change",
+      "Gain confidence and energy",
+    ],
+    price: "399€",
+    priceNumeric: 399,
+    priceUnit: "/month",
+    priceDetails: "3-6 month program",
+    ctaText: "Transform my body",
+  },
+];
+
+export function getPrograms(locale: Locale): Program[] {
+  return locale === "en" ? PROGRAMS_EN : PROGRAMS_FR;
+}
+
+export const PROGRAMS = PROGRAMS_FR;
+
+// ─── PRICING PACKS ──────────────────────────────────────────
+
+const PRICING_PACKS_FR: PricingPack[] = [
   {
     title: "Séance Découverte",
     price: "45€",
@@ -350,3 +518,65 @@ export const PRICING_PACKS: PricingPack[] = [
     ],
   },
 ];
+
+const PRICING_PACKS_EN: PricingPack[] = [
+  {
+    title: "Discovery Session",
+    price: "45€",
+    priceNumeric: 45,
+    duration: "1 session / 1 hour",
+    features: [
+      "Personalized assessment",
+      "Goal setting",
+      "Custom action plan",
+      "Basic nutrition advice",
+    ],
+  },
+  {
+    title: "5-Session Pack",
+    price: "200€",
+    priceNumeric: 200,
+    duration: "5 sessions / Valid 2 months",
+    features: [
+      "5 one-hour sessions",
+      "Complete personalized program",
+      "Detailed nutritional follow-up",
+      "Messaging support",
+      "Save 25€",
+    ],
+  },
+  {
+    title: "10-Session Pack",
+    price: "380€",
+    priceNumeric: 380,
+    duration: "10 sessions / Valid 3 months",
+    features: [
+      "10 one-hour sessions",
+      "Complete progressive program",
+      "In-depth nutrition follow-up",
+      "Unlimited messaging support",
+      "Detailed monthly review",
+      "Save 70€",
+    ],
+  },
+  {
+    title: "20-Session Pack",
+    price: "700€",
+    priceNumeric: 700,
+    duration: "20 sessions / Valid 6 months",
+    features: [
+      "20 one-hour sessions",
+      "Complete transformation program",
+      "Nutrition follow-up and body analysis",
+      "Priority support 7 days/week",
+      "Detailed bi-monthly review",
+      "Save 200€!",
+    ],
+  },
+];
+
+export function getPricingPacks(locale: Locale): PricingPack[] {
+  return locale === "en" ? PRICING_PACKS_EN : PRICING_PACKS_FR;
+}
+
+export const PRICING_PACKS = PRICING_PACKS_FR;

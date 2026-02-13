@@ -1,3 +1,5 @@
+export type Locale = "fr" | "en";
+
 export interface NavLink {
   href: string;
   label: string;
@@ -33,6 +35,7 @@ export interface Program {
   title: string;
   description: string;
   features: string[];
+  goals: string[];
   price: string;
   priceNumeric?: number;
   priceUnit?: string;

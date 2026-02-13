@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { Program } from "@/lib/types";
+import { useLanguage } from "@/lib/i18n/useLanguage";
 
 interface ProgramCardProps extends Program {
   onCheckout?: () => void;
@@ -11,6 +14,7 @@ export default function ProgramCard({
   title,
   description,
   features,
+  goals,
   price,
   priceUnit,
   priceDetails,
@@ -21,6 +25,7 @@ export default function ProgramCard({
   onCheckout,
   isLoading = false,
 }: ProgramCardProps) {
+  const { t } = useLanguage();
   const isStripe = !!onCheckout;
 
   const cardClasses = `h-full bg-white rounded-xl overflow-hidden flex flex-col transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_35px_rgba(37,99,235,0.12)] hover:border-brand-blue hover:-translate-y-1 no-underline cursor-pointer ${
@@ -35,7 +40,7 @@ export default function ProgramCard({
           alt={title}
           fill
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes="(max-width: 768px) 100vw, 25vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-black/10" />
         {featuredBadge && (
@@ -47,13 +52,31 @@ export default function ProgramCard({
           {title}
         </h3>
       </div>
-      <div className="flex-1 p-6 flex flex-col items-center text-center">
+      <div className="flex-1 p-6 flex flex-col text-center">
         <p className="text-gray-500 leading-[1.6] mb-4 text-[0.95rem]">{description}</p>
-        <ul className="list-none p-0">
+
+        {/* What's included */}
+        <p className="text-[0.8rem] font-bold text-brand-blue uppercase tracking-wider mb-2 mt-2">
+          {t("offers.included")}
+        </p>
+        <ul className="list-none p-0 mb-4">
           {features.map((feature) => (
-            <li key={feature} className="py-[0.4rem] text-gray-600 flex items-center justify-center gap-2 text-[0.9rem]">
-              <span className="text-brand-blue font-bold text-base shrink-0">✓</span>
+            <li key={feature} className="py-[0.3rem] text-gray-600 flex items-center justify-center gap-2 text-[0.85rem]">
+              <span className="text-brand-blue font-bold text-sm shrink-0">✓</span>
               {feature}
+            </li>
+          ))}
+        </ul>
+
+        {/* Goals */}
+        <p className="text-[0.8rem] font-bold text-heading uppercase tracking-wider mb-2 mt-auto">
+          {t("offers.goals")}
+        </p>
+        <ul className="list-none p-0">
+          {goals.map((goal) => (
+            <li key={goal} className="py-[0.3rem] text-gray-600 flex items-center justify-center gap-2 text-[0.85rem]">
+              <span className="text-heading font-bold text-sm shrink-0">🎯</span>
+              {goal}
             </li>
           ))}
         </ul>
@@ -65,7 +88,7 @@ export default function ProgramCard({
         </div>
         <p className="text-gray-500 text-[0.9rem] mb-5">{priceDetails}</p>
         <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-3 px-8 rounded-lg font-bold transition-all duration-300 inline-block w-full text-center text-[0.95rem]">
-          {isLoading ? "Redirection..." : ctaText}
+          {isLoading ? t("offers.redirecting") : ctaText}
         </span>
       </div>
     </>

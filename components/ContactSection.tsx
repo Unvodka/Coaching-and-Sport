@@ -3,6 +3,7 @@
 import { useState, FormEvent, useEffect } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
+import { useLanguage } from "@/lib/i18n/useLanguage";
 import FadeInWhenVisible from "./animations/FadeInWhenVisible";
 
 export default function ContactSection() {
@@ -12,6 +13,7 @@ export default function ContactSection() {
   const [formule, setFormule] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
@@ -33,9 +35,7 @@ export default function ContactSection() {
       serviceId === "YOUR_SERVICE_ID" ||
       templateId === "YOUR_TEMPLATE_ID"
     ) {
-      alert(
-        "EmailJS n'est pas configuré. Contactez : chevallier.a06@gmail.com"
-      );
+      alert(t("contact.notConfigured"));
       setIsSubmitting(false);
       return;
     }
@@ -43,7 +43,7 @@ export default function ContactSection() {
     const templateParams = {
       from_name: fromName,
       from_email: fromEmail,
-      phone: phone || "Non renseigné",
+      phone: phone || t("contact.notProvided"),
       formule,
       message,
       to_email: "chevallier.a06@gmail.com",
@@ -51,7 +51,7 @@ export default function ContactSection() {
 
     emailjs.send(serviceId, templateId, templateParams).then(
       () => {
-        alert("✅ Message envoyé avec succès !");
+        alert(`✅ ${t("contact.success")}`);
         setFromName("");
         setFromEmail("");
         setPhone("");
@@ -60,9 +60,7 @@ export default function ContactSection() {
         setIsSubmitting(false);
       },
       () => {
-        alert(
-          "❌ Erreur lors de l'envoi. Contactez : chevallier.a06@gmail.com"
-        );
+        alert(`❌ ${t("contact.error")}`);
         setIsSubmitting(false);
       }
     );
@@ -75,12 +73,12 @@ export default function ContactSection() {
     >
       <FadeInWhenVisible>
         <h2 className="font-heading text-center text-5xl mb-4 font-extrabold tracking-tight text-heading max-md:text-[2.2rem] max-[480px]:text-[1.8rem]">
-          Contactez-Moi
+          {t("contact.title")}
         </h2>
       </FadeInWhenVisible>
       <FadeInWhenVisible delay={0.1}>
         <p className="text-center text-gray-500 text-lg mb-16 max-w-[700px] mx-auto">
-          Prêt à commencer votre transformation ? Parlons-en !
+          {t("contact.subtitle")}
         </p>
       </FadeInWhenVisible>
 
@@ -91,7 +89,7 @@ export default function ContactSection() {
         >
           <div className="mb-7">
             <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
-              Nom Complet *
+              {t("contact.fullName")} *
             </label>
             <input
               type="text"
@@ -104,7 +102,7 @@ export default function ContactSection() {
 
           <div className="mb-7">
             <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
-              Email *
+              {t("contact.email")} *
             </label>
             <input
               type="email"
@@ -117,7 +115,7 @@ export default function ContactSection() {
 
           <div className="mb-7">
             <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
-              Téléphone
+              {t("contact.phone")}
             </label>
             <input
               type="tel"
@@ -129,7 +127,7 @@ export default function ContactSection() {
 
           <div className="mb-7">
             <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
-              Type de cours souhaité *
+              {t("contact.courseType")} *
             </label>
             <select
               required
@@ -137,20 +135,20 @@ export default function ContactSection() {
               onChange={(e) => setFormule(e.target.value)}
               className="w-full p-4 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
             >
-              <option value="">-- Sélectionnez --</option>
-              <option value="particulier">Cours Particuliers</option>
-              <option value="programmation">Programmation Sur Mesure</option>
-              <option value="info">Demande d&apos;information</option>
+              <option value="">{t("contact.select")}</option>
+              <option value="particulier">{t("contact.privateLesson")}</option>
+              <option value="programmation">{t("contact.customProgram")}</option>
+              <option value="info">{t("contact.infoRequest")}</option>
             </select>
           </div>
 
           <div className="mb-7">
             <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
-              Votre Message *
+              {t("contact.message")} *
             </label>
             <textarea
               required
-              placeholder="Parlez-moi de vos objectifs, votre niveau actuel..."
+              placeholder={t("contact.placeholder")}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               className="w-full p-4 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans min-h-[150px] resize-y focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
@@ -164,7 +162,7 @@ export default function ContactSection() {
             whileTap={{ scale: 0.98 }}
             className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-5 px-12 border-none rounded-lg text-[1.1rem] font-bold cursor-pointer transition-all duration-300 w-full disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? "Envoi en cours..." : "Envoyer ma Demande"}
+            {isSubmitting ? t("contact.sending") : t("contact.submit")}
           </motion.button>
         </form>
       </FadeInWhenVisible>

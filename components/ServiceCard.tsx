@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Service } from "@/lib/types";
+import { useLanguage } from "@/lib/i18n/useLanguage";
 
 export default function ServiceCard({
   slug,
@@ -9,6 +12,8 @@ export default function ServiceCard({
   title,
   description,
 }: Service) {
+  const { t } = useLanguage();
+
   return (
     <Link
       href={`/services/${slug}`}
@@ -27,7 +32,7 @@ export default function ServiceCard({
           {description}
         </p>
         <span className="inline-flex items-center mt-4 text-brand-blue font-semibold text-sm gap-1 transition-all duration-300 group-hover:gap-2">
-          En savoir plus &rarr;
+          {t("services.learnMore")} &rarr;
         </span>
       </div>
     </Link>
