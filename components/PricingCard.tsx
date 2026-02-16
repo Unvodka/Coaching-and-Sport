@@ -21,7 +21,7 @@ export default function PricingCard({
   return (
     <div
       onClick={!isLoading ? onBuy : undefined}
-      className={`h-full bg-white py-10 px-8 rounded-xl border-2 border-gray-200 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_35px_rgba(0,0,0,0.1)] hover:border-brand-blue ${
+      className={`h-full bg-white py-10 px-8 rounded-xl border-2 border-gray-200 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_35px_rgba(0,0,0,0.1)] hover:border-brand-blue flex flex-col ${
         isLoading ? "opacity-60 cursor-not-allowed" : "cursor-pointer"
       }`}
     >
@@ -30,7 +30,7 @@ export default function PricingCard({
         {price}
       </div>
       <div className="text-gray-500 text-[0.9rem] mb-6 italic">{duration}</div>
-      <ul className="list-none p-0 my-6 text-left">
+      <ul className="list-none p-0 my-6 text-left flex-1">
         {features.map((feature) => (
           <li
             key={feature}
@@ -41,12 +41,14 @@ export default function PricingCard({
           </li>
         ))}
       </ul>
-      <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-8 rounded-lg font-bold text-[0.95rem] transition-all duration-300 w-full mt-6 inline-block text-center">
-        {isLoading ? t("offers.redirecting") : t("offers.bookNow")}
-      </span>
-      <p className="text-[0.7rem] text-gray-400 mt-3 flex items-center justify-center gap-1">
-        🔒 {t("security.securedByStripe")}
-      </p>
+      <div className="mt-auto">
+        <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-8 rounded-lg font-bold text-[0.95rem] transition-all duration-300 w-full inline-block text-center">
+          {isLoading ? t("offers.redirecting") : t("offers.bookNow")}
+        </span>
+        <p className="text-[0.7rem] text-gray-400 mt-3 flex items-center justify-center gap-1">
+          🔒 {t("security.securedByStripe")}
+        </p>
+      </div>
     </div>
   );
 }
