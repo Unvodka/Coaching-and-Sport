@@ -35,8 +35,8 @@ const fr = {
   "info.programsInclude": "Tous les programmes incluent :",
   "info.programsDetails":
     "Bilan initial gratuit • Suivi personnalisé • Conseils nutrition • Motivation continue",
-  "info.securePayment": "Paiement sécurisé",
-  "info.paymentMethods": "Plusieurs moyens de paiement acceptés",
+  "info.securePayment": "Paiement sécurisé par Stripe",
+  "info.paymentMethods": "Cryptage SSL 256 bits • 3D Secure • CB, Visa, Mastercard, Apple Pay",
   "info.sessionsNote":
     "Les séances peuvent être utilisées pour n'importe quelle activité : natation, fitness ou activités extérieures",
   "info.needAdvice": "Besoin de conseils pour choisir ?",
@@ -45,7 +45,7 @@ const fr = {
 
   // About section
   "about.title": "À Propos",
-  "about.heading": "Arnaud Chevallier - Votre Coach Dédié à Votre Réussite",
+  "about.heading": "Coach-Bluewave — Votre Coach Dédié à Votre Réussite",
   "about.p1":
     "Maître-nageur diplômé et coach sportif certifié, je me consacre depuis plusieurs années à accompagner mes clients dans leur parcours de transformation physique.",
   "about.p2":
@@ -81,13 +81,23 @@ const fr = {
 
   // Footer
   "footer.text":
-    "Arnaud Chevallier - Coach Sportif & Maître-Nageur - Valbonne - Tous droits réservés",
+    "Coach-Bluewave | Arnaud Chevallier - Coach Sportif & Maître-Nageur - Tous droits réservés",
 
   // Service detail pages
   "detail.backToServices": "Retour aux services",
   "detail.benefits": "Les Bienfaits",
   "detail.targetAudience": "Pour Qui ?",
   "detail.seeOffers": "Voir les offres & tarifs",
+  "detail.faq": "Questions Fréquentes",
+
+  // Security badges
+  "security.securedByStripe": "Paiement sécurisé par Stripe · 3D Secure",
+  "security.badge1.title": "Paiement 100% sécurisé",
+  "security.badge1.desc": "Cryptage SSL 256 bits",
+  "security.badge2.title": "3D Secure activé",
+  "security.badge2.desc": "Double authentification bancaire",
+  "security.badge3.title": "CB, Visa, Mastercard",
+  "security.badge3.desc": "Apple Pay également accepté",
 
   // Checkout
   "checkout.success.title": "Paiement réussi !",

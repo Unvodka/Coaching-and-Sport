@@ -44,6 +44,9 @@ export default function PricingCard({
       <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-8 rounded-lg font-bold text-[0.95rem] transition-all duration-300 w-full mt-6 inline-block text-center">
         {isLoading ? t("offers.redirecting") : t("offers.bookNow")}
       </span>
+      <p className="text-[0.7rem] text-gray-400 mt-3 flex items-center justify-center gap-1">
+        🔒 {t("security.securedByStripe")}
+      </p>
     </div>
   );
 }

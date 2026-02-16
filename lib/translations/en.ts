@@ -36,8 +36,8 @@ const en: Record<TranslationKey, string> = {
   "info.programsInclude": "All programs include:",
   "info.programsDetails":
     "Free initial assessment • Personalized follow-up • Nutrition advice • Continuous motivation",
-  "info.securePayment": "Secure payment",
-  "info.paymentMethods": "Multiple payment methods accepted",
+  "info.securePayment": "Secured payment by Stripe",
+  "info.paymentMethods": "SSL 256-bit encryption • 3D Secure • CB, Visa, Mastercard, Apple Pay",
   "info.sessionsNote":
     "Sessions can be used for any activity: swimming, fitness, or outdoor training",
   "info.needAdvice": "Need help choosing?",
@@ -46,7 +46,7 @@ const en: Record<TranslationKey, string> = {
 
   // About section
   "about.title": "About",
-  "about.heading": "Arnaud Chevallier - Your Coach Dedicated to Your Success",
+  "about.heading": "Coach-Bluewave — Your Coach Dedicated to Your Success",
   "about.p1":
     "Certified lifeguard and sports coach, I have been dedicated for several years to helping my clients on their physical transformation journey.",
   "about.p2":
@@ -82,13 +82,23 @@ const en: Record<TranslationKey, string> = {
 
   // Footer
   "footer.text":
-    "Arnaud Chevallier - Sports Coach & Lifeguard - Valbonne - All rights reserved",
+    "Coach-Bluewave | Arnaud Chevallier - Sports Coach & Lifeguard - All rights reserved",
 
   // Service detail pages
   "detail.backToServices": "Back to services",
   "detail.benefits": "Benefits",
   "detail.targetAudience": "Who Is It For?",
   "detail.seeOffers": "See offers & pricing",
+  "detail.faq": "Frequently Asked Questions",
+
+  // Security badges
+  "security.securedByStripe": "Secured by Stripe · 3D Secure",
+  "security.badge1.title": "100% secure payment",
+  "security.badge1.desc": "SSL 256-bit encryption",
+  "security.badge2.title": "3D Secure enabled",
+  "security.badge2.desc": "Bank double authentication",
+  "security.badge3.title": "CB, Visa, Mastercard",
+  "security.badge3.desc": "Apple Pay also accepted",
 
   // Checkout
   "checkout.success.title": "Payment successful!",

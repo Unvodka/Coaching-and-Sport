@@ -90,6 +90,9 @@ export default function ProgramCard({
         <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-3 px-8 rounded-lg font-bold transition-all duration-300 inline-block w-full text-center text-[0.95rem]">
           {isLoading ? t("offers.redirecting") : ctaText}
         </span>
+        <p className="text-[0.7rem] text-gray-400 mt-3 flex items-center justify-center gap-1">
+          🔒 {t("security.securedByStripe")}
+        </p>
       </div>
     </>
   );

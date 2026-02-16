@@ -76,6 +76,35 @@ export default function OffersSection() {
           ))}
         </div>
 
+        {/* Security Trust Bar */}
+        <FadeInWhenVisible delay={0.2}>
+          <div className="flex flex-wrap justify-center gap-8 my-12 py-6 px-4 bg-white rounded-xl border border-gray-200 shadow-sm max-md:gap-4 max-md:py-4">
+            <div className="flex items-center gap-3 text-center">
+              <span className="text-2xl">🔒</span>
+              <div>
+                <p className="text-sm font-bold text-heading leading-tight">{t("security.badge1.title")}</p>
+                <p className="text-xs text-gray-400">{t("security.badge1.desc")}</p>
+              </div>
+            </div>
+            <div className="hidden sm:block w-px bg-gray-200 self-stretch" />
+            <div className="flex items-center gap-3 text-center">
+              <span className="text-2xl">🛡️</span>
+              <div>
+                <p className="text-sm font-bold text-heading leading-tight">{t("security.badge2.title")}</p>
+                <p className="text-xs text-gray-400">{t("security.badge2.desc")}</p>
+              </div>
+            </div>
+            <div className="hidden sm:block w-px bg-gray-200 self-stretch" />
+            <div className="flex items-center gap-3 text-center">
+              <span className="text-2xl">💳</span>
+              <div>
+                <p className="text-sm font-bold text-heading leading-tight">{t("security.badge3.title")}</p>
+                <p className="text-xs text-gray-400">{t("security.badge3.desc")}</p>
+              </div>
+            </div>
+          </div>
+        </FadeInWhenVisible>
+
         {/* Pricing Divider */}
         <FadeInWhenVisible>
           <div id="pricing-packs" className="text-center my-16 max-w-[800px] mx-auto">
