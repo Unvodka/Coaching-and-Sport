@@ -13,8 +13,11 @@ export default function CheckoutSuccess() {
         <h1 className="font-heading text-3xl font-bold text-heading mb-4">
           {t("checkout.success.title")}
         </h1>
-        <p className="text-gray-500 text-lg mb-8 leading-relaxed">
+        <p className="text-gray-500 text-lg mb-6 leading-relaxed">
           {t("checkout.success.message")}
+        </p>
+        <p className="text-[0.8rem] text-gray-400 mb-8 flex items-center justify-center gap-2">
+          🔒 {t("security.checkoutSecured")}
         </p>
         <Link
           href="/"

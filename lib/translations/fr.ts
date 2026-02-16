@@ -99,7 +99,13 @@ const fr = {
   "security.badge3.title": "CB, Visa, Mastercard",
   "security.badge3.desc": "Apple Pay également accepté",
 
+  // Packs page
+  "packs.title": "Packs Cours Particuliers",
+  "packs.subtitle": "Réservez vos séances individuelles avec des packs avantageux",
+  "packs.backToOffers": "← Retour aux offres",
+
   // Checkout
+  "security.checkoutSecured": "Votre paiement a été sécurisé par Stripe · 3D Secure · SSL 256 bits",
   "checkout.success.title": "Paiement réussi !",
   "checkout.success.message":
     "Merci pour votre confiance. Vous recevrez un email de confirmation avec tous les détails de votre réservation.",

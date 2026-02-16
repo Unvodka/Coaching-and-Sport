@@ -100,7 +100,13 @@ const en: Record<TranslationKey, string> = {
   "security.badge3.title": "CB, Visa, Mastercard",
   "security.badge3.desc": "Apple Pay also accepted",
 
+  // Packs page
+  "packs.title": "Private Lesson Packs",
+  "packs.subtitle": "Book your individual sessions with great value packs",
+  "packs.backToOffers": "← Back to offers",
+
   // Checkout
+  "security.checkoutSecured": "Your payment was secured by Stripe · 3D Secure · SSL 256-bit",
   "checkout.success.title": "Payment successful!",
   "checkout.success.message":
     "Thank you for your trust. You will receive a confirmation email with all the details of your booking.",

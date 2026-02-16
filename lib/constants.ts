@@ -7,6 +7,7 @@ const NAV_LINKS_FR: NavLink[] = [
   { href: "/#services", label: "Services" },
   { href: "/#offres", label: "Offres & Tarifs" },
   { href: "/#apropos", label: "À Propos" },
+  { href: "/blog", label: "Blog" },
   { href: "/#contact", label: "Contact" },
 ];
 
@@ -15,6 +16,7 @@ const NAV_LINKS_EN: NavLink[] = [
   { href: "/#services", label: "Services" },
   { href: "/#offres", label: "Offers & Pricing" },
   { href: "/#apropos", label: "About" },
+  { href: "/blog", label: "Blog" },
   { href: "/#contact", label: "Contact" },
 ];
 
@@ -34,7 +36,7 @@ const SERVICES_FR: Service[] = [
     imageAlt: "Natation",
     title: "Natation",
     description:
-      "Cours de natation adaptés à tous les niveaux. Perfectionnement technique, endurance et perte de poids grâce à une activité complète et douce pour les articulations.",
+      "Cours de natation avec maître-nageur diplômé d'État, adaptés à tous les niveaux. Perfectionnement technique, endurance et perte de poids grâce à une activité complète et douce pour les articulations.",
     detail: {
       heroImageSrc:
         "https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=1600&q=80",
@@ -59,6 +61,28 @@ const SERVICES_FR: Service[] = [
         "Seniors souhaitant maintenir leur forme et leur mobilité",
       ],
       ctaText: "Prêt à plonger ? Découvrez nos offres",
+      faqs: [
+        {
+          question: "À quel âge peut-on commencer les cours de natation ?",
+          answer: "Les cours de natation sont accessibles dès 4 ans pour l'initiation aquatique. Pour les adultes, il n'y a aucune limite d'âge. J'adapte chaque séance au niveau et à la condition physique de l'élève.",
+        },
+        {
+          question: "Faut-il savoir nager pour prendre des cours ?",
+          answer: "Non, absolument pas ! J'accueille les débutants complets et les accompagne pas à pas pour acquérir les bases de la natation en toute sécurité et confiance.",
+        },
+        {
+          question: "Où se déroulent les cours de natation à Valbonne ?",
+          answer: "Les cours se déroulent dans des piscines partenaires à Valbonne et ses environs (Sophia Antipolis, Mougins, Antibes). Le lieu exact est défini selon votre localisation pour plus de commodité.",
+        },
+        {
+          question: "Combien de séances faut-il pour apprendre à nager ?",
+          answer: "En général, un débutant acquiert les bases en 8 à 12 séances. Pour le perfectionnement technique, comptez 5 à 10 séances supplémentaires selon vos objectifs. Chaque progression est individuelle.",
+        },
+        {
+          question: "La natation aide-t-elle vraiment à perdre du poids ?",
+          answer: "Oui, la natation est excellente pour la perte de poids. Une séance intensive brûle jusqu'à 500 calories par heure tout en sollicitant tous les groupes musculaires, sans impact sur les articulations.",
+        },
+      ],
     },
   },
   {
@@ -93,6 +117,28 @@ const SERVICES_FR: Service[] = [
         "Toute personne motivée par un changement physique durable",
       ],
       ctaText: "Prêt à vous transformer ? Découvrez nos offres",
+      faqs: [
+        {
+          question: "Quels types d'entraînement proposez-vous en fitness ?",
+          answer: "Je propose de la musculation, du HIIT (entraînement par intervalles haute intensité), du circuit training, des exercices fonctionnels et du renforcement musculaire. Chaque programme est adapté à vos objectifs.",
+        },
+        {
+          question: "Les séances en plein air se déroulent-elles même en hiver ?",
+          answer: "Oui, grâce au climat de la Côte d'Azur, les séances en extérieur sont possibles quasiment toute l'année. En cas de mauvais temps, nous basculons sur une séance en salle ou en intérieur.",
+        },
+        {
+          question: "Je suis débutant(e), le fitness est-il adapté pour moi ?",
+          answer: "Absolument ! Chaque programme est conçu sur mesure selon votre niveau actuel. Je vous accompagne progressivement pour éviter les blessures et garantir des résultats visibles.",
+        },
+        {
+          question: "À quelle fréquence faut-il s'entraîner pour voir des résultats ?",
+          answer: "Pour des résultats visibles, je recommande 2 à 3 séances par semaine minimum. Les premiers changements apparaissent généralement après 3 à 4 semaines d'entraînement régulier.",
+        },
+        {
+          question: "Quel équipement faut-il pour les séances en plein air ?",
+          answer: "Simplement une tenue de sport confortable et des baskets adaptées. Je fournis tout le matériel nécessaire (élastiques, haltères, tapis) pour les séances en extérieur.",
+        },
+      ],
     },
   },
   {
@@ -127,6 +173,28 @@ const SERVICES_FR: Service[] = [
         "Parents souhaitant améliorer l'alimentation de toute la famille",
       ],
       ctaText: "Prêt à mieux manger ? Découvrez nos offres",
+      faqs: [
+        {
+          question: "Proposez-vous des régimes stricts ou restrictifs ?",
+          answer: "Non, mon approche est basée sur le rééquilibrage alimentaire, pas sur les régimes restrictifs. L'objectif est d'adopter des habitudes durables et agréables, sans frustration ni effet yoyo.",
+        },
+        {
+          question: "Comment se déroule le bilan nutritionnel initial ?",
+          answer: "Le bilan comprend une analyse de vos habitudes alimentaires actuelles, de votre mode de vie, de vos objectifs et de vos éventuelles intolérances. Il dure environ 45 minutes et permet d'élaborer un plan alimentaire personnalisé.",
+        },
+        {
+          question: "Le suivi nutritionnel est-il inclus dans le coaching sportif ?",
+          answer: "Les conseils nutrition de base sont inclus dans tous mes programmes. Pour un accompagnement nutritionnel approfondi avec plan alimentaire détaillé et recettes, optez pour les formules Coaching en Ligne ou Transformation.",
+        },
+        {
+          question: "Pouvez-vous m'aider avec des intolérances alimentaires ?",
+          answer: "Oui, je prends en compte toutes les intolérances et allergies alimentaires pour élaborer un plan nutritionnel adapté. J'ai l'habitude de travailler avec des régimes sans gluten, sans lactose ou végétariens.",
+        },
+        {
+          question: "En combien de temps peut-on voir des résultats avec un rééquilibrage alimentaire ?",
+          answer: "Les premiers effets (meilleure énergie, meilleur sommeil) se font sentir dès la première semaine. Pour la perte de poids, comptez 3 à 4 semaines pour observer des résultats significatifs et durables.",
+        },
+      ],
     },
   },
 ];
@@ -139,7 +207,7 @@ const SERVICES_EN: Service[] = [
     imageAlt: "Swimming",
     title: "Swimming",
     description:
-      "Swimming lessons adapted to all levels. Technical improvement, endurance and weight loss through a complete activity that is gentle on the joints.",
+      "Swimming lessons with a certified lifeguard (maître-nageur), adapted to all levels. Technical improvement, endurance and weight loss through a complete activity that is gentle on the joints.",
     detail: {
       heroImageSrc:
         "https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=1600&q=80",
@@ -164,6 +232,28 @@ const SERVICES_EN: Service[] = [
         "Seniors wanting to maintain their fitness and mobility",
       ],
       ctaText: "Ready to dive in? Discover our offers",
+      faqs: [
+        {
+          question: "At what age can you start swimming lessons?",
+          answer: "Swimming lessons are available from age 4 for water introduction. For adults, there is no age limit. I adapt each session to the student's level and physical condition.",
+        },
+        {
+          question: "Do I need to know how to swim to take lessons?",
+          answer: "Not at all! I welcome complete beginners and guide them step by step to learn the basics of swimming safely and confidently.",
+        },
+        {
+          question: "Where do swimming lessons take place in Valbonne?",
+          answer: "Lessons take place in partner pools in Valbonne and surroundings (Sophia Antipolis, Mougins, Antibes). The exact location is chosen based on your location for convenience.",
+        },
+        {
+          question: "How many sessions does it take to learn to swim?",
+          answer: "Generally, a beginner acquires the basics in 8 to 12 sessions. For technical improvement, count 5 to 10 additional sessions depending on your goals. Each progression is individual.",
+        },
+        {
+          question: "Does swimming really help with weight loss?",
+          answer: "Yes, swimming is excellent for weight loss. An intensive session burns up to 500 calories per hour while engaging all muscle groups, without impact on joints.",
+        },
+      ],
     },
   },
   {
@@ -198,6 +288,28 @@ const SERVICES_EN: Service[] = [
         "Anyone motivated by lasting physical change",
       ],
       ctaText: "Ready to transform? Discover our offers",
+      faqs: [
+        {
+          question: "What types of fitness training do you offer?",
+          answer: "I offer weight training, HIIT (high-intensity interval training), circuit training, functional exercises and muscle strengthening. Each program is adapted to your goals.",
+        },
+        {
+          question: "Do outdoor sessions take place even in winter?",
+          answer: "Yes, thanks to the French Riviera climate, outdoor sessions are possible almost year-round. In case of bad weather, we switch to an indoor session.",
+        },
+        {
+          question: "I'm a beginner, is fitness suitable for me?",
+          answer: "Absolutely! Each program is custom-designed based on your current level. I guide you progressively to avoid injuries and guarantee visible results.",
+        },
+        {
+          question: "How often should I train to see results?",
+          answer: "For visible results, I recommend a minimum of 2 to 3 sessions per week. The first changes usually appear after 3 to 4 weeks of regular training.",
+        },
+        {
+          question: "What equipment do I need for outdoor sessions?",
+          answer: "Simply comfortable sportswear and appropriate sneakers. I provide all necessary equipment (resistance bands, dumbbells, mats) for outdoor sessions.",
+        },
+      ],
     },
   },
   {
@@ -232,6 +344,28 @@ const SERVICES_EN: Service[] = [
         "Parents wanting to improve the whole family's nutrition",
       ],
       ctaText: "Ready to eat better? Discover our offers",
+      faqs: [
+        {
+          question: "Do you offer strict or restrictive diets?",
+          answer: "No, my approach is based on nutritional rebalancing, not restrictive diets. The goal is to adopt lasting and enjoyable habits, without frustration or yo-yo effects.",
+        },
+        {
+          question: "How does the initial nutritional assessment work?",
+          answer: "The assessment includes an analysis of your current eating habits, lifestyle, goals and any intolerances. It lasts approximately 45 minutes and allows me to create a personalized meal plan.",
+        },
+        {
+          question: "Is nutritional support included in sports coaching?",
+          answer: "Basic nutrition advice is included in all my programs. For in-depth nutritional support with detailed meal plans and recipes, opt for the Online Coaching or Transformation packages.",
+        },
+        {
+          question: "Can you help with food intolerances?",
+          answer: "Yes, I take into account all food intolerances and allergies to develop an adapted nutritional plan. I regularly work with gluten-free, lactose-free or vegetarian diets.",
+        },
+        {
+          question: "How long does it take to see results with nutritional rebalancing?",
+          answer: "The first effects (better energy, better sleep) can be felt within the first week. For weight loss, expect 3 to 4 weeks to see significant and lasting results.",
+        },
+      ],
     },
   },
 ];
@@ -271,7 +405,7 @@ const PROGRAMS_FR: Program[] = [
     price: "45€",
     priceDetails: "par séance",
     ctaText: "Voir les packs",
-    ctaHref: "#pricing-packs",
+    ctaHref: "/packs",
   },
   {
     imageSrc:
@@ -374,7 +508,7 @@ const PROGRAMS_EN: Program[] = [
     price: "45€",
     priceDetails: "per session",
     ctaText: "See packs",
-    ctaHref: "#pricing-packs",
+    ctaHref: "/packs",
   },
   {
     imageSrc:
