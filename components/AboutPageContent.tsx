@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -47,29 +48,45 @@ export default function AboutPageContent() {
             </h2>
           </FadeInWhenVisible>
 
+          {/* Photo */}
           <FadeInWhenVisible delay={0.1}>
+            <div className="flex justify-center mb-10">
+              <div className="relative w-[280px] h-[320px] rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12)] border-4 border-white">
+                <Image
+                  src="/images/Aquabike.jpg"
+                  alt="Arnaud Chevallier — Coach Sportif & Maître-Nageur"
+                  fill
+                  className="object-cover"
+                  sizes="280px"
+                  priority
+                />
+              </div>
+            </div>
+          </FadeInWhenVisible>
+
+          <FadeInWhenVisible delay={0.15}>
             <p className="text-gray-600 mb-5 leading-[1.8] text-[1.05rem]">
               {t("aboutPage.p1")}
             </p>
           </FadeInWhenVisible>
-          <FadeInWhenVisible delay={0.15}>
+          <FadeInWhenVisible delay={0.2}>
             <p className="text-gray-600 mb-5 leading-[1.8] text-[1.05rem]">
               {t("aboutPage.p2")}
             </p>
           </FadeInWhenVisible>
-          <FadeInWhenVisible delay={0.2}>
+          <FadeInWhenVisible delay={0.25}>
             <p className="text-gray-600 mb-5 leading-[1.8] text-[1.05rem]">
               {t("aboutPage.p3")}
             </p>
           </FadeInWhenVisible>
-          <FadeInWhenVisible delay={0.25}>
+          <FadeInWhenVisible delay={0.3}>
             <p className="text-gray-600 mb-12 leading-[1.8] text-[1.05rem]">
               {t("aboutPage.p4")}
             </p>
           </FadeInWhenVisible>
 
           {/* Qualifications */}
-          <FadeInWhenVisible delay={0.3}>
+          <FadeInWhenVisible delay={0.35}>
             <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-10 mb-12 border border-blue-100">
               <h3 className="font-heading text-heading text-2xl font-bold mb-6 flex items-center gap-3">
                 🎓 {t("aboutPage.qualificationsTitle")}
@@ -89,7 +106,7 @@ export default function AboutPageContent() {
           </FadeInWhenVisible>
 
           {/* Approach */}
-          <FadeInWhenVisible delay={0.35}>
+          <FadeInWhenVisible delay={0.4}>
             <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-10 mb-12 border border-gray-200">
               <h3 className="font-heading text-heading text-2xl font-bold mb-6 flex items-center gap-3">
                 🎯 {t("aboutPage.approachTitle")}
@@ -111,7 +128,7 @@ export default function AboutPageContent() {
           </FadeInWhenVisible>
 
           {/* CTA */}
-          <FadeInWhenVisible delay={0.4}>
+          <FadeInWhenVisible delay={0.45}>
             <div className="text-center bg-gradient-to-br from-brand-dark to-brand-navy rounded-2xl p-12 text-white">
               <h3 className="font-heading text-3xl font-bold mb-6">
                 {t("aboutPage.ctaTitle")}
@@ -126,7 +143,7 @@ export default function AboutPageContent() {
           </FadeInWhenVisible>
 
           {/* Back link */}
-          <FadeInWhenVisible delay={0.45}>
+          <FadeInWhenVisible delay={0.5}>
             <div className="text-center mt-10">
               <Link
                 href="/"
