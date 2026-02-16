@@ -31,6 +31,8 @@ const en: Record<TranslationKey, string> = {
   "offers.bookNow": "Book now",
   "offers.included": "What's included",
   "offers.goals": "Goals",
+  "offers.showGoals": "Show goals",
+  "offers.hideGoals": "Hide goals",
 
   // Info note
   "info.programsInclude": "All programs include:",

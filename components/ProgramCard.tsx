@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { Program } from "@/lib/types";
 import { useLanguage } from "@/lib/i18n/useLanguage";
@@ -16,7 +17,7 @@ export default function ProgramCard({
   features,
   goals,
   price,
-  priceUnit,
+  // priceUnit no longer displayed separately (price is inside button)
   priceDetails,
   ctaText,
   ctaHref,
@@ -26,6 +27,7 @@ export default function ProgramCard({
   isLoading = false,
 }: ProgramCardProps) {
   const { t } = useLanguage();
+  const [showGoals, setShowGoals] = useState(false);
   const isStripe = !!onCheckout;
 
   const cardClasses = `h-full bg-white rounded-xl overflow-hidden flex flex-col transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_35px_rgba(37,99,235,0.12)] hover:border-brand-blue hover:-translate-y-1 no-underline cursor-pointer ${
@@ -68,29 +70,31 @@ export default function ProgramCard({
           ))}
         </ul>
 
-        {/* Goals */}
-        <p className="text-[0.8rem] font-bold text-heading uppercase tracking-wider mb-3 mt-auto">
-          {t("offers.goals")}
-        </p>
-        <ul className="list-none p-0 text-left mx-auto w-fit">
-          {goals.map((goal) => (
-            <li key={goal} className="py-1 text-gray-600 flex items-start gap-2.5 text-[0.85rem] leading-snug">
-              <span className="shrink-0 mt-px">🎯</span>
-              <span>{goal}</span>
-            </li>
-          ))}
-        </ul>
+        {/* Goals toggle */}
+        <button
+          onClick={(e) => { e.stopPropagation(); e.preventDefault(); setShowGoals(!showGoals); }}
+          className="text-[0.8rem] font-bold text-heading uppercase tracking-wider mb-3 mt-auto flex items-center justify-center gap-1 bg-transparent border-none cursor-pointer hover:text-brand-blue transition-colors"
+        >
+          {showGoals ? t("offers.hideGoals") : t("offers.showGoals")}
+          <span className="text-[0.65rem]">{showGoals ? "▲" : "▼"}</span>
+        </button>
+        {showGoals && (
+          <ul className="list-none p-0 text-left mx-auto w-fit">
+            {goals.map((goal) => (
+              <li key={goal} className="py-1 text-gray-600 flex items-start gap-2.5 text-[0.85rem] leading-snug">
+                <span className="shrink-0 mt-px">🎯</span>
+                <span>{goal}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <div className="p-6 flex flex-col justify-center items-center text-center bg-white border-t border-gray-200">
-        <div className="text-[2rem] font-bold text-heading leading-none mb-1 max-[480px]:text-[1.6rem]">
-          {price}
-          {priceUnit && <small className="text-sm text-gray-500 font-normal">{priceUnit}</small>}
-        </div>
-        <p className="text-gray-500 text-[0.9rem] mb-5">{priceDetails}</p>
         <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-3 px-8 rounded-lg font-bold transition-all duration-300 inline-block w-full text-center text-[0.95rem]">
-          {isLoading ? t("offers.redirecting") : ctaText}
+          {isLoading ? t("offers.redirecting") : `${price} — ${ctaText}`}
         </span>
-        <p className="text-[0.7rem] text-gray-400 mt-3 flex items-center justify-center gap-1">
+        <p className="text-gray-500 text-[0.8rem] mt-2">{priceDetails}</p>
+        <p className="text-[0.7rem] text-gray-400 mt-2 flex items-center justify-center gap-1">
           🔒 {t("security.securedByStripe")}
         </p>
       </div>

@@ -30,6 +30,8 @@ const fr = {
   "offers.bookNow": "Réserver maintenant",
   "offers.included": "Inclus",
   "offers.goals": "Objectifs",
+  "offers.showGoals": "Voir les objectifs",
+  "offers.hideGoals": "Masquer les objectifs",
 
   // Info note
   "info.programsInclude": "Tous les programmes incluent :",
