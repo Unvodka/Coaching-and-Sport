@@ -69,7 +69,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="bg-gradient-to-br from-slate-50 to-slate-100 py-24 px-16 w-full max-md:py-16 max-md:px-6"
+      className="bg-gradient-to-br from-slate-50 to-slate-100 py-14 px-16 w-full max-md:py-10 max-md:px-6"
     >
       <FadeInWhenVisible>
         <h2 className="font-heading text-center text-5xl mb-4 font-extrabold tracking-tight text-heading max-md:text-[2.2rem] max-[480px]:text-[1.8rem]">
@@ -77,7 +77,7 @@ export default function ContactSection() {
         </h2>
       </FadeInWhenVisible>
       <FadeInWhenVisible delay={0.1}>
-        <p className="text-center text-gray-500 text-lg mb-16 max-w-[700px] mx-auto">
+        <p className="text-center text-gray-500 text-lg mb-10 max-w-[700px] mx-auto">
           {t("contact.subtitle")}
         </p>
       </FadeInWhenVisible>
@@ -85,10 +85,10 @@ export default function ContactSection() {
       <FadeInWhenVisible delay={0.2} duration={0.8}>
         <form
           onSubmit={handleSubmit}
-          className="max-w-[700px] mx-auto bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-gray-200 max-md:p-8 max-[480px]:p-6"
+          className="max-w-[700px] mx-auto bg-white p-8 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-gray-200 max-md:p-6 max-[480px]:p-4"
         >
-          <div className="mb-5">
-            <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
+          <div className="mb-3.5">
+            <label className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
               {t("contact.fullName")} *
             </label>
             <input
@@ -100,8 +100,8 @@ export default function ContactSection() {
             />
           </div>
 
-          <div className="mb-5">
-            <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
+          <div className="mb-3.5">
+            <label className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
               {t("contact.email")} *
             </label>
             <input
@@ -113,8 +113,8 @@ export default function ContactSection() {
             />
           </div>
 
-          <div className="mb-5">
-            <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
+          <div className="mb-3.5">
+            <label className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
               {t("contact.phone")}
             </label>
             <input
@@ -125,8 +125,8 @@ export default function ContactSection() {
             />
           </div>
 
-          <div className="mb-5">
-            <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
+          <div className="mb-3.5">
+            <label className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
               {t("contact.courseType")} *
             </label>
             <select
@@ -142,8 +142,8 @@ export default function ContactSection() {
             </select>
           </div>
 
-          <div className="mb-5">
-            <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
+          <div className="mb-3.5">
+            <label className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
               {t("contact.message")} *
             </label>
             <textarea
@@ -151,7 +151,7 @@ export default function ContactSection() {
               placeholder={t("contact.placeholder")}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full p-3.5 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans min-h-[120px] resize-y focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
+              className="w-full p-3.5 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans min-h-[90px] resize-y focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
             />
           </div>
 
@@ -160,7 +160,7 @@ export default function ContactSection() {
             disabled={isSubmitting}
             whileHover={{ y: -3, boxShadow: "0 10px 25px rgba(37,99,235,0.3)" }}
             whileTap={{ scale: 0.98 }}
-            className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-12 border-none rounded-lg text-[1.1rem] font-bold cursor-pointer transition-all duration-300 w-full disabled:opacity-60 disabled:cursor-not-allowed"
+            className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-12 border-none rounded-lg text-[1.1rem] font-bold cursor-pointer transition-all duration-300 w-1/2 mx-auto block disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {isSubmitting ? t("contact.sending") : t("contact.submit")}
           </motion.button>
