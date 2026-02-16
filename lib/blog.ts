@@ -20,7 +20,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readingTime: "6 min",
     category: "Perte de poids",
     imageSrc:
-      "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&q=80",
+      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&q=80",
     imageAlt: "Entraînement personnalisé avec un coach sportif pour perdre du poids",
     content: [
       "La perte de poids est l'un des objectifs les plus courants chez les personnes qui font appel à un coach sportif. Pourtant, beaucoup de gens se lancent dans des régimes drastiques ou des programmes d'entraînement trop intenses, ce qui mène souvent à l'abandon et à l'effet yoyo. En tant que coach sportif diplômé à Valbonne, je vous explique comment aborder la perte de poids de manière intelligente et durable.",
@@ -40,7 +40,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readingTime: "5 min",
     category: "Natation",
     imageSrc:
-      "https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=1200&q=80",
+      "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=1200&q=80",
     imageAlt: "Nageur adulte dans une piscine effectuant un crawl",
     content: [
       "La natation est souvent considérée comme le sport le plus complet qui existe, et pour de bonnes raisons. En tant que maître-nageur diplômé d'État à Valbonne, je constate chaque jour les incroyables bienfaits que cette discipline apporte à mes élèves adultes. Que vous soyez débutant ou nageur confirmé, voici les 10 raisons pour lesquelles vous devriez intégrer la natation dans votre routine sportive.",
@@ -62,7 +62,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readingTime: "5 min",
     category: "Fitness",
     imageSrc:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80",
+      "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1200&q=80",
     imageAlt: "Séance de fitness en plein air dans un parc verdoyant",
     content: [
       "Si vous hésitez entre vous entraîner en salle de sport ou en plein air, cet article est pour vous. En tant que coach sportif à Valbonne, je propose les deux formats, mais je constate systématiquement que mes clients qui s'entraînent en extérieur obtiennent des résultats supérieurs et maintiennent leur motivation plus longtemps. Voici pourquoi.",
@@ -83,7 +83,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readingTime: "7 min",
     category: "Nutrition",
     imageSrc:
-      "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1200&q=80",
+      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200&q=80",
     imageAlt: "Repas équilibré avec protéines, légumes et glucides complexes",
     content: [
       "La nutrition est le pilier souvent négligé de tout programme sportif. On dit que les résultats se font à 30% à l'entraînement et à 70% dans l'assiette, et mon expérience de coach sportif à Valbonne confirme totalement cette proportion. Voici les bases de la nutrition sportive pour vous aider à optimiser vos performances et atteindre vos objectifs.",
@@ -104,7 +104,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readingTime: "6 min",
     category: "Remise en forme",
     imageSrc:
-      "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&q=80",
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80",
     imageAlt: "Personne mature faisant de l'exercice en plein air avec un coach",
     content: [
       "Il n'est jamais trop tard pour commencer ou reprendre une activité physique. À 40, 50 ou même 60 ans, le sport peut transformer votre qualité de vie. En tant que coach sportif à Valbonne, j'accompagne de nombreux clients dans cette tranche d'âge, et les résultats sont toujours remarquables. Voici comment aborder la reprise sportive en toute sécurité.",
