@@ -56,27 +56,27 @@ export default function ProgramCard({
         <p className="text-gray-500 leading-[1.6] mb-4 text-[0.95rem]">{description}</p>
 
         {/* What's included */}
-        <p className="text-[0.8rem] font-bold text-brand-blue uppercase tracking-wider mb-2 mt-2">
+        <p className="text-[0.8rem] font-bold text-brand-blue uppercase tracking-wider mb-3 mt-2">
           {t("offers.included")}
         </p>
-        <ul className="list-none p-0 mb-4">
+        <ul className="list-none p-0 mb-4 text-left mx-auto w-fit">
           {features.map((feature) => (
-            <li key={feature} className="py-[0.3rem] text-gray-600 flex items-start justify-center gap-2 text-[0.85rem]">
-              <span className="text-brand-blue font-bold text-sm shrink-0">✓</span>
-              {feature}
+            <li key={feature} className="py-1 text-gray-600 flex items-start gap-2.5 text-[0.85rem] leading-snug">
+              <span className="text-brand-blue font-bold text-sm shrink-0 mt-px">✓</span>
+              <span>{feature}</span>
             </li>
           ))}
         </ul>
 
         {/* Goals */}
-        <p className="text-[0.8rem] font-bold text-heading uppercase tracking-wider mb-2 mt-auto">
+        <p className="text-[0.8rem] font-bold text-heading uppercase tracking-wider mb-3 mt-auto">
           {t("offers.goals")}
         </p>
-        <ul className="list-none p-0">
+        <ul className="list-none p-0 text-left mx-auto w-fit">
           {goals.map((goal) => (
-            <li key={goal} className="py-[0.3rem] text-gray-600 flex items-center justify-center gap-2 text-[0.85rem]">
-              <span className="text-heading font-bold text-sm shrink-0">🎯</span>
-              {goal}
+            <li key={goal} className="py-1 text-gray-600 flex items-start gap-2.5 text-[0.85rem] leading-snug">
+              <span className="shrink-0 mt-px">🎯</span>
+              <span>{goal}</span>
             </li>
           ))}
         </ul>
