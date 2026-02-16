@@ -160,7 +160,7 @@ export default function ContactSection() {
             disabled={isSubmitting}
             whileHover={{ y: -3, boxShadow: "0 10px 25px rgba(37,99,235,0.3)" }}
             whileTap={{ scale: 0.98 }}
-            className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-12 border-none rounded-lg text-[1.1rem] font-bold cursor-pointer transition-all duration-300 w-1/2 mx-auto block disabled:opacity-60 disabled:cursor-not-allowed"
+            className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-12 border-none rounded-lg text-[1.1rem] font-bold cursor-pointer transition-all duration-300 w-1/2 max-md:w-full mx-auto block disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {isSubmitting ? t("contact.sending") : t("contact.submit")}
           </motion.button>
