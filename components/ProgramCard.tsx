@@ -90,13 +90,14 @@ export default function ProgramCard({
         )}
       </div>
       <div className="p-6 flex flex-col justify-center items-center text-center bg-white border-t border-gray-200">
+        <div className="text-[2rem] font-bold text-heading leading-none mb-1 max-[480px]:text-[1.6rem]">
+          {price}
+        </div>
+        <p className="text-gray-500 text-[0.9rem] mb-5">{priceDetails}</p>
         <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-3 px-8 rounded-lg font-bold transition-all duration-300 inline-block w-full text-center text-[0.95rem]">
-          {isLoading ? t("offers.redirecting") : (
-            <><span className="text-[1.15rem]">{price}</span> — {ctaText}</>
-          )}
+          {isLoading ? t("offers.redirecting") : ctaText}
         </span>
-        <p className="text-gray-500 text-[0.8rem] mt-2">{priceDetails}</p>
-        <p className="text-[0.7rem] text-gray-400 mt-2 flex items-center justify-center gap-1">
+        <p className="text-[0.7rem] text-gray-400 mt-3 flex items-center justify-center gap-1">
           🔒 {t("security.securedByStripe")}
         </p>
       </div>
