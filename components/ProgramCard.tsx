@@ -61,7 +61,7 @@ export default function ProgramCard({
         </p>
         <ul className="list-none p-0 mb-4">
           {features.map((feature) => (
-            <li key={feature} className="py-[0.3rem] text-gray-600 flex items-center justify-center gap-2 text-[0.85rem]">
+            <li key={feature} className="py-[0.3rem] text-gray-600 flex items-start justify-center gap-2 text-[0.85rem]">
               <span className="text-brand-blue font-bold text-sm shrink-0">✓</span>
               {feature}
             </li>

@@ -418,7 +418,6 @@ const PROGRAMS_FR: Program[] = [
       "Plan alimentaire adapté à vos objectifs",
       "Ajustements hebdomadaires selon résultats",
       "Support illimité par message (24h)",
-      "Application de suivi mobile",
     ],
     goals: [
       "Perdre du poids durablement",
@@ -521,7 +520,6 @@ const PROGRAMS_EN: Program[] = [
       "Meal plan tailored to your goals",
       "Weekly adjustments based on results",
       "Unlimited messaging support (24h)",
-      "Mobile tracking app",
     ],
     goals: [
       "Lose weight sustainably",
