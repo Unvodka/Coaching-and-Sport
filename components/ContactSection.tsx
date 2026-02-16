@@ -85,9 +85,9 @@ export default function ContactSection() {
       <FadeInWhenVisible delay={0.2} duration={0.8}>
         <form
           onSubmit={handleSubmit}
-          className="max-w-[700px] mx-auto bg-white p-12 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-gray-200 max-md:p-8 max-[480px]:p-6"
+          className="max-w-[700px] mx-auto bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-gray-200 max-md:p-8 max-[480px]:p-6"
         >
-          <div className="mb-7">
+          <div className="mb-5">
             <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
               {t("contact.fullName")} *
             </label>
@@ -96,11 +96,11 @@ export default function ContactSection() {
               required
               value={fromName}
               onChange={(e) => setFromName(e.target.value)}
-              className="w-full p-4 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
+              className="w-full p-3.5 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
             />
           </div>
 
-          <div className="mb-7">
+          <div className="mb-5">
             <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
               {t("contact.email")} *
             </label>
@@ -109,11 +109,11 @@ export default function ContactSection() {
               required
               value={fromEmail}
               onChange={(e) => setFromEmail(e.target.value)}
-              className="w-full p-4 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
+              className="w-full p-3.5 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
             />
           </div>
 
-          <div className="mb-7">
+          <div className="mb-5">
             <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
               {t("contact.phone")}
             </label>
@@ -121,11 +121,11 @@ export default function ContactSection() {
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full p-4 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
+              className="w-full p-3.5 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
             />
           </div>
 
-          <div className="mb-7">
+          <div className="mb-5">
             <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
               {t("contact.courseType")} *
             </label>
@@ -133,7 +133,7 @@ export default function ContactSection() {
               required
               value={formule}
               onChange={(e) => setFormule(e.target.value)}
-              className="w-full p-4 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
+              className="w-full p-3.5 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
             >
               <option value="">{t("contact.select")}</option>
               <option value="particulier">{t("contact.privateLesson")}</option>
@@ -142,7 +142,7 @@ export default function ContactSection() {
             </select>
           </div>
 
-          <div className="mb-7">
+          <div className="mb-5">
             <label className="block mb-2.5 text-gray-700 font-semibold text-[0.95rem]">
               {t("contact.message")} *
             </label>
@@ -151,7 +151,7 @@ export default function ContactSection() {
               placeholder={t("contact.placeholder")}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full p-4 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans min-h-[150px] resize-y focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
+              className="w-full p-3.5 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans min-h-[120px] resize-y focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
             />
           </div>
 
@@ -160,7 +160,7 @@ export default function ContactSection() {
             disabled={isSubmitting}
             whileHover={{ y: -3, boxShadow: "0 10px 25px rgba(37,99,235,0.3)" }}
             whileTap={{ scale: 0.98 }}
-            className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-5 px-12 border-none rounded-lg text-[1.1rem] font-bold cursor-pointer transition-all duration-300 w-full disabled:opacity-60 disabled:cursor-not-allowed"
+            className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-12 border-none rounded-lg text-[1.1rem] font-bold cursor-pointer transition-all duration-300 w-full disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {isSubmitting ? t("contact.sending") : t("contact.submit")}
           </motion.button>

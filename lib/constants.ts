@@ -409,7 +409,7 @@ const PROGRAMS_FR: Program[] = [
   },
   {
     imageSrc:
-      "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80",
+      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80",
     title: "Coaching en Ligne",
     description:
       "Un programme complet à distance avec suivi quotidien pour progresser où que vous soyez, à votre rythme.",
@@ -512,7 +512,7 @@ const PROGRAMS_EN: Program[] = [
   },
   {
     imageSrc:
-      "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80",
+      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80",
     title: "Online Coaching",
     description:
       "A complete remote program with daily follow-up to progress wherever you are, at your own pace.",

@@ -55,6 +55,39 @@ const fr = {
   "about.p4.prefix": "Basé à Valbonne",
   "about.p4.suffix":
     ", j'interviens dans toute la région pour vous offrir le meilleur service possible.",
+  "about.cta": "En savoir plus",
+
+  // About page (dedicated /apropos)
+  "aboutPage.title": "À Propos de Coach-Bluewave",
+  "aboutPage.subtitle":
+    "Découvrez mon parcours et ma philosophie d'accompagnement",
+  "aboutPage.heading":
+    "Arnaud Chevallier — Coach Sportif & Maître-Nageur Diplômé",
+  "aboutPage.p1":
+    "Maître-nageur diplômé et coach sportif certifié, je me consacre depuis plusieurs années à accompagner mes clients dans leur parcours de transformation physique.",
+  "aboutPage.p2":
+    "Spécialisé dans la perte de poids et la remise en forme, j'ai développé une approche globale qui combine plusieurs disciplines sportives pour des résultats durables et harmonieux.",
+  "aboutPage.p3":
+    "Ma philosophie : un accompagnement bienveillant, des objectifs réalistes et une progression adaptée à votre rythme. Chaque personne est unique, et votre programme le sera aussi.",
+  "aboutPage.p4":
+    "Basé à Valbonne, j'interviens dans toute la région pour vous offrir le meilleur service possible.",
+  "aboutPage.qualificationsTitle": "Mes Qualifications",
+  "aboutPage.q1": "Brevet d'État de Maître-Nageur Sauveteur",
+  "aboutPage.q2": "Coach sportif certifié",
+  "aboutPage.q3": "Spécialiste en perte de poids et remise en forme",
+  "aboutPage.q4": "Conseiller en nutrition sportive",
+  "aboutPage.approachTitle": "Mon Approche",
+  "aboutPage.approach1":
+    "Évaluation initiale complète de votre condition physique et de vos objectifs",
+  "aboutPage.approach2":
+    "Programmes 100% personnalisés adaptés à votre rythme et vos contraintes",
+  "aboutPage.approach3":
+    "Suivi régulier et ajustements pour garantir votre progression",
+  "aboutPage.approach4":
+    "Accompagnement bienveillant et motivant à chaque étape",
+  "aboutPage.ctaTitle": "Prêt à commencer ?",
+  "aboutPage.ctaText": "Contactez-moi",
+  "aboutPage.backHome": "← Retour à l'accueil",
 
   // Contact section
   "contact.title": "Contactez-Moi",

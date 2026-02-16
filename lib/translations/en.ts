@@ -56,6 +56,39 @@ const en: Record<TranslationKey, string> = {
   "about.p4.prefix": "Based in Valbonne",
   "about.p4.suffix":
     ", I work throughout the region to offer you the best possible service.",
+  "about.cta": "Learn more",
+
+  // About page (dedicated /apropos)
+  "aboutPage.title": "About Coach-Bluewave",
+  "aboutPage.subtitle":
+    "Discover my journey and coaching philosophy",
+  "aboutPage.heading":
+    "Arnaud Chevallier — Sports Coach & Certified Lifeguard",
+  "aboutPage.p1":
+    "Certified lifeguard and sports coach, I have been dedicated for several years to helping my clients on their physical transformation journey.",
+  "aboutPage.p2":
+    "Specializing in weight loss and fitness, I have developed a holistic approach that combines multiple sports disciplines for lasting and balanced results.",
+  "aboutPage.p3":
+    "My philosophy: supportive guidance, realistic goals, and progress adapted to your pace. Every person is unique, and your program will be too.",
+  "aboutPage.p4":
+    "Based in Valbonne, I work throughout the region to offer you the best possible service.",
+  "aboutPage.qualificationsTitle": "My Qualifications",
+  "aboutPage.q1": "State-certified Lifeguard",
+  "aboutPage.q2": "Certified sports coach",
+  "aboutPage.q3": "Weight loss and fitness specialist",
+  "aboutPage.q4": "Sports nutrition advisor",
+  "aboutPage.approachTitle": "My Approach",
+  "aboutPage.approach1":
+    "Complete initial assessment of your fitness level and goals",
+  "aboutPage.approach2":
+    "100% personalized programs adapted to your pace and constraints",
+  "aboutPage.approach3":
+    "Regular follow-up and adjustments to ensure your progress",
+  "aboutPage.approach4":
+    "Supportive and motivating guidance at every step",
+  "aboutPage.ctaTitle": "Ready to get started?",
+  "aboutPage.ctaText": "Contact me",
+  "aboutPage.backHome": "← Back to home",
 
   // Contact section
   "contact.title": "Contact Me",

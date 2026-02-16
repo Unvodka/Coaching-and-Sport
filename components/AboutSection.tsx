@@ -1,8 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import FadeInWhenVisible from "./animations/FadeInWhenVisible";
-import ScaleInWhenVisible from "./animations/ScaleInWhenVisible";
 
 export default function AboutSection() {
   const { t } = useLanguage();
@@ -15,37 +15,29 @@ export default function AboutSection() {
         </h2>
       </FadeInWhenVisible>
       <div className="flex flex-col items-center text-center max-w-[800px] mx-auto">
-        <div>
-          <FadeInWhenVisible delay={0.1}>
-            <h3 className="font-heading text-heading text-[1.8rem] mb-6 font-bold">
-              {t("about.heading")}
-            </h3>
-          </FadeInWhenVisible>
-          <FadeInWhenVisible delay={0.2}>
-            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.05rem]">
-              {t("about.p1")}
-            </p>
-          </FadeInWhenVisible>
-          <FadeInWhenVisible delay={0.3}>
-            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.05rem]">
-              {t("about.p2")}
-            </p>
-          </FadeInWhenVisible>
-          <FadeInWhenVisible delay={0.4}>
-            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.05rem]">
-              {t("about.p3")}
-            </p>
-          </FadeInWhenVisible>
-          <FadeInWhenVisible delay={0.5}>
-            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.05rem]">
-              <strong className="text-heading">{t("about.p4.prefix")}</strong>
-              {t("about.p4.suffix")}
-            </p>
-          </FadeInWhenVisible>
-        </div>
-        <ScaleInWhenVisible delay={0.6}>
-          <div className="text-[8rem] mt-8">🏅</div>
-        </ScaleInWhenVisible>
+        <FadeInWhenVisible delay={0.1}>
+          <h3 className="font-heading text-heading text-[1.8rem] mb-6 font-bold">
+            {t("about.heading")}
+          </h3>
+        </FadeInWhenVisible>
+        <FadeInWhenVisible delay={0.2}>
+          <p className="text-gray-600 mb-5 leading-[1.8] text-[1.05rem]">
+            {t("about.p1")}
+          </p>
+        </FadeInWhenVisible>
+        <FadeInWhenVisible delay={0.3}>
+          <p className="text-gray-600 mb-8 leading-[1.8] text-[1.05rem]">
+            {t("about.p2")}
+          </p>
+        </FadeInWhenVisible>
+        <FadeInWhenVisible delay={0.4}>
+          <Link
+            href="/apropos"
+            className="inline-flex items-center gap-2 bg-brand-blue text-white font-semibold py-4 px-10 rounded-xl text-lg shadow-lg hover:bg-blue-700 transition-all duration-300 hover:-translate-y-0.5 no-underline"
+          >
+            {t("about.cta")} &rarr;
+          </Link>
+        </FadeInWhenVisible>
       </div>
     </section>
   );
