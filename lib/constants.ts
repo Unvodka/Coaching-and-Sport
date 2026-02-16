@@ -623,7 +623,7 @@ const PRICING_PACKS_FR: PricingPack[] = [
     title: "Pack 10 Séances",
     price: "380€",
     priceNumeric: 380,
-    duration: "10 séances / Validité 3 mois",
+    duration: "10 séances / Validité 6 mois",
     features: [
       "10 séances d'1 heure",
       "Programme évolutif complet",
@@ -637,7 +637,7 @@ const PRICING_PACKS_FR: PricingPack[] = [
     title: "Pack 20 Séances",
     price: "700€",
     priceNumeric: 700,
-    duration: "20 séances / Validité 6 mois",
+    duration: "20 séances / Validité 12 mois",
     features: [
       "20 séances d'1 heure",
       "Programme transformation complète",
@@ -679,7 +679,7 @@ const PRICING_PACKS_EN: PricingPack[] = [
     title: "10-Session Pack",
     price: "380€",
     priceNumeric: 380,
-    duration: "10 sessions / Valid 3 months",
+    duration: "10 sessions / Valid 6 months",
     features: [
       "10 one-hour sessions",
       "Complete progressive program",
@@ -693,7 +693,7 @@ const PRICING_PACKS_EN: PricingPack[] = [
     title: "20-Session Pack",
     price: "700€",
     priceNumeric: 700,
-    duration: "20 sessions / Valid 6 months",
+    duration: "20 sessions / Valid 12 months",
     features: [
       "20 one-hour sessions",
       "Complete transformation program",
