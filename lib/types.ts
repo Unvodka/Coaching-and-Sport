@@ -11,6 +11,11 @@ export interface ServiceBenefit {
   description: string;
 }
 
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
 export interface ServiceDetail {
   heroImageSrc: string;
   heroImageAlt: string;
@@ -19,6 +24,7 @@ export interface ServiceDetail {
   benefits: ServiceBenefit[];
   targetAudience: string[];
   ctaText: string;
+  faqs: FAQ[];
 }
 
 export interface Service {
