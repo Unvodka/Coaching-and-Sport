@@ -35,7 +35,7 @@ export default function Header() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 80, damping: 20, delay: 0.2 }}
-      className="text-white py-6 fixed w-full top-0 z-[1000] backdrop-blur-md bg-black/40 max-md:py-3 max-md:top-1"
+      className="text-white py-6 fixed w-full top-0 z-[1000] backdrop-blur-md bg-black/40 max-md:py-3"
     >
       <nav className="flex justify-between items-center w-full px-12">
         <Link href="/" className="font-heading text-[1.7rem] font-bold tracking-tight text-white no-underline">
