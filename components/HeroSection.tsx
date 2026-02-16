@@ -31,7 +31,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           className="font-heading text-[4rem] mb-6 font-extrabold tracking-tight text-white max-md:text-[2.5rem] max-[480px]:text-[2rem]"
         >
-          Arnaud Chevallier
+          Coach-Bluewave
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 40 }}

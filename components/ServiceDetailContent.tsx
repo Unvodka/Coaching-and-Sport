@@ -113,6 +113,34 @@ export default function ServiceDetailContent({ slug }: Props) {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      {detail.faqs && detail.faqs.length > 0 && (
+        <section className="bg-gradient-to-br from-slate-50 to-slate-100 py-24 px-16 max-md:py-16 max-md:px-6">
+          <FadeInWhenVisible>
+            <h2 className="font-heading text-center text-4xl mb-16 font-extrabold tracking-tight text-heading max-md:text-[2rem]">
+              {t("detail.faq")}
+            </h2>
+          </FadeInWhenVisible>
+          <div className="max-w-[800px] mx-auto space-y-6">
+            {detail.faqs.map((faq, i) => (
+              <FadeInWhenVisible key={i} delay={i * 0.08}>
+                <details className="bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-gray-200 group">
+                  <summary className="p-6 cursor-pointer font-bold text-heading text-[1.05rem] list-none flex items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
+                    {faq.question}
+                    <span className="text-brand-blue shrink-0 transition-transform duration-300 group-open:rotate-45 text-2xl leading-none">
+                      +
+                    </span>
+                  </summary>
+                  <div className="px-6 pb-6 text-gray-600 leading-[1.8] text-[0.95rem] border-t border-gray-100 pt-4">
+                    {faq.answer}
+                  </div>
+                </details>
+              </FadeInWhenVisible>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* CTA */}
       <section className="bg-gradient-to-br from-brand-dark to-brand-navy text-white text-center py-20 px-16 max-md:py-14 max-md:px-6">
         <FadeInWhenVisible>

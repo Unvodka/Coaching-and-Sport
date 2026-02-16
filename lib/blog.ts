@@ -1,0 +1,123 @@
+export interface BlogPost {
+  slug: string;
+  title: string;
+  description: string;
+  date: string;
+  readingTime: string;
+  category: string;
+  imageSrc: string;
+  imageAlt: string;
+  content: string[];
+}
+
+export const BLOG_POSTS: BlogPost[] = [
+  {
+    slug: "perdre-du-poids-avec-coach-sportif",
+    title: "Comment perdre du poids durablement avec un coach sportif ?",
+    description:
+      "Découvrez les clés d'une perte de poids durable grâce à un accompagnement sportif personnalisé. Conseils d'expert pour atteindre vos objectifs sans effet yoyo.",
+    date: "2025-01-15",
+    readingTime: "6 min",
+    category: "Perte de poids",
+    imageSrc:
+      "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&q=80",
+    imageAlt: "Entraînement personnalisé avec un coach sportif pour perdre du poids",
+    content: [
+      "La perte de poids est l'un des objectifs les plus courants chez les personnes qui font appel à un coach sportif. Pourtant, beaucoup de gens se lancent dans des régimes drastiques ou des programmes d'entraînement trop intenses, ce qui mène souvent à l'abandon et à l'effet yoyo. En tant que coach sportif diplômé à Valbonne, je vous explique comment aborder la perte de poids de manière intelligente et durable.",
+      "La première étape est de comprendre que la perte de poids repose sur un déficit calorique modéré, combiné à une activité physique adaptée. Il ne s'agit pas de se priver ou de s'épuiser, mais de trouver le bon équilibre entre alimentation et exercice. Un coach sportif vous aide à définir ce déficit de manière personnalisée, en tenant compte de votre métabolisme, votre mode de vie et vos préférences alimentaires.",
+      "L'entraînement en résistance (musculation, circuit training) est souvent sous-estimé dans un programme de perte de poids. Contrairement aux idées reçues, la musculation ne vous rendra pas « trop musclé(e) ». Au contraire, elle augmente votre métabolisme de base, ce qui signifie que vous brûlez plus de calories même au repos. Combinée avec du cardio modéré (natation, marche rapide, HIIT), cette approche donne des résultats visibles en quelques semaines.",
+      "La régularité est la clé du succès. Plutôt que de s'entraîner intensément 6 jours par semaine pendant un mois puis d'abandonner, il est bien plus efficace de maintenir 2 à 3 séances hebdomadaires sur le long terme. C'est exactement ce qu'un coach sportif vous aide à mettre en place : un programme réaliste, progressif et motivant.",
+      "L'alimentation représente environ 70% des résultats en matière de perte de poids. Mais attention, il ne s'agit pas de suivre un régime strict. Mon approche en tant que coach à Valbonne est basée sur le rééquilibrage alimentaire : apprendre à mieux manger sans frustration, en comprenant les macronutriments et en adoptant des habitudes durables.",
+      "Enfin, le suivi régulier est essentiel. Les progrès ne sont pas toujours visibles sur la balance (la masse musculaire pèse plus que la graisse), c'est pourquoi un coach sportif utilise plusieurs indicateurs : tour de taille, photos de progression, performances sportives et bien-être général. Cette approche globale vous permet de rester motivé(e) et de voir vos véritables progrès.",
+    ],
+  },
+  {
+    slug: "bienfaits-natation-adultes",
+    title: "Les 10 bienfaits de la natation pour les adultes",
+    description:
+      "La natation est l'un des sports les plus complets. Découvrez ses 10 principaux bienfaits pour la santé, la forme physique et le bien-être mental des adultes.",
+    date: "2025-01-28",
+    readingTime: "5 min",
+    category: "Natation",
+    imageSrc:
+      "https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=1200&q=80",
+    imageAlt: "Nageur adulte dans une piscine effectuant un crawl",
+    content: [
+      "La natation est souvent considérée comme le sport le plus complet qui existe, et pour de bonnes raisons. En tant que maître-nageur diplômé d'État à Valbonne, je constate chaque jour les incroyables bienfaits que cette discipline apporte à mes élèves adultes. Que vous soyez débutant ou nageur confirmé, voici les 10 raisons pour lesquelles vous devriez intégrer la natation dans votre routine sportive.",
+      "Premier bienfait : la natation sollicite l'ensemble des groupes musculaires. Contrairement à la course à pied qui travaille principalement les jambes, ou à la musculation ciblée, la natation engage les bras, les jambes, le dos, les abdominaux et les épaules simultanément. Chaque mouvement dans l'eau est un exercice de renforcement musculaire complet.",
+      "Deuxième bienfait : elle est extrêmement douce pour les articulations. L'eau porte environ 90% de votre poids corporel, ce qui réduit considérablement le stress articulaire. C'est pourquoi la natation est recommandée pour les personnes souffrant d'arthrose, de douleurs lombaires ou en phase de rééducation après une blessure.",
+      "Troisième et quatrième bienfaits : la natation est un excellent brûleur de calories (jusqu'à 500 kcal/heure en nage intensive) et améliore significativement votre endurance cardiovasculaire. Votre cœur et vos poumons deviennent plus efficaces, réduisant le risque de maladies cardiovasculaires.",
+      "Cinquième et sixième bienfaits : nager régulièrement améliore votre posture (en renforçant les muscles du dos et de la ceinture abdominale) et augmente votre souplesse. Les mouvements amples dans l'eau étirent naturellement vos muscles et améliorent l'amplitude de vos articulations.",
+      "Septième bienfait : la natation a un puissant effet anti-stress. Le contact avec l'eau a un effet apaisant prouvé scientifiquement. La respiration rythmée et la concentration sur les mouvements créent un état méditatif qui réduit le cortisol (hormone du stress) et favorise la production d'endorphines.",
+      "Huitième, neuvième et dixième bienfaits : la natation améliore la qualité du sommeil, renforce le système immunitaire, et peut se pratiquer à tout âge sans risque. Que vous ayez 25 ou 75 ans, il existe toujours un style de nage et une intensité adaptés à votre condition physique.",
+      "À Valbonne et sur la Côte d'Azur, nous avons la chance de pouvoir pratiquer la natation quasiment toute l'année. Si vous souhaitez découvrir ou redécouvrir les bienfaits de la natation avec un accompagnement professionnel, je serai ravi de vous accueillir pour une séance d'évaluation personnalisée.",
+    ],
+  },
+  {
+    slug: "fitness-plein-air-avantages",
+    title: "Pourquoi s'entraîner en plein air est meilleur qu'en salle ?",
+    description:
+      "S'entraîner en extérieur offre des avantages uniques pour le corps et l'esprit. Découvrez pourquoi le fitness en plein air à Valbonne peut transformer vos résultats.",
+    date: "2025-02-10",
+    readingTime: "5 min",
+    category: "Fitness",
+    imageSrc:
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80",
+    imageAlt: "Séance de fitness en plein air dans un parc verdoyant",
+    content: [
+      "Si vous hésitez entre vous entraîner en salle de sport ou en plein air, cet article est pour vous. En tant que coach sportif à Valbonne, je propose les deux formats, mais je constate systématiquement que mes clients qui s'entraînent en extérieur obtiennent des résultats supérieurs et maintiennent leur motivation plus longtemps. Voici pourquoi.",
+      "L'air frais fait une vraie différence sur vos performances. Des études scientifiques montrent que l'entraînement en extérieur augmente l'apport en oxygène de 10 à 20% par rapport à un environnement fermé et climatisé. Vos muscles sont mieux oxygénés, votre récupération est plus rapide, et votre endurance s'améliore naturellement.",
+      "La lumière naturelle du soleil est un allié puissant. L'exposition au soleil pendant l'exercice stimule la production de vitamine D, essentielle pour la santé des os, le système immunitaire et l'humeur. Sur la Côte d'Azur, nous bénéficions de plus de 300 jours de soleil par an, un avantage considérable pour le fitness en plein air à Valbonne.",
+      "Le terrain naturel renforce davantage vos muscles stabilisateurs. Contrairement au sol plat d'une salle de sport, les surfaces naturelles (herbe, sable, sentiers) sollicitent constamment vos muscles profonds et améliorent votre proprioception (sens de l'équilibre). Résultat : une meilleure coordination, moins de risques de blessures dans la vie quotidienne.",
+      "L'effet psychologique du contact avec la nature est prouvé scientifiquement. Le concept japonais de « bain de forêt » (shinrin-yoku) montre que passer du temps dans un environnement naturel réduit le cortisol de 16% en moyenne. Combiné à l'exercice physique, cet effet anti-stress est multiplié. Mes clients qui s'entraînent en plein air rapportent systématiquement un meilleur bien-être mental.",
+      "La variété des exercices possibles en plein air est quasi illimitée. Sprints, escaliers, exercices avec banc, course en côte, circuit training dans un parc — les possibilités sont infinies et chaque séance peut être différente. Cette variété combat la monotonie qui est l'ennemi numéro 1 de la régularité sportive.",
+      "Valbonne et ses environs offrent un cadre exceptionnel pour le fitness en plein air. Entre les parcs verdoyants, les sentiers de randonnée et le climat méditerranéen, chaque séance devient un moment de plaisir autant qu'un entraînement efficace. Si vous souhaitez essayer le coaching en plein air, contactez-moi pour une séance découverte gratuite.",
+    ],
+  },
+  {
+    slug: "nutrition-sportive-bases",
+    title: "Nutrition sportive : les bases pour optimiser vos performances",
+    description:
+      "Apprenez les fondamentaux de la nutrition sportive pour améliorer vos performances, votre récupération et atteindre vos objectifs physiques plus rapidement.",
+    date: "2025-02-25",
+    readingTime: "7 min",
+    category: "Nutrition",
+    imageSrc:
+      "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1200&q=80",
+    imageAlt: "Repas équilibré avec protéines, légumes et glucides complexes",
+    content: [
+      "La nutrition est le pilier souvent négligé de tout programme sportif. On dit que les résultats se font à 30% à l'entraînement et à 70% dans l'assiette, et mon expérience de coach sportif à Valbonne confirme totalement cette proportion. Voici les bases de la nutrition sportive pour vous aider à optimiser vos performances et atteindre vos objectifs.",
+      "Les macronutriments sont les trois grandes familles de nutriments dont votre corps a besoin : les protéines, les glucides et les lipides. Chacun joue un rôle essentiel. Les protéines réparent et construisent les muscles (visez 1,6 à 2g par kg de poids corporel si vous êtes actif). Les glucides fournissent l'énergie nécessaire à l'effort (privilégiez les glucides complexes comme les patates douces, le riz complet, les flocons d'avoine). Les lipides sont essentiels au bon fonctionnement hormonal et à l'absorption des vitamines.",
+      "L'hydratation est souvent sous-estimée mais elle est cruciale. Une déshydratation de seulement 2% peut réduire vos performances de 10 à 20%. Visez au minimum 2 litres d'eau par jour, davantage les jours d'entraînement. Sur la Côte d'Azur, le climat chaud impose une vigilance particulière, surtout pour le fitness en plein air.",
+      "Le timing de vos repas autour de l'entraînement fait une réelle différence. Avant l'effort (2-3h avant) : un repas complet avec glucides, protéines et peu de graisses. Juste après l'effort (dans les 30 minutes) : une collation riche en protéines et glucides rapides pour optimiser la récupération musculaire. C'est la fameuse « fenêtre anabolique » qui maximise l'absorption des nutriments par vos muscles.",
+      "Les compléments alimentaires ne sont pas indispensables si votre alimentation est équilibrée. Cependant, certains peuvent être utiles : la créatine pour la force et la puissance (l'un des compléments les plus étudiés et les plus sûrs), la protéine en poudre pour compléter vos apports si nécessaire, et la vitamine D en hiver (même sur la Côte d'Azur, les mois d'hiver peuvent être insuffisants).",
+      "Les erreurs nutritionnelles les plus fréquentes que je constate chez mes clients sont : sauter le petit-déjeuner (ce qui ralentit le métabolisme), ne pas manger assez de protéines (surtout chez les femmes), se priver excessivement (ce qui provoque des compulsions alimentaires), et négliger les légumes et les fibres (essentiels pour la digestion et la satiété).",
+      "Mon approche nutritionnelle en tant que coach à Valbonne est pragmatique : pas de régime strict, pas d'interdits absolus, mais un rééquilibrage progressif et personnalisé. L'objectif est de vous donner les connaissances et les habitudes pour gérer votre alimentation de manière autonome et durable. C'est cette approche qui distingue un changement temporaire d'une véritable transformation à long terme.",
+    ],
+  },
+  {
+    slug: "commencer-sport-apres-40-ans",
+    title: "Comment reprendre le sport après 40 ans en toute sécurité",
+    description:
+      "Il n'est jamais trop tard pour commencer ou reprendre le sport. Guide complet pour une reprise sportive en douceur après 40 ans, avec les conseils d'un coach diplômé.",
+    date: "2025-03-12",
+    readingTime: "6 min",
+    category: "Remise en forme",
+    imageSrc:
+      "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&q=80",
+    imageAlt: "Personne mature faisant de l'exercice en plein air avec un coach",
+    content: [
+      "Il n'est jamais trop tard pour commencer ou reprendre une activité physique. À 40, 50 ou même 60 ans, le sport peut transformer votre qualité de vie. En tant que coach sportif à Valbonne, j'accompagne de nombreux clients dans cette tranche d'âge, et les résultats sont toujours remarquables. Voici comment aborder la reprise sportive en toute sécurité.",
+      "La première étape indispensable est de consulter votre médecin pour un bilan de santé complet. Un test d'effort est recommandé, surtout si vous êtes sédentaire depuis plusieurs années. Ce bilan permet d'identifier d'éventuelles contre-indications et d'adapter votre programme en conséquence. Une fois le feu vert médical obtenu, vous pouvez commencer sereinement.",
+      "La progressivité est le maître-mot après 40 ans. Votre corps a besoin de plus de temps pour s'adapter qu'à 20 ans, et c'est tout à fait normal. Je recommande de commencer par 2 séances par semaine de 30 à 45 minutes, puis d'augmenter progressivement la fréquence et l'intensité sur 4 à 6 semaines. Cette approche graduelle minimise les risques de blessures.",
+      "Le choix des activités est crucial. La natation est idéale pour reprendre en douceur car elle ne met aucun stress sur les articulations. La marche active et le fitness adapté en plein air sont également excellents pour reconditionner votre système cardiovasculaire. Le renforcement musculaire léger est essentiel pour prévenir la sarcopénie (perte de masse musculaire liée à l'âge).",
+      "La récupération prend une importance majeure après 40 ans. Prévoyez au minimum 48 heures entre deux séances sollicitant les mêmes groupes musculaires. Le sommeil de qualité (7-8 heures par nuit), les étirements post-entraînement et une alimentation riche en protéines sont les trois piliers d'une bonne récupération.",
+      "Les bénéfices sont rapides et concrets : après 4 semaines de pratique régulière, vous constaterez une amélioration de votre énergie, de votre sommeil et de votre humeur. Après 8 à 12 semaines, les changements physiques deviennent visibles. La pratique sportive régulière après 40 ans réduit le risque de diabète de type 2, de maladies cardiovasculaires et d'ostéoporose de 30 à 50%.",
+      "Le rôle d'un coach sportif est particulièrement précieux dans cette situation. Il adapte chaque exercice à votre condition physique, corrige votre posture pour éviter les blessures, et vous motive sur le long terme. À Valbonne, je propose des séances individuelles parfaitement adaptées aux besoins spécifiques des personnes de plus de 40 ans. Contactez-moi pour une évaluation personnalisée.",
+    ],
+  },
+];
+
+export function getBlogPostBySlug(slug: string): BlogPost | undefined {
+  return BLOG_POSTS.find((post) => post.slug === slug);
+}
