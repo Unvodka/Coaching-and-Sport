@@ -460,7 +460,7 @@ const PROGRAMS_FR: Program[] = [
   },
   {
     imageSrc:
-      "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&q=80",
+      "https://images.unsplash.com/photo-1550345332-09e3ac987658?w=800&q=80",
     title: "Transformation",
     description:
       "Le programme ultime pour une transformation physique complète. Corps, nutrition et mental — tout est inclus.",
@@ -563,7 +563,7 @@ const PROGRAMS_EN: Program[] = [
   },
   {
     imageSrc:
-      "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&q=80",
+      "https://images.unsplash.com/photo-1550345332-09e3ac987658?w=800&q=80",
     title: "Transformation",
     description:
       "The ultimate program for a complete physical transformation. Body, nutrition and mindset — everything is included.",
