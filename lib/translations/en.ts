@@ -46,7 +46,7 @@ const en: Record<TranslationKey, string> = {
 
   // About section
   "about.title": "About",
-  "about.heading": "Coach-Bluewave — Your Coach Dedicated to Your Success",
+  "about.heading": "Arnaud Chevallier — Your Coach Dedicated to Your Success",
   "about.p1":
     "Certified lifeguard and sports coach, I have been dedicated for several years to helping my clients on their physical transformation journey.",
   "about.p2":

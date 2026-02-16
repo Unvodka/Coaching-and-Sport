@@ -45,7 +45,7 @@ const fr = {
 
   // About section
   "about.title": "À Propos",
-  "about.heading": "Coach-Bluewave — Votre Coach Dédié à Votre Réussite",
+  "about.heading": "Arnaud Chevallier — Votre Coach Dédié à Votre Réussite",
   "about.p1":
     "Maître-nageur diplômé et coach sportif certifié, je me consacre depuis plusieurs années à accompagner mes clients dans leur parcours de transformation physique.",
   "about.p2":
