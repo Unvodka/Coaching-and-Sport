@@ -39,7 +39,7 @@ export default function Header() {
     >
       <nav className="flex justify-between items-center w-full px-12">
         <Link href="/" className="font-heading text-[1.7rem] font-bold tracking-tight text-white no-underline">
-          🏊 Arnaud Chevallier
+          Coach-Bluewave
         </Link>
 
         <div className="flex items-center gap-6">
