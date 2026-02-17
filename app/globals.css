@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global paragraph font size bump (+2px) */
+p {
+  font-size: 1.125rem; /* 18px instead of default 16px */
+}
+
 /* Hero radial gradient overlay */
 .hero-overlay::before {
   content: "";
