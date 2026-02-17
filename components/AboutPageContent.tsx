@@ -44,7 +44,11 @@ export default function AboutPageContent() {
           {/* Bio */}
           <FadeInWhenVisible>
             <h2 className="font-heading text-heading text-[1.8rem] mb-8 font-bold text-center">
-              {t("aboutPage.heading")}
+              {t("aboutPage.headingName")}
+              <br />
+              <span className="text-[1.3rem] font-semibold text-gray-500">
+                {t("aboutPage.headingRole")}
+              </span>
             </h2>
           </FadeInWhenVisible>
 

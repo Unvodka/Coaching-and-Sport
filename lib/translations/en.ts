@@ -66,6 +66,8 @@ const en: Record<TranslationKey, string> = {
     "Discover my journey and coaching philosophy",
   "aboutPage.heading":
     "Arnaud Chevallier — Sports Coach & Certified Lifeguard",
+  "aboutPage.headingName": "Arnaud Chevallier",
+  "aboutPage.headingRole": "Fitness Coach & Certified Swimming Teacher and Lifeguard",
   "aboutPage.p1":
     "Certified lifeguard and sports coach, I have been dedicated for several years to helping my clients on their physical transformation journey.",
   "aboutPage.p2":

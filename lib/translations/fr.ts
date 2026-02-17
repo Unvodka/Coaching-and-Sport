@@ -65,6 +65,8 @@ const fr = {
   'aboutPage.subtitle':
     "Découvrez mon parcours et ma philosophie d'accompagnement",
   'aboutPage.heading': 'Arnaud Chevallier — Coach Sportif & Maître-Nageur',
+  'aboutPage.headingName': 'Arnaud Chevallier',
+  'aboutPage.headingRole': 'Coach Sportif & Maître-Nageur',
   'aboutPage.p1':
     'Maître-nageur diplômé et entraineur sportif, je me consacre depuis plus de 10 ans à accompagner mes clients dans leur parcours de transformation physique.',
   'aboutPage.p2':
