@@ -58,7 +58,7 @@ export default function OffersSection() {
 
       <div className="w-full">
         {/* Programs Grid */}
-        <div className="grid grid-cols-4 gap-6 mb-16 max-lg:grid-cols-2 max-md:grid-cols-1 max-w-[1280px] mx-auto">
+        <div className="grid grid-cols-4 gap-6 mb-16 max-lg:grid-cols-2 max-md:grid-cols-1 max-w-[1400px] mx-auto">
           {programs.map((program, i) => (
             <FadeInWhenVisible key={program.title} delay={i * 0.15}>
               <ProgramCard
