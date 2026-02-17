@@ -28,7 +28,7 @@ export default function ServiceCard({
       />
       <div className="p-8 flex-1 flex flex-col">
         <h3 className="text-2xl mb-4 text-heading font-bold">{title}</h3>
-        <p className="text-gray-500 leading-[1.7] text-[0.98rem] flex-1">
+        <p className="text-gray-500 leading-[1.7] text-[1.1rem] flex-1">
           {description}
         </p>
         <span className="inline-flex items-center mt-4 text-brand-blue font-semibold text-sm gap-1 transition-all duration-300 group-hover:gap-2">

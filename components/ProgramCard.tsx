@@ -55,7 +55,7 @@ export default function ProgramCard({
         </h3>
       </div>
       <div className="flex-1 p-6 flex flex-col text-center">
-        <p className="text-gray-500 leading-[1.6] mb-4 text-[0.95rem]">{description}</p>
+        <p className="text-gray-500 leading-[1.6] mb-4 text-[1.1rem]">{description}</p>
 
         {/* What's included */}
         <p className="text-[0.8rem] font-bold text-brand-blue uppercase tracking-wider mb-3 mt-2">
@@ -63,7 +63,7 @@ export default function ProgramCard({
         </p>
         <ul className="list-none p-0 mb-4 text-left mx-auto w-fit">
           {features.map((feature) => (
-            <li key={feature} className="py-1 text-gray-600 flex items-start gap-2.5 text-[0.85rem] leading-snug">
+            <li key={feature} className="py-1 text-gray-600 flex items-start gap-2.5 text-[1.1rem] leading-snug">
               <span className="text-brand-blue font-bold text-sm shrink-0 mt-px">✓</span>
               <span>{feature}</span>
             </li>
@@ -81,7 +81,7 @@ export default function ProgramCard({
         {showGoals && (
           <ul className="list-none p-0 text-left mx-auto w-fit">
             {goals.map((goal) => (
-              <li key={goal} className="py-1 text-gray-600 flex items-start gap-2.5 text-[0.85rem] leading-snug">
+              <li key={goal} className="py-1 text-gray-600 flex items-start gap-2.5 text-[1.1rem] leading-snug">
                 <span className="shrink-0 mt-px">🎯</span>
                 <span>{goal}</span>
               </li>
@@ -93,8 +93,8 @@ export default function ProgramCard({
         <div className="text-[2rem] font-bold text-heading leading-none mb-1 max-[480px]:text-[1.6rem]">
           {price}
         </div>
-        <p className="text-gray-500 text-[0.9rem] mb-5">{priceDetails}</p>
-        <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-3 px-8 rounded-lg font-bold transition-all duration-300 inline-block w-full text-center text-[0.95rem]">
+        <p className="text-gray-500 text-[1.1rem] mb-5">{priceDetails}</p>
+        <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-3 px-8 rounded-lg font-bold transition-all duration-300 inline-block w-full text-center text-[1.1rem]">
           {isLoading ? t("offers.redirecting") : ctaText}
         </span>
         <p className="text-[0.7rem] text-gray-400 mt-3 flex items-center justify-center gap-1">

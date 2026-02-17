@@ -29,12 +29,12 @@ export default function PricingCard({
       <div className="text-[2.2rem] font-bold text-heading my-4 leading-none max-[480px]:text-[1.8rem]">
         {price}
       </div>
-      <div className="text-gray-500 text-[0.9rem] mb-6 italic">{duration}</div>
+      <div className="text-gray-500 text-[1.1rem] mb-6 italic">{duration}</div>
       <ul className="list-none p-0 my-6 text-left flex-1">
         {features.map((feature) => (
           <li
             key={feature}
-            className="py-[0.6rem] text-gray-600 text-[0.92rem] flex items-start gap-[0.7rem]"
+            className="py-[0.6rem] text-gray-600 text-[1.1rem] flex items-start gap-[0.7rem]"
           >
             <span className="text-brand-blue font-bold text-lg shrink-0">✓</span>
             {feature}
@@ -42,7 +42,7 @@ export default function PricingCard({
         ))}
       </ul>
       <div className="mt-auto">
-        <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-8 rounded-lg font-bold text-[0.95rem] transition-all duration-300 w-full inline-block text-center">
+        <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-8 rounded-lg font-bold text-[1.1rem] transition-all duration-300 w-full inline-block text-center">
           {isLoading ? t("offers.redirecting") : t("offers.bookNow")}
         </span>
         <p className="text-[0.7rem] text-gray-400 mt-3 flex items-center justify-center gap-1">
