@@ -4,7 +4,7 @@
 
 /* Global paragraph font size bump (+2px) */
 p {
-  font-size: 1.125rem; /* 18px instead of default 16px */
+  font-size: 1.15rem;
 }
 
 /* Hero radial gradient overlay */
