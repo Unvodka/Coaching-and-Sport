@@ -69,22 +69,22 @@ export default function AboutPageContent() {
           </FadeInWhenVisible>
 
           <FadeInWhenVisible delay={0.15}>
-            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.05rem]">
+            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
               {t("aboutPage.p1")}
             </p>
           </FadeInWhenVisible>
           <FadeInWhenVisible delay={0.2}>
-            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.05rem]">
+            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
               {t("aboutPage.p2")}
             </p>
           </FadeInWhenVisible>
           <FadeInWhenVisible delay={0.25}>
-            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.05rem]">
+            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
               {t("aboutPage.p3")}
             </p>
           </FadeInWhenVisible>
           <FadeInWhenVisible delay={0.3}>
-            <p className="text-gray-600 mb-12 leading-[1.8] text-[1.05rem]">
+            <p className="text-gray-600 mb-12 leading-[1.8] text-[1.1rem]">
               {t("aboutPage.p4")}
             </p>
           </FadeInWhenVisible>
@@ -99,7 +99,7 @@ export default function AboutPageContent() {
                 {qualifications.map((q, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-3 text-gray-600 text-[1.02rem] leading-relaxed"
+                    className="flex items-start gap-3 text-gray-600 text-[1.1rem] leading-relaxed"
                   >
                     <span className="text-brand-blue text-lg mt-0.5">✓</span>
                     {q}
@@ -119,7 +119,7 @@ export default function AboutPageContent() {
                 {approaches.map((a, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-3 text-gray-600 text-[1.02rem] leading-relaxed"
+                    className="flex items-start gap-3 text-gray-600 text-[1.1rem] leading-relaxed"
                   >
                     <span className="bg-brand-blue text-white text-sm font-bold w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5">
                       {i + 1}

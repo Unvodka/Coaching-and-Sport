@@ -51,7 +51,7 @@ export default function ServiceDetailContent({ slug }: Props) {
       <div className="py-6 px-16 max-md:px-6">
         <Link
           href="/#services"
-          className="text-brand-blue font-semibold hover:underline text-[0.95rem] inline-flex items-center gap-2"
+          className="text-brand-blue font-semibold hover:underline text-[1.1rem] inline-flex items-center gap-2"
         >
           &larr; {t("detail.backToServices")}
         </Link>
@@ -61,7 +61,7 @@ export default function ServiceDetailContent({ slug }: Props) {
       <section className="pb-16 px-16 max-w-[800px] mx-auto max-md:px-6">
         {detail.longDescription.map((paragraph, i) => (
           <FadeInWhenVisible key={i} delay={i * 0.1}>
-            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.05rem]">
+            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
               {paragraph}
             </p>
           </FadeInWhenVisible>
@@ -83,7 +83,7 @@ export default function ServiceDetailContent({ slug }: Props) {
                 <h3 className="text-xl font-bold text-heading mb-2">
                   {benefit.title}
                 </h3>
-                <p className="text-gray-500 leading-[1.7] text-[0.95rem]">
+                <p className="text-gray-500 leading-[1.7] text-[1.1rem]">
                   {benefit.description}
                 </p>
               </div>
@@ -106,7 +106,7 @@ export default function ServiceDetailContent({ slug }: Props) {
                 <span className="text-brand-blue font-bold text-lg shrink-0">
                   ✓
                 </span>
-                <span className="text-gray-600 text-[1.05rem]">{item}</span>
+                <span className="text-gray-600 text-[1.1rem]">{item}</span>
               </div>
             </FadeInWhenVisible>
           ))}
@@ -125,13 +125,13 @@ export default function ServiceDetailContent({ slug }: Props) {
             {detail.faqs.map((faq, i) => (
               <FadeInWhenVisible key={i} delay={i * 0.08}>
                 <details className="bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-gray-200 group">
-                  <summary className="p-6 cursor-pointer font-bold text-heading text-[1.05rem] list-none flex items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
+                  <summary className="p-6 cursor-pointer font-bold text-heading text-[1.1rem] list-none flex items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
                     {faq.question}
                     <span className="text-brand-blue shrink-0 transition-transform duration-300 group-open:rotate-45 text-2xl leading-none">
                       +
                     </span>
                   </summary>
-                  <div className="px-6 pb-6 text-gray-600 leading-[1.8] text-[0.95rem] border-t border-gray-100 pt-4">
+                  <div className="px-6 pb-6 text-gray-600 leading-[1.8] text-[1.1rem] border-t border-gray-100 pt-4">
                     {faq.answer}
                   </div>
                 </details>
