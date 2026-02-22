@@ -145,8 +145,8 @@ const SERVICES_FR: Service[] = [
     slug: "nutrition-equilibree",
     imageSrc:
       "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
-    imageAlt: "Nutrition Équilibrée",
-    title: "Nutrition Équilibrée",
+    imageAlt: "Nutrition Équilibrée et Bien-Être",
+    title: "Nutrition Équilibrée et Bien-Être",
     description:
       "Conseils nutritionnels personnalisés pour une alimentation variée et équilibrée. Apprenez à mieux manger sans frustration pour des résultats durables et un bien-être optimal.",
     detail: {
@@ -316,8 +316,8 @@ const SERVICES_EN: Service[] = [
     slug: "nutrition-equilibree",
     imageSrc:
       "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
-    imageAlt: "Balanced Nutrition",
-    title: "Balanced Nutrition",
+    imageAlt: "Balanced Nutrition & Wellness",
+    title: "Balanced Nutrition & Wellness",
     description:
       "Personalized nutritional advice for a varied and balanced diet. Learn to eat better without frustration for lasting results and optimal well-being.",
     detail: {
@@ -401,8 +401,9 @@ const PROGRAMS_FR: Program[] = [
       "Apprendre les bases ou perfectionner votre technique",
       "Progresser à votre rythme avec un encadrement dédié",
       "Obtenir des résultats rapides et visibles",
+      "Aisance aquatique / Aquaphobie",
     ],
-    price: "45€",
+    price: "60€",
     priceDetails: "par séance",
     ctaText: "Voir les packs",
     ctaHref: "/packs",
@@ -502,8 +503,9 @@ const PROGRAMS_EN: Program[] = [
       "Learn the basics or perfect your technique",
       "Progress at your own pace with dedicated guidance",
       "Achieve quick and visible results",
+      "Water confidence / Aquaphobia",
     ],
-    price: "45€",
+    price: "60€",
     priceDetails: "per session",
     ctaText: "See packs",
     ctaHref: "/packs",
@@ -596,8 +598,8 @@ export const PROGRAMS = PROGRAMS_FR;
 const PRICING_PACKS_FR: PricingPack[] = [
   {
     title: "Séance Découverte",
-    price: "45€",
-    priceNumeric: 45,
+    price: "60€",
+    priceNumeric: 60,
     duration: "1 séance / 1 heure",
     features: [
       "Évaluation personnalisée",
@@ -652,8 +654,8 @@ const PRICING_PACKS_FR: PricingPack[] = [
 const PRICING_PACKS_EN: PricingPack[] = [
   {
     title: "Discovery Session",
-    price: "45€",
-    priceNumeric: 45,
+    price: "60€",
+    priceNumeric: 60,
     duration: "1 session / 1 hour",
     features: [
       "Personalized assessment",
