@@ -44,6 +44,12 @@ const BLOG_KEYWORDS: Record<string, string[]> = {
     "coaching seniors", "natation seniors", "fitness débutant",
     "coach sportif seniors", "personal trainer over 40",
   ],
+  "sport-et-sante-mentale": [
+    "sport santé mentale", "activité physique bien-être", "sport anxiété",
+    "sport dépression", "exercice physique stress", "bienfaits sport mental",
+    "sport et moral", "endorphines sport", "sport anti-stress",
+    "santé mentale activité physique", "mental health exercise",
+  ],
 };
 
 export function generateMetadata({ params }: Props): Metadata {

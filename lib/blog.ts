@@ -116,6 +116,41 @@ export const BLOG_POSTS: BlogPost[] = [
       "Le rôle d'un coach sportif est particulièrement précieux dans cette situation. Il adapte chaque exercice à votre condition physique, corrige votre posture pour éviter les blessures, et vous motive sur le long terme. À Valbonne, je propose des séances individuelles parfaitement adaptées aux besoins spécifiques des personnes de plus de 40 ans. Contactez-moi pour une évaluation personnalisée.",
     ],
   },
+  {
+    slug: "sport-et-sante-mentale",
+    title: "Sport et santé mentale : comment l'activité physique transforme votre bien-être psychologique",
+    description:
+      "Découvrez comment le sport agit sur le stress, l'anxiété et la dépression. Études scientifiques, mécanismes biologiques et conseils pratiques par un coach sportif diplômé à Valbonne.",
+    date: "2025-02-23",
+    readingTime: "8 min",
+    category: "Bien-être",
+    imageSrc:
+      "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200&q=80",
+    imageAlt: "Personne méditant en plein air après une séance de sport, bien-être mental",
+    content: [
+      "La santé mentale est la Grande Cause nationale 2025 en France, et pour une bonne raison : un Français sur quatre sera confronté à un trouble psychique au cours de sa vie. Stress chronique, anxiété, burn-out, dépression... ces maux touchent toutes les tranches d'âge et tous les milieux sociaux. Mais saviez-vous que l'activité physique est l'une des armes les plus puissantes — et les plus accessibles — pour protéger et améliorer votre santé mentale ? En tant que coach sportif et maître-nageur diplômé à Valbonne, je constate chaque jour les transformations profondes que le sport opère sur le bien-être psychologique de mes clients.",
+
+      "La science est formelle : une méta-analyse publiée dans le British Journal of Sports Medicine a démontré que l'exercice physique est 1,5 fois plus efficace que les traitements médicamenteux ou la psychothérapie pour réduire les symptômes de dépression et d'anxiété légères à modérées. Le Ministère de la Santé confirme qu'une activité physique adaptée peut être aussi efficace que les antidépresseurs dans ces cas. Ce n'est pas une opinion, c'est un consensus scientifique international appuyé par l'OMS, la Haute Autorité de Santé et des centaines d'études sur des millions de participants.",
+
+      "Comment le sport agit-il concrètement sur votre cerveau ? Pendant l'exercice, votre corps libère un cocktail de substances chimiques bénéfiques. Les endorphines, souvent appelées « hormones du bonheur », créent une sensation d'euphorie naturelle — c'est le fameux « runner's high ». La sérotonine, neurotransmetteur clé de la régulation de l'humeur, voit sa production augmenter significativement. La dopamine, impliquée dans la motivation et le plaisir, est également stimulée. Enfin, le sport réduit le cortisol, l'hormone du stress, ce qui explique cette sensation de calme et de clarté mentale après une bonne séance.",
+
+      "La réduction du stress et de l'anxiété est l'un des bénéfices les plus immédiats du sport. Une vaste étude menée sur plus de 200 000 personnes pendant 21 ans a démontré que l'exercice physique régulier réduit le risque de développer un trouble anxieux de près de 60%. Et bonne nouvelle : il ne faut pas forcément s'épuiser pour en profiter. Des recherches récentes montrent qu'à peine 15 minutes d'activité physique suffisent pour ressentir les premiers effets positifs sur le mental. La clé n'est pas l'intensité, c'est la régularité.",
+
+      "Le sport améliore aussi la qualité du sommeil, un facteur souvent sous-estimé de la santé mentale. Les études montrent que l'activité physique régulière raccourcit le temps d'endormissement, réduit les réveils nocturnes et augmente la durée du sommeil profond. Or, un mauvais sommeil aggrave le stress, l'irritabilité et les symptômes dépressifs — c'est un cercle vicieux que le sport permet de briser. Attention toutefois à ne pas s'entraîner trop tard le soir : idéalement, terminez votre séance au moins 2 heures avant le coucher.",
+
+      "L'estime de soi et la confiance en soi se construisent séance après séance. Chaque progrès — un exercice réussi, une distance supplémentaire nagée, un poids plus lourd soulevé — renvoie un message puissant à votre cerveau : « je suis capable ». Ce sentiment d'auto-efficacité déborde bien au-delà du sport et impacte positivement votre vie professionnelle, vos relations sociales et votre façon de gérer les défis du quotidien. Mes clients me confient souvent que ce n'est pas seulement leur corps qui a changé, mais toute leur façon de se percevoir.",
+
+      "La dimension sociale du sport est un autre levier puissant pour la santé mentale. L'isolement et la solitude sont des facteurs de risque majeurs pour la dépression. Pratiquer une activité physique — que ce soit avec un coach, dans un groupe ou en famille — crée du lien social, un sentiment d'appartenance et une routine structurante. Même le coaching individuel offre cette relation de confiance et de soutien régulier qui peut faire toute la différence dans les périodes difficiles.",
+
+      "Quelles activités choisir pour maximiser les bienfaits sur le mental ? Toutes les formes d'exercice sont bénéfiques, mais certaines se distinguent. La natation combine les bienfaits du sport avec l'effet apaisant de l'eau — le contact aquatique réduit le cortisol et favorise un état méditatif naturel. Le fitness en plein air ajoute les bienfaits prouvés du contact avec la nature (réduction du stress de 16% en moyenne selon les études sur le « bain de forêt » japonais). Le yoga et les étirements activent le système nerveux parasympathique, celui qui favorise la détente. Le HIIT et la musculation libèrent un maximum d'endorphines en peu de temps.",
+
+      "La régularité prime sur l'intensité. L'OMS recommande au minimum 150 minutes d'activité modérée par semaine (soit environ 30 minutes, 5 fois par semaine) ou 75 minutes d'activité intense. Mais même en dessous de ces seuils, chaque minute compte. L'essentiel est de trouver une activité qui vous plaît et de l'intégrer durablement dans votre routine. C'est précisément le rôle d'un coach sportif : vous aider à trouver l'activité adaptée, vous accompagner dans la régularité et adapter les séances à votre état du jour — y compris les jours où la motivation est en berne.",
+
+      "Un point important : le sport n'est pas un substitut aux soins médicaux ou psychologiques en cas de trouble mental diagnostiqué. C'est un complément puissant, reconnu par la communauté médicale. Si vous souffrez de dépression sévère, de troubles anxieux importants ou de toute autre condition psychique, consultez un professionnel de santé. Le sport viendra renforcer votre prise en charge, pas la remplacer.",
+
+      "À Valbonne et sur la Côte d'Azur, nous avons la chance de pouvoir pratiquer en plein air presque toute l'année, dans un cadre naturel exceptionnel. Que ce soit à travers la natation, le fitness en extérieur ou un programme combiné, je vous accompagne pour faire du sport un véritable pilier de votre équilibre mental et physique. Une première séance découverte est le meilleur moyen de commencer — contactez-moi pour en discuter.",
+    ],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
