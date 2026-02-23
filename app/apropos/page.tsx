@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import AboutPageContent from "@/components/AboutPageContent";
+import JsonLd from "@/components/JsonLd";
 
 const BASE_URL = "https://coach-bluewave.com";
 
@@ -38,6 +39,30 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Accueil",
+      item: BASE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "À Propos",
+      item: `${BASE_URL}/apropos`,
+    },
+  ],
+};
+
 export default function AproposPage() {
-  return <AboutPageContent />;
+  return (
+    <>
+      <JsonLd data={breadcrumbJsonLd} />
+      <AboutPageContent />
+    </>
+  );
 }

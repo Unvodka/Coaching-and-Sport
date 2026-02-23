@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Playfair_Display } from "next/font/google";
 import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import JsonLd from "@/components/JsonLd";
@@ -359,6 +360,20 @@ export default function RootLayout({
         className={`${inter.className} ${playfair.variable} leading-[1.7] text-gray-800 overflow-x-hidden bg-white`}
       >
         <LanguageProvider>{children}</LanguageProvider>
+
+        {/* Google Analytics 4 — REMPLACE G-XXXXXXXXXX par ton vrai ID GA4 */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXXXXXX');
+          `}
+        </Script>
       </body>
     </html>
   );
