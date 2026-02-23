@@ -361,9 +361,9 @@ export default function RootLayout({
       >
         <LanguageProvider>{children}</LanguageProvider>
 
-        {/* Google Analytics 4 — REMPLACE G-XXXXXXXXXX par ton vrai ID GA4 */}
+        {/* Google Analytics 4 — REMPLACE G-GEJXN9BH9R par ton vrai ID GA4 */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+          src="https://www.googletagmanager.com/gtag/js?id=G-GEJXN9BH9R"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -371,7 +371,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX');
+            gtag('config', 'G-GEJXN9BH9R');
           `}
         </Script>
       </body>
