@@ -610,15 +610,15 @@ const PRICING_PACKS_FR: PricingPack[] = [
   },
   {
     title: "Pack 5 Séances",
-    price: "149€",
-    priceNumeric: 149,
+    price: "249€",
+    priceNumeric: 249,
     duration: "5 séances / Validité 2 mois",
     features: [
       "5 séances d'1 heure",
       "Programme personnalisé complet",
       "Suivi nutritionnel détaillé",
       "Support par message",
-      "Économie de 151€",
+      "Économie de 51€",
     ],
   },
   {
@@ -666,15 +666,15 @@ const PRICING_PACKS_EN: PricingPack[] = [
   },
   {
     title: "5-Session Pack",
-    price: "149€",
-    priceNumeric: 149,
+    price: "249€",
+    priceNumeric: 249,
     duration: "5 sessions / Valid 2 months",
     features: [
       "5 one-hour sessions",
       "Complete personalized program",
       "Detailed nutritional follow-up",
       "Messaging support",
-      "Save 151€",
+      "Save 51€",
     ],
   },
   {
