@@ -623,8 +623,8 @@ const PRICING_PACKS_FR: PricingPack[] = [
   },
   {
     title: "Pack 10 Séances",
-    price: "379€",
-    priceNumeric: 379,
+    price: "449€",
+    priceNumeric: 449,
     duration: "10 séances / Validité 6 mois",
     features: [
       "10 séances d'1 heure",
@@ -632,7 +632,7 @@ const PRICING_PACKS_FR: PricingPack[] = [
       "Suivi nutrition approfondi",
       "Support illimité par message",
       "Bilan mensuel détaillé",
-      "Économie de 221€",
+      "Économie de 151€",
     ],
   },
   {
@@ -679,8 +679,8 @@ const PRICING_PACKS_EN: PricingPack[] = [
   },
   {
     title: "10-Session Pack",
-    price: "379€",
-    priceNumeric: 379,
+    price: "449€",
+    priceNumeric: 449,
     duration: "10 sessions / Valid 6 months",
     features: [
       "10 one-hour sessions",
@@ -688,7 +688,7 @@ const PRICING_PACKS_EN: PricingPack[] = [
       "In-depth nutrition follow-up",
       "Unlimited messaging support",
       "Detailed monthly review",
-      "Save 221€",
+      "Save 151€",
     ],
   },
   {
