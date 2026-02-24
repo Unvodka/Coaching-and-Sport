@@ -9,8 +9,6 @@ import TrustBar from "@/components/TrustBar";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 
-const BASE_URL = "https://coach-bluewave.com";
-
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
