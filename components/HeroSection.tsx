@@ -52,7 +52,7 @@ export default function HeroSection() {
             boxShadow: "0 20px 50px rgba(255,255,255,0.25)",
           }}
           whileTap={{ scale: 0.95, y: 0 }}
-          className="inline-block bg-white text-brand-dark py-5 px-12 rounded-lg no-underline font-bold text-[1.05rem] transition-colors duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:bg-brand-blue hover:text-white"
+          className="inline-block bg-white text-brand-dark py-5 px-12 rounded-lg no-underline font-bold text-[1.05rem] transition-colors duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:bg-brand-blue hover:text-white max-md:py-3 max-md:px-8 max-md:text-[0.95rem]"
         >
           {t("hero.cta")}
         </motion.a>

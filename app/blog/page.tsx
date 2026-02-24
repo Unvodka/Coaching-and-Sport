@@ -73,7 +73,7 @@ export default function BlogPage() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-brand-dark to-brand-navy text-white py-20 px-16 text-center max-md:py-14 max-md:px-6">
+      <section className="bg-gradient-to-br from-brand-dark to-brand-navy text-white py-20 pt-32 px-16 text-center max-md:py-14 max-md:pt-28 max-md:px-6">
         <h1 className="font-heading text-[3rem] font-extrabold tracking-tight mb-4 max-md:text-[2.2rem]">
           Blog
         </h1>
