@@ -62,9 +62,9 @@ export default function Home() {
       <JsonLd data={faqJsonLd} />
       <Header />
       <HeroSection />
+      <AboutSection />
       <ServicesSection />
       <OffersSection />
-      <AboutSection />
       <ContactSection />
       <FAQSection />
       <TrustBar />
