@@ -82,6 +82,46 @@ export default function PacksPageContent() {
           ))}
         </div>
 
+        {/* Tax Credit Banner */}
+        <FadeInWhenVisible delay={0.15}>
+          <div className="max-w-6xl mx-auto mt-12 bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-200 rounded-2xl p-8 max-md:p-5">
+            <div className="flex items-start gap-4 max-md:flex-col max-md:items-center max-md:text-center">
+              <span className="text-4xl shrink-0">🏠</span>
+              <div className="flex-1">
+                <h2 className="font-heading text-xl font-bold text-heading mb-2">
+                  {locale === "en"
+                    ? "50% tax credit for home sessions"
+                    : "50% de crédit d'impôt pour les cours à domicile"}
+                </h2>
+                <p className="text-gray-600 text-[0.95rem] leading-relaxed mb-4">
+                  {locale === "en"
+                    ? "As a personal services provider (Services à la Personne), your home coaching sessions are eligible for a 50% income tax credit. This means the actual cost is halved!"
+                    : "En tant que prestataire de Services à la Personne (SAP), vos séances de coaching à domicile sont éligibles au crédit d'impôt de 50%. Concrètement, le coût réel pour vous est divisé par deux !"}
+                </p>
+                <div className="grid grid-cols-4 gap-4 max-md:grid-cols-2 max-[480px]:grid-cols-1">
+                  {pricingPacks.map((pack) => (
+                    <div key={pack.title} className="bg-white rounded-xl p-4 text-center border border-emerald-100">
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">{pack.title}</p>
+                      <p className="text-gray-400 line-through text-sm">{pack.price}</p>
+                      <p className="text-2xl font-bold text-emerald-600 max-md:text-xl">
+                        {(pack.priceNumeric / 2).toFixed(2).replace(".", ",")}€
+                      </p>
+                      <p className="text-xs text-emerald-500 font-semibold">
+                        {locale === "en" ? "actual cost" : "coût réel"}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-400 mt-4 italic">
+                  {locale === "en"
+                    ? "* Tax credit applicable to home sessions only. Subject to conditions — consult your tax advisor."
+                    : "* Crédit d'impôt applicable uniquement aux séances à domicile. Sous conditions — consultez votre conseiller fiscal."}
+                </p>
+              </div>
+            </div>
+          </div>
+        </FadeInWhenVisible>
+
         {/* Security Trust Bar */}
         <FadeInWhenVisible delay={0.2}>
           <div className="flex flex-wrap justify-center gap-8 my-12 py-6 px-4 bg-white rounded-xl border border-gray-200 shadow-sm max-w-6xl mx-auto max-md:gap-4 max-md:py-4">
