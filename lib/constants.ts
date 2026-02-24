@@ -637,8 +637,8 @@ const PRICING_PACKS_FR: PricingPack[] = [
   },
   {
     title: "Pack 20 Séances",
-    price: "699€",
-    priceNumeric: 699,
+    price: "799€",
+    priceNumeric: 799,
     duration: "20 séances / Validité 12 mois",
     features: [
       "20 séances d'1 heure",
@@ -646,7 +646,7 @@ const PRICING_PACKS_FR: PricingPack[] = [
       "Suivi nutrition et analyses corporelles",
       "Support prioritaire 7j/7",
       "Bilan bi-mensuel détaillé",
-      "Économie de 501€ !",
+      "Économie de 401€ !",
     ],
   },
 ];
@@ -693,8 +693,8 @@ const PRICING_PACKS_EN: PricingPack[] = [
   },
   {
     title: "20-Session Pack",
-    price: "699€",
-    priceNumeric: 699,
+    price: "799€",
+    priceNumeric: 799,
     duration: "20 sessions / Valid 12 months",
     features: [
       "20 one-hour sessions",
@@ -702,7 +702,7 @@ const PRICING_PACKS_EN: PricingPack[] = [
       "Nutrition follow-up and body analysis",
       "Priority support 7 days/week",
       "Detailed bi-monthly review",
-      "Save 501€!",
+      "Save 401€!",
     ],
   },
 ];
