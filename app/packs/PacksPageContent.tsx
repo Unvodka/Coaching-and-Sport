@@ -64,27 +64,14 @@ export default function PacksPageContent() {
           </h1>
         </FadeInWhenVisible>
         <FadeInWhenVisible delay={0.1}>
-          <p className="text-center text-gray-500 text-lg mb-16 max-w-[700px] mx-auto">
+          <p className="text-center text-gray-500 text-lg mb-12 max-w-[700px] mx-auto">
             {t("packs.subtitle")}
           </p>
         </FadeInWhenVisible>
 
-        {/* Pricing Grid */}
-        <div className="flex flex-wrap gap-8 max-w-6xl mx-auto max-md:flex-col">
-          {pricingPacks.map((pack, i) => (
-            <FadeInWhenVisible key={pack.title} delay={i * 0.1} className="flex-1 min-w-0 max-md:min-w-full">
-              <PricingCard
-                {...pack}
-                isLoading={loadingPack === pack.title}
-                onBuy={() => handleCheckout(pack.title, pack.priceNumeric)}
-              />
-            </FadeInWhenVisible>
-          ))}
-        </div>
-
         {/* Tax Credit Banner */}
         <FadeInWhenVisible delay={0.15}>
-          <div className="max-w-6xl mx-auto mt-12 bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-200 rounded-2xl p-8 max-md:p-5">
+          <div className="max-w-6xl mx-auto mb-12 bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-200 rounded-2xl p-8 max-md:p-5">
             <div className="flex items-start gap-4 max-md:flex-col max-md:items-center max-md:text-center">
               <span className="text-4xl shrink-0">🏠</span>
               <div className="flex-1">
@@ -121,6 +108,19 @@ export default function PacksPageContent() {
             </div>
           </div>
         </FadeInWhenVisible>
+
+        {/* Pricing Grid */}
+        <div className="flex flex-wrap gap-8 max-w-6xl mx-auto max-md:flex-col">
+          {pricingPacks.map((pack, i) => (
+            <FadeInWhenVisible key={pack.title} delay={i * 0.1} className="flex-1 min-w-0 max-md:min-w-full">
+              <PricingCard
+                {...pack}
+                isLoading={loadingPack === pack.title}
+                onBuy={() => handleCheckout(pack.title, pack.priceNumeric)}
+              />
+            </FadeInWhenVisible>
+          ))}
+        </div>
 
         {/* Security Trust Bar */}
         <FadeInWhenVisible delay={0.2}>
