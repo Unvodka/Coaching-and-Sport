@@ -1,6 +1,45 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
+export async function GET() {
+  try {
+    const supabase = createClient();
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Fetch recipes and user favorites in parallel
+    const [recipesRes, favsRes] = await Promise.all([
+      supabase
+        .from("recipes")
+        .select("*")
+        .order("created_at", { ascending: false }),
+      supabase
+        .from("recipe_favorites")
+        .select("recipe_id")
+        .eq("user_id", user.id),
+    ]);
+
+    if (recipesRes.error) {
+      console.error("Recipes fetch error:", recipesRes.error);
+      return NextResponse.json({ error: recipesRes.error.message }, { status: 500 });
+    }
+
+    const favoriteIds = (favsRes.data || []).map((f: { recipe_id: string }) => f.recipe_id);
+
+    return NextResponse.json({
+      data: recipesRes.data || [],
+      favoriteIds,
+      userId: user.id,
+    });
+  } catch (error) {
+    console.error("Recipes GET error:", error);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const supabase = createClient();

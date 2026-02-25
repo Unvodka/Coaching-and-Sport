@@ -3,7 +3,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useAuth } from "@/lib/supabase/AuthContext";
-import { createClient } from "@/lib/supabase/client";
 import WeightChart from "@/components/portal/WeightChart";
 import WeightLogForm from "@/components/portal/WeightLogForm";
 import WeightLogList from "@/components/portal/WeightLogList";
@@ -11,42 +10,31 @@ import type { WeightLog } from "@/lib/supabase/database.types";
 
 export default function WeightPage() {
   const { t, locale } = useLanguage();
-  const { user: authUser, isLoading: authLoading } = useAuth();
+  const { user: authUser } = useAuth();
   const [logs, setLogs] = useState<WeightLog[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchLogs = useCallback(async () => {
     try {
-      const supabase = createClient();
+      const res = await fetch("/api/portal/weight");
+      const json = await res.json();
 
-      // Use AuthContext user first, fallback to getUser()
-      let uid = authUser?.id;
-      if (!uid) {
-        const { data: { user } } = await supabase.auth.getUser();
-        uid = user?.id;
+      if (!res.ok) {
+        console.error("Weight fetch error:", json.error);
+        return;
       }
-      if (!uid) { setLoading(false); return; }
 
-      const { data, error } = await supabase
-        .from("weight_logs")
-        .select("*")
-        .eq("user_id", uid)
-        .order("date", { ascending: false });
-      if (error) console.error("Weight fetch error:", error);
-      setLogs((data as WeightLog[]) || []);
+      setLogs(json.data as WeightLog[]);
     } catch (err) {
       console.error("Weight page error:", err);
     } finally {
       setLoading(false);
     }
-  }, [authUser?.id]);
+  }, []);
 
   useEffect(() => {
-    // Wait for auth to finish loading before fetching
-    if (!authLoading) {
-      fetchLogs();
-    }
-  }, [authLoading, fetchLogs]);
+    fetchLogs();
+  }, [fetchLogs]);
 
   // Safety timeout
   useEffect(() => {
@@ -129,7 +117,7 @@ export default function WeightPage() {
       {/* Chart — only when we have data */}
       {logs.length > 0 && <WeightChart logs={logs} />}
 
-      {/* Add form — always rendered, userId from AuthContext */}
+      {/* Add form — always rendered */}
       <WeightLogForm userId={authUser?.id} onAdded={fetchLogs} />
 
       {/* History — only when we have data */}

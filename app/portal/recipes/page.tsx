@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { useAuth } from "@/lib/supabase/AuthContext";
-import { createClient } from "@/lib/supabase/client";
 import RecipeCard from "@/components/portal/RecipeCard";
 import type { Recipe } from "@/lib/supabase/database.types";
 
@@ -12,60 +10,42 @@ type Tab = "all" | "mine" | "favorites";
 
 export default function RecipesPage() {
   const { t, locale } = useLanguage();
-  const { user: authUser, isLoading: authLoading } = useAuth();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
+  const [userId, setUserId] = useState<string | null>(null);
   const [tab, setTab] = useState<Tab>("all");
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchRecipes() {
-      if (authLoading) return;
+  const fetchRecipes = useCallback(async () => {
+    try {
+      const res = await fetch("/api/portal/recipes");
+      const json = await res.json();
 
-      try {
-        const supabase = createClient();
-
-        let uid = authUser?.id;
-        if (!uid) {
-          const { data: { user } } = await supabase.auth.getUser();
-          uid = user?.id;
-        }
-        if (!uid) { setLoading(false); return; }
-
-        const [recipesRes, favsRes] = await Promise.all([
-          supabase
-            .from("recipes")
-            .select("*")
-            .order("created_at", { ascending: false }),
-          supabase
-            .from("recipe_favorites")
-            .select("recipe_id")
-            .eq("user_id", uid),
-        ]);
-
-        if (recipesRes.error) console.error("Recipes fetch error:", recipesRes.error);
-        setRecipes((recipesRes.data as Recipe[]) || []);
-        setFavoriteIds(
-          new Set((favsRes.data || []).map((f: { recipe_id: string }) => f.recipe_id))
-        );
-      } catch (err) {
-        console.error("Recipes page error:", err);
-      } finally {
-        setLoading(false);
+      if (!res.ok) {
+        console.error("Recipes fetch error:", json.error);
+        return;
       }
-    }
 
+      setRecipes((json.data as Recipe[]) || []);
+      setFavoriteIds(new Set(json.favoriteIds || []));
+      setUserId(json.userId || null);
+    } catch (err) {
+      console.error("Recipes page error:", err);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
     fetchRecipes();
-  }, [authUser?.id, authLoading]);
+  }, [fetchRecipes]);
 
   // Safety timeout
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 5000);
     return () => clearTimeout(timer);
   }, []);
-
-  const userId = authUser?.id || null;
 
   const filtered = recipes.filter((r) => {
     if (tab === "mine" && r.author_id !== userId) return false;

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useAuth } from "@/lib/supabase/AuthContext";
-import { createClient } from "@/lib/supabase/client";
 import DashboardCard from "@/components/portal/DashboardCard";
 
 interface DashboardStats {
@@ -16,7 +15,7 @@ interface DashboardStats {
 
 export default function DashboardPage() {
   const { t, locale } = useLanguage();
-  const { user: authUser, profile: authProfile, isLoading: authLoading } = useAuth();
+  const { profile: authProfile } = useAuth();
   const [stats, setStats] = useState<DashboardStats>({
     recipes: 0,
     weightLogs: 0,
@@ -27,41 +26,20 @@ export default function DashboardPage() {
 
   useEffect(() => {
     async function fetchStats() {
-      if (authLoading) return;
-
       try {
-        const supabase = createClient();
-        let uid = authUser?.id;
-        if (!uid) {
-          const { data: { user } } = await supabase.auth.getUser();
-          uid = user?.id;
-        }
-        if (!uid) { setLoading(false); return; }
+        const res = await fetch("/api/portal/stats");
+        const json = await res.json();
 
-        const [recipesRes, weightRes, moodRes, progressRes] = await Promise.all([
-          supabase
-            .from("recipes")
-            .select("id", { count: "exact", head: true })
-            .eq("author_id", uid),
-          supabase
-            .from("weight_logs")
-            .select("id", { count: "exact", head: true })
-            .eq("user_id", uid),
-          supabase
-            .from("mood_entries")
-            .select("id", { count: "exact", head: true })
-            .eq("user_id", uid),
-          supabase
-            .from("user_workout_progress")
-            .select("id", { count: "exact", head: true })
-            .eq("user_id", uid),
-        ]);
+        if (!res.ok) {
+          console.error("Dashboard stats error:", json.error);
+          return;
+        }
 
         setStats({
-          recipes: recipesRes.count ?? 0,
-          weightLogs: weightRes.count ?? 0,
-          moodEntries: moodRes.count ?? 0,
-          workoutsCompleted: progressRes.count ?? 0,
+          recipes: json.recipes ?? 0,
+          weightLogs: json.weightLogs ?? 0,
+          moodEntries: json.moodEntries ?? 0,
+          workoutsCompleted: json.workoutsCompleted ?? 0,
         });
       } catch (err) {
         console.error("Dashboard error:", err);
@@ -71,7 +49,7 @@ export default function DashboardPage() {
     }
 
     fetchStats();
-  }, [authUser?.id, authLoading]);
+  }, []);
 
   // Safety timeout
   useEffect(() => {

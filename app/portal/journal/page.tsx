@@ -3,8 +3,6 @@
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { useAuth } from "@/lib/supabase/AuthContext";
-import { createClient } from "@/lib/supabase/client";
 import MoodEntryCard from "@/components/portal/MoodEntry";
 import MoodChart from "@/components/portal/MoodChart";
 import WellnessTip from "@/components/portal/WellnessTip";
@@ -12,40 +10,30 @@ import type { MoodEntry } from "@/lib/supabase/database.types";
 
 export default function JournalPage() {
   const { t, locale } = useLanguage();
-  const { user: authUser, isLoading: authLoading } = useAuth();
   const [entries, setEntries] = useState<MoodEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchEntries = useCallback(async () => {
     try {
-      const supabase = createClient();
+      const res = await fetch("/api/portal/mood");
+      const json = await res.json();
 
-      let uid = authUser?.id;
-      if (!uid) {
-        const { data: { user } } = await supabase.auth.getUser();
-        uid = user?.id;
+      if (!res.ok) {
+        console.error("Journal fetch error:", json.error);
+        return;
       }
-      if (!uid) { setLoading(false); return; }
 
-      const { data, error } = await supabase
-        .from("mood_entries")
-        .select("*")
-        .eq("user_id", uid)
-        .order("date", { ascending: false });
-      if (error) console.error("Journal fetch error:", error);
-      setEntries((data as MoodEntry[]) || []);
+      setEntries(json.data as MoodEntry[]);
     } catch (err) {
       console.error("Journal page error:", err);
     } finally {
       setLoading(false);
     }
-  }, [authUser?.id]);
+  }, []);
 
   useEffect(() => {
-    if (!authLoading) {
-      fetchEntries();
-    }
-  }, [authLoading, fetchEntries]);
+    fetchEntries();
+  }, [fetchEntries]);
 
   // Safety timeout
   useEffect(() => {
