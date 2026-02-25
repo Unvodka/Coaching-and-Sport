@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
-import { useAuth } from "@/lib/supabase/AuthContext";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { createClient } from "@/lib/supabase/client";
 import ExerciseItem from "@/components/portal/ExerciseItem";
@@ -15,7 +14,6 @@ import type {
 export default function WorkoutDetailPage() {
   const params = useParams();
   const programId = params.id as string;
-  const { user } = useAuth();
   const { locale } = useLanguage();
 
   const [program, setProgram] = useState<WorkoutProgram | null>(null);
@@ -24,8 +22,9 @@ export default function WorkoutDetailPage() {
   const [loading, setLoading] = useState(true);
 
   const fetchData = useCallback(async () => {
-    if (!user) return;
     const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { setLoading(false); return; }
 
     const [programRes, exercisesRes, progressRes] = await Promise.all([
       supabase.from("workout_programs").select("*").eq("id", programId).single(),
@@ -48,7 +47,7 @@ export default function WorkoutDetailPage() {
       new Set((progressRes.data || []).map((p: { exercise_id: string }) => p.exercise_id))
     );
     setLoading(false);
-  }, [user, programId]);
+  }, [programId]);
 
   useEffect(() => {
     fetchData();

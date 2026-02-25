@@ -5,7 +5,6 @@ import {
   useContext,
   useEffect,
   useState,
-  useCallback,
   type ReactNode,
 } from "react";
 import { createClient } from "@/lib/supabase/client";
@@ -35,51 +34,56 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const supabase = createClient();
 
-  const fetchProfile = useCallback(
-    async (userId: string) => {
+  useEffect(() => {
+    const supabase = createClient();
+    let mounted = true;
+
+    async function fetchProfile(userId: string) {
       const { data } = await supabase
         .from("profiles")
         .select("*")
         .eq("id", userId)
         .single();
-      setProfile(data as Profile | null);
-    },
-    [supabase]
-  );
+      if (mounted) setProfile(data as Profile | null);
+    }
 
-  // Fetch initial session on mount
-  useEffect(() => {
-    const getInitialSession = async () => {
+    // Use getUser() — reliable server-validated call via cookies
+    async function init() {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
-        setSession(session);
-        setUser(session?.user ?? null);
+        const { data: { user: authUser } } = await supabase.auth.getUser();
 
-        if (session?.user) {
-          await fetchProfile(session.user.id);
-        } else {
-          setProfile(null);
+        if (mounted) {
+          setUser(authUser);
+          if (authUser) {
+            // Also grab the session for completeness
+            const { data: { session: authSession } } = await supabase.auth.getSession();
+            setSession(authSession);
+            await fetchProfile(authUser.id);
+          } else {
+            setSession(null);
+            setProfile(null);
+          }
         }
       } catch (error) {
-        console.error("Error getting session:", error);
+        console.error("Auth init error:", error);
       } finally {
-        setIsLoading(false);
+        if (mounted) setIsLoading(false);
       }
-    };
+    }
 
-    getInitialSession();
+    init();
 
-    // Listen for auth changes (sign in, sign out, token refresh)
+    // Listen for future auth changes (sign in, sign out, token refresh)
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (_event: string, session: Session | null) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+    } = supabase.auth.onAuthStateChange(async (_event: string, newSession: Session | null) => {
+      if (!mounted) return;
+      setSession(newSession);
+      setUser(newSession?.user ?? null);
 
-      if (session?.user) {
-        await fetchProfile(session.user.id);
+      if (newSession?.user) {
+        await fetchProfile(newSession.user.id);
       } else {
         setProfile(null);
       }
@@ -87,10 +91,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setIsLoading(false);
     });
 
-    return () => subscription.unsubscribe();
-  }, [supabase, fetchProfile]);
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
+  }, []);
 
   const signInWithGoogle = async () => {
+    const supabase = createClient();
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -103,6 +111,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
     setSession(null);
     setProfile(null);
+    const supabase = createClient();
     await supabase.auth.signOut();
     window.location.href = "/";
   };

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { useAuth } from "@/lib/supabase/AuthContext";
 import { createClient } from "@/lib/supabase/client";
 
 interface WeightLogFormProps {
@@ -11,7 +10,6 @@ interface WeightLogFormProps {
 
 export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
   const { t, locale } = useLanguage();
-  const { user } = useAuth();
   const [weightKg, setWeightKg] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [notes, setNotes] = useState("");
@@ -19,10 +17,13 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user || !weightKg) return;
+    if (!weightKg) return;
 
     setSaving(true);
     const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { setSaving(false); return; }
+
     await supabase.from("weight_logs").insert({
       user_id: user.id,
       weight_kg: parseFloat(weightKg),

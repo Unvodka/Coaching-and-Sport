@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { useAuth } from "@/lib/supabase/AuthContext";
 import { createClient } from "@/lib/supabase/client";
 import FavoriteButton from "./FavoriteButton";
 import type { Recipe } from "@/lib/supabase/database.types";
@@ -15,16 +14,22 @@ interface RecipeDetailProps {
 
 export default function RecipeDetail({ recipeId }: RecipeDetailProps) {
   const { locale, t } = useLanguage();
-  const { user, profile } = useAuth();
   const router = useRouter();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [isFavorited, setIsFavorited] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchRecipe() {
-      if (!user) return;
       const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { setLoading(false); return; }
+      setCurrentUserId(user.id);
+
+      const { data: profileData } = await supabase.from("profiles").select("role").eq("id", user.id).single();
+      if (profileData?.role) setUserRole(profileData.role);
 
       const [recipeRes, favRes] = await Promise.all([
         supabase.from("recipes").select("*").eq("id", recipeId).single(),
@@ -42,7 +47,7 @@ export default function RecipeDetail({ recipeId }: RecipeDetailProps) {
     }
 
     fetchRecipe();
-  }, [recipeId, user]);
+  }, [recipeId]);
 
   const handleDelete = async () => {
     if (!confirm(locale === "fr" ? "Supprimer cette recette ?" : "Delete this recipe?")) return;
@@ -73,7 +78,7 @@ export default function RecipeDetail({ recipeId }: RecipeDetailProps) {
   const description = locale === "fr" ? recipe.description_fr : (recipe.description_en || recipe.description_fr);
   const instructions = locale === "fr" ? recipe.instructions_fr : (recipe.instructions_en || recipe.instructions_fr);
   const ingredients = recipe.ingredients as string[];
-  const canEdit = user?.id === recipe.author_id || profile?.role === "coach";
+  const canEdit = currentUserId === recipe.author_id || userRole === "coach";
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -100,10 +105,10 @@ export default function RecipeDetail({ recipeId }: RecipeDetailProps) {
           )}
         </div>
         <div className="flex items-center gap-2">
-          {user && (
+          {currentUserId && (
             <FavoriteButton
               recipeId={recipe.id}
-              userId={user.id}
+              userId={currentUserId}
               initialFavorited={isFavorited}
             />
           )}

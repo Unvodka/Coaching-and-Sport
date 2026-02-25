@@ -2,22 +2,29 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useAuth } from "@/lib/supabase/AuthContext";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { createClient } from "@/lib/supabase/client";
 import WorkoutProgramCard from "@/components/portal/WorkoutProgramCard";
 import type { WorkoutProgram } from "@/lib/supabase/database.types";
 
 export default function WorkoutsPage() {
-  const { profile } = useAuth();
   const { locale } = useLanguage();
   const [programs, setPrograms] = useState<WorkoutProgram[]>([]);
   const [loading, setLoading] = useState(true);
-  const isCoach = profile?.role === "coach";
+  const [isCoach, setIsCoach] = useState(false);
 
   useEffect(() => {
     async function fetchPrograms() {
       const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", user.id)
+          .single();
+        if (profile?.role === "coach") setIsCoach(true);
+      }
       const { data } = await supabase
         .from("workout_programs")
         .select("*")

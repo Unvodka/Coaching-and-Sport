@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { useAuth } from "@/lib/supabase/AuthContext";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { createClient } from "@/lib/supabase/client";
 import WeightChart from "@/components/portal/WeightChart";
@@ -10,14 +9,14 @@ import WeightLogList from "@/components/portal/WeightLogList";
 import type { WeightLog } from "@/lib/supabase/database.types";
 
 export default function WeightPage() {
-  const { user } = useAuth();
   const { t, locale } = useLanguage();
   const [logs, setLogs] = useState<WeightLog[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchLogs = useCallback(async () => {
-    if (!user) return;
     const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { setLoading(false); return; }
     const { data } = await supabase
       .from("weight_logs")
       .select("*")
@@ -25,7 +24,7 @@ export default function WeightPage() {
       .order("date", { ascending: false });
     setLogs((data as WeightLog[]) || []);
     setLoading(false);
-  }, [user]);
+  }, []);
 
   useEffect(() => {
     fetchLogs();

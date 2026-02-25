@@ -2,18 +2,17 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { useAuth } from "@/lib/supabase/AuthContext";
 import FavoriteButton from "./FavoriteButton";
 import type { Recipe } from "@/lib/supabase/database.types";
 
 interface RecipeCardProps {
   recipe: Recipe;
   isFavorited: boolean;
+  userId?: string | null;
 }
 
-export default function RecipeCard({ recipe, isFavorited }: RecipeCardProps) {
+export default function RecipeCard({ recipe, isFavorited, userId }: RecipeCardProps) {
   const { locale } = useLanguage();
-  const { user } = useAuth();
 
   const title = locale === "fr" ? recipe.title_fr : (recipe.title_en || recipe.title_fr);
   const description = locale === "fr" ? recipe.description_fr : (recipe.description_en || recipe.description_fr);
@@ -43,10 +42,10 @@ export default function RecipeCard({ recipe, isFavorited }: RecipeCardProps) {
               {description}
             </p>
           </div>
-          {user && (
+          {userId && (
             <FavoriteButton
               recipeId={recipe.id}
-              userId={user.id}
+              userId={userId}
               initialFavorited={isFavorited}
             />
           )}

@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
-import { useAuth } from "@/lib/supabase/AuthContext";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { createClient } from "@/lib/supabase/client";
 import MoodEntryCard from "@/components/portal/MoodEntry";
@@ -11,14 +10,14 @@ import WellnessTip from "@/components/portal/WellnessTip";
 import type { MoodEntry } from "@/lib/supabase/database.types";
 
 export default function JournalPage() {
-  const { user } = useAuth();
   const { t, locale } = useLanguage();
   const [entries, setEntries] = useState<MoodEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchEntries = useCallback(async () => {
-    if (!user) return;
     const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { setLoading(false); return; }
     const { data } = await supabase
       .from("mood_entries")
       .select("*")
@@ -26,7 +25,7 @@ export default function JournalPage() {
       .order("date", { ascending: false });
     setEntries((data as MoodEntry[]) || []);
     setLoading(false);
-  }, [user]);
+  }, []);
 
   useEffect(() => {
     fetchEntries();

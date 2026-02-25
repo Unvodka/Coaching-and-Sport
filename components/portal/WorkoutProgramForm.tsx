@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { useAuth } from "@/lib/supabase/AuthContext";
 import { createClient } from "@/lib/supabase/client";
 
 interface ExerciseInput {
@@ -18,8 +17,6 @@ interface ExerciseInput {
 export default function WorkoutProgramForm() {
   const router = useRouter();
   const { locale } = useLanguage();
-  const { user } = useAuth();
-
   const [title_fr, setTitleFr] = useState("");
   const [title_en, setTitleEn] = useState("");
   const [description_fr, setDescriptionFr] = useState("");
@@ -51,10 +48,10 @@ export default function WorkoutProgramForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) return;
-
     setSaving(true);
     const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { setSaving(false); return; }
 
     const { data: program, error: programError } = await supabase
       .from("workout_programs")

@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { useAuth } from "@/lib/supabase/AuthContext";
 import { createClient } from "@/lib/supabase/client";
 import type { Recipe } from "@/lib/supabase/database.types";
 
@@ -26,8 +25,19 @@ interface RecipeFormProps {
 export default function RecipeForm({ recipe }: RecipeFormProps) {
   const router = useRouter();
   const { t, locale } = useLanguage();
-  const { user, profile } = useAuth();
-  const isCoach = profile?.role === "coach";
+  const [isCoach, setIsCoach] = useState(false);
+
+  useEffect(() => {
+    async function checkRole() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
+        if (profile?.role === "coach") setIsCoach(true);
+      }
+    }
+    checkRole();
+  }, []);
 
   const [formData, setFormData] = useState({
     title_fr: recipe?.title_fr || "",
@@ -48,12 +58,13 @@ export default function RecipeForm({ recipe }: RecipeFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) return;
 
     setSaving(true);
     setError("");
 
     const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { setSaving(false); return; }
     const ingredientsList = formData.ingredients
       .split("\n")
       .map((i) => i.trim())

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { useAuth } from "@/lib/supabase/AuthContext";
 import { createClient } from "@/lib/supabase/client";
 import type { WorkoutExercise } from "@/lib/supabase/database.types";
 
@@ -20,15 +19,15 @@ export default function ExerciseItem({
   onToggle,
 }: ExerciseItemProps) {
   const { locale, t } = useLanguage();
-  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
 
   const name = locale === "fr" ? exercise.name_fr : (exercise.name_en || exercise.name_fr);
 
   const handleToggle = async () => {
-    if (!user) return;
     setLoading(true);
     const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { setLoading(false); return; }
 
     if (isCompleted) {
       await supabase

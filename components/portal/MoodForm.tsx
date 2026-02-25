@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { useAuth } from "@/lib/supabase/AuthContext";
 import { createClient } from "@/lib/supabase/client";
 import WellnessTip from "@/components/portal/WellnessTip";
 
@@ -16,7 +15,6 @@ const TAG_SUGGESTIONS = [
 export default function MoodForm() {
   const router = useRouter();
   const { t, locale } = useLanguage();
-  const { user } = useAuth();
 
   const [moodScore, setMoodScore] = useState(5);
   const [energyLevel, setEnergyLevel] = useState(5);
@@ -34,10 +32,12 @@ export default function MoodForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) return;
 
     setSaving(true);
     const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { setSaving(false); return; }
+
     await supabase.from("mood_entries").insert({
       user_id: user.id,
       mood_score: moodScore,
