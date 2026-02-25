@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Playfair_Display, Cormorant_Garamond } from "next/font/google";
 import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import { AuthProvider } from "@/lib/supabase/AuthContext";
 import JsonLd from "@/components/JsonLd";
@@ -17,6 +17,13 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "600", "700", "800"],
   variable: "--font-playfair",
+  display: "swap",
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-cormorant",
   display: "swap",
 });
 
@@ -360,7 +367,7 @@ export default function RootLayout({
         <JsonLd data={websiteJsonLd} />
       </head>
       <body
-        className={`${inter.className} ${playfair.variable} leading-[1.7] text-gray-800 overflow-x-hidden bg-white`}
+        className={`${inter.className} ${playfair.variable} ${cormorant.variable} leading-[1.7] text-gray-800 overflow-x-hidden bg-white`}
       >
         <LanguageProvider>
           <AuthProvider>{children}</AuthProvider>
