@@ -25,14 +25,6 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-black/50 z-[1]" />
 
       <div className="relative z-10 max-w-[900px] p-8">
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-          className="font-heading text-[4rem] mb-6 font-extrabold tracking-tight text-white max-md:text-[2.5rem] max-[480px]:text-[2rem]"
-        >
-          Coach-Bluewave
-        </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
