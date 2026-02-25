@@ -21,7 +21,7 @@ export default function EditRecipePage() {
       try {
         const supabase = createClient();
 
-        // Get user
+        // Get user (best effort — form has its own fallback auth)
         const { data: { session } } = await supabase.auth.getSession();
         let uid = session?.user?.id;
         if (!uid) {

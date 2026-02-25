@@ -119,8 +119,8 @@ export default function WeightPage() {
       {/* Chart — only when we have data */}
       {logs.length > 0 && <WeightChart logs={logs} />}
 
-      {/* Add form */}
-      {userId && <WeightLogForm userId={userId} onAdded={fetchLogs} />}
+      {/* Add form — always rendered, userId passed when available */}
+      <WeightLogForm userId={userId || undefined} onAdded={fetchLogs} />
 
       {/* History — only when we have data */}
       {logs.length > 0 && (

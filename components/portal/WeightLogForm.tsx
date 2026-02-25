@@ -5,11 +5,11 @@ import { useLanguage } from "@/lib/i18n/useLanguage";
 import { createClient } from "@/lib/supabase/client";
 
 interface WeightLogFormProps {
-  userId: string;
+  userId?: string;
   onAdded: () => void;
 }
 
-export default function WeightLogForm({ userId, onAdded }: WeightLogFormProps) {
+export default function WeightLogForm({ userId: propUserId, onAdded }: WeightLogFormProps) {
   const { t, locale } = useLanguage();
   const [weightKg, setWeightKg] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
@@ -29,8 +29,24 @@ export default function WeightLogForm({ userId, onAdded }: WeightLogFormProps) {
     try {
       const supabase = createClient();
 
+      // Use prop userId if available, otherwise try session then getUser
+      let currentUserId = propUserId;
+      if (!currentUserId) {
+        const { data: { session } } = await supabase.auth.getSession();
+        currentUserId = session?.user?.id;
+      }
+      if (!currentUserId) {
+        const { data: { user } } = await supabase.auth.getUser();
+        currentUserId = user?.id;
+      }
+      if (!currentUserId) {
+        setError(locale === "fr" ? "Vous devez être connecté" : "You must be logged in");
+        setSaving(false);
+        return;
+      }
+
       const { error: insertError } = await supabase.from("weight_logs").insert({
-        user_id: userId,
+        user_id: currentUserId,
         weight_kg: parseFloat(weightKg),
         date,
         notes: notes || null,
