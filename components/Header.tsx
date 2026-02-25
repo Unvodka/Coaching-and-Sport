@@ -40,7 +40,7 @@ export default function Header() {
       className="text-white py-6 fixed w-full top-0 z-[1000] backdrop-blur-md bg-black/40 max-md:py-3"
     >
       <nav className="flex justify-between items-center w-full px-12 max-md:px-2.5">
-        <Link href="/" className="flex items-center no-underline shrink-0">
+        <Link href="/" className="flex items-center no-underline shrink-0 max-md:ml-2.5">
           <Image
             src="/images/logo-bluewave-white.png"
             alt="Coach-Bluewave"
