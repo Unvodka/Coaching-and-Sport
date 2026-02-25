@@ -110,9 +110,9 @@ export default function PacksPageContent() {
         </FadeInWhenVisible>
 
         {/* Pricing Grid */}
-        <div className="flex flex-wrap gap-8 max-w-6xl mx-auto max-md:flex-col">
+        <div className="flex flex-wrap gap-8 max-w-7xl mx-auto max-md:flex-col">
           {pricingPacks.map((pack, i) => (
-            <FadeInWhenVisible key={pack.title} delay={i * 0.1} className="flex-1 min-w-0 max-md:min-w-full">
+            <FadeInWhenVisible key={pack.title} delay={i * 0.1} className="flex-1 min-w-[240px] max-md:min-w-full">
               <PricingCard
                 {...pack}
                 isLoading={loadingPack === pack.title}
