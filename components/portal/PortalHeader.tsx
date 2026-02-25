@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useAuth } from "@/lib/supabase/AuthContext";
-import LanguageToggle from "@/components/LanguageToggle";
+import { useLanguage } from "@/lib/i18n/useLanguage";
 
 interface PortalHeaderProps {
   title: string;
@@ -11,6 +11,7 @@ interface PortalHeaderProps {
 
 export default function PortalHeader({ title, onMenuToggle }: PortalHeaderProps) {
   const { user, profile } = useAuth();
+  const { locale, setLocale } = useLanguage();
 
   return (
     <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sticky top-0 z-30">
@@ -30,7 +31,30 @@ export default function PortalHeader({ title, onMenuToggle }: PortalHeaderProps)
 
       {/* Right: language + user */}
       <div className="flex items-center gap-4">
-        <LanguageToggle />
+        {/* Language toggle — styled for white background */}
+        <div className="flex items-center bg-gray-100 rounded-full overflow-hidden text-sm font-semibold border border-gray-200">
+          <button
+            onClick={() => setLocale("fr")}
+            className={`px-3 py-1.5 transition-all duration-200 ${
+              locale === "fr"
+                ? "bg-brand-blue text-white"
+                : "text-gray-500 hover:text-gray-800"
+            }`}
+          >
+            FR
+          </button>
+          <button
+            onClick={() => setLocale("en")}
+            className={`px-3 py-1.5 transition-all duration-200 ${
+              locale === "en"
+                ? "bg-brand-blue text-white"
+                : "text-gray-500 hover:text-gray-800"
+            }`}
+          >
+            EN
+          </button>
+        </div>
+
         <div className="flex items-center gap-2">
           {profile?.avatar_url ? (
             <Image

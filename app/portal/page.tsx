@@ -60,6 +60,9 @@ export default function DashboardPage() {
     fetchStats();
   }, [user]);
 
+  const totalActivity =
+    stats.recipes + stats.weightLogs + stats.moodEntries + stats.workoutsCompleted;
+
   const greeting = profile?.full_name
     ? `${t("portal.welcome")} ${profile.full_name}`
     : t("portal.welcome");
@@ -87,56 +90,77 @@ export default function DashboardPage() {
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <DashboardCard
-            title={t("portal.recipes")}
-            value={stats.recipes}
-            subtitle={locale === "fr" ? "recettes créées" : "recipes created"}
-            href="/portal/recipes"
-            color="bg-orange-100 text-orange-600"
-            icon={
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        <>
+          {/* Empty state banner */}
+          {totalActivity === 0 && (
+            <div className="bg-gradient-to-r from-brand-blue/5 to-brand-navy/5 border border-brand-blue/20 rounded-xl p-8 mb-8 text-center">
+              <svg className="w-16 h-16 mx-auto text-brand-blue/40 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
               </svg>
-            }
-          />
-          <DashboardCard
-            title={t("portal.weight")}
-            value={stats.weightLogs}
-            subtitle={locale === "fr" ? "pesées enregistrées" : "entries recorded"}
-            href="/portal/weight"
-            color="bg-blue-100 text-blue-600"
-            icon={
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-              </svg>
-            }
-          />
-          <DashboardCard
-            title={t("portal.journal")}
-            value={stats.moodEntries}
-            subtitle={locale === "fr" ? "entrées journal" : "journal entries"}
-            href="/portal/journal"
-            color="bg-purple-100 text-purple-600"
-            icon={
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            }
-          />
-          <DashboardCard
-            title={t("portal.workouts")}
-            value={stats.workoutsCompleted}
-            subtitle={locale === "fr" ? "exercices complétés" : "exercises completed"}
-            href="/portal/workouts"
-            color="bg-green-100 text-green-600"
-            icon={
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            }
-          />
-        </div>
+              <h3 className="text-lg font-semibold text-heading mb-2">
+                {locale === "fr"
+                  ? "Aucune activité pour le moment"
+                  : "No activity yet"}
+              </h3>
+              <p className="text-gray-500 max-w-md mx-auto">
+                {locale === "fr"
+                  ? "Commencez par renseigner vos informations ! Ajoutez une recette, enregistrez votre poids, notez votre humeur ou suivez un programme d'entraînement."
+                  : "Start by entering your information! Add a recipe, log your weight, record your mood, or follow a workout program."}
+              </p>
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <DashboardCard
+              title={t("portal.recipes")}
+              value={stats.recipes}
+              subtitle={locale === "fr" ? "recettes créées" : "recipes created"}
+              href="/portal/recipes"
+              color="bg-orange-100 text-orange-600"
+              icon={
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              }
+            />
+            <DashboardCard
+              title={t("portal.weight")}
+              value={stats.weightLogs}
+              subtitle={locale === "fr" ? "pesées enregistrées" : "entries recorded"}
+              href="/portal/weight"
+              color="bg-blue-100 text-blue-600"
+              icon={
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                </svg>
+              }
+            />
+            <DashboardCard
+              title={t("portal.journal")}
+              value={stats.moodEntries}
+              subtitle={locale === "fr" ? "entrées journal" : "journal entries"}
+              href="/portal/journal"
+              color="bg-purple-100 text-purple-600"
+              icon={
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              }
+            />
+            <DashboardCard
+              title={t("portal.workouts")}
+              value={stats.workoutsCompleted}
+              subtitle={locale === "fr" ? "exercices complétés" : "exercises completed"}
+              href="/portal/workouts"
+              color="bg-green-100 text-green-600"
+              icon={
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              }
+            />
+          </div>
+        </>
       )}
     </div>
   );
