@@ -14,27 +14,51 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [notes, setNotes] = useState("");
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!weightKg) return;
 
     setSaving(true);
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { setSaving(false); return; }
+    setError(null);
+    setSuccess(false);
 
-    await supabase.from("weight_logs").insert({
-      user_id: user.id,
-      weight_kg: parseFloat(weightKg),
-      date,
-      notes: notes || null,
-    });
+    try {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        setError(locale === "fr" ? "Vous devez être connecté" : "You must be logged in");
+        setSaving(false);
+        return;
+      }
 
-    setWeightKg("");
-    setNotes("");
-    setSaving(false);
-    onAdded();
+      const { error: insertError } = await supabase.from("weight_logs").insert({
+        user_id: user.id,
+        weight_kg: parseFloat(weightKg),
+        date,
+        notes: notes || null,
+      });
+
+      if (insertError) {
+        console.error("Weight insert error:", insertError);
+        setError(locale === "fr" ? "Erreur lors de l'enregistrement" : "Error saving entry");
+        setSaving(false);
+        return;
+      }
+
+      setWeightKg("");
+      setNotes("");
+      setSuccess(true);
+      setSaving(false);
+      onAdded();
+      setTimeout(() => setSuccess(false), 3000);
+    } catch (err) {
+      console.error("Weight submit error:", err);
+      setError(locale === "fr" ? "Erreur inattendue" : "Unexpected error");
+      setSaving(false);
+    }
   };
 
   const inputClass =
@@ -48,6 +72,18 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
       <h3 className="font-semibold text-heading mb-4">
         {t("portal.weight.add")}
       </h3>
+
+      {error && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg">
+          {error}
+        </div>
+      )}
+      {success && (
+        <div className="mb-4 p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg">
+          {locale === "fr" ? "Poids enregistré avec succès !" : "Weight saved successfully!"}
+        </div>
+      )}
+
       <div className="flex flex-wrap gap-4 items-end">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">

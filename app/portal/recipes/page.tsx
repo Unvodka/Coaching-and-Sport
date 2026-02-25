@@ -20,30 +20,42 @@ export default function RecipesPage() {
 
   useEffect(() => {
     async function fetchRecipes() {
-      const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { setLoading(false); return; }
-      setUserId(user.id);
+      try {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) { setLoading(false); return; }
+        setUserId(user.id);
 
-      const [recipesRes, favsRes] = await Promise.all([
-        supabase
-          .from("recipes")
-          .select("*")
-          .order("created_at", { ascending: false }),
-        supabase
-          .from("recipe_favorites")
-          .select("recipe_id")
-          .eq("user_id", user.id),
-      ]);
+        const [recipesRes, favsRes] = await Promise.all([
+          supabase
+            .from("recipes")
+            .select("*")
+            .order("created_at", { ascending: false }),
+          supabase
+            .from("recipe_favorites")
+            .select("recipe_id")
+            .eq("user_id", user.id),
+        ]);
 
-      setRecipes((recipesRes.data as Recipe[]) || []);
-      setFavoriteIds(
-        new Set((favsRes.data || []).map((f: { recipe_id: string }) => f.recipe_id))
-      );
-      setLoading(false);
+        if (recipesRes.error) console.error("Recipes fetch error:", recipesRes.error);
+        setRecipes((recipesRes.data as Recipe[]) || []);
+        setFavoriteIds(
+          new Set((favsRes.data || []).map((f: { recipe_id: string }) => f.recipe_id))
+        );
+      } catch (err) {
+        console.error("Recipes page error:", err);
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchRecipes();
+  }, []);
+
+  // Safety timeout
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 5000);
+    return () => clearTimeout(timer);
   }, []);
 
   const filtered = recipes.filter((r) => {
@@ -65,6 +77,19 @@ export default function RecipesPage() {
     { key: "mine", label: t("portal.recipes.myRecipes") },
     { key: "favorites", label: t("portal.recipes.favorites") },
   ];
+
+  if (loading) {
+    return (
+      <div className="max-w-6xl mx-auto">
+        <div className="flex gap-2 mb-6">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="h-10 w-24 bg-gray-200 rounded-lg animate-pulse" />
+          ))}
+        </div>
+        <div className="h-10 w-64 bg-gray-200 rounded-lg animate-pulse mb-6" />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -105,28 +130,34 @@ export default function RecipesPage() {
         />
       </div>
 
-      {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden animate-pulse"
-            >
-              <div className="h-40 bg-gray-200" />
-              <div className="p-4 space-y-3">
-                <div className="h-4 bg-gray-200 rounded w-16" />
-                <div className="h-5 bg-gray-200 rounded w-3/4" />
-                <div className="h-4 bg-gray-200 rounded w-full" />
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : filtered.length === 0 ? (
-        <div className="text-center py-12 text-gray-500">
-          <svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+      {filtered.length === 0 ? (
+        <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-100 rounded-xl p-8 text-center">
+          <svg className="w-16 h-16 mx-auto text-orange-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
-          <p>{locale === "fr" ? "Aucune recette trouvée" : "No recipes found"}</p>
+          <h3 className="text-lg font-semibold text-heading mb-2">
+            {search
+              ? (locale === "fr" ? "Aucune recette trouvée" : "No recipes found")
+              : (locale === "fr" ? "Pas encore de recettes !" : "No recipes yet!")}
+          </h3>
+          <p className="text-gray-500 max-w-md mx-auto mb-6">
+            {search
+              ? (locale === "fr" ? "Essayez avec d'autres mots-clés." : "Try different keywords.")
+              : (locale === "fr"
+                  ? "Ajoutez votre première recette pour commencer à construire votre collection."
+                  : "Add your first recipe to start building your collection.")}
+          </p>
+          {!search && (
+            <Link
+              href="/portal/recipes/new"
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg font-semibold hover:opacity-90 transition-opacity no-underline"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+              {locale === "fr" ? "Créer ma première recette" : "Create my first recipe"}
+            </Link>
+          )}
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -15,21 +15,47 @@ export default function JournalPage() {
   const [loading, setLoading] = useState(true);
 
   const fetchEntries = useCallback(async () => {
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { setLoading(false); return; }
-    const { data } = await supabase
-      .from("mood_entries")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("date", { ascending: false });
-    setEntries((data as MoodEntry[]) || []);
-    setLoading(false);
+    try {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { setLoading(false); return; }
+      const { data, error } = await supabase
+        .from("mood_entries")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("date", { ascending: false });
+      if (error) console.error("Journal fetch error:", error);
+      setEntries((data as MoodEntry[]) || []);
+    } catch (err) {
+      console.error("Journal page error:", err);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
     fetchEntries();
   }, [fetchEntries]);
+
+  // Safety timeout
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="max-w-4xl mx-auto space-y-6">
+        <div className="flex items-center justify-end">
+          <div className="h-10 w-40 bg-gray-200 rounded-lg animate-pulse" />
+        </div>
+        <div className="bg-white rounded-xl border border-gray-100 p-6 animate-pulse">
+          <div className="h-6 bg-gray-200 rounded w-48 mb-3" />
+          <div className="h-4 bg-gray-200 rounded w-32" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -46,55 +72,56 @@ export default function JournalPage() {
         </Link>
       </div>
 
-      {/* Wellness tip based on latest entry */}
-      {!loading && entries.length > 0 && (
-        <div>
-          <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
-            {locale === "fr" ? "Conseil du jour" : "Today's tip"}
-          </h3>
-          <WellnessTip
-            moodScore={entries[0].mood_score}
-            energyLevel={entries[0].energy_level}
-          />
-        </div>
-      )}
-
-      {!loading && <MoodChart entries={entries} />}
-
-      {loading ? (
-        <div className="space-y-4">
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-xl border border-gray-100 p-5 animate-pulse"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-gray-200 rounded-full" />
-                <div className="space-y-2 flex-1">
-                  <div className="h-4 bg-gray-200 rounded w-32" />
-                  <div className="h-3 bg-gray-200 rounded w-48" />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : entries.length === 0 ? (
-        <div className="text-center py-12 text-gray-500">
-          <svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+      {entries.length === 0 ? (
+        <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-100 rounded-xl p-8 text-center">
+          <svg className="w-16 h-16 mx-auto text-purple-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <p>{locale === "fr" ? "Aucune entrée dans le journal" : "No journal entries yet"}</p>
+          <h3 className="text-lg font-semibold text-heading mb-2">
+            {locale === "fr"
+              ? "Commencez votre journal bien-être !"
+              : "Start your wellness journal!"}
+          </h3>
+          <p className="text-gray-500 max-w-md mx-auto mb-6">
+            {locale === "fr"
+              ? "Enregistrez votre humeur et votre niveau d'énergie chaque jour pour suivre votre bien-être au fil du temps."
+              : "Record your mood and energy level each day to track your wellness over time."}
+          </p>
+          <Link
+            href="/portal/journal/new"
+            className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg font-semibold hover:opacity-90 transition-opacity no-underline"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            {locale === "fr" ? "Ajouter ma première entrée" : "Add my first entry"}
+          </Link>
         </div>
       ) : (
-        <div className="space-y-4">
-          {entries.map((entry) => (
-            <MoodEntryCard
-              key={entry.id}
-              entry={entry}
-              onDeleted={fetchEntries}
+        <>
+          {/* Wellness tip based on latest entry */}
+          <div>
+            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+              {locale === "fr" ? "Conseil du jour" : "Today's tip"}
+            </h3>
+            <WellnessTip
+              moodScore={entries[0].mood_score}
+              energyLevel={entries[0].energy_level}
             />
-          ))}
-        </div>
+          </div>
+
+          <MoodChart entries={entries} />
+
+          <div className="space-y-4">
+            {entries.map((entry) => (
+              <MoodEntryCard
+                key={entry.id}
+                entry={entry}
+                onDeleted={fetchEntries}
+              />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

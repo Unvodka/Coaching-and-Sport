@@ -23,6 +23,7 @@ export default function MoodForm() {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [saving, setSaving] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const toggleTag = (tag: string) => {
     setTags((prev) =>
@@ -32,22 +33,40 @@ export default function MoodForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     setSaving(true);
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { setSaving(false); return; }
+    setError(null);
 
-    await supabase.from("mood_entries").insert({
-      user_id: user.id,
-      mood_score: moodScore,
-      energy_level: energyLevel,
-      notes: notes || null,
-      tags,
-      date,
-    });
+    try {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        setError(locale === "fr" ? "Vous devez être connecté" : "You must be logged in");
+        setSaving(false);
+        return;
+      }
 
-    setSubmitted(true);
+      const { error: insertError } = await supabase.from("mood_entries").insert({
+        user_id: user.id,
+        mood_score: moodScore,
+        energy_level: energyLevel,
+        notes: notes || null,
+        tags,
+        date,
+      });
+
+      if (insertError) {
+        console.error("Mood insert error:", insertError);
+        setError(locale === "fr" ? "Erreur lors de l'enregistrement" : "Error saving entry");
+        setSaving(false);
+        return;
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Mood submit error:", err);
+      setError(locale === "fr" ? "Erreur inattendue" : "Unexpected error");
+      setSaving(false);
+    }
   };
 
   // After submission, show the wellness tip
@@ -83,6 +102,7 @@ export default function MoodForm() {
           <button
             onClick={() => {
               setSubmitted(false);
+              setSaving(false);
               setMoodScore(5);
               setEnergyLevel(5);
               setNotes("");
@@ -100,6 +120,12 @@ export default function MoodForm() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-8">
+      {error && (
+        <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg">
+          {error}
+        </div>
+      )}
+
       {/* Date */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">

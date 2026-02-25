@@ -15,25 +15,51 @@ export default function WorkoutsPage() {
 
   useEffect(() => {
     async function fetchPrograms() {
-      const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("role")
-          .eq("id", user.id)
-          .single();
-        if (profile?.role === "coach") setIsCoach(true);
+      try {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id)
+            .single();
+          if (profile?.role === "coach") setIsCoach(true);
+        }
+        const { data, error } = await supabase
+          .from("workout_programs")
+          .select("*")
+          .order("created_at", { ascending: false });
+        if (error) console.error("Workouts fetch error:", error);
+        setPrograms((data as WorkoutProgram[]) || []);
+      } catch (err) {
+        console.error("Workouts page error:", err);
+      } finally {
+        setLoading(false);
       }
-      const { data } = await supabase
-        .from("workout_programs")
-        .select("*")
-        .order("created_at", { ascending: false });
-      setPrograms((data as WorkoutProgram[]) || []);
-      setLoading(false);
     }
     fetchPrograms();
   }, []);
+
+  // Safety timeout
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="max-w-4xl mx-auto space-y-6">
+        <div className="flex items-center justify-end">
+          <div className="h-10 w-40 bg-gray-200 rounded-lg animate-pulse" />
+        </div>
+        <div className="bg-white rounded-xl border border-gray-100 p-6 animate-pulse">
+          <div className="h-5 bg-gray-200 rounded w-1/2 mb-2" />
+          <div className="h-4 bg-gray-200 rounded w-3/4" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -52,25 +78,21 @@ export default function WorkoutsPage() {
         )}
       </div>
 
-      {loading ? (
-        <div className="space-y-4">
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-xl border border-gray-100 p-6 animate-pulse"
-            >
-              <div className="h-4 bg-gray-200 rounded w-20 mb-3" />
-              <div className="h-5 bg-gray-200 rounded w-1/2 mb-2" />
-              <div className="h-4 bg-gray-200 rounded w-3/4" />
-            </div>
-          ))}
-        </div>
-      ) : programs.length === 0 ? (
-        <div className="text-center py-12 text-gray-500">
-          <svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+      {programs.length === 0 ? (
+        <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100 rounded-xl p-8 text-center">
+          <svg className="w-16 h-16 mx-auto text-green-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
-          <p>{locale === "fr" ? "Aucun programme disponible" : "No programs available"}</p>
+          <h3 className="text-lg font-semibold text-heading mb-2">
+            {locale === "fr"
+              ? "Pas encore de programmes"
+              : "No programs yet"}
+          </h3>
+          <p className="text-gray-500 max-w-md mx-auto">
+            {locale === "fr"
+              ? "Les programmes d'entraînement apparaîtront ici une fois créés par votre coach."
+              : "Workout programs will appear here once created by your coach."}
+          </p>
         </div>
       ) : (
         <div className="space-y-4">
