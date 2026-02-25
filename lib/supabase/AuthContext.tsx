@@ -74,6 +74,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     init();
 
+    // Safety timeout: if init() hangs, force loading to false so the UI is usable
+    const safetyTimer = setTimeout(() => {
+      if (mounted) setIsLoading(false);
+    }, 4000);
+
     // Listen for future auth changes (sign in, sign out, token refresh)
     const {
       data: { subscription },
@@ -93,6 +98,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     return () => {
       mounted = false;
+      clearTimeout(safetyTimer);
       subscription.unsubscribe();
     };
   }, []);

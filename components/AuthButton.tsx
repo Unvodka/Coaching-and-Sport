@@ -5,9 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "@/lib/supabase/AuthContext";
 import { useLanguage } from "@/lib/i18n/useLanguage";
+import { createClient } from "@/lib/supabase/client";
 
 export default function AuthButton() {
-  const { user, profile, isLoading, signInWithGoogle, signOut } = useAuth();
+  const { user, profile, isLoading, signOut } = useAuth();
   const { t } = useLanguage();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -25,16 +26,22 @@ export default function AuthButton() {
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className="w-8 h-8 rounded-full bg-white/20 animate-pulse" />
-    );
-  }
+  // Standalone Google sign-in — does NOT depend on AuthContext
+  const handleSignIn = async () => {
+    const supabase = createClient();
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback?next=/portal`,
+      },
+    });
+  };
 
-  if (!user) {
+  // While loading, show the sign-in button so the user always has something clickable
+  if (isLoading || !user) {
     return (
       <button
-        onClick={signInWithGoogle}
+        onClick={handleSignIn}
         className="flex items-center gap-2 bg-white text-gray-800 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-gray-100 transition-colors"
       >
         <svg className="w-4 h-4" viewBox="0 0 24 24">
