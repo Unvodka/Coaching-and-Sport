@@ -29,14 +29,14 @@ export default function PricingCard({
       <div className="text-[2.075rem] font-bold text-heading my-3 leading-none max-[480px]:text-[1.675rem]">
         {price}
       </div>
-      <div className="text-gray-500 text-[0.975rem] mb-5 italic">{duration}</div>
+      <div className="text-gray-500 text-[0.85rem] mb-5 italic">{duration}</div>
       <ul className="list-none p-0 my-5 text-left flex-1">
         {features.map((feature) => (
           <li
             key={feature}
-            className="py-[0.5rem] text-gray-600 text-[0.975rem] flex items-start gap-[0.6rem]"
+            className="py-[0.5rem] text-gray-600 text-[0.85rem] flex items-start gap-[0.6rem]"
           >
-            <span className="text-brand-blue font-bold text-base shrink-0">✓</span>
+            <span className="text-brand-blue font-bold text-sm shrink-0">✓</span>
             {feature}
           </li>
         ))}
