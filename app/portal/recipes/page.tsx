@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
+import { useAuth } from "@/lib/supabase/AuthContext";
 import { createClient } from "@/lib/supabase/client";
 import RecipeCard from "@/components/portal/RecipeCard";
 import type { Recipe } from "@/lib/supabase/database.types";
@@ -11,7 +12,7 @@ type Tab = "all" | "mine" | "favorites";
 
 export default function RecipesPage() {
   const { t, locale } = useLanguage();
-  const [userId, setUserId] = useState<string | null>(null);
+  const { user: authUser, isLoading: authLoading } = useAuth();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
   const [tab, setTab] = useState<Tab>("all");
@@ -20,11 +21,17 @@ export default function RecipesPage() {
 
   useEffect(() => {
     async function fetchRecipes() {
+      if (authLoading) return;
+
       try {
         const supabase = createClient();
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) { setLoading(false); return; }
-        setUserId(user.id);
+
+        let uid = authUser?.id;
+        if (!uid) {
+          const { data: { user } } = await supabase.auth.getUser();
+          uid = user?.id;
+        }
+        if (!uid) { setLoading(false); return; }
 
         const [recipesRes, favsRes] = await Promise.all([
           supabase
@@ -34,7 +41,7 @@ export default function RecipesPage() {
           supabase
             .from("recipe_favorites")
             .select("recipe_id")
-            .eq("user_id", user.id),
+            .eq("user_id", uid),
         ]);
 
         if (recipesRes.error) console.error("Recipes fetch error:", recipesRes.error);
@@ -50,13 +57,15 @@ export default function RecipesPage() {
     }
 
     fetchRecipes();
-  }, []);
+  }, [authUser?.id, authLoading]);
 
   // Safety timeout
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 5000);
     return () => clearTimeout(timer);
   }, []);
+
+  const userId = authUser?.id || null;
 
   const filtered = recipes.filter((r) => {
     if (tab === "mine" && r.author_id !== userId) return false;
