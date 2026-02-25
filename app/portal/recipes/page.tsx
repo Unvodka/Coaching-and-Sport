@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import RecipeCard from "@/components/portal/RecipeCard";
@@ -13,9 +13,10 @@ export default function RecipesPage() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
   const [userId, setUserId] = useState<string | null>(null);
-  const [tab, setTab] = useState<Tab>("all");
+  const [tab, setTab] = useState<Tab>("favorites");
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const seeded = useRef(false);
 
   const fetchRecipes = useCallback(async () => {
     try {
@@ -30,6 +31,11 @@ export default function RecipesPage() {
       setRecipes((json.data as Recipe[]) || []);
       setFavoriteIds(new Set(json.favoriteIds || []));
       setUserId(json.userId || null);
+
+      return {
+        recipes: (json.data as Recipe[]) || [],
+        favoriteIds: (json.favoriteIds as string[]) || [],
+      };
     } catch (err) {
       console.error("Recipes page error:", err);
     } finally {
@@ -38,7 +44,26 @@ export default function RecipesPage() {
   }, []);
 
   useEffect(() => {
-    fetchRecipes();
+    async function init() {
+      const result = await fetchRecipes();
+
+      // If no favorites exist yet, seed 5 healthy recipes (runs once)
+      if (result && result.favoriteIds.length === 0 && !seeded.current) {
+        seeded.current = true;
+        try {
+          const seedRes = await fetch("/api/portal/seed-recipes", { method: "POST" });
+          const seedJson = await seedRes.json();
+          if (seedRes.ok && !seedJson.alreadyExists) {
+            // Re-fetch to show the new recipes
+            await fetchRecipes();
+          }
+        } catch (err) {
+          console.error("Seed error:", err);
+        }
+      }
+    }
+
+    init();
   }, [fetchRecipes]);
 
   // Safety timeout
@@ -76,6 +101,15 @@ export default function RecipesPage() {
           ))}
         </div>
         <div className="h-10 w-64 bg-gray-200 rounded-lg animate-pulse mb-6" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="bg-white rounded-xl border border-gray-100 p-4 animate-pulse">
+              <div className="h-40 bg-gray-200 rounded-lg mb-3" />
+              <div className="h-5 bg-gray-200 rounded w-3/4 mb-2" />
+              <div className="h-4 bg-gray-200 rounded w-1/2" />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
@@ -127,16 +161,22 @@ export default function RecipesPage() {
           <h3 className="text-lg font-semibold text-heading mb-2">
             {search
               ? (locale === "fr" ? "Aucune recette trouvée" : "No recipes found")
+              : tab === "favorites"
+              ? (locale === "fr" ? "Pas encore de favoris" : "No favorites yet")
               : (locale === "fr" ? "Pas encore de recettes !" : "No recipes yet!")}
           </h3>
           <p className="text-gray-500 max-w-md mx-auto mb-6">
             {search
               ? (locale === "fr" ? "Essayez avec d'autres mots-clés." : "Try different keywords.")
+              : tab === "favorites"
+              ? (locale === "fr"
+                  ? "Explorez les recettes et ajoutez-les à vos favoris."
+                  : "Browse recipes and add them to your favorites.")
               : (locale === "fr"
                   ? "Ajoutez votre première recette pour commencer à construire votre collection."
                   : "Add your first recipe to start building your collection.")}
           </p>
-          {!search && (
+          {!search && tab !== "favorites" && (
             <Link
               href="/portal/recipes/new"
               className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg font-semibold hover:opacity-90 transition-opacity no-underline"
@@ -146,6 +186,14 @@ export default function RecipesPage() {
               </svg>
               {locale === "fr" ? "Créer ma première recette" : "Create my first recipe"}
             </Link>
+          )}
+          {tab === "favorites" && (
+            <button
+              onClick={() => setTab("all")}
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg font-semibold hover:opacity-90 transition-opacity"
+            >
+              {locale === "fr" ? "Voir toutes les recettes" : "Browse all recipes"}
+            </button>
           )}
         </div>
       ) : (
