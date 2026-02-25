@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useAuth } from "@/lib/supabase/AuthContext";
 import { createClient } from "@/lib/supabase/client";
+import WellnessTip from "@/components/portal/WellnessTip";
 
 const MOOD_EMOJIS = ["😢", "😟", "😕", "😐", "🙂", "😊", "😄", "😁", "🤩", "🥳"];
 const TAG_SUGGESTIONS = [
@@ -23,6 +24,7 @@ export default function MoodForm() {
   const [tags, setTags] = useState<string[]>([]);
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [saving, setSaving] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const toggleTag = (tag: string) => {
     setTags((prev) =>
@@ -45,9 +47,56 @@ export default function MoodForm() {
       date,
     });
 
-    router.push("/portal/journal");
-    router.refresh();
+    setSubmitted(true);
   };
+
+  // After submission, show the wellness tip
+  if (submitted) {
+    return (
+      <div className="max-w-2xl mx-auto space-y-6">
+        <div className="text-center">
+          <div className="text-5xl mb-3">{MOOD_EMOJIS[moodScore - 1]}</div>
+          <h3 className="text-lg font-semibold text-heading mb-1">
+            {locale === "fr"
+              ? "Entrée enregistrée avec succès !"
+              : "Entry saved successfully!"}
+          </h3>
+          <p className="text-gray-500 text-sm">
+            {locale === "fr"
+              ? `Humeur : ${moodScore}/10 · Énergie : ${energyLevel}/10`
+              : `Mood: ${moodScore}/10 · Energy: ${energyLevel}/10`}
+          </p>
+        </div>
+
+        <WellnessTip moodScore={moodScore} energyLevel={energyLevel} />
+
+        <div className="flex justify-center gap-4">
+          <button
+            onClick={() => {
+              router.push("/portal/journal");
+              router.refresh();
+            }}
+            className="px-6 py-2.5 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg font-semibold hover:opacity-90 transition-opacity"
+          >
+            {locale === "fr" ? "Retour au journal" : "Back to journal"}
+          </button>
+          <button
+            onClick={() => {
+              setSubmitted(false);
+              setMoodScore(5);
+              setEnergyLevel(5);
+              setNotes("");
+              setTags([]);
+              setDate(new Date().toISOString().split("T")[0]);
+            }}
+            className="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+          >
+            {locale === "fr" ? "Nouvelle entrée" : "New entry"}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-8">

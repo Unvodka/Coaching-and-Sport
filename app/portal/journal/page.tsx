@@ -7,6 +7,7 @@ import { useLanguage } from "@/lib/i18n/useLanguage";
 import { createClient } from "@/lib/supabase/client";
 import MoodEntryCard from "@/components/portal/MoodEntry";
 import MoodChart from "@/components/portal/MoodChart";
+import WellnessTip from "@/components/portal/WellnessTip";
 import type { MoodEntry } from "@/lib/supabase/database.types";
 
 export default function JournalPage() {
@@ -45,6 +46,19 @@ export default function JournalPage() {
           {t("portal.journal.new")}
         </Link>
       </div>
+
+      {/* Wellness tip based on latest entry */}
+      {!loading && entries.length > 0 && (
+        <div>
+          <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+            {locale === "fr" ? "Conseil du jour" : "Today's tip"}
+          </h3>
+          <WellnessTip
+            moodScore={entries[0].mood_score}
+            energyLevel={entries[0].energy_level}
+          />
+        </div>
+      )}
 
       {!loading && <MoodChart entries={entries} />}
 
