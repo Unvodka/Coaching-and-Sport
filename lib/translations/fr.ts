@@ -8,7 +8,7 @@ const fr = {
 
   // Hero
   'hero.subtitle':
-    'Maître-nageur et coach sportif spécialisé en perte de poids et remise en forme',
+    'Maître-nageur et éducateur sportif spécialisé en perte de poids, remise en forme et bien-être',
   'hero.cta': 'Commencer ma transformation',
 
   // Services section
