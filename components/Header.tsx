@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { getNavLinks } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import LanguageToggle from "./LanguageToggle";
@@ -39,8 +40,15 @@ export default function Header() {
       className="text-white py-6 fixed w-full top-0 z-[1000] backdrop-blur-md bg-black/40 max-md:py-3"
     >
       <nav className="flex justify-between items-center w-full px-12 max-md:px-2.5">
-        <Link href="/" className="font-heading text-[1.7rem] font-bold tracking-tight text-white no-underline">
-          Coach-Bluewave
+        <Link href="/" className="flex items-center no-underline shrink-0">
+          <Image
+            src="/images/logo-bluewave-white.png"
+            alt="Coach-Bluewave"
+            width={200}
+            height={45}
+            className="h-10 w-auto max-md:h-8"
+            priority
+          />
         </Link>
 
         <div className="flex items-center gap-6">

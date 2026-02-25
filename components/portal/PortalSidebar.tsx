@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { createClient } from "@/lib/supabase/client";
@@ -102,10 +103,17 @@ export default function PortalSidebar({ open, onClose }: PortalSidebarProps) {
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="p-6 border-b border-white/10">
-            <Link href="/" className="text-xl font-bold tracking-tight no-underline text-white">
-              Coach-Bluewave
+            <Link href="/" className="block no-underline mb-1">
+              <Image
+                src="/images/logo-bluewave-white.png"
+                alt="Coach-Bluewave"
+                width={180}
+                height={40}
+                className="h-9 w-auto"
+                priority
+              />
             </Link>
-            <p className="text-xs text-white/60 mt-1">{t("auth.myPortal")}</p>
+            <p className="text-xs text-white/60">{t("auth.myPortal")}</p>
           </div>
 
           {/* Navigation */}
