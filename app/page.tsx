@@ -25,14 +25,6 @@ const faqJsonLd = {
     },
     {
       "@type": "Question",
-      name: "Quelles sont les qualifications d'Arnaud Chevallier ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Arnaud Chevallier est maître-nageur diplômé d'État (BPJEPS AAN) et coach sportif certifié. Il est spécialisé en perte de poids, remise en forme, cours de natation et coaching personnalisé sur la Côte d'Azur.",
-      },
-    },
-    {
-      "@type": "Question",
       name: "Où se déroulent les séances de coaching ?",
       acceptedAnswer: {
         "@type": "Answer",

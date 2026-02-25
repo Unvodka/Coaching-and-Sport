@@ -11,10 +11,6 @@ const FAQ_DATA = {
       a: "Un cours particulier (natation, fitness ou musculation) coûte 60€ la séance d'une heure. Des packs dégressifs sont disponibles avec des réductions allant jusqu'à 20%. Le coaching en ligne est à 79€/mois.",
     },
     {
-      q: "Quelles sont vos qualifications ?",
-      a: "Je suis maître-nageur diplômé d'État (BPJEPS AAN) et coach sportif certifié, spécialisé en perte de poids, remise en forme et coaching personnalisé.",
-    },
-    {
       q: "Où se déroulent les séances ?",
       a: "À Valbonne et ses environs sur la Côte d'Azur (Sophia Antipolis, Mougins, Antibes, Grasse). Natation en piscine, fitness en plein air ou en salle. Coaching en ligne disponible partout en France.",
     },
@@ -31,10 +27,6 @@ const FAQ_DATA = {
     {
       q: "How much does a private session cost?",
       a: "A private session (swimming, fitness, or weight training) costs €60 per hour. Discounted packs are available with savings up to 20%. Online coaching is €79/month.",
-    },
-    {
-      q: "What are your qualifications?",
-      a: "I am a state-certified swimming instructor (BPJEPS AAN) and certified sports coach, specializing in weight loss, fitness, and personalized coaching.",
     },
     {
       q: "Where do sessions take place?",
