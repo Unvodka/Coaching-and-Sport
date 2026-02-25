@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { useAuth } from "@/lib/supabase/AuthContext";
+import { createClient } from "@/lib/supabase/client";
 
 const NAV_ITEMS = [
   { href: "/portal", icon: "dashboard", keyFr: "portal.dashboard", keyEn: "portal.dashboard" },
@@ -66,10 +66,11 @@ interface PortalSidebarProps {
 export default function PortalSidebar({ open, onClose }: PortalSidebarProps) {
   const pathname = usePathname();
   const { t } = useLanguage();
-  const { signOut } = useAuth();
 
   const handleSignOut = () => {
-    signOut();
+    const supabase = createClient();
+    supabase.auth.signOut().catch(() => {});
+    window.location.href = "/";
   };
 
   const isActive = (href: string) => {

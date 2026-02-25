@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAuth } from "@/lib/supabase/AuthContext";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { createClient } from "@/lib/supabase/client";
 import DashboardCard from "@/components/portal/DashboardCard";
@@ -14,7 +13,6 @@ interface DashboardStats {
 }
 
 export default function DashboardPage() {
-  const { user, profile, isLoading: authLoading } = useAuth();
   const { t, locale } = useLanguage();
   const [stats, setStats] = useState<DashboardStats>({
     recipes: 0,
@@ -23,15 +21,30 @@ export default function DashboardPage() {
     workoutsCompleted: 0,
   });
   const [loading, setLoading] = useState(true);
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     async function fetchStats() {
-      if (authLoading) return;
+      const supabase = createClient();
+
+      // Get user directly from Supabase, don't rely on AuthContext
+      const { data: { user } } = await supabase.auth.getUser();
+
       if (!user) {
         setLoading(false);
         return;
       }
-      const supabase = createClient();
+
+      // Get profile name
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("full_name")
+        .eq("id", user.id)
+        .single();
+
+      if (profile?.full_name) {
+        setUserName(profile.full_name);
+      }
 
       const [recipesRes, weightRes, moodRes, progressRes] = await Promise.all([
         supabase
@@ -62,13 +75,21 @@ export default function DashboardPage() {
     }
 
     fetchStats();
-  }, [user, authLoading]);
+  }, []);
+
+  // Safety timeout: if still loading after 3 seconds, show content anyway
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const totalActivity =
     stats.recipes + stats.weightLogs + stats.moodEntries + stats.workoutsCompleted;
 
-  const greeting = profile?.full_name
-    ? `${t("portal.welcome")} ${profile.full_name}`
+  const greeting = userName
+    ? `${t("portal.welcome")} ${userName}`
     : t("portal.welcome");
 
   return (
