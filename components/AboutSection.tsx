@@ -16,7 +16,7 @@ export default function AboutSection() {
       </FadeInWhenVisible>
       <div className="flex flex-col items-center text-center max-w-[800px] mx-auto">
         <FadeInWhenVisible delay={0.1}>
-          <h3 className="font-heading text-heading text-[1.8rem] mb-6 font-bold">
+          <h3 className="font-heading text-heading text-[1.675rem] mb-6 font-bold">
             {t("about.heading")}
           </h3>
         </FadeInWhenVisible>
