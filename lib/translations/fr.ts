@@ -153,6 +153,67 @@ const fr = {
   'checkout.cancel.message':
     "Votre paiement a été annulé. Aucun montant n'a été débité. N'hésitez pas à revenir quand vous êtes prêt !",
   'checkout.cancel.seeOffers': 'Voir les offres',
+
+  // Auth
+  'auth.signIn': 'Connexion',
+  'auth.signOut': 'Déconnexion',
+  'auth.myPortal': 'Mon Espace',
+
+  // Portal - Dashboard
+  'portal.dashboard': 'Tableau de bord',
+  'portal.welcome': 'Bienvenue,',
+  'portal.dashboardSubtitle': "Voici un résumé de votre activité",
+
+  // Portal - Recipes
+  'portal.recipes': 'Recettes',
+  'portal.recipes.new': 'Nouvelle recette',
+  'portal.recipes.search': 'Rechercher une recette...',
+  'portal.recipes.favorites': 'Favoris',
+  'portal.recipes.myRecipes': 'Mes recettes',
+  'portal.recipes.all': 'Toutes',
+  'portal.recipes.category': 'Catégorie',
+  'portal.recipes.ingredients': 'Ingrédients',
+  'portal.recipes.instructions': 'Instructions',
+  'portal.recipes.instructionsFr': 'Instructions (FR)',
+  'portal.recipes.instructionsEn': 'Instructions (EN)',
+  'portal.recipes.titleFr': 'Titre (FR)',
+  'portal.recipes.titleEn': 'Titre (EN)',
+  'portal.recipes.descriptionFr': 'Description (FR)',
+  'portal.recipes.descriptionEn': 'Description (EN)',
+  'portal.recipes.imageUrl': "URL de l'image",
+  'portal.recipes.save': 'Enregistrer',
+  'portal.recipes.makePublic': 'Rendre publique (visible par tous les membres)',
+
+  // Portal - Weight
+  'portal.weight': 'Suivi du poids',
+  'portal.weight.add': 'Ajouter une pesée',
+  'portal.weight.current': 'Poids actuel',
+  'portal.weight.progress': 'Progression',
+  'portal.weight.kg': 'Poids (kg)',
+  'portal.weight.date': 'Date',
+  'portal.weight.notes': 'Notes',
+
+  // Portal - Journal
+  'portal.journal': 'Journal bien-être',
+  'portal.journal.new': 'Nouvelle entrée',
+  'portal.journal.mood': 'Humeur',
+  'portal.journal.energy': 'Énergie',
+  'portal.journal.notes': 'Notes',
+  'portal.journal.tags': 'Tags',
+
+  // Portal - Workouts
+  'portal.workouts': 'Programmes',
+  'portal.workouts.weeks': 'semaines',
+  'portal.workouts.sets': 'séries',
+  'portal.workouts.reps': 'reps',
+  'portal.workouts.rest': 'repos',
+  'portal.workouts.progress': 'Progression',
+
+  // Portal - Profile
+  'portal.profile': 'Mon profil',
+  'portal.profile.name': 'Nom complet',
+  'portal.profile.email': 'Email',
+  'portal.profile.update': 'Mettre à jour',
 } as const;
 
 export type TranslationKey = keyof typeof fr;

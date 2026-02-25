@@ -152,6 +152,67 @@ const en: Record<TranslationKey, string> = {
   "checkout.cancel.message":
     "Your payment has been cancelled. No amount has been charged. Feel free to come back when you're ready!",
   "checkout.cancel.seeOffers": "See offers",
+
+  // Auth
+  "auth.signIn": "Sign in",
+  "auth.signOut": "Sign out",
+  "auth.myPortal": "My Portal",
+
+  // Portal - Dashboard
+  "portal.dashboard": "Dashboard",
+  "portal.welcome": "Welcome,",
+  "portal.dashboardSubtitle": "Here is a summary of your activity",
+
+  // Portal - Recipes
+  "portal.recipes": "Recipes",
+  "portal.recipes.new": "New Recipe",
+  "portal.recipes.search": "Search recipes...",
+  "portal.recipes.favorites": "Favorites",
+  "portal.recipes.myRecipes": "My Recipes",
+  "portal.recipes.all": "All",
+  "portal.recipes.category": "Category",
+  "portal.recipes.ingredients": "Ingredients",
+  "portal.recipes.instructions": "Instructions",
+  "portal.recipes.instructionsFr": "Instructions (FR)",
+  "portal.recipes.instructionsEn": "Instructions (EN)",
+  "portal.recipes.titleFr": "Title (FR)",
+  "portal.recipes.titleEn": "Title (EN)",
+  "portal.recipes.descriptionFr": "Description (FR)",
+  "portal.recipes.descriptionEn": "Description (EN)",
+  "portal.recipes.imageUrl": "Image URL",
+  "portal.recipes.save": "Save",
+  "portal.recipes.makePublic": "Make public (visible to all members)",
+
+  // Portal - Weight
+  "portal.weight": "Weight Tracking",
+  "portal.weight.add": "Add entry",
+  "portal.weight.current": "Current weight",
+  "portal.weight.progress": "Progress",
+  "portal.weight.kg": "Weight (kg)",
+  "portal.weight.date": "Date",
+  "portal.weight.notes": "Notes",
+
+  // Portal - Journal
+  "portal.journal": "Wellness Journal",
+  "portal.journal.new": "New Entry",
+  "portal.journal.mood": "Mood",
+  "portal.journal.energy": "Energy",
+  "portal.journal.notes": "Notes",
+  "portal.journal.tags": "Tags",
+
+  // Portal - Workouts
+  "portal.workouts": "Programs",
+  "portal.workouts.weeks": "weeks",
+  "portal.workouts.sets": "sets",
+  "portal.workouts.reps": "reps",
+  "portal.workouts.rest": "rest",
+  "portal.workouts.progress": "Progress",
+
+  // Portal - Profile
+  "portal.profile": "My Profile",
+  "portal.profile.name": "Full Name",
+  "portal.profile.email": "Email",
+  "portal.profile.update": "Update",
 };
 
 export default en;

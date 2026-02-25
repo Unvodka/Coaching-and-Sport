@@ -54,7 +54,7 @@ export default function WeightChart({ logs }: WeightChartProps) {
               border: "1px solid #e5e7eb",
               boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
             }}
-            formatter={(value: number) => [`${value} kg`, "Poids"]}
+            formatter={(value) => [`${value} kg`, "Poids"]}
           />
           <Line
             type="monotone"

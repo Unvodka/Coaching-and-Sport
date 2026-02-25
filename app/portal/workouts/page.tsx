@@ -10,7 +10,7 @@ import type { WorkoutProgram } from "@/lib/supabase/database.types";
 
 export default function WorkoutsPage() {
   const { profile } = useAuth();
-  const { t, locale } = useLanguage();
+  const { locale } = useLanguage();
   const [programs, setPrograms] = useState<WorkoutProgram[]>([]);
   const [loading, setLoading] = useState(true);
   const isCoach = profile?.role === "coach";

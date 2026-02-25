@@ -45,7 +45,7 @@ export default function WorkoutProgramForm() {
 
   const updateExercise = (idx: number, field: keyof ExerciseInput, value: string | number) => {
     const updated = [...exercises];
-    (updated[idx] as any)[field] = value;
+    updated[idx] = { ...updated[idx], [field]: value };
     setExercises(updated);
   };
 

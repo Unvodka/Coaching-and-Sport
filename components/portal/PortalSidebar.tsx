@@ -112,7 +112,7 @@ export default function PortalSidebar({ open, onClose }: PortalSidebarProps) {
                 }`}
               >
                 <NavIcon icon={item.icon} />
-                {t(item.keyFr as any)}
+                {t(item.keyFr as Parameters<typeof t>[0])}
               </Link>
             ))}
           </nav>
