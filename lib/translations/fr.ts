@@ -50,14 +50,14 @@ const fr = {
   'about.title': 'À Propos',
   'about.heading': 'Arnaud Chevallier — Votre Coach Dédié à la Réussite',
   'about.p1':
-    'Maître-nageur diplômé et coach sportif certifié, je me consacre depuis plusieurs années à accompagner mes clients dans leur parcours de transformation physique.',
+    "Maître-nageur et éducateur sportif diplômé d'état, je me consacre depuis plusieurs années à accompagner mes clients dans leur parcours de transformation physique.",
   'about.p2':
-    "Spécialisé dans la perte de poids et la remise en forme, j'ai développé une approche globale qui combine plusieurs disciplines sportives pour des résultats durables et harmonieux.",
+    "Spécialisé dans l'enseignement, la perte de poids et la remise en forme, j'ai développé une approche globale qui combine plusieurs disciplines sportives pour des résultats durables et harmonieux.",
   'about.p3':
     'Ma philosophie : un accompagnement bienveillant, des objectifs réalistes et une progression adaptée à votre rythme. Chaque personne est unique, et votre programme le sera aussi.',
   'about.p4.prefix': 'Basé à Valbonne',
   'about.p4.suffix':
-    ", j'interviens dans toute la région pour vous offrir le meilleur service possible.",
+    ", je peux reçevoir à domicile et j'interviens également dans toute la région des Alpes-Maritimes pour vous offrir le meilleur service possible.",
   'about.cta': 'En savoir plus',
 
   // About page (dedicated /apropos)
@@ -68,9 +68,10 @@ const fr = {
   'aboutPage.headingName': 'Arnaud Chevallier',
   'aboutPage.headingRole': 'Coach Sportif & Maître-Nageur',
   'aboutPage.p1':
-    'Maître-nageur diplômé et entraineur sportif, je me consacre depuis plus de 10 ans à accompagner mes clients dans leur parcours de transformation physique.',
+    'Maître-nageur et Coach sportif, je me consacre depuis plus de 10 ans à accompagner les personnes dans leur parcours de transformation physique.',
+  //
   'aboutPage.p2':
-    "Spécialisé dans la perte de poids et la remise en forme, j'ai développé une approche globale qui combine plusieurs disciplines sportives pour des résultats durables et harmonieux.",
+    "Spécialisé dans la pratique multi-sports, la perte de poids, la remise en forme et le bien-être, j'ai développé une approche globale qui combine plusieurs disciplines sportives pour des résultats durables et harmonieux.",
   'aboutPage.p3':
     'Ma philosophie : un accompagnement bienveillant, des objectifs réalistes et une progression adaptée à votre rythme. Chaque personne est unique, et votre programme le sera aussi.',
   'aboutPage.p4':

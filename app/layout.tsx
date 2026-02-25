@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Inter, Playfair_Display } from "next/font/google";
 import { LanguageProvider } from "@/lib/i18n/LanguageContext";
+import { AuthProvider } from "@/lib/supabase/AuthContext";
 import JsonLd from "@/components/JsonLd";
 import "./globals.css";
 
@@ -359,7 +360,9 @@ export default function RootLayout({
       <body
         className={`${inter.className} ${playfair.variable} leading-[1.7] text-gray-800 overflow-x-hidden bg-white`}
       >
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </LanguageProvider>
 
         {/* Google Analytics 4 — REMPLACE G-GEJXN9BH9R par ton vrai ID GA4 */}
         <Script

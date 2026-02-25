@@ -598,7 +598,7 @@ const PROGRAMS_FR: Program[] = [
     description:
       'La formule premium combinant coaching en ligne ET séances en personne pour repousser vos limites.',
     features: [
-      '4 séances particulières par mois',
+      '4 séances individuelles par mois',
       "Programme d'entraînement personnalisé",
       'Plan nutritionnel détaillé avec recettes',
       'Support prioritaire 7j/7',
@@ -622,7 +622,7 @@ const PROGRAMS_FR: Program[] = [
     description:
       'Le programme ultime pour une transformation physique complète. Corps, nutrition et mental — tout est inclus.',
     features: [
-      '6 séances particulières par mois',
+      '8 séances individuelles par mois',
       "Programme d'entraînement complet",
       'Plan nutritionnel complet avec recettes',
       'Support prioritaire 7j/7',

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { getNavLinks } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import LanguageToggle from "./LanguageToggle";
+import AuthButton from "./AuthButton";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -71,6 +72,9 @@ export default function Header() {
 
           {/* Language Toggle */}
           <LanguageToggle />
+
+          {/* Auth Button */}
+          <AuthButton />
 
           {/* Hamburger Toggle */}
           <button
