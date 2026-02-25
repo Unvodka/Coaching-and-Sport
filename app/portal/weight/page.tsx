@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import dynamic from "next/dynamic";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useAuth } from "@/lib/supabase/AuthContext";
-import WeightChart from "@/components/portal/WeightChart";
+const WeightChart = dynamic(() => import("@/components/portal/WeightChart"), { ssr: false });
 import WeightLogForm from "@/components/portal/WeightLogForm";
 import WeightLogList from "@/components/portal/WeightLogList";
 import type { WeightLog } from "@/lib/supabase/database.types";

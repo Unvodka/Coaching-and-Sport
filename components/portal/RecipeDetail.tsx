@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import FavoriteButton from "./FavoriteButton";
 import type { Recipe } from "@/lib/supabase/database.types";
@@ -83,11 +84,14 @@ export default function RecipeDetail({ recipeId }: RecipeDetailProps) {
   return (
     <div className="max-w-3xl mx-auto">
       {recipe.image_url && (
-        <div className="h-64 rounded-xl overflow-hidden mb-6">
-          <img
+        <div className="relative h-64 rounded-xl overflow-hidden mb-6">
+          <Image
             src={recipe.image_url}
             alt={title}
-            className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 768px"
+            className="object-cover"
+            priority
           />
         </div>
       )}

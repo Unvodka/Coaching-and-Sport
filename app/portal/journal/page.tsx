@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import MoodEntryCard from "@/components/portal/MoodEntry";
-import MoodChart from "@/components/portal/MoodChart";
+const MoodChart = dynamic(() => import("@/components/portal/MoodChart"), { ssr: false });
 import WellnessTip from "@/components/portal/WellnessTip";
 import type { MoodEntry } from "@/lib/supabase/database.types";
 

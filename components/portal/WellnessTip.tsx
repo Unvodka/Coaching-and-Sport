@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 
 interface WellnessTipProps {
@@ -196,11 +197,13 @@ export default function WellnessTip({ moodScore, energyLevel }: WellnessTipProps
           className="block bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow no-underline group"
         >
           <div className="flex flex-col sm:flex-row">
-            <div className="sm:w-40 h-32 sm:h-auto flex-shrink-0">
-              <img
+            <div className="relative sm:w-40 h-32 sm:h-auto flex-shrink-0">
+              <Image
                 src={tip.article.imageSrc}
                 alt=""
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 640px) 100vw, 160px"
+                className="object-cover"
               />
             </div>
             <div className="p-4 flex-1 flex flex-col justify-center">

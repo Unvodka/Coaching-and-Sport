@@ -1,13 +1,15 @@
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import ServicesSection from "@/components/ServicesSection";
-import OffersSection from "@/components/OffersSection";
 import AboutSection from "@/components/AboutSection";
-import ContactSection from "@/components/ContactSection";
-import FAQSection from "@/components/FAQSection";
-import TrustBar from "@/components/TrustBar";
-import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
+import Footer from "@/components/Footer";
+
+const ServicesSection = dynamic(() => import("@/components/ServicesSection"));
+const OffersSection = dynamic(() => import("@/components/OffersSection"));
+const ContactSection = dynamic(() => import("@/components/ContactSection"));
+const FAQSection = dynamic(() => import("@/components/FAQSection"));
+const TrustBar = dynamic(() => import("@/components/TrustBar"));
 
 const faqJsonLd = {
   "@context": "https://schema.org",

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import FavoriteButton from "./FavoriteButton";
 import type { Recipe } from "@/lib/supabase/database.types";
@@ -23,11 +24,13 @@ export default function RecipeCard({ recipe, isFavorited, userId }: RecipeCardPr
       className="block bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow no-underline"
     >
       {recipe.image_url && (
-        <div className="h-40 bg-gray-100 overflow-hidden">
-          <img
+        <div className="relative h-40 bg-gray-100">
+          <Image
             src={recipe.image_url}
             alt={title}
-            className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover"
           />
         </div>
       )}

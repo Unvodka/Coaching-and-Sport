@@ -15,6 +15,8 @@ const nextConfig = {
         hostname: "lh3.googleusercontent.com",
       },
     ],
+    minimumCacheTTL: 2592000,
+    formats: ["image/webp"],
   },
 };
 
