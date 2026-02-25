@@ -14,7 +14,7 @@ interface DashboardStats {
 }
 
 export default function DashboardPage() {
-  const { user, profile } = useAuth();
+  const { user, profile, isLoading: authLoading } = useAuth();
   const { t, locale } = useLanguage();
   const [stats, setStats] = useState<DashboardStats>({
     recipes: 0,
@@ -26,7 +26,11 @@ export default function DashboardPage() {
 
   useEffect(() => {
     async function fetchStats() {
-      if (!user) return;
+      if (authLoading) return;
+      if (!user) {
+        setLoading(false);
+        return;
+      }
       const supabase = createClient();
 
       const [recipesRes, weightRes, moodRes, progressRes] = await Promise.all([
@@ -58,7 +62,7 @@ export default function DashboardPage() {
     }
 
     fetchStats();
-  }, [user]);
+  }, [user, authLoading]);
 
   const totalActivity =
     stats.recipes + stats.weightLogs + stats.moodEntries + stats.workoutsCompleted;
