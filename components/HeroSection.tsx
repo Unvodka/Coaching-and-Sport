@@ -25,14 +25,14 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-black/50 z-[1]" />
 
       <div className="relative z-10 max-w-[900px] p-8">
-        <motion.p
+        <motion.h2
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-[1.4rem] mb-10 font-normal opacity-95 max-md:text-[1.2rem] max-[480px]:text-base"
         >
           {t("hero.subtitle")}
-        </motion.p>
+        </motion.h2>
         <motion.a
           href="#contact"
           initial={{ opacity: 0, y: 40 }}
