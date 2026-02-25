@@ -1,7 +1,6 @@
 "use client";
 
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { createClient } from "@/lib/supabase/client";
 import type { MoodEntry as MoodEntryType } from "@/lib/supabase/database.types";
 
 const MOOD_EMOJIS = ["😢", "😟", "😕", "😐", "🙂", "😊", "😄", "😁", "🤩", "🥳"];
@@ -16,9 +15,12 @@ export default function MoodEntry({ entry, onDeleted }: MoodEntryProps) {
 
   const handleDelete = async () => {
     if (!confirm(locale === "fr" ? "Supprimer cette entrée ?" : "Delete this entry?")) return;
-    const supabase = createClient();
-    await supabase.from("mood_entries").delete().eq("id", entry.id);
-    onDeleted();
+    try {
+      await fetch(`/api/portal/mood?id=${entry.id}`, { method: "DELETE" });
+      onDeleted();
+    } catch (err) {
+      console.error("Delete error:", err);
+    }
   };
 
   return (

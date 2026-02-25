@@ -1,8 +1,9 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
+    // Verify user identity via cookies
     const supabase = createClient();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
 
@@ -10,7 +11,9 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { data, error } = await supabase
+    // Use admin client for data operations (bypasses RLS)
+    const admin = createAdminClient();
+    const { data, error } = await admin
       .from("weight_logs")
       .select("*")
       .eq("user_id", user.id)
@@ -30,6 +33,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    // Verify user identity via cookies
     const supabase = createClient();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
 
@@ -44,7 +48,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "weight_kg is required" }, { status: 400 });
     }
 
-    const { error: insertError } = await supabase.from("weight_logs").insert({
+    // Use admin client for data operations (bypasses RLS)
+    const admin = createAdminClient();
+    const { error: insertError } = await admin.from("weight_logs").insert({
       user_id: user.id,
       weight_kg: parseFloat(weight_kg),
       date: date || new Date().toISOString().split("T")[0],
@@ -59,6 +65,41 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Weight API error:", error);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const supabase = createClient();
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json({ error: "id is required" }, { status: 400 });
+    }
+
+    const admin = createAdminClient();
+    const { error: deleteError } = await admin
+      .from("weight_logs")
+      .delete()
+      .eq("id", id)
+      .eq("user_id", user.id);
+
+    if (deleteError) {
+      console.error("Weight delete error:", deleteError);
+      return NextResponse.json({ error: deleteError.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Weight DELETE error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

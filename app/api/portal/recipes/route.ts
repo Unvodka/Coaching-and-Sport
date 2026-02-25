@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -10,13 +10,15 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    const admin = createAdminClient();
+
     // Fetch recipes and user favorites in parallel
     const [recipesRes, favsRes] = await Promise.all([
-      supabase
+      admin
         .from("recipes")
         .select("*")
         .order("created_at", { ascending: false }),
-      supabase
+      admin
         .from("recipe_favorites")
         .select("recipe_id")
         .eq("user_id", user.id),
@@ -73,9 +75,11 @@ export async function POST(request: Request) {
       is_public: is_public || false,
     };
 
+    const admin = createAdminClient();
+
     if (recipe_id) {
       // Update existing recipe
-      const { error: updateError } = await supabase
+      const { error: updateError } = await admin
         .from("recipes")
         .update(data)
         .eq("id", recipe_id);
@@ -85,7 +89,7 @@ export async function POST(request: Request) {
       }
     } else {
       // Create new recipe
-      const { error: insertError } = await supabase
+      const { error: insertError } = await admin
         .from("recipes")
         .insert({ ...data, author_id: user.id });
       if (insertError) {

@@ -1,7 +1,6 @@
 "use client";
 
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { createClient } from "@/lib/supabase/client";
 import type { WeightLog } from "@/lib/supabase/database.types";
 
 interface WeightLogListProps {
@@ -14,9 +13,12 @@ export default function WeightLogList({ logs, onDeleted }: WeightLogListProps) {
 
   const handleDelete = async (id: string) => {
     if (!confirm(locale === "fr" ? "Supprimer cette entrée ?" : "Delete this entry?")) return;
-    const supabase = createClient();
-    await supabase.from("weight_logs").delete().eq("id", id);
-    onDeleted();
+    try {
+      await fetch(`/api/portal/weight?id=${id}`, { method: "DELETE" });
+      onDeleted();
+    } catch (err) {
+      console.error("Delete error:", err);
+    }
   };
 
   if (logs.length === 0) {

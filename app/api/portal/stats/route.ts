@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -10,20 +10,22 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    const admin = createAdminClient();
+
     const [recipesRes, weightRes, moodRes, progressRes] = await Promise.all([
-      supabase
+      admin
         .from("recipes")
         .select("id", { count: "exact", head: true })
         .eq("author_id", user.id),
-      supabase
+      admin
         .from("weight_logs")
         .select("id", { count: "exact", head: true })
         .eq("user_id", user.id),
-      supabase
+      admin
         .from("mood_entries")
         .select("id", { count: "exact", head: true })
         .eq("user_id", user.id),
-      supabase
+      admin
         .from("user_workout_progress")
         .select("id", { count: "exact", head: true })
         .eq("user_id", user.id),

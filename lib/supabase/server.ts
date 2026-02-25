@@ -1,6 +1,9 @@
 import { createServerClient } from "@supabase/ssr";
+import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 
+// Cookie-based server client — uses anon key + user's session cookies.
+// Good for verifying user identity via getUser().
 export function createClient() {
   const cookieStore = cookies();
 
@@ -25,5 +28,14 @@ export function createClient() {
         },
       },
     }
+  );
+}
+
+// Admin client — uses service role key, bypasses RLS.
+// Use ONLY in API routes after verifying user identity with createClient().
+export function createAdminClient() {
+  return createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
 }
