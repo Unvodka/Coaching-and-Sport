@@ -67,10 +67,15 @@ export default function PortalSidebar({ open, onClose }: PortalSidebarProps) {
   const pathname = usePathname();
   const { t } = useLanguage();
 
-  const handleSignOut = async () => {
+  const handleSignOut = () => {
     const supabase = createClient();
-    await supabase.auth.signOut();
-    window.location.href = "/";
+    supabase.auth.signOut().finally(() => {
+      window.location.href = "/";
+    });
+    // Fallback: if signOut hangs, redirect after 2 seconds anyway
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 2000);
   };
 
   const isActive = (href: string) => {
