@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useLanguage } from "@/lib/i18n/useLanguage";
+import { useAuth } from "@/lib/supabase/AuthContext";
 import { createClient } from "@/lib/supabase/client";
 import WeightChart from "@/components/portal/WeightChart";
 import WeightLogForm from "@/components/portal/WeightLogForm";
@@ -10,20 +11,26 @@ import type { WeightLog } from "@/lib/supabase/database.types";
 
 export default function WeightPage() {
   const { t, locale } = useLanguage();
+  const { user: authUser, isLoading: authLoading } = useAuth();
   const [logs, setLogs] = useState<WeightLog[]>([]);
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState<string | null>(null);
 
   const fetchLogs = useCallback(async () => {
     try {
       const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { setLoading(false); return; }
-      setUserId(user.id);
+
+      // Use AuthContext user first, fallback to getUser()
+      let uid = authUser?.id;
+      if (!uid) {
+        const { data: { user } } = await supabase.auth.getUser();
+        uid = user?.id;
+      }
+      if (!uid) { setLoading(false); return; }
+
       const { data, error } = await supabase
         .from("weight_logs")
         .select("*")
-        .eq("user_id", user.id)
+        .eq("user_id", uid)
         .order("date", { ascending: false });
       if (error) console.error("Weight fetch error:", error);
       setLogs((data as WeightLog[]) || []);
@@ -32,11 +39,14 @@ export default function WeightPage() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [authUser?.id]);
 
   useEffect(() => {
-    fetchLogs();
-  }, [fetchLogs]);
+    // Wait for auth to finish loading before fetching
+    if (!authLoading) {
+      fetchLogs();
+    }
+  }, [authLoading, fetchLogs]);
 
   // Safety timeout
   useEffect(() => {
@@ -119,8 +129,8 @@ export default function WeightPage() {
       {/* Chart — only when we have data */}
       {logs.length > 0 && <WeightChart logs={logs} />}
 
-      {/* Add form — always rendered, userId passed when available */}
-      <WeightLogForm userId={userId || undefined} onAdded={fetchLogs} />
+      {/* Add form — always rendered, userId from AuthContext */}
+      <WeightLogForm userId={authUser?.id} onAdded={fetchLogs} />
 
       {/* History — only when we have data */}
       {logs.length > 0 && (

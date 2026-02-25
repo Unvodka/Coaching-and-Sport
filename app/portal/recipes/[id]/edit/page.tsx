@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
+import { useAuth } from "@/lib/supabase/AuthContext";
 import { createClient } from "@/lib/supabase/client";
 import RecipeForm from "@/components/portal/RecipeForm";
 import type { Recipe } from "@/lib/supabase/database.types";
@@ -11,34 +12,14 @@ export default function EditRecipePage() {
   const params = useParams();
   const id = params.id as string;
   const { locale } = useLanguage();
+  const { user: authUser, profile } = useAuth();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
-  const [userId, setUserId] = useState<string | null>(null);
-  const [userRole, setUserRole] = useState<string>("user");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchRecipe() {
       try {
         const supabase = createClient();
-
-        // Get user (best effort — form has its own fallback auth)
-        const { data: { session } } = await supabase.auth.getSession();
-        let uid = session?.user?.id;
-        if (!uid) {
-          const { data: { user } } = await supabase.auth.getUser();
-          uid = user?.id;
-        }
-        if (uid) {
-          setUserId(uid);
-          const { data: profile } = await supabase
-            .from("profiles")
-            .select("role")
-            .eq("id", uid)
-            .single();
-          if (profile?.role) setUserRole(profile.role);
-        }
-
-        // Get recipe
         const { data } = await supabase
           .from("recipes")
           .select("*")
@@ -51,7 +32,7 @@ export default function EditRecipePage() {
         setLoading(false);
       }
     }
-    fetchData();
+    fetchRecipe();
     const timer = setTimeout(() => setLoading(false), 5000);
     return () => clearTimeout(timer);
   }, [id]);
@@ -80,7 +61,7 @@ export default function EditRecipePage() {
       <h2 className="text-2xl font-bold text-heading font-heading mb-6">
         {locale === "fr" ? "Modifier la recette" : "Edit Recipe"}
       </h2>
-      <RecipeForm recipe={recipe} userId={userId || undefined} userRole={userRole} />
+      <RecipeForm recipe={recipe} userId={authUser?.id} userRole={profile?.role || "user"} />
     </div>
   );
 }
