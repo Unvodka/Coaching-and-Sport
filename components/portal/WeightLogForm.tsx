@@ -5,10 +5,11 @@ import { useLanguage } from "@/lib/i18n/useLanguage";
 import { createClient } from "@/lib/supabase/client";
 
 interface WeightLogFormProps {
+  userId: string;
   onAdded: () => void;
 }
 
-export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
+export default function WeightLogForm({ userId, onAdded }: WeightLogFormProps) {
   const { t, locale } = useLanguage();
   const [weightKg, setWeightKg] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
@@ -27,15 +28,9 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
 
     try {
       const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        setError(locale === "fr" ? "Vous devez être connecté" : "You must be logged in");
-        setSaving(false);
-        return;
-      }
 
       const { error: insertError } = await supabase.from("weight_logs").insert({
-        user_id: user.id,
+        user_id: userId,
         weight_kg: parseFloat(weightKg),
         date,
         notes: notes || null,
@@ -43,7 +38,11 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
 
       if (insertError) {
         console.error("Weight insert error:", insertError);
-        setError(locale === "fr" ? "Erreur lors de l'enregistrement" : "Error saving entry");
+        setError(
+          locale === "fr"
+            ? `Erreur: ${insertError.message}`
+            : `Error: ${insertError.message}`
+        );
         setSaving(false);
         return;
       }
@@ -53,7 +52,7 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
       setSuccess(true);
       setSaving(false);
       onAdded();
-      setTimeout(() => setSuccess(false), 3000);
+      setTimeout(() => setSuccess(false), 4000);
     } catch (err) {
       console.error("Weight submit error:", err);
       setError(locale === "fr" ? "Erreur inattendue" : "Unexpected error");
@@ -80,7 +79,7 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
       )}
       {success && (
         <div className="mb-4 p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg">
-          {locale === "fr" ? "Poids enregistré avec succès !" : "Weight saved successfully!"}
+          {locale === "fr" ? "✅ Poids enregistré avec succès !" : "✅ Weight saved successfully!"}
         </div>
       )}
 
@@ -131,7 +130,7 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
           className="px-6 py-2.5 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
         >
           {saving
-            ? "..."
+            ? (locale === "fr" ? "Enregistrement..." : "Saving...")
             : locale === "fr"
             ? "Ajouter"
             : "Add"}

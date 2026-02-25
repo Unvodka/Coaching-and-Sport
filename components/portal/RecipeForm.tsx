@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { createClient } from "@/lib/supabase/client";
@@ -20,24 +20,14 @@ const CATEGORIES = [
 
 interface RecipeFormProps {
   recipe?: Recipe;
+  userId?: string;
+  userRole?: string;
 }
 
-export default function RecipeForm({ recipe }: RecipeFormProps) {
+export default function RecipeForm({ recipe, userId: propUserId, userRole }: RecipeFormProps) {
   const router = useRouter();
   const { t, locale } = useLanguage();
-  const [isCoach, setIsCoach] = useState(false);
-
-  useEffect(() => {
-    async function checkRole() {
-      const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
-        if (profile?.role === "coach") setIsCoach(true);
-      }
-    }
-    checkRole();
-  }, []);
+  const isCoach = userRole === "coach";
 
   const [formData, setFormData] = useState({
     title_fr: recipe?.title_fr || "",
@@ -63,8 +53,23 @@ export default function RecipeForm({ recipe }: RecipeFormProps) {
     setError("");
 
     const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { setSaving(false); return; }
+
+    // Use prop userId if available, otherwise try to get it from session/user
+    let currentUserId = propUserId;
+    if (!currentUserId) {
+      const { data: { session } } = await supabase.auth.getSession();
+      currentUserId = session?.user?.id;
+    }
+    if (!currentUserId) {
+      const { data: { user } } = await supabase.auth.getUser();
+      currentUserId = user?.id;
+    }
+    if (!currentUserId) {
+      setError(locale === "fr" ? "Vous devez être connecté" : "You must be logged in");
+      setSaving(false);
+      return;
+    }
+
     const ingredientsList = formData.ingredients
       .split("\n")
       .map((i) => i.trim())
@@ -96,7 +101,7 @@ export default function RecipeForm({ recipe }: RecipeFormProps) {
     } else {
       const { error: insertError } = await supabase
         .from("recipes")
-        .insert({ ...data, author_id: user.id });
+        .insert({ ...data, author_id: currentUserId });
       if (insertError) {
         setError(insertError.message);
         setSaving(false);

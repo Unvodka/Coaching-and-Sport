@@ -12,20 +12,48 @@ export default function EditRecipePage() {
   const id = params.id as string;
   const { locale } = useLanguage();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<string>("user");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchRecipe() {
-      const supabase = createClient();
-      const { data } = await supabase
-        .from("recipes")
-        .select("*")
-        .eq("id", id)
-        .single();
-      setRecipe(data as Recipe | null);
-      setLoading(false);
+    async function fetchData() {
+      try {
+        const supabase = createClient();
+
+        // Get user
+        const { data: { session } } = await supabase.auth.getSession();
+        let uid = session?.user?.id;
+        if (!uid) {
+          const { data: { user } } = await supabase.auth.getUser();
+          uid = user?.id;
+        }
+        if (uid) {
+          setUserId(uid);
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", uid)
+            .single();
+          if (profile?.role) setUserRole(profile.role);
+        }
+
+        // Get recipe
+        const { data } = await supabase
+          .from("recipes")
+          .select("*")
+          .eq("id", id)
+          .single();
+        setRecipe(data as Recipe | null);
+      } catch (err) {
+        console.error("Edit recipe page error:", err);
+      } finally {
+        setLoading(false);
+      }
     }
-    fetchRecipe();
+    fetchData();
+    const timer = setTimeout(() => setLoading(false), 5000);
+    return () => clearTimeout(timer);
   }, [id]);
 
   if (loading) {
@@ -52,7 +80,7 @@ export default function EditRecipePage() {
       <h2 className="text-2xl font-bold text-heading font-heading mb-6">
         {locale === "fr" ? "Modifier la recette" : "Edit Recipe"}
       </h2>
-      <RecipeForm recipe={recipe} />
+      <RecipeForm recipe={recipe} userId={userId || undefined} userRole={userRole} />
     </div>
   );
 }

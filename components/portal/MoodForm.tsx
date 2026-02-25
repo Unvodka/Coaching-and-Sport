@@ -12,7 +12,11 @@ const TAG_SUGGESTIONS = [
   "fatigue", "énergie", "progrès", "repos", "méditation",
 ];
 
-export default function MoodForm() {
+interface MoodFormProps {
+  userId?: string;
+}
+
+export default function MoodForm({ userId: propUserId }: MoodFormProps) {
   const router = useRouter();
   const { t, locale } = useLanguage();
 
@@ -38,15 +42,25 @@ export default function MoodForm() {
 
     try {
       const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
+
+      // Use prop userId if available, otherwise try to get it from session
+      let currentUserId = propUserId;
+      if (!currentUserId) {
+        const { data: { session } } = await supabase.auth.getSession();
+        currentUserId = session?.user?.id;
+      }
+      if (!currentUserId) {
+        const { data: { user } } = await supabase.auth.getUser();
+        currentUserId = user?.id;
+      }
+      if (!currentUserId) {
         setError(locale === "fr" ? "Vous devez être connecté" : "You must be logged in");
         setSaving(false);
         return;
       }
 
       const { error: insertError } = await supabase.from("mood_entries").insert({
-        user_id: user.id,
+        user_id: currentUserId,
         mood_score: moodScore,
         energy_level: energyLevel,
         notes: notes || null,
@@ -56,7 +70,11 @@ export default function MoodForm() {
 
       if (insertError) {
         console.error("Mood insert error:", insertError);
-        setError(locale === "fr" ? "Erreur lors de l'enregistrement" : "Error saving entry");
+        setError(
+          locale === "fr"
+            ? `Erreur: ${insertError.message}`
+            : `Error: ${insertError.message}`
+        );
         setSaving(false);
         return;
       }

@@ -12,12 +12,14 @@ export default function WeightPage() {
   const { t, locale } = useLanguage();
   const [logs, setLogs] = useState<WeightLog[]>([]);
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState<string | null>(null);
 
   const fetchLogs = useCallback(async () => {
     try {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) { setLoading(false); return; }
+      setUserId(user.id);
       const { data, error } = await supabase
         .from("weight_logs")
         .select("*")
@@ -118,7 +120,7 @@ export default function WeightPage() {
       {logs.length > 0 && <WeightChart logs={logs} />}
 
       {/* Add form */}
-      <WeightLogForm onAdded={fetchLogs} />
+      {userId && <WeightLogForm userId={userId} onAdded={fetchLogs} />}
 
       {/* History — only when we have data */}
       {logs.length > 0 && (
