@@ -67,9 +67,9 @@ export default function PortalSidebar({ open, onClose }: PortalSidebarProps) {
   const pathname = usePathname();
   const { t } = useLanguage();
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     const supabase = createClient();
-    supabase.auth.signOut().catch(() => {});
+    await supabase.auth.signOut();
     window.location.href = "/";
   };
 
