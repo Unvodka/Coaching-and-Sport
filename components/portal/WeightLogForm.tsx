@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { createClient } from "@/lib/supabase/client";
 
 interface WeightLogFormProps {
   userId?: string;
   onAdded: () => void;
 }
 
-export default function WeightLogForm({ userId: propUserId, onAdded }: WeightLogFormProps) {
+export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
   const { t, locale } = useLanguage();
   const [weightKg, setWeightKg] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
@@ -27,37 +26,23 @@ export default function WeightLogForm({ userId: propUserId, onAdded }: WeightLog
     setSuccess(false);
 
     try {
-      const supabase = createClient();
-
-      // Use prop userId if available, otherwise try session then getUser
-      let currentUserId = propUserId;
-      if (!currentUserId) {
-        const { data: { session } } = await supabase.auth.getSession();
-        currentUserId = session?.user?.id;
-      }
-      if (!currentUserId) {
-        const { data: { user } } = await supabase.auth.getUser();
-        currentUserId = user?.id;
-      }
-      if (!currentUserId) {
-        setError(locale === "fr" ? "Vous devez être connecté" : "You must be logged in");
-        setSaving(false);
-        return;
-      }
-
-      const { error: insertError } = await supabase.from("weight_logs").insert({
-        user_id: currentUserId,
-        weight_kg: parseFloat(weightKg),
-        date,
-        notes: notes || null,
+      const res = await fetch("/api/portal/weight", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          weight_kg: weightKg,
+          date,
+          notes: notes || null,
+        }),
       });
 
-      if (insertError) {
-        console.error("Weight insert error:", insertError);
+      const data = await res.json();
+
+      if (!res.ok) {
         setError(
           locale === "fr"
-            ? `Erreur: ${insertError.message}`
-            : `Error: ${insertError.message}`
+            ? `Erreur: ${data.error || "Une erreur est survenue"}`
+            : `Error: ${data.error || "Something went wrong"}`
         );
         setSaving(false);
         return;
@@ -71,7 +56,7 @@ export default function WeightLogForm({ userId: propUserId, onAdded }: WeightLog
       setTimeout(() => setSuccess(false), 4000);
     } catch (err) {
       console.error("Weight submit error:", err);
-      setError(locale === "fr" ? "Erreur inattendue" : "Unexpected error");
+      setError(locale === "fr" ? "Erreur de connexion" : "Connection error");
       setSaving(false);
     }
   };
@@ -95,7 +80,7 @@ export default function WeightLogForm({ userId: propUserId, onAdded }: WeightLog
       )}
       {success && (
         <div className="mb-4 p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg">
-          {locale === "fr" ? "✅ Poids enregistré avec succès !" : "✅ Weight saved successfully!"}
+          {locale === "fr" ? "Poids enregistré avec succès !" : "Weight saved successfully!"}
         </div>
       )}
 

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { createClient } from "@/lib/supabase/client";
 import WellnessTip from "@/components/portal/WellnessTip";
 
 const MOOD_EMOJIS = ["😢", "😟", "😕", "😐", "🙂", "😊", "😄", "😁", "🤩", "🥳"];
@@ -16,7 +15,7 @@ interface MoodFormProps {
   userId?: string;
 }
 
-export default function MoodForm({ userId: propUserId }: MoodFormProps) {
+export default function MoodForm({}: MoodFormProps) {
   const router = useRouter();
   const { t, locale } = useLanguage();
 
@@ -41,39 +40,25 @@ export default function MoodForm({ userId: propUserId }: MoodFormProps) {
     setError(null);
 
     try {
-      const supabase = createClient();
-
-      // Use prop userId if available, otherwise try to get it from session
-      let currentUserId = propUserId;
-      if (!currentUserId) {
-        const { data: { session } } = await supabase.auth.getSession();
-        currentUserId = session?.user?.id;
-      }
-      if (!currentUserId) {
-        const { data: { user } } = await supabase.auth.getUser();
-        currentUserId = user?.id;
-      }
-      if (!currentUserId) {
-        setError(locale === "fr" ? "Vous devez être connecté" : "You must be logged in");
-        setSaving(false);
-        return;
-      }
-
-      const { error: insertError } = await supabase.from("mood_entries").insert({
-        user_id: currentUserId,
-        mood_score: moodScore,
-        energy_level: energyLevel,
-        notes: notes || null,
-        tags,
-        date,
+      const res = await fetch("/api/portal/mood", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          mood_score: moodScore,
+          energy_level: energyLevel,
+          notes: notes || null,
+          tags,
+          date,
+        }),
       });
 
-      if (insertError) {
-        console.error("Mood insert error:", insertError);
+      const data = await res.json();
+
+      if (!res.ok) {
         setError(
           locale === "fr"
-            ? `Erreur: ${insertError.message}`
-            : `Error: ${insertError.message}`
+            ? `Erreur: ${data.error || "Une erreur est survenue"}`
+            : `Error: ${data.error || "Something went wrong"}`
         );
         setSaving(false);
         return;
@@ -82,7 +67,7 @@ export default function MoodForm({ userId: propUserId }: MoodFormProps) {
       setSubmitted(true);
     } catch (err) {
       console.error("Mood submit error:", err);
-      setError(locale === "fr" ? "Erreur inattendue" : "Unexpected error");
+      setError(locale === "fr" ? "Erreur de connexion" : "Connection error");
       setSaving(false);
     }
   };

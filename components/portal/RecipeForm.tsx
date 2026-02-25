@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { createClient } from "@/lib/supabase/client";
 import type { Recipe } from "@/lib/supabase/database.types";
 
 const CATEGORIES = [
@@ -24,7 +23,7 @@ interface RecipeFormProps {
   userRole?: string;
 }
 
-export default function RecipeForm({ recipe, userId: propUserId, userRole }: RecipeFormProps) {
+export default function RecipeForm({ recipe, userRole }: RecipeFormProps) {
   const router = useRouter();
   const { t, locale } = useLanguage();
   const isCoach = userRole === "coach";
@@ -52,65 +51,49 @@ export default function RecipeForm({ recipe, userId: propUserId, userRole }: Rec
     setSaving(true);
     setError("");
 
-    const supabase = createClient();
+    try {
+      const ingredientsList = formData.ingredients
+        .split("\n")
+        .map((i) => i.trim())
+        .filter(Boolean);
 
-    // Use prop userId if available, otherwise try to get it from session/user
-    let currentUserId = propUserId;
-    if (!currentUserId) {
-      const { data: { session } } = await supabase.auth.getSession();
-      currentUserId = session?.user?.id;
-    }
-    if (!currentUserId) {
-      const { data: { user } } = await supabase.auth.getUser();
-      currentUserId = user?.id;
-    }
-    if (!currentUserId) {
-      setError(locale === "fr" ? "Vous devez être connecté" : "You must be logged in");
+      const res = await fetch("/api/portal/recipes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title_fr: formData.title_fr,
+          title_en: formData.title_en,
+          description_fr: formData.description_fr,
+          description_en: formData.description_en,
+          ingredients: ingredientsList,
+          instructions_fr: formData.instructions_fr,
+          instructions_en: formData.instructions_en,
+          image_url: formData.image_url || null,
+          category: formData.category,
+          is_public: isCoach ? formData.is_public : false,
+          recipe_id: recipe?.id || null,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(
+          locale === "fr"
+            ? `Erreur: ${data.error || "Une erreur est survenue"}`
+            : `Error: ${data.error || "Something went wrong"}`
+        );
+        setSaving(false);
+        return;
+      }
+
+      router.push("/portal/recipes");
+      router.refresh();
+    } catch (err) {
+      console.error("Recipe submit error:", err);
+      setError(locale === "fr" ? "Erreur de connexion" : "Connection error");
       setSaving(false);
-      return;
     }
-
-    const ingredientsList = formData.ingredients
-      .split("\n")
-      .map((i) => i.trim())
-      .filter(Boolean);
-
-    const data = {
-      title_fr: formData.title_fr,
-      title_en: formData.title_en,
-      description_fr: formData.description_fr,
-      description_en: formData.description_en,
-      ingredients: ingredientsList,
-      instructions_fr: formData.instructions_fr,
-      instructions_en: formData.instructions_en,
-      image_url: formData.image_url || null,
-      category: formData.category,
-      is_public: isCoach ? formData.is_public : false,
-    };
-
-    if (recipe) {
-      const { error: updateError } = await supabase
-        .from("recipes")
-        .update(data)
-        .eq("id", recipe.id);
-      if (updateError) {
-        setError(updateError.message);
-        setSaving(false);
-        return;
-      }
-    } else {
-      const { error: insertError } = await supabase
-        .from("recipes")
-        .insert({ ...data, author_id: currentUserId });
-      if (insertError) {
-        setError(insertError.message);
-        setSaving(false);
-        return;
-      }
-    }
-
-    router.push("/portal/recipes");
-    router.refresh();
   };
 
   const inputClass =
