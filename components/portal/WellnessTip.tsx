@@ -14,6 +14,10 @@ interface Tip {
   message: { fr: string; en: string };
   action: { fr: string; en: string };
   href: string;
+  article?: {
+    label: { fr: string; en: string };
+    href: string;
+  };
 }
 
 function getTip(mood: number, energy: number): Tip {
@@ -34,6 +38,13 @@ function getTip(mood: number, energy: number): Tip {
         en: "Try a comforting recipe",
       },
       href: "/portal/recipes",
+      article: {
+        label: {
+          fr: "Lire un article sur la gestion du stress",
+          en: "Read an article about stress management",
+        },
+        href: "/blog/gerer-stress-et-anxiete",
+      },
     };
   }
 
@@ -54,6 +65,13 @@ function getTip(mood: number, energy: number): Tip {
         en: "See workout programs",
       },
       href: "/portal/workouts",
+      article: {
+        label: {
+          fr: "Lire un article sur le sport et la santé mentale",
+          en: "Read an article about sport and mental health",
+        },
+        href: "/blog/sport-et-sante-mentale",
+      },
     };
   }
 
@@ -74,6 +92,13 @@ function getTip(mood: number, energy: number): Tip {
         en: "Prepare a healthy meal",
       },
       href: "/portal/recipes",
+      article: {
+        label: {
+          fr: "Lire un article pour retrouver motivation et énergie",
+          en: "Read an article about finding motivation and energy",
+        },
+        href: "/blog/retrouver-energie-et-motivation",
+      },
     };
   }
 
@@ -131,15 +156,26 @@ export default function WellnessTip({ moodScore, energyLevel }: WellnessTipProps
           <p className="text-gray-600 text-sm leading-relaxed mb-4">
             {locale === "fr" ? tip.message.fr : tip.message.en}
           </p>
-          <Link
-            href={tip.href}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity no-underline"
-          >
-            {locale === "fr" ? tip.action.fr : tip.action.en}
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </Link>
+          <div className="flex flex-col gap-3">
+            <Link
+              href={tip.href}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity no-underline w-fit"
+            >
+              {locale === "fr" ? tip.action.fr : tip.action.en}
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </Link>
+            {tip.article && (
+              <Link
+                href={tip.article.href}
+                className="inline-flex items-center gap-2 text-sm text-brand-blue hover:text-brand-navy transition-colors no-underline"
+              >
+                <span>📖</span>
+                {locale === "fr" ? tip.article.label.fr : tip.article.label.en}
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>

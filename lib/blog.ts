@@ -151,6 +151,60 @@ export const BLOG_POSTS: BlogPost[] = [
       "À Valbonne et sur la Côte d'Azur, nous avons la chance de pouvoir pratiquer en plein air presque toute l'année, dans un cadre naturel exceptionnel. Que ce soit à travers la natation, le fitness en extérieur ou un programme combiné, je vous accompagne pour faire du sport un véritable pilier de votre équilibre mental et physique. Une première séance découverte est le meilleur moyen de commencer — contactez-moi pour en discuter.",
     ],
   },
+  {
+    slug: "gerer-stress-et-anxiete",
+    title: "Gérer le stress et l'anxiété : techniques simples pour retrouver la sérénité",
+    description:
+      "Découvrez des techniques concrètes pour gérer le stress et l'anxiété au quotidien. Respiration, récupération et habitudes bien-être pour retrouver votre équilibre.",
+    date: "2025-03-20",
+    readingTime: "7 min",
+    category: "Bien-être",
+    imageSrc:
+      "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=1200&q=80",
+    imageAlt: "Personne pratiquant la respiration profonde dans un cadre naturel apaisant",
+    content: [
+      "Le stress et l'anxiété font partie de la vie moderne, mais quand ils deviennent chroniques, ils peuvent sérieusement affecter votre santé physique et mentale. En tant que coach sportif à Valbonne, j'accompagne régulièrement des clients qui arrivent à leur première séance avec un niveau de stress élevé. La bonne nouvelle ? Il existe des techniques simples et accessibles pour reprendre le contrôle.",
+
+      "La respiration est votre outil anti-stress le plus puissant et le plus immédiat. La technique de respiration 4-7-8 est particulièrement efficace : inspirez par le nez pendant 4 secondes, retenez votre souffle pendant 7 secondes, puis expirez lentement par la bouche pendant 8 secondes. Répétez ce cycle 4 fois. Cette technique active votre système nerveux parasympathique, celui qui calme le corps et l'esprit. En moins de 2 minutes, votre rythme cardiaque ralentit et la tension musculaire diminue.",
+
+      "Le mouvement doux est un antidote naturel au stress. Quand vous êtes stressé et fatigué, l'idée d'un entraînement intense peut sembler insurmontable — et ce n'est pas ce dont votre corps a besoin. Privilégiez plutôt une marche de 15 à 20 minutes en plein air, des étirements doux, ou quelques postures de yoga simples. Ces activités réduisent le cortisol (hormone du stress) sans épuiser vos réserves d'énergie déjà limitées.",
+
+      "Le sommeil est la fondation de votre résistance au stress. Un manque de sommeil augmente la production de cortisol de 37% et réduit votre capacité à gérer les émotions. Pour améliorer votre sommeil : maintenez des horaires réguliers (même le week-end), évitez les écrans 1h avant le coucher, gardez votre chambre fraîche (18-19°C) et essayez une routine de relaxation comme la lecture ou la méditation avant de dormir.",
+
+      "L'alimentation joue un rôle clé dans la gestion du stress. Certains aliments favorisent la production de sérotonine et de GABA, les neurotransmetteurs de la détente : les bananes, les noix, le chocolat noir (70% minimum), les poissons gras riches en oméga-3, et les légumes verts. À l'inverse, limitez la caféine après midi et réduisez les sucres raffinés qui provoquent des pics d'énergie suivis de chutes brutales.",
+
+      "La connexion sociale est un besoin fondamental souvent négligé en période de stress. Quand on ne va pas bien, on a tendance à s'isoler, ce qui aggrave le problème. Même un simple appel de 10 minutes avec un ami ou un proche peut réduire significativement le cortisol. Si vous vous entraînez avec un coach, ces séances régulières deviennent aussi un moment de connexion et de soutien qui aide à traverser les périodes difficiles.",
+
+      "Quand consulter un professionnel ? Le stress et l'anxiété ponctuels sont normaux, mais si vous ressentez une anxiété persistante depuis plus de deux semaines, des troubles du sommeil chroniques, une perte d'appétit ou de motivation prolongée, ou des crises de panique, n'hésitez pas à consulter votre médecin ou un psychologue. Le sport et les techniques de relaxation sont de puissants compléments, mais ils ne remplacent pas un accompagnement médical quand il est nécessaire.",
+    ],
+  },
+  {
+    slug: "retrouver-energie-et-motivation",
+    title: "Comment retrouver énergie et motivation quand on se sent en panne",
+    description:
+      "Vous vous sentez en panne de motivation ? Découvrez des stratégies concrètes pour relancer votre énergie et retrouver l'envie d'avancer, étape par étape.",
+    date: "2025-04-05",
+    readingTime: "6 min",
+    category: "Bien-être",
+    imageSrc:
+      "https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=1200&q=80",
+    imageAlt: "Personne marchant sur un sentier ensoleillé, symbolisant le retour de la motivation",
+    content: [
+      "Il y a des jours — parfois des semaines — où la motivation semble avoir disparu. Vous n'êtes pas vraiment mal, mais vous n'êtes pas bien non plus. Tout semble demander un effort considérable, et l'envie de progresser s'est éteinte. En tant que coach sportif à Valbonne, je rencontre régulièrement cette situation chez mes clients. C'est normal, et surtout, c'est temporaire. Voici comment relancer la machine.",
+
+      "La règle des 5 minutes est la technique la plus efficace pour vaincre l'inertie. Le principe est simple : engagez-vous à faire l'activité pendant seulement 5 minutes. Pas 30, pas une heure — juste 5 minutes. Mettez vos chaussures de sport et marchez 5 minutes. Ouvrez votre tapis de yoga et faites 5 minutes d'étirements. Dans 80% des cas, une fois lancé, vous continuerez bien au-delà. Et si vous arrêtez après 5 minutes ? C'est 5 minutes de plus que zéro, et votre cerveau enregistre quand même une victoire.",
+
+      "La motivation ne précède pas l'action — elle en découle. C'est l'erreur la plus courante : attendre d'être motivé pour agir. En réalité, c'est l'inverse qui fonctionne. L'action, même minime, déclenche la production de dopamine (l'hormone de la récompense et de la motivation). Chaque petite action accomplie crée un cercle vertueux : action → dopamine → envie d'en faire plus → action. C'est pourquoi les micro-habitudes sont si puissantes.",
+
+      "Changez votre environnement pour changer votre état d'esprit. Quand vous êtes dans une routine monotone, votre cerveau passe en mode automatique et la motivation s'émousse. Brisez le cycle : entraînez-vous dans un lieu différent, essayez une nouvelle recette, prenez un itinéraire différent pour aller au travail, ou réorganisez votre espace. Le simple fait de changer de cadre stimule la curiosité et la dopamine.",
+
+      "Le pouvoir de la micro-action ne doit pas être sous-estimé. Au lieu de vous fixer des objectifs ambitieux qui vous paralysent (« je dois perdre 10 kg », « je dois m'entraîner 5 fois par semaine »), décomposez en actions minuscules : « aujourd'hui, je mange un légume de plus », « je fais 10 squats avant ma douche », « je bois un verre d'eau au réveil ». Ces micro-victoires s'accumulent et reconstruisent progressivement votre confiance et votre élan.",
+
+      "Prenez soin de vos fondamentaux : sommeil, hydratation, alimentation. Un manque de motivation est souvent le symptôme d'un déséquilibre physiologique. Dormez-vous suffisamment (7-8h) ? Buvez-vous assez d'eau (2L/jour) ? Mangez-vous suffisamment de protéines et de glucides complexes pour alimenter votre cerveau et vos muscles ? Avant de chercher des solutions complexes, réglez les bases. Un client qui « manquait de motivation » a retrouvé toute son énergie simplement en passant de 5h30 à 7h de sommeil par nuit.",
+
+      "Enfin, soyez bienveillant avec vous-même. Les passages à vide font partie du parcours de progression. Ils ne signifient pas que vous avez échoué ou que vous êtes paresseux. Parfois, votre corps et votre esprit ont besoin de ralentir pour mieux repartir. Le rôle d'un coach sportif est justement de vous accompagner dans ces moments : adapter les séances à votre état du jour, maintenir le fil de la régularité même à basse intensité, et vous rappeler tout le chemin que vous avez déjà parcouru.",
+    ],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
