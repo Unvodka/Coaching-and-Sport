@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 
 interface FavoriteButtonProps {
   recipeId: string;
@@ -11,7 +10,6 @@ interface FavoriteButtonProps {
 
 export default function FavoriteButton({
   recipeId,
-  userId,
   initialFavorited,
 }: FavoriteButtonProps) {
   const [favorited, setFavorited] = useState(initialFavorited);
@@ -19,22 +17,21 @@ export default function FavoriteButton({
 
   const toggle = async () => {
     setLoading(true);
-    const supabase = createClient();
-
-    if (favorited) {
-      await supabase
-        .from("recipe_favorites")
-        .delete()
-        .eq("user_id", userId)
-        .eq("recipe_id", recipeId);
-      setFavorited(false);
-    } else {
-      await supabase
-        .from("recipe_favorites")
-        .insert({ user_id: userId, recipe_id: recipeId });
-      setFavorited(true);
+    try {
+      await fetch("/api/portal/recipes/favorite", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          recipe_id: recipeId,
+          action: favorited ? "remove" : "add",
+        }),
+      });
+      setFavorited(!favorited);
+    } catch (err) {
+      console.error("Favorite toggle error:", err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (

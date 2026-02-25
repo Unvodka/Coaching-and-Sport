@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { createClient } from "@/lib/supabase/client";
 import FavoriteButton from "./FavoriteButton";
 import type { Recipe } from "@/lib/supabase/database.types";
 
@@ -23,27 +22,25 @@ export default function RecipeDetail({ recipeId }: RecipeDetailProps) {
 
   useEffect(() => {
     async function fetchRecipe() {
-      const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { setLoading(false); return; }
-      setCurrentUserId(user.id);
+      try {
+        const res = await fetch(`/api/portal/recipes/${recipeId}`);
+        const json = await res.json();
 
-      const { data: profileData } = await supabase.from("profiles").select("role").eq("id", user.id).single();
-      if (profileData?.role) setUserRole(profileData.role);
+        if (!res.ok) {
+          console.error("Recipe detail error:", json.error);
+          setLoading(false);
+          return;
+        }
 
-      const [recipeRes, favRes] = await Promise.all([
-        supabase.from("recipes").select("*").eq("id", recipeId).single(),
-        supabase
-          .from("recipe_favorites")
-          .select("id")
-          .eq("user_id", user.id)
-          .eq("recipe_id", recipeId)
-          .maybeSingle(),
-      ]);
-
-      if (recipeRes.data) setRecipe(recipeRes.data as Recipe);
-      setIsFavorited(!!favRes.data);
-      setLoading(false);
+        setRecipe(json.recipe as Recipe);
+        setIsFavorited(json.isFavorited);
+        setCurrentUserId(json.userId);
+        setUserRole(json.userRole);
+      } catch (err) {
+        console.error("Recipe detail fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchRecipe();
@@ -51,9 +48,12 @@ export default function RecipeDetail({ recipeId }: RecipeDetailProps) {
 
   const handleDelete = async () => {
     if (!confirm(locale === "fr" ? "Supprimer cette recette ?" : "Delete this recipe?")) return;
-    const supabase = createClient();
-    await supabase.from("recipes").delete().eq("id", recipeId);
-    router.push("/portal/recipes");
+    try {
+      await fetch(`/api/portal/recipes/${recipeId}`, { method: "DELETE" });
+      router.push("/portal/recipes");
+    } catch (err) {
+      console.error("Delete error:", err);
+    }
   };
 
   if (loading) {
