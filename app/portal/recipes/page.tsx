@@ -37,7 +37,7 @@ export default function RecipesPage() {
 
       setRecipes((recipesRes.data as Recipe[]) || []);
       setFavoriteIds(
-        new Set((favsRes.data || []).map((f) => f.recipe_id))
+        new Set((favsRes.data || []).map((f: { recipe_id: string }) => f.recipe_id))
       );
       setLoading(false);
     }

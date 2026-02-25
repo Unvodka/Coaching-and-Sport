@@ -45,7 +45,7 @@ export default function WorkoutDetailPage() {
     setProgram(programRes.data as WorkoutProgram | null);
     setExercises((exercisesRes.data as WorkoutExercise[]) || []);
     setCompletedIds(
-      new Set((progressRes.data || []).map((p) => p.exercise_id))
+      new Set((progressRes.data || []).map((p: { exercise_id: string }) => p.exercise_id))
     );
     setLoading(false);
   }, [user, programId]);
