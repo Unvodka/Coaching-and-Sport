@@ -31,7 +31,7 @@ export default function ProgramCard({
   const [showGoals, setShowGoals] = useState(false);
   const isStripe = !!onCheckout;
 
-  const cardClasses = `bg-white rounded-xl overflow-hidden flex flex-col transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_35px_rgba(37,99,235,0.12)] hover:border-brand-blue hover:-translate-y-1 no-underline cursor-pointer ${
+  const cardClasses = `h-full bg-white rounded-xl overflow-hidden flex flex-col transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_35px_rgba(37,99,235,0.12)] hover:border-brand-blue hover:-translate-y-1 no-underline cursor-pointer ${
     isFeatured ? "border-[3px] border-brand-blue" : "border-2 border-gray-200"
   } ${isLoading ? "opacity-60 pointer-events-none" : ""}`;
 

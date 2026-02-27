@@ -565,6 +565,7 @@ const PROGRAMS_FR: Program[] = [
     priceDetails: 'par séance',
     ctaText: 'Voir les packs',
     ctaHref: '/packs',
+    featuredBadge: "50% crédit d'impôt",
   },
   {
     imageSrc:
@@ -666,6 +667,7 @@ const PROGRAMS_EN: Program[] = [
     priceDetails: 'per session',
     ctaText: 'See packs',
     ctaHref: '/packs',
+    featuredBadge: '50% tax credit',
   },
   {
     imageSrc:
