@@ -4,18 +4,18 @@ import { NavLink, Service, Program, PricingPack, Locale } from './types';
 
 const NAV_LINKS_FR: NavLink[] = [
   { href: '/#accueil', label: 'Accueil' },
+  { href: '/#apropos', label: 'À Propos' },
   { href: '/#services', label: 'Services' },
   { href: '/#offres', label: 'Offres & Tarifs' },
-  { href: '/#apropos', label: 'À Propos' },
   { href: '/blog', label: 'Blog' },
   { href: '/#contact', label: 'Contact' },
 ];
 
 const NAV_LINKS_EN: NavLink[] = [
   { href: '/#accueil', label: 'Home' },
+  { href: '/#apropos', label: 'About' },
   { href: '/#services', label: 'Services' },
   { href: '/#offres', label: 'Offers & Pricing' },
-  { href: '/#apropos', label: 'About' },
   { href: '/blog', label: 'Blog' },
   { href: '/#contact', label: 'Contact' },
 ];
