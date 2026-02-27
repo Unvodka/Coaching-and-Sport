@@ -32,6 +32,8 @@ const fr = {
   'offers.goals': 'Objectifs',
   'offers.showGoals': 'Voir les objectifs',
   'offers.hideGoals': 'Masquer les objectifs',
+  'offers.showFeatures': 'Voir le détail',
+  'offers.hideFeatures': 'Masquer le détail',
 
   // Info note
   'info.programsInclude': 'Tous les programmes incluent :',
@@ -162,7 +164,7 @@ const fr = {
   // Portal - Dashboard
   'portal.dashboard': 'Tableau de bord',
   'portal.welcome': 'Bienvenue,',
-  'portal.dashboardSubtitle': "Voici un résumé de votre activité",
+  'portal.dashboardSubtitle': 'Voici un résumé de votre activité',
 
   // Portal - Recipes
   'portal.recipes': 'Recettes',

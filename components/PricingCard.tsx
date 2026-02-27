@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { PricingPack } from "@/lib/types";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 
@@ -17,6 +18,7 @@ export default function PricingCard({
   isLoading = false,
 }: PricingCardProps) {
   const { t } = useLanguage();
+  const [showFeatures, setShowFeatures] = useState(false);
 
   return (
     <div
@@ -30,17 +32,29 @@ export default function PricingCard({
         {price}
       </div>
       <div className="text-gray-500 text-[0.9125rem] mb-5 italic">{duration}</div>
-      <ul className="list-none p-0 my-5 text-left flex-1">
-        {features.map((feature) => (
-          <li
-            key={feature}
-            className="py-[0.5rem] text-gray-600 text-[0.9125rem] flex items-start gap-[0.6rem]"
-          >
-            <span className="text-brand-blue font-bold text-sm shrink-0">✓</span>
-            {feature}
-          </li>
-        ))}
-      </ul>
+
+      {/* Features toggle */}
+      <button
+        onClick={(e) => { e.stopPropagation(); e.preventDefault(); setShowFeatures(!showFeatures); }}
+        className="text-[0.8rem] font-bold text-heading uppercase tracking-wider mb-3 mt-auto flex items-center justify-center gap-1 bg-transparent border-none cursor-pointer hover:text-brand-blue transition-colors"
+      >
+        {showFeatures ? t("offers.hideFeatures") : t("offers.showFeatures")}
+        <span className="text-[0.65rem]">{showFeatures ? "▲" : "▼"}</span>
+      </button>
+      {showFeatures && (
+        <ul className="list-none p-0 my-3 text-left">
+          {features.map((feature) => (
+            <li
+              key={feature}
+              className="py-[0.5rem] text-gray-600 text-[0.9125rem] flex items-start gap-[0.6rem]"
+            >
+              <span className="text-brand-blue font-bold text-sm shrink-0">✓</span>
+              {feature}
+            </li>
+          ))}
+        </ul>
+      )}
+
       <div className="mt-auto">
         <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-3 px-6 rounded-lg font-bold text-[0.975rem] transition-all duration-300 w-full inline-block text-center">
           {isLoading ? t("offers.redirecting") : t("offers.bookNow")}

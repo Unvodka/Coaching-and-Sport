@@ -33,6 +33,8 @@ const en: Record<TranslationKey, string> = {
   "offers.goals": "Goals",
   "offers.showGoals": "Show goals",
   "offers.hideGoals": "Hide goals",
+  "offers.showFeatures": "See details",
+  "offers.hideFeatures": "Hide details",
 
   // Info note
   "info.programsInclude": "All programs include:",
