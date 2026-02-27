@@ -27,6 +27,7 @@ export default function ProgramCard({
   isLoading = false,
 }: ProgramCardProps) {
   const { t } = useLanguage();
+  const [showFeatures, setShowFeatures] = useState(false);
   const [showGoals, setShowGoals] = useState(false);
   const isStripe = !!onCheckout;
 
@@ -57,18 +58,24 @@ export default function ProgramCard({
       <div className="flex-1 p-6 flex flex-col text-center">
         <p className="text-gray-500 leading-[1.6] mb-4 text-[1.1rem]">{description}</p>
 
-        {/* What's included */}
-        <p className="text-[0.8rem] font-bold text-brand-blue uppercase tracking-wider mb-3 mt-2">
+        {/* What's included toggle */}
+        <button
+          onClick={(e) => { e.stopPropagation(); e.preventDefault(); setShowFeatures(!showFeatures); }}
+          className="text-[0.8rem] font-bold text-brand-blue uppercase tracking-wider mb-3 mt-2 flex items-center justify-center gap-1 bg-transparent border-none cursor-pointer hover:opacity-80 transition-colors"
+        >
           {t("offers.included")}
-        </p>
-        <ul className="list-none p-0 mb-4 text-left mx-auto w-fit">
-          {features.map((feature) => (
-            <li key={feature} className="py-1 text-gray-600 flex items-start gap-2.5 text-[1.1rem] leading-snug">
-              <span className="text-brand-blue font-bold text-sm shrink-0 mt-px">✓</span>
-              <span>{feature}</span>
-            </li>
-          ))}
-        </ul>
+          <span className="text-[0.65rem]">{showFeatures ? "▲" : "▼"}</span>
+        </button>
+        {showFeatures && (
+          <ul className="list-none p-0 mb-4 text-left mx-auto w-fit">
+            {features.map((feature) => (
+              <li key={feature} className="py-1 text-gray-600 flex items-start gap-2.5 text-[1.1rem] leading-snug">
+                <span className="text-brand-blue font-bold text-sm shrink-0 mt-px">✓</span>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+        )}
 
         {/* Goals toggle */}
         <button
