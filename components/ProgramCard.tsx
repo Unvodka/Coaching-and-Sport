@@ -58,7 +58,7 @@ export default function ProgramCard({
 
       {/* Body */}
       <div className="p-5 flex flex-col text-center max-md:p-6">
-        <p className="text-gray-500 leading-[1.6] mb-5 text-[0.95rem] min-h-[4.5rem] max-md:min-h-0">{description}</p>
+        <p className="text-gray-500 leading-[1.6] mb-5 text-[1.0125rem] min-h-[4.5rem] max-md:min-h-0">{description}</p>
 
         {/* Toggle buttons row */}
         <div className="flex items-center justify-center gap-4 mb-2">
@@ -89,7 +89,7 @@ export default function ProgramCard({
           <div className="overflow-hidden">
             <ul className="list-none p-0 text-left mx-auto w-fit">
               {features.map((feature) => (
-                <li key={feature} className="py-1 text-gray-600 flex items-start gap-2 text-[0.95rem] leading-snug">
+                <li key={feature} className="py-1 text-gray-600 flex items-start gap-2 text-[1.0125rem] leading-snug">
                   <span className="text-brand-blue font-bold text-sm shrink-0 mt-px">✓</span>
                   <span>{feature}</span>
                 </li>
@@ -103,7 +103,7 @@ export default function ProgramCard({
           <div className="overflow-hidden">
             <ul className="list-none p-0 text-left mx-auto w-fit">
               {goals.map((goal) => (
-                <li key={goal} className="py-1 text-gray-600 flex items-start gap-2 text-[0.95rem] leading-snug">
+                <li key={goal} className="py-1 text-gray-600 flex items-start gap-2 text-[1.0125rem] leading-snug">
                   <span className="shrink-0 mt-px">🎯</span>
                   <span>{goal}</span>
                 </li>
@@ -118,7 +118,7 @@ export default function ProgramCard({
         <div className="text-[1.8rem] font-bold text-heading leading-none mb-1 max-[480px]:text-[1.5rem]">
           {price}
         </div>
-        <p className="text-gray-400 text-[0.95rem] mb-4">{priceDetails}</p>
+        <p className="text-gray-400 text-[1.0125rem] mb-4">{priceDetails}</p>
         <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-3 px-8 rounded-lg font-bold transition-all duration-300 inline-block w-full text-center text-[1rem] cursor-pointer hover:opacity-90">
           {isLoading ? t("offers.redirecting") : ctaText}
         </span>
