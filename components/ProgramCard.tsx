@@ -51,7 +51,7 @@ export default function ProgramCard({
             {featuredBadge}
           </span>
         )}
-        <h3 className="font-heading absolute bottom-4 left-0 right-0 text-center text-white text-[1.5rem] font-bold drop-shadow-lg">
+        <h3 className="font-heading absolute top-1/2 -translate-y-1/2 left-0 right-0 text-center text-white text-[1.5rem] font-bold drop-shadow-lg">
           {title}
         </h3>
       </div>
