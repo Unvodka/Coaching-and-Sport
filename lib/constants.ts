@@ -4,18 +4,18 @@ import { NavLink, Service, Program, PricingPack, Locale } from './types';
 
 const NAV_LINKS_FR: NavLink[] = [
   { href: '/#accueil', label: 'Accueil' },
-  { href: '/#apropos', label: 'À Propos' },
   { href: '/#services', label: 'Services' },
   { href: '/#offres', label: 'Offres & Tarifs' },
+  { href: '/#apropos', label: 'À Propos' },
   { href: '/blog', label: 'Blog' },
   { href: '/#contact', label: 'Contact' },
 ];
 
 const NAV_LINKS_EN: NavLink[] = [
   { href: '/#accueil', label: 'Home' },
-  { href: '/#apropos', label: 'About' },
   { href: '/#services', label: 'Services' },
   { href: '/#offres', label: 'Offers & Pricing' },
+  { href: '/#apropos', label: 'About' },
   { href: '/blog', label: 'Blog' },
   { href: '/#contact', label: 'Contact' },
 ];
@@ -549,7 +549,7 @@ const PROGRAMS_FR: Program[] = [
     description:
       'Un accompagnement 100% personnalisé pour atteindre vos objectifs rapidement avec un suivi individuel de qualité.',
     features: [
-      "Séances individuelles d'1 heure",
+      "Séances individuelles d'une heure",
       'Programme entièrement sur mesure',
       'Horaires ultra-flexibles',
       'Corrections techniques en temps réel',
@@ -565,7 +565,6 @@ const PROGRAMS_FR: Program[] = [
     priceDetails: 'par séance',
     ctaText: 'Voir les packs',
     ctaHref: '/packs',
-    featuredBadge: "50% crédit d'impôt",
   },
   {
     imageSrc:
@@ -667,7 +666,6 @@ const PROGRAMS_EN: Program[] = [
     priceDetails: 'per session',
     ctaText: 'See packs',
     ctaHref: '/packs',
-    featuredBadge: '50% tax credit',
   },
   {
     imageSrc:

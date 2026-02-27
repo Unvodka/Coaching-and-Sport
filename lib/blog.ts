@@ -12,58 +12,59 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    slug: "perdre-du-poids-avec-coach-sportif",
-    title: "Comment perdre du poids durablement avec un coach sportif ?",
+    slug: 'perdre-du-poids-avec-coach-sportif',
+    title: 'Comment perdre du poids durablement avec un coach sportif ?',
     description:
       "Découvrez les clés d'une perte de poids durable grâce à un accompagnement sportif personnalisé. Conseils d'expert pour atteindre vos objectifs sans effet yoyo.",
-    date: "2025-01-15",
-    readingTime: "6 min",
-    category: "Perte de poids",
+    date: '2025-01-15',
+    readingTime: '6 min',
+    category: 'Perte de poids',
     imageSrc:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&q=80",
-    imageAlt: "Entraînement personnalisé avec un coach sportif pour perdre du poids",
+      'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&q=80',
+    imageAlt:
+      'Entraînement personnalisé avec un coach sportif pour perdre du poids',
     content: [
-      "La perte de poids est l'un des objectifs les plus courants chez les personnes qui font appel à un coach sportif. Pourtant, beaucoup de gens se lancent dans des régimes drastiques ou des programmes d'entraînement trop intenses, ce qui mène souvent à l'abandon et à l'effet yoyo. En tant que coach sportif diplômé à Valbonne, je vous explique comment aborder la perte de poids de manière intelligente et durable.",
+      "La perte de poids est l'un des objectifs les plus courants chez les personnes qui font appel à un coach sportif. Pourtant, beaucoup de gens se lancent dans des régimes drastiques ou des programmes d'entraînement trop intenses, ce qui mène souvent à l'abandon et à l'effet yoyo. Ayez les bonnes habitudes et abordez la perte de poids de manière intelligente et durable.",
       "La première étape est de comprendre que la perte de poids repose sur un déficit calorique modéré, combiné à une activité physique adaptée. Il ne s'agit pas de se priver ou de s'épuiser, mais de trouver le bon équilibre entre alimentation et exercice. Un coach sportif vous aide à définir ce déficit de manière personnalisée, en tenant compte de votre métabolisme, votre mode de vie et vos préférences alimentaires.",
       "L'entraînement en résistance (musculation, circuit training) est souvent sous-estimé dans un programme de perte de poids. Contrairement aux idées reçues, la musculation ne vous rendra pas « trop musclé(e) ». Au contraire, elle augmente votre métabolisme de base, ce qui signifie que vous brûlez plus de calories même au repos. Combinée avec du cardio modéré (natation, marche rapide, HIIT), cette approche donne des résultats visibles en quelques semaines.",
       "La régularité est la clé du succès. Plutôt que de s'entraîner intensément 6 jours par semaine pendant un mois puis d'abandonner, il est bien plus efficace de maintenir 2 à 3 séances hebdomadaires sur le long terme. C'est exactement ce qu'un coach sportif vous aide à mettre en place : un programme réaliste, progressif et motivant.",
-      "L'alimentation représente environ 70% des résultats en matière de perte de poids. Mais attention, il ne s'agit pas de suivre un régime strict. Mon approche en tant que coach à Valbonne est basée sur le rééquilibrage alimentaire : apprendre à mieux manger sans frustration, en comprenant les macronutriments et en adoptant des habitudes durables.",
+      "L'alimentation représente environ 70% des résultats en matière de perte de poids. Mais attention, il ne s'agit pas de suivre un régime strict. Mon approche est basée sur le rééquilibrage alimentaire : apprendre à mieux manger sans frustration, en comprenant les macronutriments et en adoptant des habitudes durables.",
       "Enfin, le suivi régulier est essentiel. Les progrès ne sont pas toujours visibles sur la balance (la masse musculaire pèse plus que la graisse), c'est pourquoi un coach sportif utilise plusieurs indicateurs : tour de taille, photos de progression, performances sportives et bien-être général. Cette approche globale vous permet de rester motivé(e) et de voir vos véritables progrès.",
     ],
   },
   {
-    slug: "bienfaits-natation-adultes",
-    title: "Les 10 bienfaits de la natation pour les adultes",
+    slug: 'bienfaits-natation-adultes',
+    title: 'Les 10 bienfaits de la natation pour les adultes',
     description:
       "La natation est l'un des sports les plus complets. Découvrez ses 10 principaux bienfaits pour la santé, la forme physique et le bien-être mental des adultes.",
-    date: "2025-01-28",
-    readingTime: "5 min",
-    category: "Natation",
+    date: '2025-01-28',
+    readingTime: '5 min',
+    category: 'Natation',
     imageSrc:
-      "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=1200&q=80",
-    imageAlt: "Nageur adulte dans une piscine effectuant un crawl",
+      'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=1200&q=80',
+    imageAlt: 'Nageur adulte dans une piscine effectuant un crawl',
     content: [
-      "La natation est souvent considérée comme le sport le plus complet qui existe, et pour de bonnes raisons. En tant que maître-nageur diplômé d'État à Valbonne, je constate chaque jour les incroyables bienfaits que cette discipline apporte à mes élèves adultes. Que vous soyez débutant ou nageur confirmé, voici les 10 raisons pour lesquelles vous devriez intégrer la natation dans votre routine sportive.",
+      'La natation est souvent considérée comme le sport le plus complet qui existe, et pour de bonnes raisons. Je constate chaque jour les incroyables bienfaits que cette discipline apporte au personnes. Que vous soyez débutant ou nageur confirmé, voici les 10 raisons pour lesquelles vous devriez intégrer la natation dans votre routine sportive.',
       "Premier bienfait : la natation sollicite l'ensemble des groupes musculaires. Contrairement à la course à pied qui travaille principalement les jambes, ou à la musculation ciblée, la natation engage les bras, les jambes, le dos, les abdominaux et les épaules simultanément. Chaque mouvement dans l'eau est un exercice de renforcement musculaire complet.",
       "Deuxième bienfait : elle est extrêmement douce pour les articulations. L'eau porte environ 90% de votre poids corporel, ce qui réduit considérablement le stress articulaire. C'est pourquoi la natation est recommandée pour les personnes souffrant d'arthrose, de douleurs lombaires ou en phase de rééducation après une blessure.",
-      "Troisième et quatrième bienfaits : la natation est un excellent brûleur de calories (jusqu'à 500 kcal/heure en nage intensive) et améliore significativement votre endurance cardiovasculaire. Votre cœur et vos poumons deviennent plus efficaces, réduisant le risque de maladies cardiovasculaires.",
+      'Troisième et quatrième bienfaits : la natation est un excellent brûleur de calories et améliore significativement votre endurance cardiovasculaire. Votre cœur et vos poumons deviennent plus efficaces, réduisant le risque de maladies cardiovasculaires.',
       "Cinquième et sixième bienfaits : nager régulièrement améliore votre posture (en renforçant les muscles du dos et de la ceinture abdominale) et augmente votre souplesse. Les mouvements amples dans l'eau étirent naturellement vos muscles et améliorent l'amplitude de vos articulations.",
       "Septième bienfait : la natation a un puissant effet anti-stress. Le contact avec l'eau a un effet apaisant prouvé scientifiquement. La respiration rythmée et la concentration sur les mouvements créent un état méditatif qui réduit le cortisol (hormone du stress) et favorise la production d'endorphines.",
-      "Huitième, neuvième et dixième bienfaits : la natation améliore la qualité du sommeil, renforce le système immunitaire, et peut se pratiquer à tout âge sans risque. Que vous ayez 25 ou 75 ans, il existe toujours un style de nage et une intensité adaptés à votre condition physique.",
+      'Huitième, neuvième et dixième bienfaits : la natation améliore la qualité du sommeil, renforce le système immunitaire, et peut se pratiquer à tout âge sans risque. Que vous ayez 25 ou 75 ans, il existe toujours un style de nage et une intensité adaptés à votre condition physique.',
       "À Valbonne et sur la Côte d'Azur, nous avons la chance de pouvoir pratiquer la natation quasiment toute l'année. Si vous souhaitez découvrir ou redécouvrir les bienfaits de la natation avec un accompagnement professionnel, je serai ravi de vous accueillir pour une séance d'évaluation personnalisée.",
     ],
   },
   {
-    slug: "fitness-plein-air-avantages",
+    slug: 'fitness-plein-air-avantages',
     title: "Pourquoi s'entraîner en plein air est meilleur qu'en salle ?",
     description:
       "S'entraîner en extérieur offre des avantages uniques pour le corps et l'esprit. Découvrez pourquoi le fitness en plein air à Valbonne peut transformer vos résultats.",
-    date: "2025-02-10",
-    readingTime: "5 min",
-    category: "Fitness",
+    date: '2025-02-10',
+    readingTime: '5 min',
+    category: 'Fitness',
     imageSrc:
-      "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1200&q=80",
-    imageAlt: "Séance de fitness en plein air dans un parc verdoyant",
+      'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1200&q=80',
+    imageAlt: 'Séance de fitness en plein air dans un parc verdoyant',
     content: [
       "Si vous hésitez entre vous entraîner en salle de sport ou en plein air, cet article est pour vous. En tant que coach sportif à Valbonne, je propose les deux formats, mais je constate systématiquement que mes clients qui s'entraînent en extérieur obtiennent des résultats supérieurs et maintiennent leur motivation plus longtemps. Voici pourquoi.",
       "L'air frais fait une vraie différence sur vos performances. Des études scientifiques montrent que l'entraînement en extérieur augmente l'apport en oxygène de 10 à 20% par rapport à un environnement fermé et climatisé. Vos muscles sont mieux oxygénés, votre récupération est plus rapide, et votre endurance s'améliore naturellement.",
@@ -75,37 +76,38 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
   },
   {
-    slug: "nutrition-sportive-bases",
-    title: "Nutrition sportive : les bases pour optimiser vos performances",
+    slug: 'nutrition-sportive-bases',
+    title: 'Nutrition sportive : les bases pour optimiser vos performances',
     description:
-      "Apprenez les fondamentaux de la nutrition sportive pour améliorer vos performances, votre récupération et atteindre vos objectifs physiques plus rapidement.",
-    date: "2025-02-25",
-    readingTime: "7 min",
-    category: "Nutrition",
+      'Apprenez les fondamentaux de la nutrition sportive pour améliorer vos performances, votre récupération et atteindre vos objectifs physiques plus rapidement.',
+    date: '2025-02-25',
+    readingTime: '7 min',
+    category: 'Nutrition',
     imageSrc:
-      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200&q=80",
-    imageAlt: "Repas équilibré avec protéines, légumes et glucides complexes",
+      'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200&q=80',
+    imageAlt: 'Repas équilibré avec protéines, légumes et glucides complexes',
     content: [
       "La nutrition est le pilier souvent négligé de tout programme sportif. On dit que les résultats se font à 30% à l'entraînement et à 70% dans l'assiette, et mon expérience de coach sportif à Valbonne confirme totalement cette proportion. Voici les bases de la nutrition sportive pour vous aider à optimiser vos performances et atteindre vos objectifs.",
       "Les macronutriments sont les trois grandes familles de nutriments dont votre corps a besoin : les protéines, les glucides et les lipides. Chacun joue un rôle essentiel. Les protéines réparent et construisent les muscles (visez 1,6 à 2g par kg de poids corporel si vous êtes actif). Les glucides fournissent l'énergie nécessaire à l'effort (privilégiez les glucides complexes comme les patates douces, le riz complet, les flocons d'avoine). Les lipides sont essentiels au bon fonctionnement hormonal et à l'absorption des vitamines.",
       "L'hydratation est souvent sous-estimée mais elle est cruciale. Une déshydratation de seulement 2% peut réduire vos performances de 10 à 20%. Visez au minimum 2 litres d'eau par jour, davantage les jours d'entraînement. Sur la Côte d'Azur, le climat chaud impose une vigilance particulière, surtout pour le fitness en plein air.",
       "Le timing de vos repas autour de l'entraînement fait une réelle différence. Avant l'effort (2-3h avant) : un repas complet avec glucides, protéines et peu de graisses. Juste après l'effort (dans les 30 minutes) : une collation riche en protéines et glucides rapides pour optimiser la récupération musculaire. C'est la fameuse « fenêtre anabolique » qui maximise l'absorption des nutriments par vos muscles.",
       "Les compléments alimentaires ne sont pas indispensables si votre alimentation est équilibrée. Cependant, certains peuvent être utiles : la créatine pour la force et la puissance (l'un des compléments les plus étudiés et les plus sûrs), la protéine en poudre pour compléter vos apports si nécessaire, et la vitamine D en hiver (même sur la Côte d'Azur, les mois d'hiver peuvent être insuffisants).",
-      "Les erreurs nutritionnelles les plus fréquentes que je constate chez mes clients sont : sauter le petit-déjeuner (ce qui ralentit le métabolisme), ne pas manger assez de protéines (surtout chez les femmes), se priver excessivement (ce qui provoque des compulsions alimentaires), et négliger les légumes et les fibres (essentiels pour la digestion et la satiété).",
+      'Les erreurs nutritionnelles les plus fréquentes que je constate chez mes clients sont : sauter le petit-déjeuner (ce qui ralentit le métabolisme), ne pas manger assez de protéines (surtout chez les femmes), se priver excessivement (ce qui provoque des compulsions alimentaires), et négliger les légumes et les fibres (essentiels pour la digestion et la satiété).',
       "Mon approche nutritionnelle en tant que coach à Valbonne est pragmatique : pas de régime strict, pas d'interdits absolus, mais un rééquilibrage progressif et personnalisé. L'objectif est de vous donner les connaissances et les habitudes pour gérer votre alimentation de manière autonome et durable. C'est cette approche qui distingue un changement temporaire d'une véritable transformation à long terme.",
     ],
   },
   {
-    slug: "commencer-sport-apres-40-ans",
-    title: "Comment reprendre le sport après 40 ans en toute sécurité",
+    slug: 'commencer-sport-apres-40-ans',
+    title: 'Comment reprendre le sport après 40 ans en toute sécurité',
     description:
       "Il n'est jamais trop tard pour commencer ou reprendre le sport. Guide complet pour une reprise sportive en douceur après 40 ans, avec les conseils d'un coach diplômé.",
-    date: "2025-03-12",
-    readingTime: "6 min",
-    category: "Remise en forme",
+    date: '2025-03-12',
+    readingTime: '6 min',
+    category: 'Remise en forme',
     imageSrc:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80",
-    imageAlt: "Personne mature faisant de l'exercice en plein air avec un coach",
+      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80',
+    imageAlt:
+      "Personne mature faisant de l'exercice en plein air avec un coach",
     content: [
       "Il n'est jamais trop tard pour commencer ou reprendre une activité physique. À 40, 50 ou même 60 ans, le sport peut transformer votre qualité de vie. En tant que coach sportif à Valbonne, j'accompagne de nombreux clients dans cette tranche d'âge, et les résultats sont toujours remarquables. Voici comment aborder la reprise sportive en toute sécurité.",
       "La première étape indispensable est de consulter votre médecin pour un bilan de santé complet. Un test d'effort est recommandé, surtout si vous êtes sédentaire depuis plusieurs années. Ce bilan permet d'identifier d'éventuelles contre-indications et d'adapter votre programme en conséquence. Une fois le feu vert médical obtenu, vous pouvez commencer sereinement.",
@@ -117,16 +119,18 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
   },
   {
-    slug: "sport-et-sante-mentale",
-    title: "Sport et santé mentale : comment l'activité physique transforme votre bien-être psychologique",
+    slug: 'sport-et-sante-mentale',
+    title:
+      "Sport et santé mentale : comment l'activité physique transforme votre bien-être psychologique",
     description:
       "Découvrez comment le sport agit sur le stress, l'anxiété et la dépression. Études scientifiques, mécanismes biologiques et conseils pratiques par un coach sportif diplômé à Valbonne.",
-    date: "2025-02-23",
-    readingTime: "8 min",
-    category: "Bien-être",
+    date: '2025-02-23',
+    readingTime: '8 min',
+    category: 'Bien-être',
     imageSrc:
-      "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200&q=80",
-    imageAlt: "Personne méditant en plein air après une séance de sport, bien-être mental",
+      'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200&q=80',
+    imageAlt:
+      'Personne méditant en plein air après une séance de sport, bien-être mental',
     content: [
       "La santé mentale est la Grande Cause nationale 2025 en France, et pour une bonne raison : un Français sur quatre sera confronté à un trouble psychique au cours de sa vie. Stress chronique, anxiété, burn-out, dépression... ces maux touchent toutes les tranches d'âge et tous les milieux sociaux. Mais saviez-vous que l'activité physique est l'une des armes les plus puissantes — et les plus accessibles — pour protéger et améliorer votre santé mentale ? En tant que coach sportif et maître-nageur diplômé à Valbonne, je constate chaque jour les transformations profondes que le sport opère sur le bien-être psychologique de mes clients.",
 
@@ -152,16 +156,18 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
   },
   {
-    slug: "gerer-stress-et-anxiete",
-    title: "Gérer le stress et l'anxiété : techniques simples pour retrouver la sérénité",
+    slug: 'gerer-stress-et-anxiete',
+    title:
+      "Gérer le stress et l'anxiété : techniques simples pour retrouver la sérénité",
     description:
       "Découvrez des techniques concrètes pour gérer le stress et l'anxiété au quotidien. Respiration, récupération et habitudes bien-être pour retrouver votre équilibre.",
-    date: "2025-03-20",
-    readingTime: "7 min",
-    category: "Bien-être",
+    date: '2025-03-20',
+    readingTime: '7 min',
+    category: 'Bien-être',
     imageSrc:
-      "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=1200&q=80",
-    imageAlt: "Personne pratiquant la respiration profonde dans un cadre naturel apaisant",
+      'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=1200&q=80',
+    imageAlt:
+      'Personne pratiquant la respiration profonde dans un cadre naturel apaisant',
     content: [
       "Le stress et l'anxiété font partie de la vie moderne, mais quand ils deviennent chroniques, ils peuvent sérieusement affecter votre santé physique et mentale. En tant que coach sportif à Valbonne, j'accompagne régulièrement des clients qui arrivent à leur première séance avec un niveau de stress élevé. La bonne nouvelle ? Il existe des techniques simples et accessibles pour reprendre le contrôle.",
 
@@ -169,7 +175,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
       "Le mouvement doux est un antidote naturel au stress. Quand vous êtes stressé et fatigué, l'idée d'un entraînement intense peut sembler insurmontable — et ce n'est pas ce dont votre corps a besoin. Privilégiez plutôt une marche de 15 à 20 minutes en plein air, des étirements doux, ou quelques postures de yoga simples. Ces activités réduisent le cortisol (hormone du stress) sans épuiser vos réserves d'énergie déjà limitées.",
 
-      "Le sommeil est la fondation de votre résistance au stress. Un manque de sommeil augmente la production de cortisol de 37% et réduit votre capacité à gérer les émotions. Pour améliorer votre sommeil : maintenez des horaires réguliers (même le week-end), évitez les écrans 1h avant le coucher, gardez votre chambre fraîche (18-19°C) et essayez une routine de relaxation comme la lecture ou la méditation avant de dormir.",
+      'Le sommeil est la fondation de votre résistance au stress. Un manque de sommeil augmente la production de cortisol de 37% et réduit votre capacité à gérer les émotions. Pour améliorer votre sommeil : maintenez des horaires réguliers (même le week-end), évitez les écrans 1h avant le coucher, gardez votre chambre fraîche (18-19°C) et essayez une routine de relaxation comme la lecture ou la méditation avant de dormir.',
 
       "L'alimentation joue un rôle clé dans la gestion du stress. Certains aliments favorisent la production de sérotonine et de GABA, les neurotransmetteurs de la détente : les bananes, les noix, le chocolat noir (70% minimum), les poissons gras riches en oméga-3, et les légumes verts. À l'inverse, limitez la caféine après midi et réduisez les sucres raffinés qui provoquent des pics d'énergie suivis de chutes brutales.",
 
@@ -179,16 +185,17 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
   },
   {
-    slug: "retrouver-energie-et-motivation",
-    title: "Comment retrouver énergie et motivation quand on se sent en panne",
+    slug: 'retrouver-energie-et-motivation',
+    title: 'Comment retrouver énergie et motivation quand on se sent en panne',
     description:
       "Vous vous sentez en panne de motivation ? Découvrez des stratégies concrètes pour relancer votre énergie et retrouver l'envie d'avancer, étape par étape.",
-    date: "2025-04-05",
-    readingTime: "6 min",
-    category: "Bien-être",
+    date: '2025-04-05',
+    readingTime: '6 min',
+    category: 'Bien-être',
     imageSrc:
-      "https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=1200&q=80",
-    imageAlt: "Personne marchant sur un sentier ensoleillé, symbolisant le retour de la motivation",
+      'https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=1200&q=80',
+    imageAlt:
+      'Personne marchant sur un sentier ensoleillé, symbolisant le retour de la motivation',
     content: [
       "Il y a des jours — parfois des semaines — où la motivation semble avoir disparu. Vous n'êtes pas vraiment mal, mais vous n'êtes pas bien non plus. Tout semble demander un effort considérable, et l'envie de progresser s'est éteinte. En tant que coach sportif à Valbonne, je rencontre régulièrement cette situation chez mes clients. C'est normal, et surtout, c'est temporaire. Voici comment relancer la machine.",
 
