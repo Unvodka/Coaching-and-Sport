@@ -42,7 +42,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const { weight_kg, date, notes } = body;
+    const { weight_kg, body_fat_pct, visceral_fat, muscle_mass_kg, water_pct, date, notes } = body;
 
     if (!weight_kg) {
       return NextResponse.json({ error: "weight_kg is required" }, { status: 400 });
@@ -53,6 +53,10 @@ export async function POST(request: Request) {
     const { error: insertError } = await admin.from("weight_logs").insert({
       user_id: user.id,
       weight_kg: parseFloat(weight_kg),
+      body_fat_pct: body_fat_pct ? parseFloat(body_fat_pct) : null,
+      visceral_fat: visceral_fat ? parseFloat(visceral_fat) : null,
+      muscle_mass_kg: muscle_mass_kg ? parseFloat(muscle_mass_kg) : null,
+      water_pct: water_pct ? parseFloat(water_pct) : null,
       date: date || new Date().toISOString().split("T")[0],
       notes: notes || null,
     });

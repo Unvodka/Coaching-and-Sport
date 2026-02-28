@@ -11,11 +11,16 @@ interface WeightLogFormProps {
 export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
   const { t, locale } = useLanguage();
   const [weightKg, setWeightKg] = useState("");
+  const [bodyFatPct, setBodyFatPct] = useState("");
+  const [visceralFat, setVisceralFat] = useState("");
+  const [muscleMassKg, setMuscleMassKg] = useState("");
+  const [waterPct, setWaterPct] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [notes, setNotes] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [showExtras, setShowExtras] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,6 +36,10 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           weight_kg: weightKg,
+          body_fat_pct: bodyFatPct || null,
+          visceral_fat: visceralFat || null,
+          muscle_mass_kg: muscleMassKg || null,
+          water_pct: waterPct || null,
           date,
           notes: notes || null,
         }),
@@ -49,6 +58,10 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
       }
 
       setWeightKg("");
+      setBodyFatPct("");
+      setVisceralFat("");
+      setMuscleMassKg("");
+      setWaterPct("");
       setNotes("");
       setSuccess(true);
       setSaving(false);
@@ -80,14 +93,15 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
       )}
       {success && (
         <div className="mb-4 p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg">
-          {locale === "fr" ? "Poids enregistré avec succès !" : "Weight saved successfully!"}
+          {locale === "fr" ? "Données enregistrées avec succès !" : "Data saved successfully!"}
         </div>
       )}
 
+      {/* Row 1: Weight, Date */}
       <div className="flex flex-wrap gap-4 items-end">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t("portal.weight.kg")}
+            {t("portal.weight.kg")} *
           </label>
           <input
             type="number"
@@ -113,6 +127,94 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
             className={inputClass}
           />
         </div>
+        <button
+          type="button"
+          onClick={() => setShowExtras(!showExtras)}
+          className="px-4 py-2.5 text-sm font-medium text-brand-blue hover:bg-blue-50 rounded-lg transition-colors flex items-center gap-1.5"
+        >
+          <svg
+            className={`w-4 h-4 transition-transform ${showExtras ? "rotate-180" : ""}`}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+          {locale === "fr" ? "Composition corporelle" : "Body composition"}
+        </button>
+      </div>
+
+      {/* Row 2: Body composition fields (collapsible) */}
+      {showExtras && (
+        <div className="mt-4 pt-4 border-t border-gray-100">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">
+                {locale === "fr" ? "Masse graisseuse (%)" : "Body fat (%)"}
+              </label>
+              <input
+                type="number"
+                step="0.1"
+                min="1"
+                max="70"
+                value={bodyFatPct}
+                onChange={(e) => setBodyFatPct(e.target.value)}
+                placeholder="20.0"
+                className={`${inputClass} w-full`}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">
+                {locale === "fr" ? "Graisse viscérale" : "Visceral fat"}
+              </label>
+              <input
+                type="number"
+                step="0.5"
+                min="1"
+                max="60"
+                value={visceralFat}
+                onChange={(e) => setVisceralFat(e.target.value)}
+                placeholder="8.0"
+                className={`${inputClass} w-full`}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">
+                {locale === "fr" ? "Masse musculaire (kg)" : "Muscle mass (kg)"}
+              </label>
+              <input
+                type="number"
+                step="0.1"
+                min="10"
+                max="150"
+                value={muscleMassKg}
+                onChange={(e) => setMuscleMassKg(e.target.value)}
+                placeholder="30.0"
+                className={`${inputClass} w-full`}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">
+                {locale === "fr" ? "Masse d'eau (%)" : "Water mass (%)"}
+              </label>
+              <input
+                type="number"
+                step="0.1"
+                min="20"
+                max="80"
+                value={waterPct}
+                onChange={(e) => setWaterPct(e.target.value)}
+                placeholder="55.0"
+                className={`${inputClass} w-full`}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Row 3: Notes + Submit */}
+      <div className="flex flex-wrap gap-4 items-end mt-4">
         <div className="flex-1 min-w-[200px]">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             {t("portal.weight.notes")}

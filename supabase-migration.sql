@@ -126,6 +126,10 @@ CREATE TABLE public.weight_logs (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
   weight_kg DECIMAL(5,2) NOT NULL,
+  body_fat_pct DECIMAL(4,1),
+  visceral_fat DECIMAL(4,1),
+  muscle_mass_kg DECIMAL(5,2),
+  water_pct DECIMAL(4,1),
   date DATE NOT NULL DEFAULT CURRENT_DATE,
   notes TEXT,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()

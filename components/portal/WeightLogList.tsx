@@ -11,6 +11,10 @@ interface WeightLogListProps {
 export default function WeightLogList({ logs, onDeleted }: WeightLogListProps) {
   const { locale, t } = useLanguage();
 
+  const hasComposition = logs.some(
+    (l) => l.body_fat_pct || l.visceral_fat || l.muscle_mass_kg || l.water_pct
+  );
+
   const handleDelete = async (id: string) => {
     if (!confirm(locale === "fr" ? "Supprimer cette entrée ?" : "Delete this entry?")) return;
     try {
@@ -29,39 +33,76 @@ export default function WeightLogList({ logs, onDeleted }: WeightLogListProps) {
     );
   }
 
+  const formatVal = (val: number | null, unit: string) => {
+    if (val === null || val === undefined) return "—";
+    return `${Number(val)}${unit}`;
+  };
+
   return (
-    <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
+    <div className="bg-white rounded-xl border border-gray-100 overflow-x-auto">
       <table className="w-full">
         <thead>
           <tr className="bg-gray-50 text-left">
-            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase">
+            <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase">
               {t("portal.weight.date")}
             </th>
-            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase">
+            <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase">
               {t("portal.weight.kg")}
             </th>
-            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase">
+            {hasComposition && (
+              <>
+                <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase whitespace-nowrap">
+                  {locale === "fr" ? "Graisse" : "Fat"}
+                </th>
+                <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase whitespace-nowrap">
+                  {locale === "fr" ? "Viscérale" : "Visceral"}
+                </th>
+                <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase whitespace-nowrap">
+                  {locale === "fr" ? "Muscles" : "Muscle"}
+                </th>
+                <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase whitespace-nowrap">
+                  {locale === "fr" ? "Eau" : "Water"}
+                </th>
+              </>
+            )}
+            <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase">
               {t("portal.weight.notes")}
             </th>
-            <th className="px-6 py-3" />
+            <th className="px-4 py-3" />
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-100">
           {logs.map((log) => (
             <tr key={log.id} className="hover:bg-gray-50 transition-colors">
-              <td className="px-6 py-3 text-sm text-gray-800">
+              <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap">
                 {new Date(log.date).toLocaleDateString(
                   locale === "fr" ? "fr-FR" : "en-US",
-                  { day: "numeric", month: "long", year: "numeric" }
+                  { day: "numeric", month: "short", year: "numeric" }
                 )}
               </td>
-              <td className="px-6 py-3 text-sm font-semibold text-heading">
+              <td className="px-4 py-3 text-sm font-semibold text-heading">
                 {Number(log.weight_kg)} kg
               </td>
-              <td className="px-6 py-3 text-sm text-gray-500">
+              {hasComposition && (
+                <>
+                  <td className="px-4 py-3 text-sm text-amber-600">
+                    {formatVal(log.body_fat_pct, " %")}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-red-500">
+                    {formatVal(log.visceral_fat, "")}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-emerald-600">
+                    {formatVal(log.muscle_mass_kg, " kg")}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-cyan-600">
+                    {formatVal(log.water_pct, " %")}
+                  </td>
+                </>
+              )}
+              <td className="px-4 py-3 text-sm text-gray-500">
                 {log.notes || "—"}
               </td>
-              <td className="px-6 py-3 text-right">
+              <td className="px-4 py-3 text-right">
                 <button
                   onClick={() => handleDelete(log.id)}
                   className="text-red-400 hover:text-red-600 transition-colors"

@@ -113,6 +113,10 @@ export interface Database {
           id: string;
           user_id: string;
           weight_kg: number;
+          body_fat_pct: number | null;
+          visceral_fat: number | null;
+          muscle_mass_kg: number | null;
+          water_pct: number | null;
           date: string;
           notes: string | null;
           created_at: string;
@@ -121,6 +125,10 @@ export interface Database {
           id?: string;
           user_id: string;
           weight_kg: number;
+          body_fat_pct?: number | null;
+          visceral_fat?: number | null;
+          muscle_mass_kg?: number | null;
+          water_pct?: number | null;
           date?: string;
           notes?: string | null;
           created_at?: string;
@@ -129,6 +137,10 @@ export interface Database {
           id?: string;
           user_id?: string;
           weight_kg?: number;
+          body_fat_pct?: number | null;
+          visceral_fat?: number | null;
+          muscle_mass_kg?: number | null;
+          water_pct?: number | null;
           date?: string;
           notes?: string | null;
           created_at?: string;

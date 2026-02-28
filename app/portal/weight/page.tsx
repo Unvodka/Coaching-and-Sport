@@ -80,7 +80,7 @@ export default function WeightPage() {
       {/* Summary — only when we have data */}
       {latestWeight && (
         <div className="bg-white rounded-xl border border-gray-100 p-6">
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-6">
             <div>
               <p className="text-sm text-gray-500">
                 {t("portal.weight.current")}
@@ -109,6 +109,47 @@ export default function WeightPage() {
                     </p>
                   );
                 })()}
+              </div>
+            )}
+            {/* Body composition latest values */}
+            {logs[0].body_fat_pct && (
+              <div className="border-l border-gray-200 pl-6">
+                <p className="text-xs text-gray-400 uppercase tracking-wider">
+                  {locale === "fr" ? "Graisse" : "Body fat"}
+                </p>
+                <p className="text-lg font-semibold text-amber-600">
+                  {Number(logs[0].body_fat_pct)} %
+                </p>
+              </div>
+            )}
+            {logs[0].visceral_fat && (
+              <div className="border-l border-gray-200 pl-6">
+                <p className="text-xs text-gray-400 uppercase tracking-wider">
+                  {locale === "fr" ? "Viscérale" : "Visceral"}
+                </p>
+                <p className="text-lg font-semibold text-red-500">
+                  {Number(logs[0].visceral_fat)}
+                </p>
+              </div>
+            )}
+            {logs[0].muscle_mass_kg && (
+              <div className="border-l border-gray-200 pl-6">
+                <p className="text-xs text-gray-400 uppercase tracking-wider">
+                  {locale === "fr" ? "Muscles" : "Muscle"}
+                </p>
+                <p className="text-lg font-semibold text-emerald-600">
+                  {Number(logs[0].muscle_mass_kg)} kg
+                </p>
+              </div>
+            )}
+            {logs[0].water_pct && (
+              <div className="border-l border-gray-200 pl-6">
+                <p className="text-xs text-gray-400 uppercase tracking-wider">
+                  {locale === "fr" ? "Eau" : "Water"}
+                </p>
+                <p className="text-lg font-semibold text-cyan-600">
+                  {Number(logs[0].water_pct)} %
+                </p>
               </div>
             )}
           </div>
