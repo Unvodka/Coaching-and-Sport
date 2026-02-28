@@ -184,6 +184,18 @@ export default function RecipesPage() {
         />
       </div>
 
+      {/* Salt awareness notice */}
+      <div className="flex items-start gap-3 px-4 py-3 mb-6 bg-amber-50/70 border border-amber-200/60 rounded-lg">
+        <svg className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+        </svg>
+        <p className="text-sm text-amber-800 leading-relaxed">
+          {locale === "fr"
+            ? "L'OMS recommande moins de 5 g de sel par jour. Pensez à goûter vos plats avant de saler et privilégiez les herbes, épices et jus de citron pour relever vos recettes."
+            : "The WHO recommends less than 5 g of salt per day. Taste your dishes before adding salt and favor herbs, spices, and lemon juice to enhance your recipes."}
+        </p>
+      </div>
+
       {filtered.length === 0 ? (
         <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-100 rounded-xl p-8 text-center">
           <svg className="w-16 h-16 mx-auto text-orange-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
