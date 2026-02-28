@@ -16,7 +16,7 @@ export async function GET() {
       admin
         .from("recipes")
         .select("id", { count: "exact", head: true })
-        .eq("author_id", user.id),
+        .or(`is_public.eq.true,author_id.eq.${user.id}`),
       admin
         .from("weight_logs")
         .select("id", { count: "exact", head: true })

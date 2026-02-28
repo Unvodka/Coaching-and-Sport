@@ -147,7 +147,7 @@ export default function DashboardPage() {
         <DashboardCard
           title={t("portal.recipes")}
           value={stats.recipes}
-          subtitle={locale === "fr" ? "recettes créées" : "recipes created"}
+          subtitle={locale === "fr" ? "recettes disponibles" : "recipes available"}
           href="/portal/recipes"
           color="bg-orange-100 text-orange-600"
           icon={
