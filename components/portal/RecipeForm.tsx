@@ -21,14 +21,16 @@ interface RecipeFormProps {
   recipe?: Recipe;
   userId?: string;
   userRole?: string;
+  onAdded?: () => void;
+  inline?: boolean;
 }
 
-export default function RecipeForm({ recipe, userRole }: RecipeFormProps) {
+export default function RecipeForm({ recipe, userRole, onAdded, inline }: RecipeFormProps) {
   const router = useRouter();
   const { t, locale } = useLanguage();
   const isCoach = userRole === "coach";
 
-  const [formData, setFormData] = useState({
+  const getInitialFormData = () => ({
     title_fr: recipe?.title_fr || "",
     title_en: recipe?.title_en || "",
     description_fr: recipe?.description_fr || "",
@@ -42,14 +44,18 @@ export default function RecipeForm({ recipe, userRole }: RecipeFormProps) {
     category: recipe?.category || "general",
     is_public: recipe?.is_public || false,
   });
+
+  const [formData, setFormData] = useState(getInitialFormData());
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     setSaving(true);
     setError("");
+    setSuccess(false);
 
     try {
       const ingredientsList = formData.ingredients
@@ -87,8 +93,17 @@ export default function RecipeForm({ recipe, userRole }: RecipeFormProps) {
         return;
       }
 
-      router.push("/portal/recipes");
-      router.refresh();
+      // Inline mode: show success, reset form, notify parent
+      if (inline && onAdded) {
+        setFormData(getInitialFormData());
+        setSuccess(true);
+        setSaving(false);
+        onAdded();
+        setTimeout(() => setSuccess(false), 4000);
+      } else {
+        router.push("/portal/recipes");
+        router.refresh();
+      }
     } catch (err) {
       console.error("Recipe submit error:", err);
       setError(locale === "fr" ? "Erreur de connexion" : "Connection error");
@@ -101,10 +116,15 @@ export default function RecipeForm({ recipe, userRole }: RecipeFormProps) {
   const labelClass = "block text-sm font-medium text-gray-700 mb-1";
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-6">
+    <form onSubmit={handleSubmit} className={inline ? "space-y-6" : "max-w-3xl mx-auto space-y-6"}>
       {error && (
         <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm">
           {error}
+        </div>
+      )}
+      {success && (
+        <div className="p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg">
+          {locale === "fr" ? "Recette créée avec succès !" : "Recipe created successfully!"}
         </div>
       )}
 
@@ -279,15 +299,19 @@ export default function RecipeForm({ recipe, userRole }: RecipeFormProps) {
             ? locale === "fr"
               ? "Enregistrement..."
               : "Saving..."
+            : inline
+            ? (locale === "fr" ? "Ajouter" : "Add")
             : t("portal.recipes.save")}
         </button>
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
-        >
-          {locale === "fr" ? "Annuler" : "Cancel"}
-        </button>
+        {!inline && (
+          <button
+            type="button"
+            onClick={() => router.back()}
+            className="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+          >
+            {locale === "fr" ? "Annuler" : "Cancel"}
+          </button>
+        )}
       </div>
     </form>
   );

@@ -2,17 +2,20 @@
 
 import { useEffect, useState, useCallback } from "react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
+import { useAuth } from "@/lib/supabase/AuthContext";
 import MoodEntryCard from "@/components/portal/MoodEntry";
 const MoodChart = dynamic(() => import("@/components/portal/MoodChart"), { ssr: false });
 import WellnessTip from "@/components/portal/WellnessTip";
+import MoodForm from "@/components/portal/MoodForm";
 import type { MoodEntry } from "@/lib/supabase/database.types";
 
 export default function JournalPage() {
   const { t, locale } = useLanguage();
+  const { user: authUser } = useAuth();
   const [entries, setEntries] = useState<MoodEntry[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
 
   const fetchEntries = useCallback(async () => {
     try {
@@ -42,6 +45,11 @@ export default function JournalPage() {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleAdded = () => {
+    fetchEntries();
+    // Keep form open so user sees the data appear below
+  };
+
   if (loading) {
     return (
       <div className="max-w-4xl mx-auto space-y-6">
@@ -60,18 +68,34 @@ export default function JournalPage() {
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <div />
-        <Link
-          href="/portal/journal/new"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity no-underline"
+        <button
+          onClick={() => setShowForm(!showForm)}
+          className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+            {showForm ? (
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+            )}
           </svg>
-          {t("portal.journal.new")}
-        </Link>
+          {showForm
+            ? (locale === "fr" ? "Fermer" : "Close")
+            : t("portal.journal.new")}
+        </button>
       </div>
 
-      {entries.length === 0 ? (
+      {/* Inline form */}
+      {showForm && (
+        <div className="bg-white rounded-xl border border-gray-100 p-6">
+          <h3 className="font-semibold text-heading mb-4">
+            {t("portal.journal.new")}
+          </h3>
+          <MoodForm userId={authUser?.id} onAdded={handleAdded} inline />
+        </div>
+      )}
+
+      {entries.length === 0 && !showForm ? (
         <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-100 rounded-xl p-8 text-center">
           <svg className="w-16 h-16 mx-auto text-purple-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -86,17 +110,17 @@ export default function JournalPage() {
               ? "Enregistrez votre humeur et votre niveau d'énergie chaque jour pour suivre votre bien-être au fil du temps."
               : "Record your mood and energy level each day to track your wellness over time."}
           </p>
-          <Link
-            href="/portal/journal/new"
-            className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg font-semibold hover:opacity-90 transition-opacity no-underline"
+          <button
+            onClick={() => setShowForm(true)}
+            className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg font-semibold hover:opacity-90 transition-opacity"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
             </svg>
             {locale === "fr" ? "Ajouter ma première entrée" : "Add my first entry"}
-          </Link>
+          </button>
         </div>
-      ) : (
+      ) : entries.length > 0 ? (
         <>
           {/* Wellness tip based on latest entry */}
           <div>
@@ -121,7 +145,7 @@ export default function JournalPage() {
             ))}
           </div>
         </>
-      )}
+      ) : null}
     </div>
   );
 }

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import WellnessTip from "@/components/portal/WellnessTip";
 
 const MOOD_EMOJIS = ["😢", "😟", "😕", "😐", "🙂", "😊", "😄", "😁", "🤩", "🥳"];
 const TAG_SUGGESTIONS = [
@@ -13,9 +12,11 @@ const TAG_SUGGESTIONS = [
 
 interface MoodFormProps {
   userId?: string;
+  onAdded?: () => void;
+  inline?: boolean;
 }
 
-export default function MoodForm({}: MoodFormProps) {
+export default function MoodForm({ onAdded, inline }: MoodFormProps) {
   const router = useRouter();
   const { t, locale } = useLanguage();
 
@@ -25,8 +26,8 @@ export default function MoodForm({}: MoodFormProps) {
   const [tags, setTags] = useState<string[]>([]);
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [saving, setSaving] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   const toggleTag = (tag: string) => {
     setTags((prev) =>
@@ -34,10 +35,19 @@ export default function MoodForm({}: MoodFormProps) {
     );
   };
 
+  const resetForm = () => {
+    setMoodScore(5);
+    setEnergyLevel(5);
+    setNotes("");
+    setTags([]);
+    setDate(new Date().toISOString().split("T")[0]);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
     setError(null);
+    setSuccess(false);
 
     try {
       const res = await fetch("/api/portal/mood", {
@@ -64,7 +74,18 @@ export default function MoodForm({}: MoodFormProps) {
         return;
       }
 
-      setSubmitted(true);
+      // Inline mode: show success, reset form, notify parent
+      if (inline && onAdded) {
+        resetForm();
+        setSuccess(true);
+        setSaving(false);
+        onAdded();
+        setTimeout(() => setSuccess(false), 4000);
+      } else {
+        // Standalone page mode: redirect back
+        router.push("/portal/journal");
+        router.refresh();
+      }
     } catch (err) {
       console.error("Mood submit error:", err);
       setError(locale === "fr" ? "Erreur de connexion" : "Connection error");
@@ -72,60 +93,16 @@ export default function MoodForm({}: MoodFormProps) {
     }
   };
 
-  // After submission, show the wellness tip
-  if (submitted) {
-    return (
-      <div className="max-w-2xl mx-auto space-y-6">
-        <div className="text-center">
-          <div className="text-5xl mb-3">{MOOD_EMOJIS[moodScore - 1]}</div>
-          <h3 className="text-lg font-semibold text-heading mb-1">
-            {locale === "fr"
-              ? "Entrée enregistrée avec succès !"
-              : "Entry saved successfully!"}
-          </h3>
-          <p className="text-gray-500 text-sm">
-            {locale === "fr"
-              ? `Humeur : ${moodScore}/10 · Énergie : ${energyLevel}/10`
-              : `Mood: ${moodScore}/10 · Energy: ${energyLevel}/10`}
-          </p>
-        </div>
-
-        <WellnessTip moodScore={moodScore} energyLevel={energyLevel} />
-
-        <div className="flex justify-center gap-4">
-          <button
-            onClick={() => {
-              router.push("/portal/journal");
-              router.refresh();
-            }}
-            className="px-6 py-2.5 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg font-semibold hover:opacity-90 transition-opacity"
-          >
-            {locale === "fr" ? "Retour au journal" : "Back to journal"}
-          </button>
-          <button
-            onClick={() => {
-              setSubmitted(false);
-              setSaving(false);
-              setMoodScore(5);
-              setEnergyLevel(5);
-              setNotes("");
-              setTags([]);
-              setDate(new Date().toISOString().split("T")[0]);
-            }}
-            className="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
-          >
-            {locale === "fr" ? "Nouvelle entrée" : "New entry"}
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-8">
+    <form onSubmit={handleSubmit} className={inline ? "space-y-6" : "max-w-2xl mx-auto space-y-8"}>
       {error && (
         <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg">
           {error}
+        </div>
+      )}
+      {success && (
+        <div className="p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg">
+          {locale === "fr" ? "Entrée enregistrée avec succès !" : "Entry saved successfully!"}
         </div>
       )}
 
@@ -209,7 +186,7 @@ export default function MoodForm({}: MoodFormProps) {
           {t("portal.journal.notes")}
         </label>
         <textarea
-          rows={4}
+          rows={3}
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           placeholder={
@@ -230,15 +207,19 @@ export default function MoodForm({}: MoodFormProps) {
         >
           {saving
             ? "..."
+            : inline
+            ? (locale === "fr" ? "Ajouter" : "Add")
             : t("portal.recipes.save")}
         </button>
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
-        >
-          {locale === "fr" ? "Annuler" : "Cancel"}
-        </button>
+        {!inline && (
+          <button
+            type="button"
+            onClick={() => router.back()}
+            className="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+          >
+            {locale === "fr" ? "Annuler" : "Cancel"}
+          </button>
+        )}
       </div>
     </form>
   );
