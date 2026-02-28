@@ -51,8 +51,8 @@ export default function RecipesPage() {
     async function init() {
       const result = await fetchRecipes();
 
-      // If no favorites exist yet, seed 5 healthy recipes (runs once)
-      if (result && result.favoriteIds.length === 0 && !seeded.current) {
+      // Seed healthy recipes (API handles deduplication by title)
+      if (result && !seeded.current) {
         seeded.current = true;
         try {
           const seedRes = await fetch("/api/portal/seed-recipes", { method: "POST" });

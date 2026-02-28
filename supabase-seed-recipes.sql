@@ -130,3 +130,175 @@ SELECT
   'snack',
   true
 FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+
+-- === 6 NEW RECIPES ===
+
+-- Dinner 1: Poulet Rôti aux Herbes & Patates Douces
+INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
+SELECT
+  p.id,
+  'Poulet Rôti aux Herbes & Patates Douces',
+  'Herb Roasted Chicken & Sweet Potatoes',
+  'Un dîner complet et réconfortant. Le poulet rôti aux herbes associé aux patates douces offre un repas riche en protéines et en glucides complexes.',
+  'A complete and comforting dinner. Herb-roasted chicken with sweet potatoes provides a meal rich in protein and complex carbs.',
+  '["4 hauts de cuisse de poulet", "2 patates douces moyennes", "2 c.à.s huile d''olive", "3 gousses d''ail", "1 c.à.c thym séché", "1 c.à.c romarin séché", "1 c.à.c paprika fumé", "200g haricots verts", "Sel, poivre"]'::jsonb,
+  '1. Préchauffer le four à 200°C.
+2. Couper les patates douces en cubes de 2 cm.
+3. Mélanger le poulet avec l''huile d''olive, l''ail émincé, le thym, le romarin, le paprika, le sel et le poivre.
+4. Disposer le poulet et les patates douces sur une plaque de cuisson.
+5. Enfourner 25 minutes.
+6. Ajouter les haricots verts, mélanger et cuire encore 10 minutes.
+7. Le poulet doit être doré et les légumes tendres. Servir chaud.',
+  '1. Preheat oven to 200°C (400°F).
+2. Cut sweet potatoes into 2 cm cubes.
+3. Toss chicken with olive oil, minced garlic, thyme, rosemary, paprika, salt, and pepper.
+4. Arrange chicken and sweet potatoes on a baking sheet.
+5. Roast for 25 minutes.
+6. Add green beans, toss, and cook for another 10 minutes.
+7. Chicken should be golden and vegetables tender. Serve hot.',
+  'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=800',
+  'dinner',
+  true
+FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+
+-- Dinner 2: Pavé de Cabillaud & Ratatouille Maison
+INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
+SELECT
+  p.id,
+  'Pavé de Cabillaud & Ratatouille Maison',
+  'Cod Fillet with Homemade Ratatouille',
+  'Un dîner méditerranéen léger et savoureux. Le cabillaud apporte des protéines maigres, accompagné d''une ratatouille riche en vitamines.',
+  'A light and flavorful Mediterranean dinner. Cod provides lean protein, paired with a vitamin-rich ratatouille.',
+  '["2 pavés de cabillaud", "1 courgette", "1 aubergine", "1 poivron rouge", "1 poivron jaune", "4 tomates mûres", "1 oignon", "3 gousses d''ail", "2 c.à.s huile d''olive", "Herbes de Provence", "Basilic frais", "Sel, poivre"]'::jsonb,
+  '1. Couper tous les légumes en dés réguliers.
+2. Faire revenir l''oignon et l''ail dans l''huile d''olive pendant 3 minutes.
+3. Ajouter l''aubergine et les poivrons, cuire 5 minutes.
+4. Ajouter la courgette et les tomates, assaisonner avec les herbes de Provence, sel et poivre.
+5. Laisser mijoter 20 minutes à feu doux en remuant de temps en temps.
+6. Assaisonner les pavés de cabillaud et les cuire à la poêle 4 minutes de chaque côté.
+7. Servir le cabillaud sur la ratatouille, garnir de basilic frais.',
+  '1. Dice all vegetables into even pieces.
+2. Sauté onion and garlic in olive oil for 3 minutes.
+3. Add eggplant and peppers, cook for 5 minutes.
+4. Add zucchini and tomatoes, season with herbes de Provence, salt, and pepper.
+5. Simmer for 20 minutes on low heat, stirring occasionally.
+6. Season cod fillets and pan-sear for 4 minutes per side.
+7. Serve cod on top of ratatouille, garnish with fresh basil.',
+  'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800',
+  'dinner',
+  true
+FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+
+-- Dinner 3: Steak de Thon & Wok de Légumes au Sésame
+INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
+SELECT
+  p.id,
+  'Steak de Thon & Wok de Légumes au Sésame',
+  'Tuna Steak & Sesame Vegetable Stir-Fry',
+  'Un dîner healthy et rapide d''inspiration asiatique. Le thon snacké est riche en protéines et en oméga-3, accompagné de légumes croquants.',
+  'A healthy and quick Asian-inspired dinner. Seared tuna is rich in protein and omega-3, served with crispy stir-fried vegetables.',
+  '["2 steaks de thon frais (150g chacun)", "1 c.à.s sauce soja", "1 c.à.c huile de sésame", "1 brocoli (en fleurettes)", "1 carotte (en julienne)", "1 poivron rouge (en lamelles)", "100g pois mange-tout", "2 gousses d''ail", "1 c.à.s gingembre frais râpé", "2 c.à.s graines de sésame", "1 c.à.s huile d''olive", "Coriandre fraîche"]'::jsonb,
+  '1. Mariner les steaks de thon dans la sauce soja et l''huile de sésame pendant 10 minutes.
+2. Faire chauffer l''huile d''olive dans un wok à feu vif.
+3. Saisir le brocoli, la carotte et le poivron pendant 3 minutes.
+4. Ajouter les pois mange-tout, l''ail et le gingembre. Cuire 2 minutes.
+5. Dans une poêle très chaude, saisir les steaks de thon 1-2 minutes de chaque côté (laisser rosé au centre).
+6. Servir le thon tranché sur les légumes, parsemer de sésame et de coriandre.',
+  '1. Marinate tuna steaks in soy sauce and sesame oil for 10 minutes.
+2. Heat olive oil in a wok over high heat.
+3. Stir-fry broccoli, carrot, and pepper for 3 minutes.
+4. Add snap peas, garlic, and ginger. Cook for 2 minutes.
+5. In a very hot pan, sear tuna steaks 1-2 minutes per side (keep pink in the center).
+6. Serve sliced tuna over vegetables, sprinkle with sesame seeds and cilantro.',
+  'https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=800',
+  'dinner',
+  true
+FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+
+-- Breakfast salé: Tartine Salée Œuf, Avocat & Feta
+INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
+SELECT
+  p.id,
+  'Tartine Salée Œuf, Avocat & Feta',
+  'Savory Egg, Avocado & Feta Toast',
+  'Un petit-déjeuner salé complet et rassasiant. L''association œuf-avocat-feta apporte protéines, bonnes graisses et saveurs méditerranéennes.',
+  'A complete and filling savory breakfast. The egg-avocado-feta combination delivers protein, healthy fats, and Mediterranean flavors.',
+  '["2 tranches de pain complet", "2 œufs", "1 avocat mûr", "40g de feta", "1 petite tomate", "1 c.à.c huile d''olive", "Quelques feuilles de roquette", "Graines de courge", "Piment d''Espelette (ou flocons de piment)", "Sel, poivre"]'::jsonb,
+  '1. Faire griller les tranches de pain.
+2. Écraser l''avocat à la fourchette avec un filet d''huile d''olive, sel et poivre.
+3. Cuire les œufs au plat dans une poêle antiadhésive.
+4. Tartiner l''avocat sur le pain grillé.
+5. Couper la tomate en tranches fines et disposer sur l''avocat.
+6. Déposer un œuf sur chaque tartine.
+7. Émietter la feta par-dessus, ajouter la roquette et les graines de courge.
+8. Saupoudrer de piment d''Espelette. Servir immédiatement.',
+  '1. Toast the bread slices.
+2. Mash avocado with a fork, a drizzle of olive oil, salt, and pepper.
+3. Fry eggs sunny-side up in a non-stick pan.
+4. Spread mashed avocado on toasted bread.
+5. Slice tomato thinly and arrange over avocado.
+6. Place an egg on each toast.
+7. Crumble feta on top, add arugula and pumpkin seeds.
+8. Sprinkle with Espelette pepper. Serve immediately.',
+  'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800',
+  'breakfast',
+  true
+FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+
+-- Soup 1: Velouté de Butternut & Noisettes
+INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
+SELECT
+  p.id,
+  'Velouté de Butternut & Noisettes',
+  'Butternut Squash & Hazelnut Soup',
+  'Un velouté onctueux et réconfortant, parfait pour les soirées fraîches. La butternut apporte des vitamines A et C, les noisettes ajoutent du croquant et des bonnes graisses.',
+  'A creamy and comforting soup, perfect for cool evenings. Butternut squash provides vitamins A and C, while hazelnuts add crunch and healthy fats.',
+  '["1 courge butternut (environ 800g)", "1 oignon", "2 gousses d''ail", "1 c.à.s huile d''olive", "500ml bouillon de légumes", "100ml crème fraîche légère (ou lait de coco)", "1 c.à.c curcuma", "1 pincée de muscade", "30g noisettes concassées", "Sel, poivre"]'::jsonb,
+  '1. Éplucher et couper la butternut en cubes.
+2. Faire revenir l''oignon et l''ail émincés dans l''huile d''olive pendant 3 minutes.
+3. Ajouter les cubes de butternut, le curcuma et la muscade. Mélanger.
+4. Verser le bouillon de légumes et porter à ébullition.
+5. Laisser mijoter 20-25 minutes jusqu''à ce que la courge soit tendre.
+6. Mixer finement, ajouter la crème fraîche et rectifier l''assaisonnement.
+7. Servir dans des bols, parsemer de noisettes concassées.',
+  '1. Peel and cube the butternut squash.
+2. Sauté minced onion and garlic in olive oil for 3 minutes.
+3. Add squash cubes, turmeric, and nutmeg. Stir.
+4. Pour in vegetable broth and bring to a boil.
+5. Simmer 20-25 minutes until squash is tender.
+6. Blend until smooth, stir in cream, and adjust seasoning.
+7. Serve in bowls, topped with crushed hazelnuts.',
+  'https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=800',
+  'soup',
+  true
+FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+
+-- Soup 2: Potage Poireaux, Pommes de Terre & Ciboulette
+INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
+SELECT
+  p.id,
+  'Potage Poireaux, Pommes de Terre & Ciboulette',
+  'Leek, Potato & Chive Potage',
+  'Un grand classique français revisité, léger et nourrissant. Ce potage crémeux est riche en fibres et idéal pour un dîner simple et sain.',
+  'A light and nourishing French classic. This creamy potage is rich in fiber and perfect for a simple, healthy dinner.',
+  '["3 poireaux (blanc et vert tendre)", "3 pommes de terre moyennes", "1 oignon", "1 gousse d''ail", "1 c.à.s huile d''olive", "700ml bouillon de volaille (ou légumes)", "2 c.à.s crème fraîche légère", "Ciboulette fraîche", "Sel, poivre"]'::jsonb,
+  '1. Laver et émincer les poireaux. Éplucher et couper les pommes de terre en morceaux.
+2. Faire revenir l''oignon et l''ail dans l''huile d''olive 2 minutes.
+3. Ajouter les poireaux et faire suer 5 minutes à feu doux.
+4. Ajouter les pommes de terre et le bouillon. Porter à ébullition.
+5. Cuire à couvert pendant 20 minutes à feu moyen.
+6. Mixer le tout jusqu''à consistance lisse.
+7. Incorporer la crème fraîche, assaisonner.
+8. Servir chaud avec la ciboulette ciselée et un filet d''huile d''olive.',
+  '1. Wash and slice leeks. Peel and chop potatoes.
+2. Sauté onion and garlic in olive oil for 2 minutes.
+3. Add leeks and sweat for 5 minutes on low heat.
+4. Add potatoes and broth. Bring to a boil.
+5. Cover and cook for 20 minutes on medium heat.
+6. Blend until smooth.
+7. Stir in cream, season to taste.
+8. Serve hot with snipped chives and a drizzle of olive oil.',
+  'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800',
+  'soup',
+  true
+FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
