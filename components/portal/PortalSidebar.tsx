@@ -69,8 +69,8 @@ export default function PortalSidebar({ open, onClose }: PortalSidebarProps) {
   const { t } = useLanguage();
   const { signOut } = useAuth();
 
-  const handleSignOut = () => {
-    signOut();
+  const handleSignOut = async () => {
+    await signOut();
   };
 
   const isActive = (href: string) => {

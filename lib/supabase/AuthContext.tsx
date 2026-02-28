@@ -114,11 +114,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signOut = async () => {
+    try {
+      const supabase = createClient();
+      await supabase.auth.signOut();
+    } catch (err) {
+      console.error("Sign out error:", err);
+    }
+    // Clear state and force full page reload to clear server-side session
     setUser(null);
     setSession(null);
     setProfile(null);
-    const supabase = createClient();
-    await supabase.auth.signOut({ scope: "global" });
     window.location.href = "/";
   };
 
