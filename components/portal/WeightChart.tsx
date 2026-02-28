@@ -39,7 +39,7 @@ const METRICS: MetricConfig[] = [
 
 export default function WeightChart({ logs }: WeightChartProps) {
   const { locale } = useLanguage();
-  const [activeMetrics, setActiveMetrics] = useState<Set<MetricKey>>(new Set(["weight"]));
+  const [activeMetrics, setActiveMetrics] = useState<Set<MetricKey>>(() => new Set<MetricKey>(["weight"]));
 
   const hasCompositionData = logs.some(
     (l) => l.body_fat_pct || l.visceral_fat || l.muscle_mass_kg || l.water_pct
@@ -156,9 +156,10 @@ export default function WeightChart({ logs }: WeightChartProps) {
               border: "1px solid #e5e7eb",
               boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
             }}
-            formatter={(value: number, name: string) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            formatter={(value: any, name: any) => {
               const metric = METRICS.find((m) => m.key === name);
-              if (!metric) return [value, name];
+              if (!metric) return [`${value}`, name];
               const label = locale === "fr" ? metric.labelFr : metric.labelEn;
               return [`${value}${metric.unit}`, label];
             }}

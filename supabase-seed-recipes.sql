@@ -1,139 +1,142 @@
 -- ============================================================
--- Seed 5 healthy starter recipes (authored by the coach)
+-- Seed 11 healthy starter recipes (authored by the coach)
 -- Run this in Supabase SQL Editor AFTER setting up your coach role
+-- 
+-- NOTE: The API route /api/portal/seed-recipes also seeds these
+-- same recipes automatically. Only run this SQL if you need to
+-- seed manually. Duplicates are prevented by title_fr.
 -- ============================================================
 
--- Insert 5 public recipes authored by the coach
+-- Helper: only insert if title doesn't already exist
+-- Recipe 1: Bowl Poulet Grillé & Quinoa
 INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
 SELECT
   p.id,
-  'Bowl Petit-Déjeuner Protéiné',
-  'Protein Breakfast Bowl',
-  'Un petit-déjeuner équilibré et riche en protéines pour bien démarrer la journée. Idéal avant un entraînement matinal.',
-  'A balanced, protein-rich breakfast to start your day right. Perfect before a morning workout.',
-  '["150g de yaourt grec nature", "30g de flocons d''avoine", "1 banane", "10g de graines de chia", "1 cuillère à soupe de miel", "Une poignée de myrtilles", "10g d''amandes effilées"]'::jsonb,
-  '1. Placer le yaourt grec dans un bol.
-2. Ajouter les flocons d''avoine et les graines de chia, mélanger.
-3. Couper la banane en rondelles et disposer sur le dessus.
-4. Ajouter les myrtilles et les amandes effilées.
-5. Arroser de miel.
-6. Déguster immédiatement ou laisser reposer 10 min au frigo pour un overnight oats.',
-  '1. Place the Greek yogurt in a bowl.
-2. Add the oats and chia seeds, mix well.
-3. Slice the banana and arrange on top.
-4. Add the blueberries and sliced almonds.
-5. Drizzle with honey.
-6. Enjoy immediately or refrigerate for 10 min for an overnight oats style.',
-  'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=800',
-  'breakfast',
-  true
-FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
-
-INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
-SELECT
-  p.id,
-  'Salade Poulet Grillé & Avocat',
-  'Grilled Chicken & Avocado Salad',
-  'Une salade complète, riche en protéines et en bonnes graisses. Parfaite pour un déjeuner léger mais rassasiant.',
-  'A complete salad, rich in protein and healthy fats. Perfect for a light but filling lunch.',
-  '["150g de blanc de poulet", "1 avocat mûr", "100g de roquette", "10 tomates cerises", "1/2 concombre", "30g de feta", "Jus d''un citron", "1 cuillère à soupe d''huile d''olive", "Sel, poivre"]'::jsonb,
-  '1. Griller le blanc de poulet assaisonné de sel et poivre (6 min de chaque côté).
-2. Laisser reposer 5 minutes puis couper en tranches.
-3. Disposer la roquette dans un grand bol.
-4. Couper l''avocat en tranches, les tomates cerises en deux et le concombre en rondelles.
-5. Assembler la salade avec le poulet, les légumes et la feta émiettée.
-6. Assaisonner avec le jus de citron et l''huile d''olive.',
-  '1. Grill the chicken breast seasoned with salt and pepper (6 min each side).
-2. Let it rest for 5 minutes then slice.
-3. Arrange the arugula in a large bowl.
-4. Slice the avocado, halve the cherry tomatoes, and slice the cucumber.
-5. Assemble the salad with chicken, vegetables, and crumbled feta.
-6. Dress with lemon juice and olive oil.',
-  'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800',
+  'Bowl Poulet Grillé & Quinoa',
+  'Grilled Chicken & Quinoa Bowl',
+  'Un bowl protéiné et équilibré, parfait après l''entraînement. Riche en protéines et en fibres.',
+  'A high-protein balanced bowl, perfect post-workout. Rich in protein and fiber.',
+  '["150g blanc de poulet", "100g quinoa", "1 avocat", "100g tomates cerises", "50g concombre", "1 c.à.s huile d''olive", "Jus de citron", "Sel, poivre, paprika"]'::jsonb,
+  '1. Cuire le quinoa selon les instructions du paquet.
+2. Assaisonner le poulet avec paprika, sel et poivre. Griller 6-7 min de chaque côté.
+3. Couper l''avocat, les tomates et le concombre.
+4. Assembler le bowl : quinoa en base, poulet tranché, légumes.
+5. Arroser d''huile d''olive et de jus de citron.',
+  '1. Cook quinoa according to package instructions.
+2. Season chicken with paprika, salt, and pepper. Grill 6-7 min per side.
+3. Slice avocado, halve tomatoes, dice cucumber.
+4. Assemble bowl: quinoa base, sliced chicken, vegetables.
+5. Drizzle with olive oil and lemon juice.',
+  'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=400&fit=crop',
   'lunch',
   true
-FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+FROM public.profiles p WHERE p.role = 'coach'
+AND NOT EXISTS (SELECT 1 FROM public.recipes WHERE title_fr = 'Bowl Poulet Grillé & Quinoa')
+LIMIT 1;
 
+-- Recipe 2: Smoothie Vert Énergie
 INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
 SELECT
   p.id,
   'Smoothie Vert Énergie',
   'Green Energy Smoothie',
-  'Un smoothie détox et énergisant, parfait en collation ou après le sport. Riche en vitamines et minéraux.',
-  'A detox and energizing smoothie, perfect as a snack or post-workout. Rich in vitamins and minerals.',
-  '["1 banane", "Une poignée d''épinards frais", "1/2 pomme verte", "200ml de lait d''amande", "1 cuillère à soupe de beurre de cacahuète", "5 glaçons"]'::jsonb,
+  'Un smoothie vert vitaminé pour bien démarrer la journée ou recharger les batteries.',
+  'A vitamin-packed green smoothie to start your day or recharge your energy.',
+  '["1 banane", "1 poignée d''épinards frais", "1/2 avocat", "200ml lait d''amande", "1 c.à.s graines de chia", "1 c.à.c miel", "Quelques glaçons"]'::jsonb,
   '1. Mettre tous les ingrédients dans un blender.
-2. Mixer pendant 45 secondes à vitesse maximale.
-3. Vérifier la consistance et ajouter du lait d''amande si trop épais.
-4. Verser dans un grand verre.
-5. Déguster immédiatement.',
-  '1. Place all ingredients in a blender.
-2. Blend for 45 seconds at maximum speed.
-3. Check consistency and add more almond milk if too thick.
-4. Pour into a tall glass.
-5. Enjoy immediately.',
-  'https://images.unsplash.com/photo-1638176066666-ffb2f013c7dd?w=800',
+2. Mixer pendant 1 minute jusqu''à obtenir une texture lisse.
+3. Ajuster la consistance avec plus de lait si nécessaire.
+4. Servir immédiatement.',
+  '1. Add all ingredients to a blender.
+2. Blend for 1 minute until smooth.
+3. Adjust consistency with more milk if needed.
+4. Serve immediately.',
+  'https://images.unsplash.com/photo-1638176066666-ffb2f013c7dd?w=600&h=400&fit=crop',
   'smoothie',
   true
-FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+FROM public.profiles p WHERE p.role = 'coach'
+AND NOT EXISTS (SELECT 1 FROM public.recipes WHERE title_fr = 'Smoothie Vert Énergie')
+LIMIT 1;
 
+-- Recipe 3: Salade Saumon & Avocat
 INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
 SELECT
   p.id,
-  'Saumon & Légumes Rôtis',
-  'Salmon & Roasted Vegetables',
-  'Un dîner sain et savoureux, riche en oméga-3 et en fibres. Cuisson simple au four pour un maximum de saveurs.',
-  'A healthy and tasty dinner, rich in omega-3 and fiber. Simple oven cooking for maximum flavor.',
-  '["2 pavés de saumon", "1 courgette", "1 poivron rouge", "200g de brocoli", "2 cuillères à soupe d''huile d''olive", "1 citron", "2 gousses d''ail", "Herbes de Provence", "Sel, poivre"]'::jsonb,
-  '1. Préchauffer le four à 200°C.
-2. Couper les légumes en morceaux et les disposer sur une plaque de cuisson.
-3. Arroser d''huile d''olive, assaisonner avec les herbes, le sel et le poivre.
-4. Enfourner les légumes pendant 15 minutes.
-5. Placer les pavés de saumon sur les légumes, ajouter l''ail émincé et le jus de citron.
-6. Cuire encore 15 minutes jusqu''à ce que le saumon soit doré.
-7. Servir immédiatement.',
-  '1. Preheat the oven to 200°C (400°F).
-2. Cut the vegetables into pieces and arrange on a baking sheet.
-3. Drizzle with olive oil, season with herbs, salt, and pepper.
-4. Roast the vegetables for 15 minutes.
-5. Place the salmon fillets on top of the vegetables, add minced garlic and lemon juice.
-6. Cook for another 15 minutes until the salmon is golden.
-7. Serve immediately.',
-  'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800',
-  'dinner',
+  'Salade Saumon & Avocat',
+  'Salmon & Avocado Salad',
+  'Une salade fraîche et nourrissante, riche en oméga-3 et en bonnes graisses.',
+  'A fresh and nourishing salad, rich in omega-3 and healthy fats.',
+  '["150g saumon fumé", "1 avocat mûr", "100g roquette", "1/2 concombre", "2 c.à.s graines de sésame", "Vinaigrette : huile d''olive, citron, moutarde", "Sel, poivre"]'::jsonb,
+  '1. Disposer la roquette dans une assiette.
+2. Couper l''avocat en tranches et le concombre en rondelles.
+3. Disposer le saumon fumé par-dessus.
+4. Préparer la vinaigrette : mélanger huile d''olive, jus de citron et moutarde.
+5. Parsemer de graines de sésame et arroser de vinaigrette.',
+  '1. Arrange arugula on a plate.
+2. Slice avocado and cucumber.
+3. Layer smoked salmon on top.
+4. Prepare dressing: mix olive oil, lemon juice, and mustard.
+5. Sprinkle with sesame seeds and drizzle with dressing.',
+  'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop',
+  'salad',
   true
-FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+FROM public.profiles p WHERE p.role = 'coach'
+AND NOT EXISTS (SELECT 1 FROM public.recipes WHERE title_fr = 'Salade Saumon & Avocat')
+LIMIT 1;
 
+-- Recipe 4: Porridge Protéiné aux Fruits
 INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
 SELECT
   p.id,
-  'Energy Balls Chocolat & Dattes',
-  'Chocolate & Date Energy Balls',
-  'Des collations saines et sans cuisson, idéales avant ou après le sport. Préparation en 10 minutes !',
-  'Healthy no-bake snacks, ideal before or after exercise. Ready in 10 minutes!',
-  '["100g de dattes dénoyautées", "50g de flocons d''avoine", "30g de cacao en poudre non sucré", "2 cuillères à soupe de beurre de cacahuète", "1 cuillère à soupe de miel", "20g de noix de coco râpée"]'::jsonb,
-  '1. Mixer les dattes dans un robot jusqu''à obtenir une pâte.
-2. Ajouter les flocons d''avoine, le cacao, le beurre de cacahuète et le miel.
-3. Mixer jusqu''à obtenir un mélange homogène.
-4. Former des petites boules avec les mains (environ 12 boules).
-5. Rouler dans la noix de coco râpée.
-6. Placer au frigo pendant 30 minutes avant de déguster.
-7. Se conservent 1 semaine au réfrigérateur.',
-  '1. Blend the dates in a food processor until a paste forms.
-2. Add the oats, cocoa, peanut butter, and honey.
-3. Blend until the mixture is smooth.
-4. Shape into small balls with your hands (about 12 balls).
-5. Roll in shredded coconut.
-6. Refrigerate for 30 minutes before serving.
-7. Keeps for 1 week in the fridge.',
-  'https://images.unsplash.com/photo-1604045709665-49tried1be14?w=800',
-  'snack',
+  'Porridge Protéiné aux Fruits',
+  'Protein Fruit Porridge',
+  'Un petit-déjeuner chaud et réconfortant qui vous donne de l''énergie pour toute la matinée.',
+  'A warm, comforting breakfast that fuels you through the entire morning.',
+  '["80g flocons d''avoine", "250ml lait (ou lait végétal)", "1 banane", "1 poignée de myrtilles", "1 c.à.s beurre de cacahuète", "1 c.à.s graines de lin", "Cannelle"]'::jsonb,
+  '1. Cuire les flocons d''avoine dans le lait à feu moyen pendant 5 minutes.
+2. Couper la banane en rondelles.
+3. Verser le porridge dans un bol.
+4. Garnir avec banane, myrtilles, beurre de cacahuète et graines de lin.
+5. Saupoudrer de cannelle.',
+  '1. Cook oats in milk over medium heat for 5 minutes.
+2. Slice the banana.
+3. Pour porridge into a bowl.
+4. Top with banana, blueberries, peanut butter, and flax seeds.
+5. Sprinkle with cinnamon.',
+  'https://images.unsplash.com/photo-1517673400267-0251440c45dc?w=600&h=400&fit=crop',
+  'breakfast',
   true
-FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+FROM public.profiles p WHERE p.role = 'coach'
+AND NOT EXISTS (SELECT 1 FROM public.recipes WHERE title_fr = 'Porridge Protéiné aux Fruits')
+LIMIT 1;
 
--- === 6 NEW RECIPES ===
+-- Recipe 5: Wrap Dinde & Légumes Croquants
+INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
+SELECT
+  p.id,
+  'Wrap Dinde & Légumes Croquants',
+  'Turkey & Crunchy Veggie Wrap',
+  'Un wrap léger mais rassasiant, idéal pour un déjeuner rapide et sain.',
+  'A light but filling wrap, ideal for a quick and healthy lunch.',
+  '["1 tortilla complète", "100g blanc de dinde", "1 carotte râpée", "50g chou rouge émincé", "1/2 avocat", "2 c.à.s houmous", "Quelques feuilles de laitue"]'::jsonb,
+  '1. Étaler le houmous sur la tortilla.
+2. Disposer les feuilles de laitue.
+3. Ajouter la dinde, la carotte râpée et le chou rouge.
+4. Couper l''avocat en tranches et placer sur le dessus.
+5. Rouler le wrap bien serré. Couper en deux et servir.',
+  '1. Spread hummus on the tortilla.
+2. Layer lettuce leaves.
+3. Add turkey, grated carrot, and red cabbage.
+4. Slice avocado and place on top.
+5. Roll the wrap tightly. Cut in half and serve.',
+  'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=600&h=400&fit=crop',
+  'lunch',
+  true
+FROM public.profiles p WHERE p.role = 'coach'
+AND NOT EXISTS (SELECT 1 FROM public.recipes WHERE title_fr = 'Wrap Dinde & Légumes Croquants')
+LIMIT 1;
 
--- Dinner 1: Poulet Rôti aux Herbes & Patates Douces
+-- Recipe 6: Poulet Rôti aux Herbes & Patates Douces
 INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
 SELECT
   p.id,
@@ -156,12 +159,14 @@ SELECT
 5. Roast for 25 minutes.
 6. Add green beans, toss, and cook for another 10 minutes.
 7. Chicken should be golden and vegetables tender. Serve hot.',
-  'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=800',
+  'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=600&h=400&fit=crop',
   'dinner',
   true
-FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+FROM public.profiles p WHERE p.role = 'coach'
+AND NOT EXISTS (SELECT 1 FROM public.recipes WHERE title_fr = 'Poulet Rôti aux Herbes & Patates Douces')
+LIMIT 1;
 
--- Dinner 2: Pavé de Cabillaud & Ratatouille Maison
+-- Recipe 7: Pavé de Cabillaud & Ratatouille Maison
 INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
 SELECT
   p.id,
@@ -184,12 +189,14 @@ SELECT
 5. Simmer for 20 minutes on low heat, stirring occasionally.
 6. Season cod fillets and pan-sear for 4 minutes per side.
 7. Serve cod on top of ratatouille, garnish with fresh basil.',
-  'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800',
+  'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=600&h=400&fit=crop',
   'dinner',
   true
-FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+FROM public.profiles p WHERE p.role = 'coach'
+AND NOT EXISTS (SELECT 1 FROM public.recipes WHERE title_fr = 'Pavé de Cabillaud & Ratatouille Maison')
+LIMIT 1;
 
--- Dinner 3: Steak de Thon & Wok de Légumes au Sésame
+-- Recipe 8: Steak de Thon & Wok de Légumes au Sésame
 INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
 SELECT
   p.id,
@@ -210,12 +217,14 @@ SELECT
 4. Add snap peas, garlic, and ginger. Cook for 2 minutes.
 5. In a very hot pan, sear tuna steaks 1-2 minutes per side (keep pink in the center).
 6. Serve sliced tuna over vegetables, sprinkle with sesame seeds and cilantro.',
-  'https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=800',
+  'https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=600&h=400&fit=crop',
   'dinner',
   true
-FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+FROM public.profiles p WHERE p.role = 'coach'
+AND NOT EXISTS (SELECT 1 FROM public.recipes WHERE title_fr = 'Steak de Thon & Wok de Légumes au Sésame')
+LIMIT 1;
 
--- Breakfast salé: Tartine Salée Œuf, Avocat & Feta
+-- Recipe 9: Tartine Salée Œuf, Avocat & Feta
 INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
 SELECT
   p.id,
@@ -240,12 +249,14 @@ SELECT
 6. Place an egg on each toast.
 7. Crumble feta on top, add arugula and pumpkin seeds.
 8. Sprinkle with Espelette pepper. Serve immediately.',
-  'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800',
+  'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=400&fit=crop',
   'breakfast',
   true
-FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+FROM public.profiles p WHERE p.role = 'coach'
+AND NOT EXISTS (SELECT 1 FROM public.recipes WHERE title_fr = 'Tartine Salée Œuf, Avocat & Feta')
+LIMIT 1;
 
--- Soup 1: Velouté de Butternut & Noisettes
+-- Recipe 10: Velouté de Butternut & Noisettes
 INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
 SELECT
   p.id,
@@ -268,12 +279,14 @@ SELECT
 5. Simmer 20-25 minutes until squash is tender.
 6. Blend until smooth, stir in cream, and adjust seasoning.
 7. Serve in bowls, topped with crushed hazelnuts.',
-  'https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=800',
+  'https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600&h=400&fit=crop',
   'soup',
   true
-FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+FROM public.profiles p WHERE p.role = 'coach'
+AND NOT EXISTS (SELECT 1 FROM public.recipes WHERE title_fr = 'Velouté de Butternut & Noisettes')
+LIMIT 1;
 
--- Soup 2: Potage Poireaux, Pommes de Terre & Ciboulette
+-- Recipe 11: Potage Poireaux, Pommes de Terre & Ciboulette
 INSERT INTO public.recipes (author_id, title_fr, title_en, description_fr, description_en, ingredients, instructions_fr, instructions_en, image_url, category, is_public)
 SELECT
   p.id,
@@ -298,7 +311,9 @@ SELECT
 6. Blend until smooth.
 7. Stir in cream, season to taste.
 8. Serve hot with snipped chives and a drizzle of olive oil.',
-  'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800',
+  'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&h=400&fit=crop',
   'soup',
   true
-FROM public.profiles p WHERE p.role = 'coach' LIMIT 1;
+FROM public.profiles p WHERE p.role = 'coach'
+AND NOT EXISTS (SELECT 1 FROM public.recipes WHERE title_fr = 'Potage Poireaux, Pommes de Terre & Ciboulette')
+LIMIT 1;
