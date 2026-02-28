@@ -72,7 +72,7 @@ export default function PortalSidebar({ open, onClose }: PortalSidebarProps) {
     try {
       const supabase = createClient();
       await supabase.auth.signOut();
-    } catch (e) {
+    } catch {
       // ignore errors, redirect anyway
     }
     window.location.replace("/");
