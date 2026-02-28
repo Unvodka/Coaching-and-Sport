@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
-import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useAuth } from "@/lib/supabase/AuthContext";
 import RecipeCard from "@/components/portal/RecipeCard";
