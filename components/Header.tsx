@@ -1,13 +1,21 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { getNavLinks } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import LanguageToggle from "./LanguageToggle";
 import AuthButton from "./AuthButton";
+
+const navAnimClasses = [
+  "animate-nav-item-1",
+  "animate-nav-item-2",
+  "animate-nav-item-3",
+  "animate-nav-item-4",
+  "animate-nav-item-5",
+  "animate-nav-item-6",
+];
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,11 +41,8 @@ export default function Header() {
   }, []);
 
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 80, damping: 20, delay: 0.2 }}
-      className="text-white py-6 fixed w-full top-0 z-[1000] backdrop-blur-md bg-black/40 max-md:py-3"
+    <header
+      className="text-white py-6 fixed w-full top-0 z-[1000] backdrop-blur-md bg-black/40 max-md:py-3 opacity-0 animate-slideDown"
     >
       <nav aria-label="Navigation principale" className="flex justify-between items-center w-full px-12 max-md:px-2.5">
         <Link href="/" className="flex items-center no-underline shrink-0 max-md:ml-2.5">
@@ -60,12 +65,9 @@ export default function Header() {
             }`}
           >
             {navLinks.map((link, i) => (
-              <motion.li
+              <li
                 key={link.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 + i * 0.1, duration: 0.4 }}
-                className="max-md:w-full"
+                className={`max-md:w-full opacity-0 ${navAnimClasses[i] || "animate-nav-item-6"}`}
               >
                 <Link
                   href={link.href}
@@ -74,7 +76,7 @@ export default function Header() {
                 >
                   {link.label}
                 </Link>
-              </motion.li>
+              </li>
             ))}
           </ul>
 
@@ -110,6 +112,6 @@ export default function Header() {
           </button>
         </div>
       </nav>
-    </motion.header>
+    </header>
   );
 }

@@ -1,10 +1,11 @@
 import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
 import JsonLd from "@/components/JsonLd";
-import Footer from "@/components/Footer";
 
+const AboutSection = dynamic(() => import("@/components/AboutSection"), {
+  loading: () => <div className="min-h-[300px]" />,
+});
 const ServicesSection = dynamic(() => import("@/components/ServicesSection"), {
   loading: () => <div className="min-h-[400px]" />,
 });
@@ -19,6 +20,9 @@ const FAQSection = dynamic(() => import("@/components/FAQSection"), {
 });
 const TrustBar = dynamic(() => import("@/components/TrustBar"), {
   loading: () => <div className="min-h-[80px]" />,
+});
+const Footer = dynamic(() => import("@/components/Footer"), {
+  loading: () => <div className="min-h-[200px]" />,
 });
 
 const faqJsonLd = {

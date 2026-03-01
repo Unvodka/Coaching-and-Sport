@@ -15,14 +15,14 @@ export const viewport: Viewport = {
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '600', '700'],
   variable: '--font-inter',
   display: 'swap',
 });
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
+  weight: ['700', '800'],
   variable: '--font-playfair',
   display: 'swap',
 });
@@ -371,6 +371,19 @@ export default function RootLayout({
   return (
     <html lang="fr" className="scroll-smooth">
       <head>
+        {/* Preconnect to external domains for faster resource loading */}
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        {/* Preload hero image for fast LCP */}
+        <link
+          rel="preload"
+          href="/images/hero-valbonne.webp"
+          as="image"
+          type="image/webp"
+          fetchPriority="high"
+        />
         <JsonLd data={professionalServiceJsonLd} />
         <JsonLd data={personJsonLd} />
         <JsonLd data={websiteJsonLd} />
@@ -389,8 +402,8 @@ export default function RootLayout({
           <CookieConsent />
         </LanguageProvider>
 
-        {/* Google Analytics 4 — loaded only after cookie consent */}
-        <Script id="ga-consent-default" strategy="afterInteractive">
+        {/* Google Analytics 4 — lazy loaded to avoid blocking render */}
+        <Script id="ga-consent-default" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -404,9 +417,9 @@ export default function RootLayout({
         </Script>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-GEJXN9BH9R"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
