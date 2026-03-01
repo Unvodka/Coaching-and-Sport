@@ -7,7 +7,7 @@ import { useLanguage } from "@/lib/i18n/useLanguage";
 import DeleteAccountModal from "@/components/portal/DeleteAccountModal";
 
 export default function ProfileForm() {
-  const { user, profile } = useAuth();
+  const { user, profile, refreshProfile } = useAuth();
   const { t, locale } = useLanguage();
   const [fullName, setFullName] = useState("");
   const [saving, setSaving] = useState(false);
@@ -54,10 +54,9 @@ export default function ProfileForm() {
       setSaving(false);
       setSuccess(true);
 
-      // Reload after a short delay to update the name everywhere
-      setTimeout(() => {
-        window.location.reload();
-      }, 800);
+      // Refresh the profile in auth context so the name updates everywhere
+      await refreshProfile();
+      setTimeout(() => setSuccess(false), 3000);
     } catch {
       setError(locale === "fr" ? "Erreur de connexion" : "Connection error");
       setSaving(false);
