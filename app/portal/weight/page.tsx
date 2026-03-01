@@ -95,8 +95,12 @@ export default function WeightPage() {
                   {t("portal.weight.progress")}
                 </p>
                 {(() => {
-                  const oldest = Number(logs[logs.length - 1].weight_kg);
-                  const diff = latestWeight - oldest;
+                  const sorted = [...logs].sort(
+                    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+                  );
+                  const first = Number(sorted[0].weight_kg);
+                  const last = Number(sorted[sorted.length - 1].weight_kg);
+                  const diff = last - first;
                   const isLoss = diff < 0;
                   return (
                     <p
