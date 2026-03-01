@@ -17,7 +17,11 @@ export default function AboutSection() {
       <div className="flex flex-col items-center text-center max-w-[800px] mx-auto">
         <FadeInWhenVisible delay={0.1}>
           <h3 className="font-heading text-heading text-[1.675rem] mb-6 font-bold">
-            {t("about.heading")}
+            {t("about.heading.name")}
+            <br />
+            <span className="text-[1.35rem] font-semibold text-gray-500">
+              {t("about.heading.role")}
+            </span>
           </h3>
         </FadeInWhenVisible>
         <FadeInWhenVisible delay={0.2}>
