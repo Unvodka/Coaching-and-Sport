@@ -20,7 +20,6 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
-  const [showExtras, setShowExtras] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -127,28 +126,14 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
             className={inputClass}
           />
         </div>
-        <button
-          type="button"
-          onClick={() => setShowExtras(!showExtras)}
-          className="px-4 py-2.5 text-sm font-medium text-brand-blue hover:bg-blue-50 rounded-lg transition-colors flex items-center gap-1.5"
-        >
-          <svg
-            className={`w-4 h-4 transition-transform ${showExtras ? "rotate-180" : ""}`}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-          {locale === "fr" ? "Composition corporelle" : "Body composition"}
-        </button>
       </div>
 
-      {/* Row 2: Body composition fields (collapsible) */}
-      {showExtras && (
-        <div className="mt-4 pt-4 border-t border-gray-100">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      {/* Row 2: Body composition fields */}
+      <div className="mt-4 pt-4 border-t border-gray-100">
+        <p className="text-sm font-medium text-gray-700 mb-3">
+          {locale === "fr" ? "Composition corporelle" : "Body composition"}
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div>
               <label className="block text-xs font-medium text-gray-500 mb-1">
                 {locale === "fr" ? "Masse graisseuse (%)" : "Body fat (%)"}
@@ -211,7 +196,6 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
             </div>
           </div>
         </div>
-      )}
 
       {/* Row 3: Notes + Submit */}
       <div className="flex flex-wrap gap-4 items-end mt-4">
