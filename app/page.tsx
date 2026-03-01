@@ -5,11 +5,21 @@ import AboutSection from "@/components/AboutSection";
 import JsonLd from "@/components/JsonLd";
 import Footer from "@/components/Footer";
 
-const ServicesSection = dynamic(() => import("@/components/ServicesSection"));
-const OffersSection = dynamic(() => import("@/components/OffersSection"));
-const ContactSection = dynamic(() => import("@/components/ContactSection"));
-const FAQSection = dynamic(() => import("@/components/FAQSection"));
-const TrustBar = dynamic(() => import("@/components/TrustBar"));
+const ServicesSection = dynamic(() => import("@/components/ServicesSection"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+const OffersSection = dynamic(() => import("@/components/OffersSection"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+const ContactSection = dynamic(() => import("@/components/ContactSection"), {
+  loading: () => <div className="min-h-[300px]" />,
+});
+const FAQSection = dynamic(() => import("@/components/FAQSection"), {
+  loading: () => <div className="min-h-[200px]" />,
+});
+const TrustBar = dynamic(() => import("@/components/TrustBar"), {
+  loading: () => <div className="min-h-[80px]" />,
+});
 
 const faqJsonLd = {
   "@context": "https://schema.org",

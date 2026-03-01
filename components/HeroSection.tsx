@@ -15,7 +15,7 @@ export default function HeroSection() {
     >
       {/* Background Image */}
       <Image
-        src="/images/hero-valbonne.jpg"
+        src="/images/hero-valbonne.webp"
         alt="Vue côte d'Azur - Valbonne"
         fill
         className="object-cover"
@@ -26,14 +26,14 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-black/50 z-[1]" />
 
       <div className="relative z-10 max-w-[900px] p-8">
-        <motion.h2
+        <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           className="font-elegant text-[2rem] mb-10 font-bold opacity-95 max-md:text-[1.65rem] max-[480px]:text-[1.4rem]"
         >
           {t("hero.subtitle")}
-        </motion.h2>
+        </motion.h1>
         <motion.a
           href="#contact"
           initial={{ opacity: 0, y: 40 }}
