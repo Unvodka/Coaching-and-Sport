@@ -18,7 +18,7 @@ export default function ContactSection() {
 
   useEffect(() => {
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-    if (publicKey && publicKey !== 'sXhWSE7yQiPafZnCB') {
+    if (publicKey && publicKey !== 'YOUR_PUBLIC_KEY') {
       emailjs.init(publicKey);
     }
   }, []);
@@ -33,8 +33,8 @@ export default function ContactSection() {
     if (
       !serviceId ||
       !templateId ||
-      serviceId === 'service_nn1oabv' ||
-      templateId === 'template_d9wvswt'
+      serviceId === 'YOUR_SERVICE_ID' ||
+      templateId === 'YOUR_TEMPLATE_ID'
     ) {
       alert(t('contact.notConfigured'));
       setIsSubmitting(false);
