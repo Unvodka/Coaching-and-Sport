@@ -79,7 +79,9 @@ export default function WeightLogList({ logs, onDeleted }: WeightLogListProps) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
-            {logs.map((log) => (
+            {[...logs]
+              .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+              .map((log) => (
               <tr key={log.id} className="hover:bg-gray-50 transition-colors">
                 <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap">
                   {new Date(log.date).toLocaleDateString(
