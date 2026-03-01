@@ -64,7 +64,7 @@ const en: Record<TranslationKey, string> = {
   "about.cta": "Learn more",
 
   // About page (dedicated /apropos)
-  "aboutPage.title": "About Coach-Bluewave",
+  "aboutPage.title": "Who is behind Coach-Bluewave?",
   "aboutPage.subtitle":
     "Discover my journey and coaching philosophy",
   "aboutPage.heading":

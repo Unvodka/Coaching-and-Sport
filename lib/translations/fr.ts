@@ -64,7 +64,7 @@ const fr = {
   'about.cta': 'En savoir plus',
 
   // About page (dedicated /apropos)
-  'aboutPage.title': 'À Propos de Coach-Bluewave',
+  'aboutPage.title': 'Qui se cache derrière Coach-Bluewave ?',
   'aboutPage.subtitle':
     "Découvrez mon parcours et ma philosophie d'accompagnement",
   'aboutPage.heading': 'Arnaud Chevallier — Coach Sportif & Maître-Nageur',
