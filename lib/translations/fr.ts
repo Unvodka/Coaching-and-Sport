@@ -214,7 +214,7 @@ const fr = {
 
   // Portal - Profile
   'portal.profile': 'Mon profil',
-  'portal.profile.name': 'Nom complet',
+  'portal.profile.name': 'Prénom',
   'portal.profile.email': 'Email',
   'portal.profile.update': 'Mettre à jour',
 } as const;

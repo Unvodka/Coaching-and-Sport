@@ -213,7 +213,7 @@ const en: Record<TranslationKey, string> = {
 
   // Portal - Profile
   "portal.profile": "My Profile",
-  "portal.profile.name": "Full Name",
+  "portal.profile.name": "First Name",
   "portal.profile.email": "Email",
   "portal.profile.update": "Update",
 };

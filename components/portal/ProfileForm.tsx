@@ -1,19 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useAuth } from "@/lib/supabase/AuthContext";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { createClient } from "@/lib/supabase/client";
 import DeleteAccountModal from "@/components/portal/DeleteAccountModal";
 
 export default function ProfileForm() {
   const { user, profile } = useAuth();
   const { t, locale } = useLanguage();
-  const [fullName, setFullName] = useState(profile?.full_name || "");
+  const [fullName, setFullName] = useState("");
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  // Sync with profile when it loads
+  useEffect(() => {
+    if (profile?.full_name) {
+      setFullName(profile.full_name);
+    }
+  }, [profile]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,15 +28,32 @@ export default function ProfileForm() {
 
     setSaving(true);
     setSuccess(false);
-    const supabase = createClient();
-    await supabase
-      .from("profiles")
-      .update({ full_name: fullName, updated_at: new Date().toISOString() })
-      .eq("id", user.id);
+    setError(null);
 
-    setSaving(false);
-    setSuccess(true);
-    setTimeout(() => setSuccess(false), 3000);
+    try {
+      const res = await fetch("/api/portal/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ full_name: fullName }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        setError(data.error || "Error");
+        setSaving(false);
+        return;
+      }
+
+      setSaving(false);
+      setSuccess(true);
+      setTimeout(() => setSuccess(false), 3000);
+
+      // Reload the page to refresh auth context with new name
+      setTimeout(() => window.location.reload(), 500);
+    } catch {
+      setError(locale === "fr" ? "Erreur de connexion" : "Connection error");
+      setSaving(false);
+    }
   };
 
   const inputClass =
@@ -56,9 +80,7 @@ export default function ProfileForm() {
           <p className="font-semibold text-heading">{fullName || user?.email}</p>
           <p className="text-sm text-gray-500">
             {profile?.role === "coach"
-              ? locale === "fr"
-                ? "Coach"
-                : "Coach"
+              ? "Coach"
               : locale === "fr"
               ? "Membre"
               : "Member"}
@@ -66,7 +88,7 @@ export default function ProfileForm() {
         </div>
       </div>
 
-      {/* Full Name */}
+      {/* First Name */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">
           {t("portal.profile.name")}
@@ -75,6 +97,7 @@ export default function ProfileForm() {
           type="text"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
+          placeholder={locale === "fr" ? "Votre prénom" : "Your first name"}
           className={inputClass}
         />
       </div>
@@ -111,6 +134,12 @@ export default function ProfileForm() {
           className={`${inputClass} bg-gray-50 text-gray-500 cursor-not-allowed`}
         />
       </div>
+
+      {error && (
+        <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm">
+          {error}
+        </div>
+      )}
 
       {success && (
         <div className="bg-green-50 text-green-600 px-4 py-3 rounded-lg text-sm">

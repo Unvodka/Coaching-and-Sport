@@ -60,9 +60,9 @@ export default function DashboardPage() {
   const totalActivity =
     stats.recipes + stats.weightLogs + stats.moodEntries + stats.workoutsCompleted;
 
-  const userName = authProfile?.full_name || "";
-  const greeting = userName
-    ? `${t("portal.welcome")} ${userName}`
+  const firstName = authProfile?.full_name?.split(" ")[0] || "";
+  const greeting = firstName
+    ? `${t("portal.welcome")} ${firstName}`
     : t("portal.welcome");
 
   if (loading) {
