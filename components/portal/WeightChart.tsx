@@ -39,11 +39,22 @@ const METRICS: MetricConfig[] = [
 
 export default function WeightChart({ logs }: WeightChartProps) {
   const { locale } = useLanguage();
-  const [activeMetrics, setActiveMetrics] = useState<Set<MetricKey>>(() => new Set<MetricKey>(["weight"]));
 
   const hasCompositionData = logs.some(
     (l) => l.body_fat_pct || l.visceral_fat || l.muscle_mass_kg || l.water_pct
   );
+
+  // Determine which metrics have data
+  const initialMetrics = (): Set<MetricKey> => {
+    const set = new Set<MetricKey>(["weight"]);
+    if (logs.some((l) => l.body_fat_pct)) set.add("bodyFat");
+    if (logs.some((l) => l.visceral_fat)) set.add("visceralFat");
+    if (logs.some((l) => l.muscle_mass_kg)) set.add("muscle");
+    if (logs.some((l) => l.water_pct)) set.add("water");
+    return set;
+  };
+
+  const [activeMetrics, setActiveMetrics] = useState<Set<MetricKey>>(initialMetrics);
 
   const data = [...logs]
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
