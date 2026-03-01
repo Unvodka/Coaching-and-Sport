@@ -376,14 +376,6 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        {/* Preload hero image for fast LCP */}
-        <link
-          rel="preload"
-          href="/images/hero-valbonne.webp"
-          as="image"
-          type="image/webp"
-          fetchPriority="high"
-        />
         <JsonLd data={professionalServiceJsonLd} />
         <JsonLd data={personJsonLd} />
         <JsonLd data={websiteJsonLd} />

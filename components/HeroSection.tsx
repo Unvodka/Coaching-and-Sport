@@ -16,8 +16,8 @@ export default function HeroSection() {
         fill
         className="object-cover"
         priority
-        fetchPriority="high"
         sizes="100vw"
+        quality={75}
       />
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-black/50 z-[1]" />
