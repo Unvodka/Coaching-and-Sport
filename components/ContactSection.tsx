@@ -185,6 +185,7 @@ export default function ContactSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-brand-blue hover:underline"
+                  aria-label="Politique de confidentialité"
                 >
                   ↗
                 </a>

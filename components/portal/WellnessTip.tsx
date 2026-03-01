@@ -200,7 +200,7 @@ export default function WellnessTip({ moodScore, energyLevel }: WellnessTipProps
             <div className="relative sm:w-40 h-32 sm:h-auto flex-shrink-0">
               <Image
                 src={tip.article.imageSrc}
-                alt=""
+                alt={tip.article.title[locale] || "Article bien-être"}
                 fill
                 sizes="(max-width: 640px) 100vw, 160px"
                 className="object-cover"
