@@ -79,10 +79,10 @@ const en: Record<TranslationKey, string> = {
     "My philosophy: supportive guidance, realistic goals, and progress adapted to your pace. Every person is unique, and your program will be too.",
   "aboutPage.p4":
     "Based in Valbonne, I work throughout the region to offer you the best possible service.",
-  "aboutPage.qualificationsTitle": "My Qualifications",
+  "aboutPage.qualificationsTitle": "My Strengths",
   "aboutPage.q1": "State-certified Lifeguard",
-  "aboutPage.q2": "Certified sports coach",
-  "aboutPage.q3": "Weight loss and fitness specialist",
+  "aboutPage.q2": "Specialized sports educator",
+  "aboutPage.q3": "Weight loss, fitness, well-being and mental health",
   "aboutPage.q4": "Sports nutrition advisor",
   "aboutPage.approachTitle": "My Approach",
   "aboutPage.approach1":

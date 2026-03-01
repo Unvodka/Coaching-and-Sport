@@ -79,10 +79,10 @@ const fr = {
     'Ma philosophie : un accompagnement bienveillant, des objectifs réalistes et une progression adaptée à votre rythme. Chaque personne est unique, et votre programme le sera aussi.',
   'aboutPage.p4':
     "Basé à Valbonne, j'interviens dans toute la région pour vous offrir le meilleur service possible.",
-  'aboutPage.qualificationsTitle': 'Mes Qualifications',
+  'aboutPage.qualificationsTitle': 'Mes Atouts',
   'aboutPage.q1': "Brevet d'État de Maître-Nageur Sauveteur",
-  'aboutPage.q2': 'Coach sportif certifié',
-  'aboutPage.q3': 'Spécialiste en perte de poids et remise en forme',
+  'aboutPage.q2': 'Éducateur sportif spécialisé',
+  'aboutPage.q3': 'Perte de poids, remise en forme, bien-être et santé mentale',
   'aboutPage.q4': 'Conseiller en nutrition sportive',
   'aboutPage.approachTitle': 'Mon Approche',
   'aboutPage.approach1':
