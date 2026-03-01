@@ -42,7 +42,7 @@ export default function Header() {
 
   return (
     <header
-      className="text-white py-6 fixed w-full top-0 z-[1000] backdrop-blur-md bg-black/40 max-md:py-3 opacity-0 animate-slideDown"
+      className="text-white py-6 fixed w-full top-0 z-[1000] backdrop-blur-md bg-black/40 max-md:py-3 animate-slideDown"
     >
       <nav aria-label="Navigation principale" className="flex justify-between items-center w-full px-12 max-md:px-2.5">
         <Link href="/" className="flex items-center no-underline shrink-0 max-md:ml-2.5">
@@ -67,7 +67,7 @@ export default function Header() {
             {navLinks.map((link, i) => (
               <li
                 key={link.href}
-                className={`max-md:w-full opacity-0 ${navAnimClasses[i] || "animate-nav-item-6"}`}
+                className={`max-md:w-full ${navAnimClasses[i] || "animate-nav-item-6"}`}
               >
                 <Link
                   href={link.href}
