@@ -123,6 +123,9 @@ const en: Record<TranslationKey, string> = {
   // Footer
   "footer.text":
     "Coach-Bluewave | Arnaud Chevallier - Sports Coach & Lifeguard - All rights reserved",
+  "footer.legal": "Legal Notice",
+  "footer.privacy": "Privacy Policy",
+  "footer.cgv": "Terms & Conditions",
 
   // Service detail pages
   "detail.backToServices": "Back to services",

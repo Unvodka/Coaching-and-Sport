@@ -122,6 +122,9 @@ const fr = {
   // Footer
   'footer.text':
     'Coach-Bluewave | Arnaud Chevallier - Coach Sportif & Maître-Nageur - Tous droits réservés',
+  'footer.legal': 'Mentions légales',
+  'footer.privacy': 'Politique de confidentialité',
+  'footer.cgv': 'CGV',
 
   // Service detail pages
   'detail.backToServices': 'Retour aux services',
