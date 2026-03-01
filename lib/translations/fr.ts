@@ -220,6 +220,15 @@ const fr = {
   'portal.profile.name': 'Prénom',
   'portal.profile.email': 'Email',
   'portal.profile.update': 'Mettre à jour',
+
+  // Cookie consent
+  'cookies.text': 'Ce site utilise des cookies pour mesurer l\'audience et améliorer votre expérience. Vous pouvez accepter ou refuser les cookies non essentiels.',
+  'cookies.learnMore': 'En savoir plus',
+  'cookies.accept': 'Accepter',
+  'cookies.refuse': 'Refuser',
+
+  // Contact RGPD
+  'contact.rgpdConsent': 'J\'accepte que mes données soient traitées conformément à la politique de confidentialité.',
 } as const;
 
 export type TranslationKey = keyof typeof fr;

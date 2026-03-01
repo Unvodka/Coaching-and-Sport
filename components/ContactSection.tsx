@@ -12,6 +12,7 @@ export default function ContactSection() {
   const [phone, setPhone] = useState("");
   const [formule, setFormule] = useState("");
   const [message, setMessage] = useState("");
+  const [rgpdConsent, setRgpdConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { t } = useLanguage();
 
@@ -46,7 +47,6 @@ export default function ContactSection() {
       phone: phone || t("contact.notProvided"),
       formule,
       message,
-      to_email: "chevallier.a06@gmail.com",
     };
 
     emailjs.send(serviceId, templateId, templateParams).then(
@@ -57,6 +57,7 @@ export default function ContactSection() {
         setPhone("");
         setFormule("");
         setMessage("");
+        setRgpdConsent(false);
         setIsSubmitting(false);
       },
       () => {
@@ -153,6 +154,29 @@ export default function ContactSection() {
               onChange={(e) => setMessage(e.target.value)}
               className="w-full p-3.5 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans min-h-[90px] resize-y focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
             />
+          </div>
+
+          <div className="mb-5">
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                required
+                checked={rgpdConsent}
+                onChange={(e) => setRgpdConsent(e.target.checked)}
+                className="mt-1 w-4 h-4 shrink-0 accent-brand-blue"
+              />
+              <span className="text-sm text-gray-600 leading-relaxed">
+                {t("contact.rgpdConsent")}{" "}
+                <a
+                  href="/politique-de-confidentialite"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-blue hover:underline"
+                >
+                  ↗
+                </a>
+              </span>
+            </label>
           </div>
 
           <motion.button

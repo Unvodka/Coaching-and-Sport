@@ -219,6 +219,15 @@ const en: Record<TranslationKey, string> = {
   "portal.profile.name": "First Name",
   "portal.profile.email": "Email",
   "portal.profile.update": "Update",
+
+  // Cookie consent
+  "cookies.text": "This site uses cookies to measure audience and improve your experience. You can accept or refuse non-essential cookies.",
+  "cookies.learnMore": "Learn more",
+  "cookies.accept": "Accept",
+  "cookies.refuse": "Refuse",
+
+  // Contact RGPD
+  "contact.rgpdConsent": "I agree that my data will be processed in accordance with the privacy policy.",
 };
 
 export default en;

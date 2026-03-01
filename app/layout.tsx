@@ -4,6 +4,7 @@ import { Inter, Playfair_Display, Cormorant_Garamond } from "next/font/google";
 import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import { AuthProvider } from "@/lib/supabase/AuthContext";
 import JsonLd from "@/components/JsonLd";
+import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -377,9 +378,22 @@ export default function RootLayout({
       >
         <LanguageProvider>
           <AuthProvider>{children}</AuthProvider>
+          <CookieConsent />
         </LanguageProvider>
 
-        {/* Google Analytics 4 — REMPLACE G-GEJXN9BH9R par ton vrai ID GA4 */}
+        {/* Google Analytics 4 — loaded only after cookie consent */}
+        <Script id="ga-consent-default" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              'analytics_storage': 'denied',
+              'ad_storage': 'denied',
+              'ad_user_data': 'denied',
+              'ad_personalization': 'denied',
+            });
+          `}
+        </Script>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-GEJXN9BH9R"
           strategy="afterInteractive"
@@ -389,7 +403,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-GEJXN9BH9R');
+            gtag('config', 'G-GEJXN9BH9R', { 'anonymize_ip': true });
           `}
         </Script>
       </body>
