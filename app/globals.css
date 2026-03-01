@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fix mobile browser viewport (address bar + bottom nav) */
+html, body {
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+}
+html {
+  height: -webkit-fill-available;
+}
+
 /* Global paragraph font size bump (+2px) */
 p {
   font-size: 1.1rem;

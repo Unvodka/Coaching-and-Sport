@@ -10,7 +10,8 @@ export default function HeroSection() {
   return (
     <section
       id="accueil"
-      className="text-white p-0 text-center relative h-screen flex items-center justify-center overflow-hidden"
+      className="text-white p-0 text-center relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ minHeight: "100dvh" }}
     >
       {/* Background Image */}
       <Image

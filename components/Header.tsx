@@ -55,7 +55,7 @@ export default function Header() {
           {/* Navigation Links */}
           <ul
             ref={menuRef}
-            className={`flex list-none gap-8 max-md:fixed max-md:top-0 max-md:flex-col max-md:bg-black/90 max-md:w-[70%] max-md:h-screen max-md:pt-20 max-md:pb-8 max-md:transition-all max-md:duration-400 max-md:ease-in-out max-md:shadow-[5px_0_15px_rgba(0,0,0,0.3)] max-md:gap-0 max-md:z-[999] ${
+            className={`flex list-none gap-8 max-md:fixed max-md:top-0 max-md:flex-col max-md:bg-black/90 max-md:w-[70%] max-md:min-h-screen max-md:pt-20 max-md:pb-8 max-md:transition-all max-md:duration-400 max-md:ease-in-out max-md:shadow-[5px_0_15px_rgba(0,0,0,0.3)] max-md:gap-0 max-md:z-[999] ${
               menuOpen ? "max-md:left-0" : "max-md:left-[-100%]"
             }`}
           >
