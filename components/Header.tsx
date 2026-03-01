@@ -39,7 +39,7 @@ export default function Header() {
       transition={{ type: "spring", stiffness: 80, damping: 20, delay: 0.2 }}
       className="text-white py-6 fixed w-full top-0 z-[1000] backdrop-blur-md bg-black/40 max-md:py-3"
     >
-      <nav className="flex justify-between items-center w-full px-12 max-md:px-2.5">
+      <nav aria-label="Navigation principale" className="flex justify-between items-center w-full px-12 max-md:px-2.5">
         <Link href="/" className="flex items-center no-underline shrink-0 max-md:ml-2.5">
           <Image
             src="/images/logo-bluewave-white.png"
@@ -90,6 +90,7 @@ export default function Header() {
             onClick={() => setMenuOpen(!menuOpen)}
             className="hidden max-md:flex flex-col cursor-pointer z-[1001] bg-none border-none p-2"
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
           >
             <span
               className={`block w-7 h-[3px] bg-white my-[3px] rounded transition-all duration-300 ${

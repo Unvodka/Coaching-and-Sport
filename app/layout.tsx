@@ -378,6 +378,12 @@ export default function RootLayout({
       <body
         className={`${inter.className} ${playfair.variable} ${cormorant.variable} leading-[1.7] text-gray-800 overflow-x-hidden bg-white`}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-brand-blue focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold"
+        >
+          Aller au contenu principal
+        </a>
         <LanguageProvider>
           <AuthProvider>{children}</AuthProvider>
           <CookieConsent />

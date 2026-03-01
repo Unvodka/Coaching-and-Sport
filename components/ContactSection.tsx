@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { useState, FormEvent, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import emailjs from '@emailjs/browser';
-import { useLanguage } from '@/lib/i18n/useLanguage';
-import FadeInWhenVisible from './animations/FadeInWhenVisible';
+import { useState, FormEvent, useEffect } from "react";
+import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
+import { useLanguage } from "@/lib/i18n/useLanguage";
+import FadeInWhenVisible from "./animations/FadeInWhenVisible";
 
 export default function ContactSection() {
-  const [fromName, setFromName] = useState('');
-  const [fromEmail, setFromEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [formule, setFormule] = useState('');
-  const [message, setMessage] = useState('');
+  const [fromName, setFromName] = useState("");
+  const [fromEmail, setFromEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [formule, setFormule] = useState("");
+  const [message, setMessage] = useState("");
   const [rgpdConsent, setRgpdConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { t } = useLanguage();
 
   useEffect(() => {
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-    if (publicKey && publicKey !== 'YOUR_PUBLIC_KEY') {
+    if (publicKey && publicKey !== "YOUR_PUBLIC_KEY") {
       emailjs.init(publicKey);
     }
   }, []);
@@ -33,10 +33,10 @@ export default function ContactSection() {
     if (
       !serviceId ||
       !templateId ||
-      serviceId === 'YOUR_SERVICE_ID' ||
-      templateId === 'YOUR_TEMPLATE_ID'
+      serviceId === "YOUR_SERVICE_ID" ||
+      templateId === "YOUR_TEMPLATE_ID"
     ) {
-      alert(t('contact.notConfigured'));
+      alert(t("contact.notConfigured"));
       setIsSubmitting(false);
       return;
     }
@@ -44,42 +44,46 @@ export default function ContactSection() {
     const templateParams = {
       from_name: fromName,
       from_email: fromEmail,
-      phone: phone || t('contact.notProvided'),
+      phone: phone || t("contact.notProvided"),
       formule,
       message,
     };
 
     emailjs.send(serviceId, templateId, templateParams).then(
       () => {
-        alert(`✅ ${t('contact.success')}`);
-        setFromName('');
-        setFromEmail('');
-        setPhone('');
-        setFormule('');
-        setMessage('');
+        alert(`✅ ${t("contact.success")}`);
+        setFromName("");
+        setFromEmail("");
+        setPhone("");
+        setFormule("");
+        setMessage("");
         setRgpdConsent(false);
         setIsSubmitting(false);
       },
       () => {
-        alert(`❌ ${t('contact.error')}`);
+        alert(`❌ ${t("contact.error")}`);
         setIsSubmitting(false);
-      },
+      }
     );
   };
 
   return (
     <section
       id="contact"
+      aria-labelledby="contact-heading"
       className="bg-gradient-to-br from-slate-50 to-slate-100 py-14 px-16 w-full max-md:py-10 max-md:px-6"
     >
       <FadeInWhenVisible>
-        <h2 className="font-heading text-center text-5xl mb-4 font-extrabold tracking-tight text-heading max-md:text-[2.2rem] max-[480px]:text-[1.8rem]">
-          {t('contact.title')}
+        <h2
+          id="contact-heading"
+          className="font-heading text-center text-5xl mb-4 font-extrabold tracking-tight text-heading max-md:text-[2.2rem] max-[480px]:text-[1.8rem]"
+        >
+          {t("contact.title")}
         </h2>
       </FadeInWhenVisible>
       <FadeInWhenVisible delay={0.1}>
         <p className="text-center text-gray-500 text-lg mb-10 max-w-[700px] mx-auto">
-          {t('contact.subtitle')}
+          {t("contact.subtitle")}
         </p>
       </FadeInWhenVisible>
 
@@ -89,12 +93,14 @@ export default function ContactSection() {
           className="max-w-[700px] mx-auto bg-white p-8 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-gray-200 max-md:p-6 max-[480px]:p-4"
         >
           <div className="mb-3.5">
-            <label className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
-              {t('contact.fullName')} *
+            <label htmlFor="contact-name" className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
+              {t("contact.fullName")} *
             </label>
             <input
+              id="contact-name"
               type="text"
               required
+              autoComplete="name"
               value={fromName}
               onChange={(e) => setFromName(e.target.value)}
               className="w-full p-3.5 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
@@ -102,12 +108,14 @@ export default function ContactSection() {
           </div>
 
           <div className="mb-3.5">
-            <label className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
-              {t('contact.email')} *
+            <label htmlFor="contact-email" className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
+              {t("contact.email")} *
             </label>
             <input
+              id="contact-email"
               type="email"
               required
+              autoComplete="email"
               value={fromEmail}
               onChange={(e) => setFromEmail(e.target.value)}
               className="w-full p-3.5 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
@@ -115,11 +123,13 @@ export default function ContactSection() {
           </div>
 
           <div className="mb-3.5">
-            <label className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
-              {t('contact.phone')}
+            <label htmlFor="contact-phone" className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
+              {t("contact.phone")}
             </label>
             <input
+              id="contact-phone"
               type="tel"
+              autoComplete="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="w-full p-3.5 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
@@ -127,31 +137,31 @@ export default function ContactSection() {
           </div>
 
           <div className="mb-3.5">
-            <label className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
-              {t('contact.courseType')} *
+            <label htmlFor="contact-formule" className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
+              {t("contact.courseType")} *
             </label>
             <select
+              id="contact-formule"
               required
               value={formule}
               onChange={(e) => setFormule(e.target.value)}
               className="w-full p-3.5 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
             >
-              <option value="">{t('contact.select')}</option>
-              <option value="particulier">{t('contact.privateLesson')}</option>
-              <option value="programmation">
-                {t('contact.customProgram')}
-              </option>
-              <option value="info">{t('contact.infoRequest')}</option>
+              <option value="">{t("contact.select")}</option>
+              <option value="particulier">{t("contact.privateLesson")}</option>
+              <option value="programmation">{t("contact.customProgram")}</option>
+              <option value="info">{t("contact.infoRequest")}</option>
             </select>
           </div>
 
           <div className="mb-3.5">
-            <label className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
-              {t('contact.message')} *
+            <label htmlFor="contact-message" className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
+              {t("contact.message")} *
             </label>
             <textarea
+              id="contact-message"
               required
-              placeholder={t('contact.placeholder')}
+              placeholder={t("contact.placeholder")}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               className="w-full p-3.5 border-2 border-gray-200 rounded-lg text-base transition-all duration-300 font-sans min-h-[90px] resize-y focus:outline-none focus:border-brand-blue focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
@@ -159,8 +169,9 @@ export default function ContactSection() {
           </div>
 
           <div className="mb-5">
-            <label className="flex items-start gap-3 cursor-pointer">
+            <label htmlFor="contact-rgpd" className="flex items-start gap-3 cursor-pointer">
               <input
+                id="contact-rgpd"
                 type="checkbox"
                 required
                 checked={rgpdConsent}
@@ -168,7 +179,7 @@ export default function ContactSection() {
                 className="mt-1 w-4 h-4 shrink-0 accent-brand-blue"
               />
               <span className="text-sm text-gray-600 leading-relaxed">
-                {t('contact.rgpdConsent')}{' '}
+                {t("contact.rgpdConsent")}{" "}
                 <a
                   href="/politique-de-confidentialite"
                   target="_blank"
@@ -184,11 +195,11 @@ export default function ContactSection() {
           <motion.button
             type="submit"
             disabled={isSubmitting}
-            whileHover={{ y: -3, boxShadow: '0 10px 25px rgba(37,99,235,0.3)' }}
+            whileHover={{ y: -3, boxShadow: "0 10px 25px rgba(37,99,235,0.3)" }}
             whileTap={{ scale: 0.98 }}
             className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-12 border-none rounded-lg text-[1.1rem] font-bold cursor-pointer transition-all duration-300 w-1/2 max-md:w-full mx-auto block disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? t('contact.sending') : t('contact.submit')}
+            {isSubmitting ? t("contact.sending") : t("contact.submit")}
           </motion.button>
         </form>
       </FadeInWhenVisible>

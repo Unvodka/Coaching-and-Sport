@@ -65,6 +65,7 @@ export default function Home() {
     <>
       <JsonLd data={faqJsonLd} />
       <Header />
+      <main id="main-content">
       <HeroSection />
       <AboutSection />
       <ServicesSection />
@@ -72,6 +73,7 @@ export default function Home() {
       <ContactSection />
       <FAQSection />
       <TrustBar />
+      </main>
       <Footer />
     </>
   );

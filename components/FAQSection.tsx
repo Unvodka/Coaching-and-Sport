@@ -63,10 +63,14 @@ export default function FAQSection() {
         {faqs.map((faq, i) => (
           <FadeInWhenVisible key={i} delay={i * 0.08}>
             <div
-              className="bg-white border border-gray-200 rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-md"
-              onClick={() => toggleFAQ(i)}
+              className="bg-white border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-md"
             >
-              <div className="flex justify-between items-center p-6">
+              <button
+                type="button"
+                onClick={() => toggleFAQ(i)}
+                aria-expanded={openIndex === i}
+                className="flex justify-between items-center p-6 w-full text-left cursor-pointer bg-transparent border-none"
+              >
                 <h3 className="font-bold text-heading text-[1.05rem] leading-snug pr-4">
                   {faq.q}
                 </h3>
@@ -74,10 +78,11 @@ export default function FAQSection() {
                   className={`text-brand-blue transition-transform duration-300 shrink-0 text-sm ${
                     openIndex === i ? "rotate-180" : ""
                   }`}
+                  aria-hidden="true"
                 >
                   ▼
                 </span>
-              </div>
+              </button>
               <div
                 className={`overflow-hidden transition-all duration-300 ${
                   openIndex === i ? "max-h-[300px] pb-6 px-6" : "max-h-0"

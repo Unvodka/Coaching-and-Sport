@@ -16,6 +16,16 @@ p {
   font-size: 1.1rem;
 }
 
+/* Accessible link styling — inline links must be distinguishable without color alone */
+a.text-brand-blue {
+  text-decoration: underline;
+  text-decoration-color: rgba(37, 99, 235, 0.4);
+  text-underline-offset: 2px;
+}
+a.text-brand-blue:hover {
+  text-decoration-color: rgba(37, 99, 235, 1);
+}
+
 /* Hero radial gradient overlay */
 .hero-overlay::before {
   content: "";

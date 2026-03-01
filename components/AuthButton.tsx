@@ -42,6 +42,7 @@ export default function AuthButton() {
     return (
       <button
         onClick={handleSignIn}
+        aria-label={t("auth.signIn")}
         className="flex items-center gap-2 bg-white text-gray-800 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-gray-100 transition-colors max-md:px-2.5 max-md:py-2.5 max-md:rounded-full"
       >
         <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -71,6 +72,8 @@ export default function AuthButton() {
     <div ref={dropdownRef} className="relative">
       <button
         onClick={() => setDropdownOpen(!dropdownOpen)}
+        aria-label="Menu utilisateur"
+        aria-expanded={dropdownOpen}
         className="flex items-center gap-2 hover:opacity-80 transition-opacity"
       >
         {profile?.avatar_url ? (
