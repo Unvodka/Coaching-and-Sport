@@ -44,6 +44,10 @@ const config: Config = {
           "0%": { opacity: "0", transform: "translateY(40px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        slideUpOnly: {
+          "0%": { transform: "translateY(30px)" },
+          "100%": { transform: "translateY(0)" },
+        },
         slideDown: {
           "0%": { opacity: "0", transform: "translateY(-100%)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
@@ -55,7 +59,7 @@ const config: Config = {
       },
       animation: {
         fadeInUp: "fadeInUp 0.8s ease forwards",
-        "hero-title": "fadeInUpDelay 0.8s cubic-bezier(0.25,0.1,0.25,1) 0.2s both",
+        "hero-title": "slideUpOnly 0.8s cubic-bezier(0.25,0.1,0.25,1) 0.2s both",
         "hero-cta": "fadeInUpDelay 0.8s cubic-bezier(0.25,0.1,0.25,1) 0.4s both",
         slideDown: "slideDown 0.6s cubic-bezier(0.25,0.1,0.25,1) 0.2s both",
         "nav-item-1": "navItemFade 0.4s ease 0.4s both",
