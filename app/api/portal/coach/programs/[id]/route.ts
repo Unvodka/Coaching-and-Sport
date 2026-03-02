@@ -25,7 +25,14 @@ export async function GET(
       .order("day_number")
       .order("order_index");
 
-    return NextResponse.json({ program, exercises: exercises || [] });
+    const { data: assignments } = await admin
+      .from("program_assignments")
+      .select("user_id")
+      .eq("program_id", params.id);
+
+    const assignedUserIds = (assignments || []).map((a) => a.user_id);
+
+    return NextResponse.json({ program, exercises: exercises || [], assignedUserIds });
   });
 }
 

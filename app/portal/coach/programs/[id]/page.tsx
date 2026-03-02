@@ -12,6 +12,7 @@ export default function EditCoachProgramPage() {
   const { locale } = useLanguage();
   const [program, setProgram] = useState<WorkoutProgram | null>(null);
   const [exercises, setExercises] = useState<WorkoutExercise[]>([]);
+  const [assignedUserIds, setAssignedUserIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -22,6 +23,7 @@ export default function EditCoachProgramPage() {
           const json = await res.json();
           setProgram(json.program);
           setExercises(json.exercises || []);
+          setAssignedUserIds(json.assignedUserIds || []);
         }
       } catch (err) {
         console.error("Edit program fetch error:", err);
@@ -56,7 +58,7 @@ export default function EditCoachProgramPage() {
       <h2 className="text-2xl font-bold text-heading font-heading mb-6">
         {locale === "fr" ? "Modifier le programme" : "Edit Program"}
       </h2>
-      <WorkoutProgramForm program={program} exercises={exercises} />
+      <WorkoutProgramForm program={program} exercises={exercises} assignedUserIds={assignedUserIds} />
     </div>
   );
 }

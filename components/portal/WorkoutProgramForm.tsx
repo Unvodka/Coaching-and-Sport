@@ -1,9 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import type { WorkoutProgram, WorkoutExercise } from "@/lib/supabase/database.types";
+
+interface SimpleUser {
+  id: string;
+  full_name: string;
+  email: string;
+  avatar_url: string | null;
+}
 
 interface ExerciseInput {
   name_fr: string;
@@ -20,9 +28,10 @@ interface ExerciseInput {
 interface WorkoutProgramFormProps {
   program?: WorkoutProgram;
   exercises?: WorkoutExercise[];
+  assignedUserIds?: string[];
 }
 
-export default function WorkoutProgramForm({ program, exercises: existingExercises }: WorkoutProgramFormProps) {
+export default function WorkoutProgramForm({ program, exercises: existingExercises, assignedUserIds }: WorkoutProgramFormProps) {
   const router = useRouter();
   const { locale } = useLanguage();
   const isEditing = !!program;
@@ -54,6 +63,53 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
   );
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+
+  // User assignment
+  const [allUsers, setAllUsers] = useState<SimpleUser[]>([]);
+  const [selectedUserIds, setSelectedUserIds] = useState<Set<string>>(
+    new Set(assignedUserIds || [])
+  );
+  const [userSearch, setUserSearch] = useState("");
+
+  useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const res = await fetch("/api/portal/coach/users");
+        if (res.ok) {
+          const json = await res.json();
+          setAllUsers(
+            (json.users || []).filter((u: SimpleUser & { role?: string }) => u.role !== "coach")
+          );
+        }
+      } catch (err) {
+        console.error("Fetch users error:", err);
+      }
+    }
+    fetchUsers();
+  }, []);
+
+  const filteredUsers = allUsers.filter((u) => {
+    if (!userSearch) return true;
+    const q = userSearch.toLowerCase();
+    return u.full_name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q);
+  });
+
+  const toggleUser = (id: string) => {
+    setSelectedUserIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleAll = () => {
+    if (selectedUserIds.size === allUsers.length) {
+      setSelectedUserIds(new Set());
+    } else {
+      setSelectedUserIds(new Set(allUsers.map((u) => u.id)));
+    }
+  };
 
   const addExercise = () => {
     setExercises([
@@ -106,11 +162,37 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
         body: JSON.stringify(payload),
       });
 
+      const resJson = await res.json();
+
       if (!res.ok) {
-        const json = await res.json();
-        setError(json.error || "Error");
+        setError(resJson.error || "Error");
         setSaving(false);
         return;
+      }
+
+      // Assign to selected users
+      const programId = isEditing ? program.id : resJson.id;
+      if (selectedUserIds.size > 0) {
+        await fetch("/api/portal/coach/assignments", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            program_id: programId,
+            user_ids: Array.from(selectedUserIds),
+          }),
+        });
+      }
+
+      // Remove assignments for users that were deselected (edit mode only)
+      if (isEditing && assignedUserIds) {
+        const removed = assignedUserIds.filter((id) => !selectedUserIds.has(id));
+        for (const uid of removed) {
+          await fetch("/api/portal/coach/assignments", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ program_id: program.id, user_id: uid }),
+          });
+        }
       }
 
       router.push("/portal/coach/programs");
@@ -375,6 +457,86 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* User Assignment */}
+      <div>
+        <h3 className="font-semibold text-heading mb-3">
+          {locale === "fr" ? "Assigner aux utilisateurs" : "Assign to users"}
+        </h3>
+        <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
+          <div className="flex items-center gap-3 mb-3">
+            <input
+              type="text"
+              placeholder={locale === "fr" ? "Rechercher un utilisateur..." : "Search user..."}
+              value={userSearch}
+              onChange={(e) => setUserSearch(e.target.value)}
+              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none text-gray-800"
+            />
+            <button
+              type="button"
+              onClick={toggleAll}
+              className="px-3 py-2 text-xs font-medium text-brand-blue hover:bg-blue-50 rounded-lg transition-colors whitespace-nowrap"
+            >
+              {selectedUserIds.size === allUsers.length
+                ? (locale === "fr" ? "Tout décocher" : "Deselect all")
+                : (locale === "fr" ? "Tout sélectionner" : "Select all")}
+            </button>
+          </div>
+          {allUsers.length === 0 ? (
+            <p className="text-sm text-gray-400 py-2">
+              {locale === "fr" ? "Chargement des utilisateurs..." : "Loading users..."}
+            </p>
+          ) : filteredUsers.length === 0 ? (
+            <p className="text-sm text-gray-400 py-2">
+              {locale === "fr" ? "Aucun résultat" : "No results"}
+            </p>
+          ) : (
+            <div className="max-h-60 overflow-y-auto space-y-1">
+              {filteredUsers.map((user) => (
+                <label
+                  key={user.id}
+                  className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer transition-colors ${
+                    selectedUserIds.has(user.id) ? "bg-blue-50" : "hover:bg-gray-100"
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedUserIds.has(user.id)}
+                    onChange={() => toggleUser(user.id)}
+                    className="w-4 h-4 text-brand-blue rounded focus:ring-brand-blue"
+                  />
+                  {user.avatar_url ? (
+                    <Image
+                      src={user.avatar_url}
+                      alt=""
+                      width={28}
+                      height={28}
+                      className="rounded-full"
+                    />
+                  ) : (
+                    <div className="w-7 h-7 rounded-full bg-brand-blue flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                      {(user.full_name || user.email).charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-gray-800 truncate">
+                      {user.full_name || user.email}
+                    </p>
+                    {user.full_name && (
+                      <p className="text-xs text-gray-400 truncate">{user.email}</p>
+                    )}
+                  </div>
+                </label>
+              ))}
+            </div>
+          )}
+          {selectedUserIds.size > 0 && (
+            <p className="text-xs text-gray-500 mt-2 pt-2 border-t border-gray-200">
+              {selectedUserIds.size} {locale === "fr" ? "utilisateur(s) sélectionné(s)" : "user(s) selected"}
+            </p>
+          )}
         </div>
       </div>
 
