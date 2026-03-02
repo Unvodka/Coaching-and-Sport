@@ -1,4 +1,5 @@
 import { BASE_URL } from "@/lib/config";
+import { LEGAL_INFO } from "@/lib/legal";
 import { Metadata } from "next";
 
 
@@ -33,35 +34,29 @@ export default function MentionsLegalesPage() {
           </h2>
           <div className="space-y-1 text-gray-700 leading-relaxed">
             <p>
-              <strong>Nom :</strong> Arnaud Chevallier
+              <strong>Nom :</strong> {LEGAL_INFO.name}
             </p>
             <p>
-              <strong>Statut :</strong> Micro-entrepreneur (Entreprise
-              Individuelle)
+              <strong>Statut :</strong> {LEGAL_INFO.status}
             </p>
             <p>
-              <strong>Activité :</strong> Coach sportif personnel,
-              Maître-Nageur Sauveteur
+              <strong>Activité :</strong> {LEGAL_INFO.activity}
             </p>
             <p>
-              <strong>SIRET :</strong>{" "}
-              <span className="text-red-500">[SIRET_NUMBER]</span>
+              <strong>SIRET :</strong> {LEGAL_INFO.siret}
             </p>
             <p>
-              <strong>Adresse :</strong>{" "}
-              <span className="text-red-500">[BUSINESS_ADDRESS]</span>,
-              Valbonne, 06560, France
+              <strong>Adresse :</strong> {LEGAL_INFO.address},{" "}
+              {LEGAL_INFO.city}
             </p>
             <p>
-              <strong>Téléphone :</strong>{" "}
-              <span className="text-red-500">[PHONE_NUMBER]</span>
+              <strong>Téléphone :</strong> {LEGAL_INFO.phone}
             </p>
             <p>
-              <strong>Email :</strong>{" "}
-              <span className="text-red-500">[CONTACT_EMAIL]</span>
+              <strong>Email :</strong> {LEGAL_INFO.email}
             </p>
             <p>
-              <strong>Directeur de la publication :</strong> Arnaud Chevallier
+              <strong>Directeur de la publication :</strong> {LEGAL_INFO.name}
             </p>
           </div>
         </section>
@@ -76,19 +71,17 @@ export default function MentionsLegalesPage() {
           </p>
           <div className="space-y-1 text-gray-700 leading-relaxed">
             <p>
-              <strong>Diplôme :</strong> BPJEPS Activités Aquatiques et de la
-              Natation (AAN)
+              <strong>Diplôme :</strong> {LEGAL_INFO.diploma}
             </p>
             <p>
               <strong>Carte professionnelle d&apos;éducateur sportif n° :</strong>{" "}
-              <span className="text-red-500">[CARTE_PRO_NUMBER]</span>
+              {LEGAL_INFO.carteProNumber}
             </p>
             <p>
-              <strong>Délivrée par :</strong> SDJES des Alpes-Maritimes (06)
+              <strong>Délivrée par :</strong> {LEGAL_INFO.carteProIssuedBy}
             </p>
             <p>
-              <strong>Date de validité :</strong>{" "}
-              <span className="text-red-500">[CARTE_PRO_EXPIRY_DATE]</span>
+              <strong>Date de validité :</strong> {LEGAL_INFO.carteProExpiry}
             </p>
           </div>
           <p className="text-gray-600 text-sm mt-3">
@@ -113,7 +106,7 @@ export default function MentionsLegalesPage() {
           <div className="space-y-1 text-gray-700 leading-relaxed">
             <p>
               <strong>Numéro de déclaration SAP :</strong>{" "}
-              <span className="text-red-500">[SAP_NUMBER]</span>
+              {LEGAL_INFO.sapNumber}
             </p>
             <p>
               Déclaration effectuée via le portail NOVA auprès de la
@@ -162,7 +155,7 @@ export default function MentionsLegalesPage() {
           <p className="text-gray-700 leading-relaxed">
             L&apos;ensemble du contenu du site coach-bluewave.com (textes, images,
             vidéos, logos, graphismes, icônes) est la propriété exclusive
-            d&apos;Arnaud Chevallier ou fait l&apos;objet d&apos;une autorisation d&apos;utilisation.
+            d&apos;{LEGAL_INFO.name} ou fait l&apos;objet d&apos;une autorisation d&apos;utilisation.
             Toute reproduction, représentation, modification, publication ou
             adaptation de tout ou partie des éléments du site est interdite sans
             autorisation écrite préalable. Toute exploitation non autorisée sera
@@ -227,16 +220,13 @@ export default function MentionsLegalesPage() {
           </p>
           <div className="space-y-1 text-gray-700 leading-relaxed">
             <p>
-              <strong>Médiateur :</strong>{" "}
-              <span className="text-red-500">[MEDIATOR_NAME]</span>
+              <strong>Médiateur :</strong> {LEGAL_INFO.mediatorName}
             </p>
             <p>
-              <strong>Site web :</strong>{" "}
-              <span className="text-red-500">[MEDIATOR_WEBSITE]</span>
+              <strong>Site web :</strong> {LEGAL_INFO.mediatorWebsite}
             </p>
             <p>
-              <strong>Email :</strong>{" "}
-              <span className="text-red-500">[MEDIATOR_EMAIL]</span>
+              <strong>Email :</strong> {LEGAL_INFO.mediatorEmail}
             </p>
           </div>
         </section>

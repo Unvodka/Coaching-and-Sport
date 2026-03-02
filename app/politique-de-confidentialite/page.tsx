@@ -1,4 +1,5 @@
 import { BASE_URL } from "@/lib/config";
+import { LEGAL_INFO } from "@/lib/legal";
 import { Metadata } from "next";
 
 
@@ -41,19 +42,17 @@ export default function PolitiqueConfidentialitePage() {
           </p>
           <div className="space-y-1 text-gray-700">
             <p>
-              <strong>Responsable du traitement :</strong> Arnaud Chevallier
+              <strong>Responsable du traitement :</strong> {LEGAL_INFO.name}
             </p>
             <p>
-              <strong>Statut :</strong> Micro-entrepreneur — Coach-Bluewave
+              <strong>Statut :</strong> {LEGAL_INFO.status} — {LEGAL_INFO.brand}
             </p>
             <p>
-              <strong>Adresse :</strong>{" "}
-              <span className="text-red-500">[BUSINESS_ADDRESS]</span>,
-              Valbonne, 06560, France
+              <strong>Adresse :</strong> {LEGAL_INFO.address},{" "}
+              {LEGAL_INFO.city}
             </p>
             <p>
-              <strong>Email :</strong>{" "}
-              <span className="text-red-500">[CONTACT_EMAIL]</span>
+              <strong>Email :</strong> {LEGAL_INFO.email}
             </p>
           </div>
         </section>
@@ -142,7 +141,7 @@ export default function PolitiqueConfidentialitePage() {
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
             Les données personnelles collectées sont destinées uniquement à
-            Arnaud Chevallier en tant que coach sportif. Certains sous-traitants
+            {LEGAL_INFO.name} en tant que coach sportif. Certains sous-traitants
             techniques peuvent avoir accès aux données :
           </p>
           <div className="overflow-x-auto">
@@ -174,9 +173,7 @@ export default function PolitiqueConfidentialitePage() {
                 <tr className="border-b border-gray-100">
                   <td className="py-2 pr-4">EmailJS</td>
                   <td className="py-2 pr-4">Envoi des formulaires</td>
-                  <td className="py-2">
-                    <span className="text-red-500">[EMAILJS_LOCATION]</span>
-                  </td>
+                  <td className="py-2">{LEGAL_INFO.emailjsLocation}</td>
                 </tr>
               </tbody>
             </table>
@@ -269,8 +266,7 @@ export default function PolitiqueConfidentialitePage() {
             </li>
           </ul>
           <p className="text-gray-700 leading-relaxed mt-4">
-            Pour exercer ces droits, contactez-nous à :{" "}
-            <span className="text-red-500">[CONTACT_EMAIL]</span>
+            Pour exercer ces droits, contactez-nous à : {LEGAL_INFO.email}
           </p>
           <p className="text-gray-700 leading-relaxed mt-2">
             Nous nous engageons à répondre dans un délai maximum de 30 jours.
@@ -361,10 +357,8 @@ export default function PolitiqueConfidentialitePage() {
           </h2>
           <p className="text-gray-700 leading-relaxed">
             Pour toute question relative à la présente politique ou pour exercer
-            vos droits :{" "}
-            <span className="text-red-500">[CONTACT_EMAIL]</span> —{" "}
-            <span className="text-red-500">[BUSINESS_ADDRESS]</span>, Valbonne,
-            06560, France.
+            vos droits : {LEGAL_INFO.email} — {LEGAL_INFO.address},{" "}
+            {LEGAL_INFO.city}.
           </p>
         </section>
       </div>

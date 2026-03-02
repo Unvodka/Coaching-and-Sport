@@ -1,4 +1,5 @@
 import { BASE_URL } from "@/lib/config";
+import { LEGAL_INFO } from "@/lib/legal";
 import { Metadata } from "next";
 
 
@@ -39,25 +40,21 @@ export default function CGVPage() {
           </p>
           <div className="space-y-1 text-gray-700 leading-relaxed">
             <p>
-              <strong>Arnaud Chevallier</strong> — Micro-entrepreneur,
-              Coach-Bluewave
+              <strong>{LEGAL_INFO.name}</strong> — {LEGAL_INFO.status},{" "}
+              {LEGAL_INFO.brand}
             </p>
             <p>
-              <strong>SIRET :</strong>{" "}
-              <span className="text-red-500">[SIRET_NUMBER]</span>
+              <strong>SIRET :</strong> {LEGAL_INFO.siret}
             </p>
             <p>
-              <strong>Adresse :</strong>{" "}
-              <span className="text-red-500">[BUSINESS_ADDRESS]</span>,
-              Valbonne, 06560, France
+              <strong>Adresse :</strong> {LEGAL_INFO.address},{" "}
+              {LEGAL_INFO.city}
             </p>
             <p>
-              <strong>Email :</strong>{" "}
-              <span className="text-red-500">[CONTACT_EMAIL]</span>
+              <strong>Email :</strong> {LEGAL_INFO.email}
             </p>
             <p>
-              <strong>Téléphone :</strong>{" "}
-              <span className="text-red-500">[PHONE_NUMBER]</span>
+              <strong>Téléphone :</strong> {LEGAL_INFO.phone}
             </p>
           </div>
           <p className="text-gray-700 leading-relaxed mt-3">
@@ -94,9 +91,9 @@ export default function CGVPage() {
             Le Coach intervient principalement à Valbonne, Sophia Antipolis,
             Mougins, Grasse, Antibes, Nice et communes environnantes de la Côte
             d&apos;Azur (06). Des frais de déplacement supplémentaires peuvent
-            s&apos;appliquer au-delà d&apos;un rayon de{" "}
-            <span className="text-red-500">[MAX_KM_RADIUS]</span> km depuis
-            Valbonne. Ces frais sont communiqués au Client avant validation.
+            s&apos;appliquer au-delà d&apos;un rayon de {LEGAL_INFO.maxKmRadius}{" "}
+            km depuis Valbonne. Ces frais sont communiqués au Client avant
+            validation.
           </p>
         </section>
 
@@ -114,12 +111,9 @@ export default function CGVPage() {
             moment de la commande.
           </p>
           <p className="text-gray-700 leading-relaxed mb-3">
-            Le paiement peut être effectué par : virement bancaire, espèces
-            <span className="text-red-500">
-              , [OTHER_PAYMENT_METHODS]
-            </span>
-            . Le paiement est exigible à la séance ou selon les conditions du
-            forfait convenu.
+            Le paiement peut être effectué par : virement bancaire, espèces,{" "}
+            {LEGAL_INFO.otherPaymentMethods}. Le paiement est exigible à la
+            séance ou selon les conditions du forfait convenu.
           </p>
           <p className="text-gray-700 leading-relaxed">
             En cas de retard de paiement, des pénalités de retard seront
@@ -136,8 +130,7 @@ export default function CGVPage() {
           </h2>
           <p className="text-gray-700 leading-relaxed mb-3">
             Le Coach est déclaré en tant que prestataire de Services à la
-            Personne (SAP) sous le n°{" "}
-            <span className="text-red-500">[SAP_NUMBER]</span>. Les prestations
+            Personne (SAP) sous le n° {LEGAL_INFO.sapNumber}. Les prestations
             de coaching réalisées au domicile du Client ouvrent droit à un
             crédit d&apos;impôt de 50% des sommes versées (article 199
             sexdecies du CGI).
@@ -195,8 +188,7 @@ export default function CGVPage() {
             du Code de la consommation).
           </p>
           <p className="text-gray-700 leading-relaxed">
-            Pour exercer ce droit, contactez{" "}
-            <span className="text-red-500">[CONTACT_EMAIL]</span>. Le
+            Pour exercer ce droit, contactez {LEGAL_INFO.email}. Le
             remboursement sera effectué sous 14 jours, déduction faite des
             prestations déjà exécutées.
           </p>
@@ -210,11 +202,11 @@ export default function CGVPage() {
           <p className="text-gray-700 leading-relaxed">
             Le Coach s&apos;engage à : fournir des prestations conformes et
             adaptées au niveau du Client ; être titulaire des diplômes et
-            qualifications requis (BPJEPS AAN, carte professionnelle en cours de
-            validité) ; disposer d&apos;une assurance responsabilité civile
-            professionnelle ; respecter les horaires convenus ; adapter les
-            exercices à la condition physique du Client. La responsabilité du
-            Coach est limitée aux dommages directs résultant d&apos;une faute
+            qualifications requis ({LEGAL_INFO.diploma}, carte professionnelle
+            en cours de validité) ; disposer d&apos;une assurance responsabilité
+            civile professionnelle ; respecter les horaires convenus ; adapter
+            les exercices à la condition physique du Client. La responsabilité
+            du Coach est limitée aux dommages directs résultant d&apos;une faute
             prouvée.
           </p>
         </section>
@@ -245,12 +237,11 @@ export default function CGVPage() {
           </h2>
           <div className="space-y-1 text-gray-700 leading-relaxed">
             <p>
-              <strong>Assureur :</strong>{" "}
-              <span className="text-red-500">[INSURANCE_COMPANY]</span>
+              <strong>Assureur :</strong> {LEGAL_INFO.insuranceCompany}
             </p>
             <p>
               <strong>Numéro de police :</strong>{" "}
-              <span className="text-red-500">[INSURANCE_POLICY_NUMBER]</span>
+              {LEGAL_INFO.insurancePolicyNumber}
             </p>
             <p>
               <strong>Garantie :</strong> Responsabilité civile professionnelle —
@@ -311,14 +302,12 @@ export default function CGVPage() {
             Article 14 — Médiation et litiges
           </h2>
           <p className="text-gray-700 leading-relaxed mb-3">
-            Pour toute réclamation, contactez{" "}
-            <span className="text-red-500">[CONTACT_EMAIL]</span>.
+            Pour toute réclamation, contactez {LEGAL_INFO.email}.
           </p>
           <p className="text-gray-700 leading-relaxed mb-3">
             En cas de litige non résolu à l&apos;amiable, le Client peut
-            recourir au médiateur :{" "}
-            <span className="text-red-500">[MEDIATOR_NAME]</span> —{" "}
-            <span className="text-red-500">[MEDIATOR_WEBSITE]</span>
+            recourir au médiateur : {LEGAL_INFO.mediatorName} —{" "}
+            {LEGAL_INFO.mediatorWebsite}
           </p>
           <p className="text-gray-700 leading-relaxed mb-3">
             Plateforme européenne de résolution des litiges :{" "}
