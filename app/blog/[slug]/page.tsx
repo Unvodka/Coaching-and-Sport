@@ -21,34 +21,28 @@ export function generateStaticParams() {
 
 const BLOG_KEYWORDS: Record<string, string[]> = {
   "perdre-du-poids-avec-coach-sportif": [
-    "perte de poids", "perdre du poids", "weight loss", "coach sportif perte de poids",
-    "maigrir avec coach", "régime sportif", "musculation perte de poids",
+    "perte de poids coach sportif", "perdre du poids durablement",
+    "musculation perte de poids", "weight loss coach", "maigrir avec coach",
   ],
   "bienfaits-natation-adultes": [
-    "natation", "natation adulte", "bienfaits natation", "swimming benefits",
-    "cours de natation adulte", "maître-nageur", "swimming teacher",
-    "natation perte de poids", "sport complet",
+    "bienfaits natation adultes", "natation sport complet",
+    "swimming benefits", "maître-nageur Valbonne", "cours natation adulte",
   ],
   "fitness-plein-air-avantages": [
-    "fitness plein air", "outdoor fitness", "entraînement extérieur",
-    "fitness Valbonne", "coach fitness", "HIIT plein air",
-    "personal trainer outdoor", "circuit training extérieur",
+    "fitness plein air avantages", "outdoor fitness Valbonne",
+    "HIIT plein air", "coach fitness extérieur", "personal trainer outdoor",
   ],
   "nutrition-sportive-bases": [
-    "nutrition sportive", "sports nutrition", "nutrition coach",
-    "plan alimentaire sportif", "macronutriments", "protéines sport",
-    "coaching nutritionnel", "meal plan",
+    "nutrition sportive bases", "plan alimentaire sportif",
+    "macronutriments sport", "coaching nutritionnel", "sports nutrition",
   ],
   "commencer-sport-apres-40-ans": [
-    "sport après 40 ans", "reprendre le sport", "remise en forme",
-    "coaching seniors", "natation seniors", "fitness débutant",
-    "coach sportif seniors", "personal trainer over 40",
+    "sport après 40 ans", "reprendre le sport", "remise en forme seniors",
+    "coach sportif débutant", "fitness over 40",
   ],
   "sport-et-sante-mentale": [
-    "sport santé mentale", "activité physique bien-être", "sport anxiété",
-    "sport dépression", "exercice physique stress", "bienfaits sport mental",
-    "sport et moral", "endorphines sport", "sport anti-stress",
-    "santé mentale activité physique", "mental health exercise",
+    "sport santé mentale", "exercice physique stress",
+    "bienfaits sport mental", "sport anti-stress", "mental health exercise",
   ],
 };
 
@@ -160,10 +154,14 @@ export default function BlogPostPage({ params }: Props) {
     ],
   };
 
-  // Find related posts (same category, excluding current)
-  const relatedPosts = BLOG_POSTS.filter(
-    (p) => p.slug !== post.slug
-  ).slice(0, 2);
+  // Find related posts — prefer same category, then fall back to others
+  const sameCategoryPosts = BLOG_POSTS.filter(
+    (p) => p.slug !== post.slug && p.category === post.category
+  );
+  const otherPosts = BLOG_POSTS.filter(
+    (p) => p.slug !== post.slug && p.category !== post.category
+  );
+  const relatedPosts = [...sameCategoryPosts, ...otherPosts].slice(0, 2);
 
   return (
     <>
@@ -227,7 +225,7 @@ export default function BlogPostPage({ params }: Props) {
         ))}
       </article>
 
-      {/* CTA Section */}
+      {/* CTA Section — French-only since blog content is currently French */}
       <section className="bg-gradient-to-br from-slate-50 to-slate-100 py-16 px-16 text-center max-md:py-12 max-md:px-6">
         <h2 className="font-heading text-2xl font-bold text-heading mb-4">
           Prêt à passer à l&apos;action ?

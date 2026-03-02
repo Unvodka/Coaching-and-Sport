@@ -131,9 +131,13 @@ export default function ProgramCard({
 
   if (isStripe) {
     return (
-      <div onClick={!isLoading ? onCheckout : undefined} className={cardClasses}>
+      <button
+        type="button"
+        onClick={!isLoading ? onCheckout : undefined}
+        className={`${cardClasses} text-left w-full`}
+      >
         {content}
-      </div>
+      </button>
     );
   }
 

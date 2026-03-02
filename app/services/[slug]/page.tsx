@@ -18,25 +18,16 @@ export function generateStaticParams() {
 
 const SERVICE_KEYWORDS: Record<string, string[]> = {
   natation: [
-    "cours de natation", "natation", "swimming lessons", "swimming teacher",
-    "maître-nageur", "maitre nageur", "maître-nageur diplômé",
-    "apprendre à nager", "learn to swim", "professeur de natation",
-    "cours de natation adulte", "cours de natation Valbonne",
-    "swimming coach", "natation Côte d'Azur", "piscine Valbonne",
+    "cours de natation Valbonne", "maître-nageur", "swimming lessons",
+    "apprendre à nager", "natation Côte d'Azur",
   ],
   "fitness-plein-air": [
-    "fitness", "fitness plein air", "outdoor fitness", "coach fitness",
-    "musculation", "HIIT", "circuit training", "renforcement musculaire",
-    "personal trainer", "coach sportif", "entraînement fonctionnel",
-    "fitness Valbonne", "fitness Côte d'Azur", "weight training",
-    "outdoor personal trainer", "sport en plein air",
+    "fitness plein air Valbonne", "coach sportif", "personal trainer",
+    "HIIT outdoor", "musculation Côte d'Azur",
   ],
   "nutrition-equilibree": [
-    "nutrition sportive", "nutrition personnalisée", "coaching nutritionnel",
-    "nutritional coaching", "plan alimentaire", "meal plan",
-    "perte de poids", "weight loss", "rééquilibrage alimentaire",
-    "coach nutrition", "diet coach", "alimentation équilibrée",
-    "nutrition Valbonne", "nutrition coach France",
+    "coaching nutritionnel", "plan alimentaire personnalisé", "nutrition sportive",
+    "perte de poids coach", "nutritional coaching",
   ],
 };
 

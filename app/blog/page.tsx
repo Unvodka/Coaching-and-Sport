@@ -13,10 +13,8 @@ export const metadata: Metadata = {
   description:
     "Blog Coach-Bluewave par Arnaud Chevallier, maître-nageur et coach sportif à Valbonne. Conseils d'expert en natation (swimming), fitness, musculation, HIIT, perte de poids et nutrition sportive. Articles pour se remettre en forme sur la Côte d'Azur et en ligne.",
   keywords: [
-    "blog coach sportif", "blog fitness", "blog natation",
-    "conseils natation", "swimming tips", "conseils fitness",
-    "perte de poids", "nutrition sportive", "musculation conseils",
-    "HIIT", "coach sportif Valbonne", "maître-nageur blog",
+    "blog coach sportif", "conseils natation", "fitness Valbonne",
+    "nutrition sportive", "perte de poids coach",
   ],
   alternates: {
     canonical: `${BASE_URL}/blog`,

@@ -21,9 +21,10 @@ export default function PricingCard({
   const [showFeatures, setShowFeatures] = useState(false);
 
   return (
-    <div
+    <button
+      type="button"
       onClick={!isLoading ? onBuy : undefined}
-      className={`h-full bg-white py-8 px-6 rounded-xl border-2 border-gray-200 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_35px_rgba(0,0,0,0.1)] hover:border-brand-blue flex flex-col ${
+      className={`h-full bg-white py-8 px-6 rounded-xl border-2 border-gray-200 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_35px_rgba(0,0,0,0.1)] hover:border-brand-blue flex flex-col w-full ${
         isLoading ? "opacity-60 cursor-not-allowed" : "cursor-pointer"
       }`}
     >
@@ -63,6 +64,6 @@ export default function PricingCard({
           🔒 {t("security.securedByStripe")}
         </p>
       </div>
-    </div>
+    </button>
   );
 }

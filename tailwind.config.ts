@@ -28,12 +28,6 @@ const config: Config = {
           "Times New Roman",
           "serif",
         ],
-        elegant: [
-          "var(--font-cormorant)",
-          "Georgia",
-          "Times New Roman",
-          "serif",
-        ],
       },
       keyframes: {
         fadeInUp: {

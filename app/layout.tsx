@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
-import { Inter, Playfair_Display, Cormorant_Garamond } from 'next/font/google';
+import { Inter, Playfair_Display } from 'next/font/google';
 import { LanguageProvider } from '@/lib/i18n/LanguageContext';
 import { AuthProvider } from '@/lib/supabase/AuthContext';
 import { BASE_URL } from '@/lib/config';
@@ -25,13 +25,6 @@ const playfair = Playfair_Display({
   subsets: ['latin'],
   weight: ['700', '800'],
   variable: '--font-playfair',
-  display: 'swap',
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['700'],
-  variable: '--font-cormorant',
   display: 'swap',
 });
 
@@ -308,6 +301,14 @@ export default function RootLayout({
   return (
     <html lang="fr" className="scroll-smooth">
       <head>
+        {/* Favicons & App Icons */}
+        <link rel="icon" href="/favicon.ico" sizes="48x48" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#2563eb" />
+
         {/* Preconnect to external domains for faster resource loading */}
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
@@ -318,7 +319,7 @@ export default function RootLayout({
         <JsonLd data={websiteJsonLd} />
       </head>
       <body
-        className={`${inter.className} ${playfair.variable} ${cormorant.variable} leading-[1.7] text-gray-800 overflow-x-hidden bg-white`}
+        className={`${inter.className} ${playfair.variable} leading-[1.7] text-gray-800 overflow-x-hidden bg-white`}
       >
         <a
           href="#main-content"

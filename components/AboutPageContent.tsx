@@ -62,7 +62,6 @@ export default function AboutPageContent() {
                   fill
                   className="object-cover"
                   sizes="280px"
-                  priority
                 />
               </div>
             </div>
