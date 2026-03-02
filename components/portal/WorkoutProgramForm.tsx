@@ -125,7 +125,7 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
     "w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none transition-all text-gray-800";
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-6">
+    <form onSubmit={handleSubmit} className="max-w-5xl mx-auto space-y-6">
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-700 text-sm p-3 rounded-lg">
           {error}
@@ -262,8 +262,9 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
                   </button>
                 )}
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-3">
-                <div className="col-span-2">
+              {/* Row 1: Name + Day */}
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-3">
+                <div className="md:col-span-3">
                   <label className="block text-xs font-medium text-gray-500 mb-1">
                     {locale === "fr" ? "Nom (FR)" : "Name (FR)"}
                   </label>
@@ -278,13 +279,34 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-gray-500 mb-1">
+                    {locale === "fr" ? "Jour" : "Day"}
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    value={ex.day_number}
+                    onChange={(e) => {
+                      const v = e.target.value;
+                      updateExercise(idx, "day_number", v === "" ? "" as unknown as number : (parseInt(v) || 1));
+                    }}
+                    className={`${inputClass} text-sm`}
+                  />
+                </div>
+              </div>
+              {/* Row 2: Sets, Reps, Duration, Rest */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div>
+                  <label className="block text-xs font-medium text-gray-500 mb-1">
                     {locale === "fr" ? "Séries" : "Sets"}
                   </label>
                   <input
                     type="number"
                     min="1"
                     value={ex.sets}
-                    onChange={(e) => updateExercise(idx, "sets", parseInt(e.target.value) || 1)}
+                    onChange={(e) => {
+                      const v = e.target.value;
+                      updateExercise(idx, "sets", v === "" ? "" as unknown as number : (parseInt(v) || 1));
+                    }}
                     className={`${inputClass} text-sm`}
                   />
                 </div>
@@ -303,22 +325,22 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
                   <label className="block text-xs font-medium text-gray-500 mb-1">
                     {locale === "fr" ? "Durée" : "Duration"}
                   </label>
-                  <div className="flex gap-1">
+                  <div className="flex gap-1.5">
                     <input
                       type="number"
                       min="0"
                       placeholder="—"
                       value={ex.duration_seconds ?? ""}
                       onChange={(e) => {
-                        const val = e.target.value;
-                        updateExercise(idx, "duration_seconds", val === "" ? null : (parseInt(val) || 0));
+                        const v = e.target.value;
+                        updateExercise(idx, "duration_seconds", v === "" ? null : parseInt(v));
                       }}
                       className={`${inputClass} text-sm flex-1 min-w-0`}
                     />
                     <select
                       value={ex.duration_unit}
                       onChange={(e) => updateExercise(idx, "duration_unit", e.target.value)}
-                      className="px-1.5 py-2 border border-gray-300 rounded-lg text-xs text-gray-700 focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none"
+                      className="px-2 py-2.5 border border-gray-300 rounded-lg text-sm text-gray-700 focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none"
                     >
                       <option value="sec">sec</option>
                       <option value="min">min</option>
@@ -329,35 +351,26 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
                   <label className="block text-xs font-medium text-gray-500 mb-1">
                     {locale === "fr" ? "Repos" : "Rest"}
                   </label>
-                  <div className="flex gap-1">
+                  <div className="flex gap-1.5">
                     <input
                       type="number"
                       min="0"
                       value={ex.rest_seconds}
-                      onChange={(e) => updateExercise(idx, "rest_seconds", parseInt(e.target.value) || 0)}
+                      onChange={(e) => {
+                        const v = e.target.value;
+                        updateExercise(idx, "rest_seconds", v === "" ? "" as unknown as number : (parseInt(v) || 0));
+                      }}
                       className={`${inputClass} text-sm flex-1 min-w-0`}
                     />
                     <select
                       value={ex.rest_unit}
                       onChange={(e) => updateExercise(idx, "rest_unit", e.target.value)}
-                      className="px-1.5 py-2 border border-gray-300 rounded-lg text-xs text-gray-700 focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none"
+                      className="px-2 py-2.5 border border-gray-300 rounded-lg text-sm text-gray-700 focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none"
                     >
                       <option value="sec">sec</option>
                       <option value="min">min</option>
                     </select>
                   </div>
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-gray-500 mb-1">
-                    {locale === "fr" ? "Jour" : "Day"}
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    value={ex.day_number}
-                    onChange={(e) => updateExercise(idx, "day_number", parseInt(e.target.value) || 1)}
-                    className={`${inputClass} text-sm`}
-                  />
                 </div>
               </div>
             </div>
