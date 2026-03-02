@@ -185,7 +185,7 @@ CREATE TABLE public.workout_programs (
   title_en TEXT NOT NULL DEFAULT '',
   description_fr TEXT NOT NULL DEFAULT '',
   description_en TEXT NOT NULL DEFAULT '',
-  difficulty TEXT NOT NULL DEFAULT 'intermediate' CHECK (difficulty IN ('beginner', 'intermediate', 'advanced')),
+  difficulty TEXT NOT NULL DEFAULT 'intermediate' CHECK (difficulty IN ('none', 'beginner', 'intermediate', 'advanced')),
   duration_weeks INTEGER NOT NULL DEFAULT 4,
   is_public BOOLEAN NOT NULL DEFAULT false,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
