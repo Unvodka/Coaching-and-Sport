@@ -76,8 +76,8 @@ export default function ServiceDetailContent({ slug }: Props) {
           </h2>
         </FadeInWhenVisible>
         <StaggerContainer className="grid grid-cols-2 gap-8 max-w-[900px] mx-auto max-md:grid-cols-1">
-          {detail.benefits.map((benefit) => (
-            <StaggerItem key={benefit.title}>
+          {detail.benefits.map((benefit, i) => (
+            <StaggerItem key={benefit.title} index={i}>
               <div className="bg-white p-8 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-gray-200 h-full">
                 <div className="text-4xl mb-4">{benefit.icon}</div>
                 <h3 className="text-xl font-bold text-heading mb-2">

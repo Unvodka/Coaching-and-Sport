@@ -24,8 +24,8 @@ export default function ServicesSection() {
         </p>
       </FadeInWhenVisible>
       <StaggerContainer className="flex flex-wrap gap-10 max-md:flex-col" staggerDelay={0.15}>
-        {services.map((service) => (
-          <StaggerItem key={service.slug} className="flex-1 min-w-0 max-md:min-w-full">
+        {services.map((service, i) => (
+          <StaggerItem key={service.slug} index={i} className="flex-1 min-w-0 max-md:min-w-full">
             <ServiceCard {...service} />
           </StaggerItem>
         ))}

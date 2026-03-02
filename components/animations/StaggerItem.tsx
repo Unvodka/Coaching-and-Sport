@@ -1,27 +1,20 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
 import { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
   className?: string;
+  index?: number;
 }
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { type: "spring", stiffness: 100, damping: 15 },
-  },
-};
-
-export default function StaggerItem({ children, className }: Props) {
+export default function StaggerItem({ children, className, index = 0 }: Props) {
   return (
-    <motion.div variants={itemVariants} className={className}>
+    <div
+      className={`stagger-item ${className || ""}`}
+      style={{ "--item-index": index } as React.CSSProperties}
+    >
       {children}
-    </motion.div>
+    </div>
   );
 }

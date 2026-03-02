@@ -53,3 +53,17 @@ a.text-brand-blue:hover {
   animation-delay: 0.4s;
   animation-fill-mode: both;
 }
+
+/* Stagger animation system */
+[data-stagger-visible="false"] > .stagger-item {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+}
+
+[data-stagger-visible="true"] > .stagger-item {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+    transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition-delay: calc(var(--item-index, 0) * var(--stagger-delay, 0.15s));
+}

@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
+import { validateOrigin } from "@/lib/api/csrf";
+import { rateLimit } from "@/lib/api/rate-limit";
 
 // Allowed prices in cents — must match lib/constants.ts packs
 const ALLOWED_PRICES: Record<number, string[]> = {
@@ -12,6 +14,18 @@ const ALLOWED_PRICES: Record<number, string[]> = {
 };
 
 export async function POST(request: NextRequest) {
+  // CSRF protection
+  const originError = validateOrigin(request);
+  if (originError) return originError;
+
+  // Rate limit: 5 checkout attempts per minute per IP
+  const rateLimitError = rateLimit(
+    request.headers.get("x-forwarded-for"),
+    "checkout",
+    { limit: 5, windowSeconds: 60 }
+  );
+  if (rateLimitError) return rateLimitError;
+
   try {
     const { title, priceInCents } = await request.json();
 

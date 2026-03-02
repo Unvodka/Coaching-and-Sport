@@ -35,6 +35,7 @@ export function getServerEnv() {
   return {
     supabaseServiceKey: requireEnv("SUPABASE_SERVICE_ROLE_KEY"),
     stripeSecretKey: requireEnv("STRIPE_SECRET_KEY"),
+    stripeWebhookSecret: optionalEnv("STRIPE_WEBHOOK_SECRET", ""),
   };
 }
 

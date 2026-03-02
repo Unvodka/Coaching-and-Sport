@@ -18,6 +18,8 @@ export default function HeroSection() {
         priority
         sizes="100vw"
         quality={75}
+        placeholder="blur"
+        blurDataURL="data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAACwAQCdASoKAAYABUB8JYwAAuX7+ExAAP51xsPWSfKpChEssNMYyFejKt3UtY7tGzKcMd/AB/AAAA=="
       />
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-black/50 z-[1]" />

@@ -40,6 +40,30 @@ export default function Header() {
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  // Close menu on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && menuOpen) {
+        setMenuOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [menuOpen]);
+
   return (
     <header
       className="text-white py-6 fixed w-full top-0 z-[1000] backdrop-blur-md bg-black/40 max-md:py-3 animate-slideDown"
@@ -57,9 +81,20 @@ export default function Header() {
         </Link>
 
         <div className="flex items-center gap-6">
+          {/* Mobile overlay backdrop */}
+          {menuOpen && (
+            <div
+              className="fixed inset-0 bg-black/40 z-[998] md:hidden"
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+            />
+          )}
+
           {/* Navigation Links */}
           <ul
             ref={menuRef}
+            role={menuOpen ? "dialog" : undefined}
+            aria-label={menuOpen ? "Navigation menu" : undefined}
             className={`flex list-none gap-8 max-md:fixed max-md:top-0 max-md:flex-col max-md:bg-black/90 max-md:w-[70%] max-md:min-h-screen max-md:pt-20 max-md:pb-8 max-md:transition-all max-md:duration-400 max-md:ease-in-out max-md:shadow-[5px_0_15px_rgba(0,0,0,0.3)] max-md:gap-0 max-md:z-[999] ${
               menuOpen ? "max-md:left-0" : "max-md:left-[-100%]"
             }`}

@@ -1,7 +1,16 @@
 import { createClient, createAdminClient } from "@/lib/supabase/server";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { rateLimit } from "@/lib/api/rate-limit";
 
-export async function POST() {
+export async function POST(request: NextRequest) {
+  // Rate limit: 3 delete attempts per 10 minutes per IP
+  const rateLimitError = rateLimit(
+    request.headers.get("x-forwarded-for"),
+    "delete-account",
+    { limit: 3, windowSeconds: 600 }
+  );
+  if (rateLimitError) return rateLimitError;
+
   try {
     // Verify the caller is authenticated
     const supabase = createClient();

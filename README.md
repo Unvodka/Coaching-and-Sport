@@ -47,6 +47,7 @@ SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
 # Stripe
 STRIPE_SECRET_KEY=sk_live_or_sk_test_xxx
+STRIPE_WEBHOOK_SECRET=whsec_xxx
 
 # EmailJS
 NEXT_PUBLIC_EMAILJS_SERVICE_ID=your-service-id
@@ -70,6 +71,14 @@ After your first Google login, promote yourself to coach:
 ```sql
 UPDATE public.profiles SET role = 'coach' WHERE email = 'your-email@gmail.com';
 ```
+
+### Stripe Webhook
+
+Set up a webhook in the [Stripe Dashboard](https://dashboard.stripe.com/webhooks):
+
+- **Endpoint URL:** `https://coach-bluewave.com/api/webhooks/stripe`
+- **Events:** `checkout.session.completed`, `checkout.session.expired`
+- Copy the webhook signing secret to `STRIPE_WEBHOOK_SECRET` in your env vars.
 
 ### Development
 

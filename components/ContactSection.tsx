@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, FormEvent, useEffect } from "react";
-import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import FadeInWhenVisible from "./animations/FadeInWhenVisible";
@@ -211,15 +210,13 @@ export default function ContactSection() {
             </label>
           </div>
 
-          <motion.button
+          <button
             type="submit"
             disabled={isSubmitting}
-            whileHover={{ y: -3, boxShadow: "0 10px 25px rgba(37,99,235,0.3)" }}
-            whileTap={{ scale: 0.98 }}
-            className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-12 border-none rounded-lg text-[1.1rem] font-bold cursor-pointer transition-all duration-300 w-1/2 max-md:w-full mx-auto block disabled:opacity-60 disabled:cursor-not-allowed"
+            className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-4 px-12 border-none rounded-lg text-[1.1rem] font-bold cursor-pointer transition-all duration-300 w-1/2 max-md:w-full mx-auto block disabled:opacity-60 disabled:cursor-not-allowed hover:-translate-y-[3px] hover:shadow-[0_10px_25px_rgba(37,99,235,0.3)] active:scale-[0.98]"
           >
             {isSubmitting ? t("contact.sending") : t("contact.submit")}
-          </motion.button>
+          </button>
         </form>
       </FadeInWhenVisible>
     </section>
