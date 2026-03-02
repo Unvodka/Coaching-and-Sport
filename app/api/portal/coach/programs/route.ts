@@ -16,21 +16,23 @@ export async function GET() {
       return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 
-    // Fetch assignment counts per program
+    // Fetch assignments per program (with user IDs)
     const programIds = (programs || []).map((p) => p.id);
     const { data: assignments } = await admin
       .from("program_assignments")
-      .select("program_id")
+      .select("program_id, user_id")
       .in("program_id", programIds);
 
-    const assignmentMap: Record<string, number> = {};
+    const assignmentMap: Record<string, string[]> = {};
     (assignments || []).forEach((a) => {
-      assignmentMap[a.program_id] = (assignmentMap[a.program_id] || 0) + 1;
+      if (!assignmentMap[a.program_id]) assignmentMap[a.program_id] = [];
+      assignmentMap[a.program_id].push(a.user_id);
     });
 
     const result = (programs || []).map((p) => ({
       ...p,
-      assignment_count: assignmentMap[p.id] || 0,
+      assignment_count: (assignmentMap[p.id] || []).length,
+      assigned_user_ids: assignmentMap[p.id] || [],
     }));
 
     return NextResponse.json({ programs: result });
