@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "@/lib/supabase/AuthContext";
 import { useLanguage } from "@/lib/i18n/useLanguage";
+import { useClickOutside } from "@/lib/hooks/useClickOutside";
 import { createClient } from "@/lib/supabase/client";
 
 export default function AuthButton() {
@@ -13,18 +14,7 @@ export default function AuthButton() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Node)
-      ) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  useClickOutside(dropdownRef, () => setDropdownOpen(false));
 
   // Standalone Google sign-in — does NOT depend on AuthContext
   const handleSignIn = async () => {

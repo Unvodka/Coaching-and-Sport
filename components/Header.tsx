@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getNavLinks } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n/useLanguage";
+import { useClickOutside } from "@/lib/hooks/useClickOutside";
 import LanguageToggle from "./LanguageToggle";
 import AuthButton from "./AuthButton";
 
@@ -25,20 +26,7 @@ export default function Header() {
 
   const navLinks = getNavLinks(locale);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        menuRef.current &&
-        toggleRef.current &&
-        !menuRef.current.contains(e.target as Node) &&
-        !toggleRef.current.contains(e.target as Node)
-      ) {
-        setMenuOpen(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  useClickOutside(menuRef, () => setMenuOpen(false), toggleRef);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {

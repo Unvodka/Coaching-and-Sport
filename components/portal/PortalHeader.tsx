@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { useAuth } from "@/lib/supabase/AuthContext";
 import { useLanguage } from "@/lib/i18n/useLanguage";
+import { useClickOutside } from "@/lib/hooks/useClickOutside";
 
 interface PortalHeaderProps {
   title: string;
@@ -16,15 +17,7 @@ export default function PortalHeader({ title, onMenuToggle }: PortalHeaderProps)
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setMenuOpen(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  useClickOutside(menuRef, () => setMenuOpen(false));
 
   const handleSignOut = () => {
     setMenuOpen(false);

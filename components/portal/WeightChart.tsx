@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   LineChart,
   Line,
@@ -40,37 +40,37 @@ const METRICS: MetricConfig[] = [
 export default function WeightChart({ logs }: WeightChartProps) {
   const { locale } = useLanguage();
 
-  const hasCompositionData = logs.some(
-    (l) => l.body_fat_pct || l.visceral_fat || l.muscle_mass_kg || l.water_pct
+  const hasCompositionData = useMemo(
+    () => logs.some((l) => l.body_fat_pct || l.visceral_fat || l.muscle_mass_kg || l.water_pct),
+    [logs]
   );
 
-  // Determine which metrics have data
-  const initialMetrics = (): Set<MetricKey> => {
+  const [activeMetrics, setActiveMetrics] = useState<Set<MetricKey>>(() => {
     const set = new Set<MetricKey>(["weight"]);
     if (logs.some((l) => l.body_fat_pct)) set.add("bodyFat");
     if (logs.some((l) => l.visceral_fat)) set.add("visceralFat");
     if (logs.some((l) => l.muscle_mass_kg)) set.add("muscle");
     if (logs.some((l) => l.water_pct)) set.add("water");
     return set;
-  };
+  });
 
-  const [activeMetrics, setActiveMetrics] = useState<Set<MetricKey>>(initialMetrics);
-
-  const data = [...logs]
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-    .map((log) => ({
-      date: new Date(log.date).toLocaleDateString("fr-FR", {
-        day: "2-digit",
-        month: "short",
-      }),
-      weight: Number(log.weight_kg),
-      bodyFat: log.body_fat_pct ? Number(log.body_fat_pct) : null,
-      visceralFat: log.visceral_fat ? Number(log.visceral_fat) : null,
-      muscle: log.muscle_mass_kg ? Number(log.muscle_mass_kg) : null,
-      water: log.water_pct ? Number(log.water_pct) : null,
-    }));
-
-  if (data.length === 0) return null;
+  const data = useMemo(
+    () =>
+      [...logs]
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+        .map((log) => ({
+          date: new Date(log.date).toLocaleDateString("fr-FR", {
+            day: "2-digit",
+            month: "short",
+          }),
+          weight: Number(log.weight_kg),
+          bodyFat: log.body_fat_pct ? Number(log.body_fat_pct) : null,
+          visceralFat: log.visceral_fat ? Number(log.visceral_fat) : null,
+          muscle: log.muscle_mass_kg ? Number(log.muscle_mass_kg) : null,
+          water: log.water_pct ? Number(log.water_pct) : null,
+        })),
+    [logs]
+  );
 
   const toggleMetric = (key: MetricKey) => {
     setActiveMetrics((prev) => {
@@ -84,27 +84,36 @@ export default function WeightChart({ logs }: WeightChartProps) {
     });
   };
 
-  // Calculate Y axis domain for weight/muscle (kg)
-  const kgValues = data.flatMap((d) => {
-    const vals: number[] = [];
-    if (activeMetrics.has("weight")) vals.push(d.weight);
-    if (activeMetrics.has("muscle") && d.muscle) vals.push(d.muscle);
-    return vals;
-  });
-  const minKg = kgValues.length > 0 ? Math.floor(Math.min(...kgValues) - 2) : 0;
-  const maxKg = kgValues.length > 0 ? Math.ceil(Math.max(...kgValues) + 2) : 100;
-
-  const availableMetrics = METRICS.filter((m) => {
-    if (m.key === "weight") return true;
-    if (!hasCompositionData) return false;
-    return logs.some((l) => {
-      if (m.key === "bodyFat") return l.body_fat_pct;
-      if (m.key === "visceralFat") return l.visceral_fat;
-      if (m.key === "muscle") return l.muscle_mass_kg;
-      if (m.key === "water") return l.water_pct;
-      return false;
+  const { minKg, maxKg } = useMemo(() => {
+    const kgValues = data.flatMap((d) => {
+      const vals: number[] = [];
+      if (activeMetrics.has("weight")) vals.push(d.weight);
+      if (activeMetrics.has("muscle") && d.muscle) vals.push(d.muscle);
+      return vals;
     });
-  });
+    return {
+      minKg: kgValues.length > 0 ? Math.floor(Math.min(...kgValues) - 2) : 0,
+      maxKg: kgValues.length > 0 ? Math.ceil(Math.max(...kgValues) + 2) : 100,
+    };
+  }, [data, activeMetrics]);
+
+  const availableMetrics = useMemo(
+    () =>
+      METRICS.filter((m) => {
+        if (m.key === "weight") return true;
+        if (!hasCompositionData) return false;
+        return logs.some((l) => {
+          if (m.key === "bodyFat") return l.body_fat_pct;
+          if (m.key === "visceralFat") return l.visceral_fat;
+          if (m.key === "muscle") return l.muscle_mass_kg;
+          if (m.key === "water") return l.water_pct;
+          return false;
+        });
+      }),
+    [logs, hasCompositionData]
+  );
+
+  if (data.length === 0) return null;
 
   return (
     <div className="bg-white rounded-xl border border-gray-100 p-6">

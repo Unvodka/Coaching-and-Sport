@@ -37,22 +37,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch profile via API route (bypasses RLS)
-  async function fetchProfileViaApi() {
+  // Fetch profile: API route first (reliable auth), fallback to direct query
+  async function fetchProfile(supabase: ReturnType<typeof createClient>, userId: string): Promise<Profile | null> {
     try {
       const res = await fetch("/api/portal/profile");
       if (res.ok) {
         const data = await res.json();
         return data.profile as Profile | null;
       }
-    } catch (err) {
-      console.error("Profile fetch error:", err);
+    } catch {
+      // API failed, try direct query
     }
-    return null;
-  }
-
-  // Fallback: fetch profile via Supabase client (depends on RLS)
-  async function fetchProfileDirect(supabase: ReturnType<typeof createClient>, userId: string) {
     try {
       const { data } = await supabase
         .from("profiles")
@@ -80,11 +75,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           const { data: { session: authSession } } = await supabase.auth.getSession();
           if (mounted) setSession(authSession);
 
-          // Try API first, fallback to direct query
-          let profileData = await fetchProfileViaApi();
-          if (!profileData) {
-            profileData = await fetchProfileDirect(supabase, authUser.id);
-          }
+          const profileData = await fetchProfile(supabase, authUser.id);
           if (mounted) setProfile(profileData);
         } else {
           setSession(null);
@@ -111,10 +102,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(newSession?.user ?? null);
 
       if (newSession?.user) {
-        let profileData = await fetchProfileViaApi();
-        if (!profileData) {
-          profileData = await fetchProfileDirect(supabase, newSession.user.id);
-        }
+        const profileData = await fetchProfile(supabase, newSession.user.id);
         if (mounted) setProfile(profileData);
       } else {
         setProfile(null);
@@ -154,7 +142,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const refreshProfile = async () => {
-    const profileData = await fetchProfileViaApi();
+    const supabase = createClient();
+    const profileData = await fetchProfile(supabase, user?.id || "");
     if (profileData) setProfile(profileData);
   };
 

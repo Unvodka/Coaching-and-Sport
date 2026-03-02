@@ -24,7 +24,6 @@ export function getNavLinks(locale: Locale): NavLink[] {
   return locale === 'en' ? NAV_LINKS_EN : NAV_LINKS_FR;
 }
 
-export const NAV_LINKS = NAV_LINKS_FR;
 
 // ─── SERVICES ───────────────────────────────────────────────
 
@@ -748,8 +747,6 @@ export function getPrograms(locale: Locale): Program[] {
   return locale === 'en' ? PROGRAMS_EN : PROGRAMS_FR;
 }
 
-export const PROGRAMS = PROGRAMS_FR;
-
 // ─── PRICING PACKS ──────────────────────────────────────────
 
 const PRICING_PACKS_FR: PricingPack[] = [
@@ -868,4 +865,3 @@ export function getPricingPacks(locale: Locale): PricingPack[] {
   return locale === 'en' ? PRICING_PACKS_EN : PRICING_PACKS_FR;
 }
 
-export const PRICING_PACKS = PRICING_PACKS_FR;

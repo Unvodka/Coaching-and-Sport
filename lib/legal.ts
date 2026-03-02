@@ -5,38 +5,38 @@
 
 export const LEGAL_INFO = {
   // ─── Identity ──────────────────────────────────────────────
-  name: "Arnaud Chevallier",
-  status: "Micro-entrepreneur (Entreprise Individuelle)",
-  brand: "Coach-Bluewave",
-  activity: "Coach sportif personnel, Maître-Nageur Sauveteur",
-  siret: "[SIRET_NUMBER]",
-  address: "[BUSINESS_ADDRESS]",
-  city: "Valbonne, 06560, France",
-  phone: "[PHONE_NUMBER]",
-  email: "[CONTACT_EMAIL]",
+  name: 'Arnaud Chevallier',
+  status: 'Micro-entrepreneur (Entreprise Individuelle)',
+  brand: 'Coach-Bluewave',
+  activity: 'Coach sportif personnel, Maître-Nageur Sauveteur',
+  siret: '82243667100025',
+  address: '131 allée des palmiers',
+  city: 'Valbonne, 06560, France',
+  phone: '0749486203',
+  email: 'chevallier.a06@gmail.com',
 
   // ─── Professional Card ─────────────────────────────────────
-  diploma: "BPJEPS Activités Aquatiques et de la Natation (AAN)",
-  carteProNumber: "[CARTE_PRO_NUMBER]",
-  carteProIssuedBy: "SDJES des Alpes-Maritimes (06)",
-  carteProExpiry: "[CARTE_PRO_EXPIRY_DATE]",
+  diploma: 'BPJEPS Activités Aquatiques et de la Natation (AAN)',
+  carteProNumber: '07520ED0375',
+  carteProIssuedBy: 'Préfécture des Alpes-Maritimes (06)',
+  carteProExpiry: '19/11/2030',
 
   // ─── SAP (Services à la Personne) ─────────────────────────
-  sapNumber: "[SAP_NUMBER]",
+  sapNumber: '[SAP_NUMBER]',
 
   // ─── Insurance ─────────────────────────────────────────────
-  insuranceCompany: "[INSURANCE_COMPANY]",
-  insurancePolicyNumber: "[INSURANCE_POLICY_NUMBER]",
+  insuranceCompany: '[INSURANCE_COMPANY]',
+  insurancePolicyNumber: '[INSURANCE_POLICY_NUMBER]',
 
   // ─── Business Details ──────────────────────────────────────
-  maxKmRadius: "[MAX_KM_RADIUS]",
-  otherPaymentMethods: "[OTHER_PAYMENT_METHODS]",
+  maxKmRadius: '[MAX_KM_RADIUS]',
+  otherPaymentMethods: '[OTHER_PAYMENT_METHODS]',
 
   // ─── Mediation ─────────────────────────────────────────────
-  mediatorName: "[MEDIATOR_NAME]",
-  mediatorWebsite: "[MEDIATOR_WEBSITE]",
-  mediatorEmail: "[MEDIATOR_EMAIL]",
+  mediatorName: '[MEDIATOR_NAME]',
+  mediatorWebsite: '[MEDIATOR_WEBSITE]',
+  mediatorEmail: '[MEDIATOR_EMAIL]',
 
   // ─── Third Parties ─────────────────────────────────────────
-  emailjsLocation: "[EMAILJS_LOCATION]",
+  emailjsLocation: '[EMAILJS_LOCATION]',
 } as const;

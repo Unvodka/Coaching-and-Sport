@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useAuth } from "@/lib/supabase/AuthContext";
 import RecipeCard from "@/components/portal/RecipeCard";
@@ -81,25 +81,45 @@ export default function RecipesPage() {
     setTab("mine");
   };
 
-  const filtered = recipes.filter((r) => {
-    if (tab === "mine" && r.author_id !== userId) return false;
-    if (tab === "favorites" && !favoriteIds.has(r.id)) return false;
-    if (search) {
-      const query = search.toLowerCase();
-      const title = locale === "fr" ? r.title_fr : (r.title_en || r.title_fr);
-      return (
-        title.toLowerCase().includes(query) ||
-        r.category.toLowerCase().includes(query)
-      );
-    }
-    return true;
-  });
+  const filtered = useMemo(() => {
+    const query = search.toLowerCase();
+    return recipes.filter((r) => {
+      if (tab === "mine" && r.author_id !== userId) return false;
+      if (tab === "favorites" && !favoriteIds.has(r.id)) return false;
+      if (query) {
+        const title = locale === "fr" ? r.title_fr : (r.title_en || r.title_fr);
+        return (
+          title.toLowerCase().includes(query) ||
+          r.category.toLowerCase().includes(query)
+        );
+      }
+      return true;
+    });
+  }, [recipes, tab, userId, favoriteIds, search, locale]);
 
   const tabs: { key: Tab; label: string }[] = [
     { key: "all", label: t("portal.recipes.all") },
     { key: "mine", label: t("portal.recipes.myRecipes") },
     { key: "favorites", label: t("portal.recipes.favorites") },
   ];
+
+  const emptyTitle = () => {
+    if (search) return locale === "fr" ? "Aucune recette trouvée" : "No recipes found";
+    if (tab === "favorites") return locale === "fr" ? "Pas encore de favoris" : "No favorites yet";
+    return locale === "fr" ? "Pas encore de recettes !" : "No recipes yet!";
+  };
+
+  const emptyDescription = () => {
+    if (search) return locale === "fr" ? "Essayez avec d'autres mots-clés." : "Try different keywords.";
+    if (tab === "favorites") {
+      return locale === "fr"
+        ? "Explorez les recettes et ajoutez-les à vos favoris."
+        : "Browse recipes and add them to your favorites.";
+    }
+    return locale === "fr"
+      ? "Ajoutez votre première recette pour commencer à construire votre collection."
+      : "Add your first recipe to start building your collection.";
+  };
 
   if (loading) {
     return (
@@ -201,22 +221,10 @@ export default function RecipesPage() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
           <h3 className="text-lg font-semibold text-heading mb-2">
-            {search
-              ? (locale === "fr" ? "Aucune recette trouvée" : "No recipes found")
-              : tab === "favorites"
-              ? (locale === "fr" ? "Pas encore de favoris" : "No favorites yet")
-              : (locale === "fr" ? "Pas encore de recettes !" : "No recipes yet!")}
+            {emptyTitle()}
           </h3>
           <p className="text-gray-500 max-w-md mx-auto mb-6">
-            {search
-              ? (locale === "fr" ? "Essayez avec d'autres mots-clés." : "Try different keywords.")
-              : tab === "favorites"
-              ? (locale === "fr"
-                  ? "Explorez les recettes et ajoutez-les à vos favoris."
-                  : "Browse recipes and add them to your favorites.")
-              : (locale === "fr"
-                  ? "Ajoutez votre première recette pour commencer à construire votre collection."
-                  : "Add your first recipe to start building your collection.")}
+            {emptyDescription()}
           </p>
           {!search && tab !== "favorites" && (
             <button

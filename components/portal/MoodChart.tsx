@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import {
   AreaChart,
   Area,
@@ -17,16 +18,20 @@ interface MoodChartProps {
 }
 
 export default function MoodChart({ entries }: MoodChartProps) {
-  const data = [...entries]
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-    .map((entry) => ({
-      date: new Date(entry.date).toLocaleDateString("fr-FR", {
-        day: "2-digit",
-        month: "short",
-      }),
-      mood: entry.mood_score,
-      energy: entry.energy_level,
-    }));
+  const data = useMemo(
+    () =>
+      [...entries]
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+        .map((entry) => ({
+          date: new Date(entry.date).toLocaleDateString("fr-FR", {
+            day: "2-digit",
+            month: "short",
+          }),
+          mood: entry.mood_score,
+          energy: entry.energy_level,
+        })),
+    [entries]
+  );
 
   if (data.length < 2) return null;
 
