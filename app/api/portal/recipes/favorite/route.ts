@@ -1,44 +1,51 @@
-import { createClient, createAdminClient } from "@/lib/supabase/server";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { withAuth } from "@/lib/api/auth";
+import { validateOrigin } from "@/lib/api/csrf";
+import { rateLimit } from "@/lib/api/rate-limit";
+import { isValidUUID } from "@/lib/config";
 
-export async function POST(request: Request) {
-  try {
-    const supabase = createClient();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
+export async function POST(request: NextRequest) {
+  const originError = validateOrigin(request);
+  if (originError) return originError;
 
-    if (authError || !user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+  const rateLimitError = rateLimit(
+    request.headers.get("x-forwarded-for"),
+    "recipe-favorite",
+    { limit: 30, windowSeconds: 60 }
+  );
+  if (rateLimitError) return rateLimitError;
 
+  return withAuth(async ({ user, admin }) => {
     const { recipe_id, action } = await request.json();
 
-    if (!recipe_id || !action) {
-      return NextResponse.json({ error: "recipe_id and action required" }, { status: 400 });
+    if (!recipe_id || !isValidUUID(recipe_id)) {
+      return NextResponse.json({ error: "Valid recipe_id is required" }, { status: 400 });
     }
 
-    const admin = createAdminClient();
+    if (action !== "add" && action !== "remove") {
+      return NextResponse.json({ error: "action must be 'add' or 'remove'" }, { status: 400 });
+    }
 
     if (action === "add") {
       const { error } = await admin
         .from("recipe_favorites")
         .insert({ user_id: user.id, recipe_id });
       if (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        console.error("Favorite add error:", error);
+        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
       }
-    } else if (action === "remove") {
+    } else {
       const { error } = await admin
         .from("recipe_favorites")
         .delete()
         .eq("user_id", user.id)
         .eq("recipe_id", recipe_id);
       if (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        console.error("Favorite remove error:", error);
+        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
       }
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("Favorite API error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-  }
+  });
 }

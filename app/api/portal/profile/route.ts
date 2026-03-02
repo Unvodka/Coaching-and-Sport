@@ -1,16 +1,10 @@
-import { createClient, createAdminClient } from "@/lib/supabase/server";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { withAuth } from "@/lib/api/auth";
+import { validateOrigin } from "@/lib/api/csrf";
+import { rateLimit } from "@/lib/api/rate-limit";
 
 export async function GET() {
-  try {
-    const supabase = createClient();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
-
-    if (authError || !user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    const admin = createAdminClient();
+  return withAuth(async ({ user, admin }) => {
     const { data, error } = await admin
       .from("profiles")
       .select("*")
@@ -18,26 +12,26 @@ export async function GET() {
       .single();
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      console.error("Profile GET error:", error);
+      return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 
     return NextResponse.json({ profile: data });
-  } catch (error) {
-    console.error("Profile GET error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-  }
+  });
 }
 
-export async function PUT(request: Request) {
-  try {
-    const supabase = createClient();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
+export async function PUT(request: NextRequest) {
+  const originError = validateOrigin(request);
+  if (originError) return originError;
 
-    if (authError || !user) {
-      console.error("Profile PUT auth error:", authError);
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+  const rateLimitError = rateLimit(
+    request.headers.get("x-forwarded-for"),
+    "profile-put",
+    { limit: 10, windowSeconds: 60 }
+  );
+  if (rateLimitError) return rateLimitError;
 
+  return withAuth(async ({ user, admin }) => {
     const body = await request.json();
     const { full_name } = body;
 
@@ -45,22 +39,23 @@ export async function PUT(request: Request) {
       return NextResponse.json({ error: "full_name is required" }, { status: 400 });
     }
 
-    const admin = createAdminClient();
+    const trimmed = full_name.trim();
+    if (trimmed.length === 0 || trimmed.length > 100) {
+      return NextResponse.json({ error: "full_name must be 1-100 characters" }, { status: 400 });
+    }
+
     const { data, error: updateError } = await admin
       .from("profiles")
-      .update({ full_name: full_name.trim(), updated_at: new Date().toISOString() })
+      .update({ full_name: trimmed, updated_at: new Date().toISOString() })
       .eq("id", user.id)
       .select()
       .single();
 
     if (updateError) {
       console.error("Profile update error:", updateError);
-      return NextResponse.json({ error: updateError.message }, { status: 500 });
+      return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 
     return NextResponse.json({ success: true, profile: data });
-  } catch (error) {
-    console.error("Profile PUT error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-  }
+  });
 }

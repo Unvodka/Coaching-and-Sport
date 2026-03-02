@@ -1,17 +1,8 @@
-import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
+import { withAuth } from "@/lib/api/auth";
 
 export async function GET() {
-  try {
-    const supabase = createClient();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
-
-    if (authError || !user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    const admin = createAdminClient();
-
+  return withAuth(async ({ user, admin }) => {
     const [recipesRes, weightRes, moodRes, progressRes] = await Promise.all([
       admin
         .from("recipes")
@@ -37,8 +28,5 @@ export async function GET() {
       moodEntries: moodRes.count ?? 0,
       workoutsCompleted: progressRes.count ?? 0,
     });
-  } catch (error) {
-    console.error("Stats API error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-  }
+  });
 }

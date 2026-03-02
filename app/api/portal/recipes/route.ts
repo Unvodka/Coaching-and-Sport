@@ -1,18 +1,12 @@
-import { createClient, createAdminClient } from "@/lib/supabase/server";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { withAuth } from "@/lib/api/auth";
+import { validateOrigin } from "@/lib/api/csrf";
+import { rateLimit } from "@/lib/api/rate-limit";
+
+const VALID_CATEGORIES = ["general", "breakfast", "lunch", "dinner", "snack", "dessert", "drink"];
 
 export async function GET() {
-  try {
-    const supabase = createClient();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
-
-    if (authError || !user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    const admin = createAdminClient();
-
-    // Fetch recipes and user favorites in parallel
+  return withAuth(async ({ user, admin }) => {
     const [recipesRes, favsRes] = await Promise.all([
       admin
         .from("recipes")
@@ -26,7 +20,7 @@ export async function GET() {
 
     if (recipesRes.error) {
       console.error("Recipes fetch error:", recipesRes.error);
-      return NextResponse.json({ error: recipesRes.error.message }, { status: 500 });
+      return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 
     const favoriteIds = (favsRes.data || []).map((f: { recipe_id: string }) => f.recipe_id);
@@ -36,21 +30,21 @@ export async function GET() {
       favoriteIds,
       userId: user.id,
     });
-  } catch (error) {
-    console.error("Recipes GET error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-  }
+  });
 }
 
-export async function POST(request: Request) {
-  try {
-    const supabase = createClient();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
+export async function POST(request: NextRequest) {
+  const originError = validateOrigin(request);
+  if (originError) return originError;
 
-    if (authError || !user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+  const rateLimitError = rateLimit(
+    request.headers.get("x-forwarded-for"),
+    "recipe-post",
+    { limit: 10, windowSeconds: 60 }
+  );
+  if (rateLimitError) return rateLimitError;
 
+  return withAuth(async ({ user, admin }) => {
     const body = await request.json();
     const {
       title_fr, title_en, description_fr, description_en,
@@ -58,8 +52,26 @@ export async function POST(request: Request) {
       image_url, category, is_public, recipe_id,
     } = body;
 
-    if (!title_fr) {
+    if (!title_fr || typeof title_fr !== "string") {
       return NextResponse.json({ error: "title_fr is required" }, { status: 400 });
+    }
+    if (title_fr.length > 255 || (title_en && title_en.length > 255)) {
+      return NextResponse.json({ error: "Title too long (max 255)" }, { status: 400 });
+    }
+    if ((description_fr && description_fr.length > 5000) || (description_en && description_en.length > 5000)) {
+      return NextResponse.json({ error: "Description too long (max 5000)" }, { status: 400 });
+    }
+    if ((instructions_fr && instructions_fr.length > 10000) || (instructions_en && instructions_en.length > 10000)) {
+      return NextResponse.json({ error: "Instructions too long (max 10000)" }, { status: 400 });
+    }
+    if (ingredients && (!Array.isArray(ingredients) || ingredients.length > 100)) {
+      return NextResponse.json({ error: "Invalid ingredients (max 100 items)" }, { status: 400 });
+    }
+    if (category && !VALID_CATEGORIES.includes(category)) {
+      return NextResponse.json({ error: "Invalid category" }, { status: 400 });
+    }
+    if (image_url && (typeof image_url !== "string" || image_url.length > 2000)) {
+      return NextResponse.json({ error: "Invalid image URL" }, { status: 400 });
     }
 
     const data = {
@@ -75,10 +87,7 @@ export async function POST(request: Request) {
       is_public: is_public || false,
     };
 
-    const admin = createAdminClient();
-
     if (recipe_id) {
-      // Update existing recipe — verify ownership or coach role
       const { data: profileData } = await admin
         .from("profiles")
         .select("role")
@@ -92,7 +101,6 @@ export async function POST(request: Request) {
         .update(data)
         .eq("id", recipe_id);
 
-      // Non-coaches can only update their own recipes
       if (!isCoach) {
         updateQuery.eq("author_id", user.id);
       }
@@ -100,22 +108,18 @@ export async function POST(request: Request) {
       const { error: updateError } = await updateQuery;
       if (updateError) {
         console.error("Recipe update error:", updateError);
-        return NextResponse.json({ error: updateError.message }, { status: 500 });
+        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
       }
     } else {
-      // Create new recipe
       const { error: insertError } = await admin
         .from("recipes")
         .insert({ ...data, author_id: user.id });
       if (insertError) {
         console.error("Recipe insert error:", insertError);
-        return NextResponse.json({ error: insertError.message }, { status: 500 });
+        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
       }
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("Recipe API error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-  }
+  });
 }

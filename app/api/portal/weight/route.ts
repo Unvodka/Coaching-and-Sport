@@ -1,18 +1,12 @@
-import { createClient, createAdminClient } from "@/lib/supabase/server";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { withAuth } from "@/lib/api/auth";
+import { validateOrigin } from "@/lib/api/csrf";
+import { rateLimit } from "@/lib/api/rate-limit";
+
+const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
 export async function GET() {
-  try {
-    // Verify user identity via cookies
-    const supabase = createClient();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
-
-    if (authError || !user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    // Use admin client for data operations (bypasses RLS)
-    const admin = createAdminClient();
+  return withAuth(async ({ user, admin }) => {
     const { data, error } = await admin
       .from("weight_logs")
       .select("*")
@@ -21,26 +15,25 @@ export async function GET() {
 
     if (error) {
       console.error("Weight fetch error:", error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 
     return NextResponse.json({ data: data || [] });
-  } catch (error) {
-    console.error("Weight GET error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-  }
+  });
 }
 
-export async function POST(request: Request) {
-  try {
-    // Verify user identity via cookies
-    const supabase = createClient();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
+export async function POST(request: NextRequest) {
+  const originError = validateOrigin(request);
+  if (originError) return originError;
 
-    if (authError || !user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+  const rateLimitError = rateLimit(
+    request.headers.get("x-forwarded-for"),
+    "weight-post",
+    { limit: 30, windowSeconds: 60 }
+  );
+  if (rateLimitError) return rateLimitError;
 
+  return withAuth(async ({ user, admin }) => {
     const body = await request.json();
     const { weight_kg, body_fat_pct, visceral_fat, muscle_mass_kg, water_pct, date, notes } = body;
 
@@ -54,7 +47,6 @@ export async function POST(request: Request) {
     const parsedMuscleMass = muscle_mass_kg ? parseFloat(muscle_mass_kg) : null;
     const parsedWater = water_pct ? parseFloat(water_pct) : null;
 
-    // Validate ranges
     if (isNaN(parsedWeight) || parsedWeight < 20 || parsedWeight > 350) {
       return NextResponse.json({ error: "Invalid weight value" }, { status: 400 });
     }
@@ -70,9 +62,13 @@ export async function POST(request: Request) {
     if (parsedWater !== null && (isNaN(parsedWater) || parsedWater < 20 || parsedWater > 80)) {
       return NextResponse.json({ error: "Invalid water percentage" }, { status: 400 });
     }
+    if (date && !DATE_REGEX.test(date)) {
+      return NextResponse.json({ error: "Invalid date format" }, { status: 400 });
+    }
+    if (notes && (typeof notes !== "string" || notes.length > 5000)) {
+      return NextResponse.json({ error: "Invalid notes" }, { status: 400 });
+    }
 
-    // Use admin client for data operations (bypasses RLS)
-    const admin = createAdminClient();
     const { error: insertError } = await admin.from("weight_logs").insert({
       user_id: user.id,
       weight_kg: parsedWeight,
@@ -86,25 +82,25 @@ export async function POST(request: Request) {
 
     if (insertError) {
       console.error("Weight insert error:", insertError);
-      return NextResponse.json({ error: insertError.message }, { status: 500 });
+      return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("Weight API error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-  }
+  });
 }
 
-export async function DELETE(request: Request) {
-  try {
-    const supabase = createClient();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
+export async function DELETE(request: NextRequest) {
+  const originError = validateOrigin(request);
+  if (originError) return originError;
 
-    if (authError || !user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+  const rateLimitError = rateLimit(
+    request.headers.get("x-forwarded-for"),
+    "weight-delete",
+    { limit: 20, windowSeconds: 60 }
+  );
+  if (rateLimitError) return rateLimitError;
 
+  return withAuth(async ({ user, admin }) => {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
 
@@ -112,7 +108,6 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: "id is required" }, { status: 400 });
     }
 
-    const admin = createAdminClient();
     const { error: deleteError } = await admin
       .from("weight_logs")
       .delete()
@@ -121,12 +116,9 @@ export async function DELETE(request: Request) {
 
     if (deleteError) {
       console.error("Weight delete error:", deleteError);
-      return NextResponse.json({ error: deleteError.message }, { status: 500 });
+      return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("Weight DELETE error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-  }
+  });
 }

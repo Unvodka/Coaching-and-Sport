@@ -1,5 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { withAuth } from "@/lib/api/auth";
+import { validateOrigin } from "@/lib/api/csrf";
+import { rateLimit } from "@/lib/api/rate-limit";
 import { isValidUUID } from "@/lib/config";
 
 export async function GET(
@@ -37,12 +39,22 @@ export async function GET(
 }
 
 export async function DELETE(
-  _request: Request,
+  request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   if (!isValidUUID(params.id)) {
     return NextResponse.json({ error: "Invalid recipe ID" }, { status: 400 });
   }
+
+  const originError = validateOrigin(request);
+  if (originError) return originError;
+
+  const rateLimitError = rateLimit(
+    request.headers.get("x-forwarded-for"),
+    "recipe-delete",
+    { limit: 10, windowSeconds: 60 }
+  );
+  if (rateLimitError) return rateLimitError;
 
   return withAuth(async ({ user, admin }) => {
     const { error: deleteError } = await admin
@@ -53,10 +65,7 @@ export async function DELETE(
 
     if (deleteError) {
       console.error("Recipe delete error:", deleteError);
-      return NextResponse.json(
-        { error: deleteError.message },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });
