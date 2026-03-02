@@ -11,6 +11,7 @@ interface ExerciseInput {
   sets: number;
   reps: string;
   rest_seconds: number;
+  rest_unit: "sec" | "min";
   day_number: number;
 }
 
@@ -32,14 +33,18 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
   const [duration_weeks, setDurationWeeks] = useState(program?.duration_weeks || 4);
   const [is_public, setIsPublic] = useState(program?.is_public ?? true);
   const [exercises, setExercises] = useState<ExerciseInput[]>(
-    existingExercises?.map((ex) => ({
-      name_fr: ex.name_fr,
-      name_en: ex.name_en,
-      sets: ex.sets,
-      reps: ex.reps,
-      rest_seconds: ex.rest_seconds,
-      day_number: ex.day_number,
-    })) || [{ name_fr: "", name_en: "", sets: 3, reps: "10", rest_seconds: 60, day_number: 1 }]
+    existingExercises?.map((ex) => {
+      const useMin = ex.rest_seconds >= 60 && ex.rest_seconds % 60 === 0;
+      return {
+        name_fr: ex.name_fr,
+        name_en: ex.name_en,
+        sets: ex.sets,
+        reps: ex.reps,
+        rest_seconds: useMin ? ex.rest_seconds / 60 : ex.rest_seconds,
+        rest_unit: useMin ? "min" as const : "sec" as const,
+        day_number: ex.day_number,
+      };
+    }) || [{ name_fr: "", name_en: "", sets: 3, reps: "10", rest_seconds: 60, rest_unit: "sec" as const, day_number: 1 }]
   );
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
@@ -47,7 +52,7 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
   const addExercise = () => {
     setExercises([
       ...exercises,
-      { name_fr: "", name_en: "", sets: 3, reps: "10", rest_seconds: 60, day_number: 1 },
+      { name_fr: "", name_en: "", sets: 3, reps: "10", rest_seconds: 60, rest_unit: "sec" as const, day_number: 1 },
     ]);
   };
 
@@ -74,7 +79,10 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
       difficulty,
       duration_weeks,
       is_public,
-      exercises,
+      exercises: exercises.map(({ rest_unit, rest_seconds, ...ex }) => ({
+        ...ex,
+        rest_seconds: rest_unit === "min" ? rest_seconds * 60 : rest_seconds,
+      })),
     };
 
     try {
@@ -246,46 +254,75 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
               </div>
               <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
                 <div className="col-span-2">
+                  <label className="block text-xs font-medium text-gray-500 mb-1">
+                    {locale === "fr" ? "Nom (FR)" : "Name (FR)"}
+                  </label>
                   <input
                     type="text"
                     required
-                    placeholder={locale === "fr" ? "Nom (FR)" : "Name (FR)"}
+                    placeholder={locale === "fr" ? "Ex: Squat" : "E.g. Squat"}
                     value={ex.name_fr}
                     onChange={(e) => updateExercise(idx, "name_fr", e.target.value)}
                     className={`${inputClass} text-sm`}
                   />
                 </div>
-                <input
-                  type="number"
-                  min="1"
-                  placeholder="Sets"
-                  value={ex.sets}
-                  onChange={(e) => updateExercise(idx, "sets", parseInt(e.target.value) || 1)}
-                  className={`${inputClass} text-sm`}
-                />
-                <input
-                  type="text"
-                  placeholder="Reps"
-                  value={ex.reps}
-                  onChange={(e) => updateExercise(idx, "reps", e.target.value)}
-                  className={`${inputClass} text-sm`}
-                />
-                <input
-                  type="number"
-                  min="0"
-                  placeholder={locale === "fr" ? "Repos (s)" : "Rest (s)"}
-                  value={ex.rest_seconds}
-                  onChange={(e) => updateExercise(idx, "rest_seconds", parseInt(e.target.value) || 0)}
-                  className={`${inputClass} text-sm`}
-                />
-                <input
-                  type="number"
-                  min="1"
-                  placeholder={locale === "fr" ? "Jour" : "Day"}
-                  value={ex.day_number}
-                  onChange={(e) => updateExercise(idx, "day_number", parseInt(e.target.value) || 1)}
-                  className={`${inputClass} text-sm`}
-                />
+                <div>
+                  <label className="block text-xs font-medium text-gray-500 mb-1">
+                    {locale === "fr" ? "Séries" : "Sets"}
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    value={ex.sets}
+                    onChange={(e) => updateExercise(idx, "sets", parseInt(e.target.value) || 1)}
+                    className={`${inputClass} text-sm`}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-500 mb-1">
+                    {locale === "fr" ? "Répétitions" : "Reps"}
+                  </label>
+                  <input
+                    type="text"
+                    value={ex.reps}
+                    onChange={(e) => updateExercise(idx, "reps", e.target.value)}
+                    className={`${inputClass} text-sm`}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-500 mb-1">
+                    {locale === "fr" ? "Repos" : "Rest"}
+                  </label>
+                  <div className="flex gap-1">
+                    <input
+                      type="number"
+                      min="0"
+                      value={ex.rest_seconds}
+                      onChange={(e) => updateExercise(idx, "rest_seconds", parseInt(e.target.value) || 0)}
+                      className={`${inputClass} text-sm flex-1 min-w-0`}
+                    />
+                    <select
+                      value={ex.rest_unit}
+                      onChange={(e) => updateExercise(idx, "rest_unit", e.target.value)}
+                      className="px-1.5 py-2 border border-gray-300 rounded-lg text-xs text-gray-700 focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none"
+                    >
+                      <option value="sec">sec</option>
+                      <option value="min">min</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-500 mb-1">
+                    {locale === "fr" ? "Jour" : "Day"}
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    value={ex.day_number}
+                    onChange={(e) => updateExercise(idx, "day_number", parseInt(e.target.value) || 1)}
+                    className={`${inputClass} text-sm`}
+                  />
+                </div>
               </div>
             </div>
           ))}
