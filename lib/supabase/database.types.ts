@@ -230,6 +230,7 @@ export interface Database {
           sets: number;
           reps: string;
           rest_seconds: number;
+          duration_seconds: number | null;
           order_index: number;
           day_number: number;
           created_at: string;
@@ -244,6 +245,7 @@ export interface Database {
           sets?: number;
           reps?: string;
           rest_seconds?: number;
+          duration_seconds?: number | null;
           order_index?: number;
           day_number?: number;
           created_at?: string;
@@ -258,6 +260,7 @@ export interface Database {
           sets?: number;
           reps?: string;
           rest_seconds?: number;
+          duration_seconds?: number | null;
           order_index?: number;
           day_number?: number;
           created_at?: string;

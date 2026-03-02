@@ -76,12 +76,13 @@ export async function PUT(
 
       const exerciseData = exercises
         .filter((ex: { name_fr?: string }) => ex.name_fr && ex.name_fr.trim())
-        .map((ex: { name_fr: string; name_en?: string; sets?: number; reps?: string; rest_seconds?: number; day_number?: number }, i: number) => ({
+        .map((ex: { name_fr: string; name_en?: string; sets?: number; reps?: string; duration_seconds?: number | null; rest_seconds?: number; day_number?: number }, i: number) => ({
           program_id: params.id,
           name_fr: ex.name_fr.trim(),
           name_en: (ex.name_en || "").trim(),
           sets: Number(ex.sets) || 3,
           reps: ex.reps || "10",
+          duration_seconds: ex.duration_seconds != null ? Number(ex.duration_seconds) : null,
           rest_seconds: Number(ex.rest_seconds) || 60,
           day_number: Number(ex.day_number) || 1,
           order_index: i,

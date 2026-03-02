@@ -309,6 +309,12 @@ CREATE INDEX idx_program_assignments_program ON public.program_assignments(progr
 
 
 -- ==========================================
+-- ADD DURATION COLUMN TO WORKOUT_EXERCISES
+-- For time-based exercises (e.g., plank 60s) instead of rep-based
+-- ==========================================
+ALTER TABLE public.workout_exercises ADD COLUMN IF NOT EXISTS duration_seconds INTEGER;
+
+-- ==========================================
 -- SETUP COACH ROLE
 -- After your first Google login, run this with your email:
 -- UPDATE public.profiles SET role = 'coach' WHERE email = 'your-email@gmail.com';

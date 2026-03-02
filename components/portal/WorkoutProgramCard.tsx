@@ -5,12 +5,14 @@ import { useLanguage } from "@/lib/i18n/useLanguage";
 import type { WorkoutProgram } from "@/lib/supabase/database.types";
 
 const DIFFICULTY_COLORS = {
+  none: "bg-gray-100 text-gray-500",
   beginner: "bg-green-100 text-green-700",
   intermediate: "bg-yellow-100 text-yellow-700",
   advanced: "bg-red-100 text-red-700",
 };
 
 const DIFFICULTY_LABELS = {
+  none: { fr: "Aucun", en: "None" },
   beginner: { fr: "Débutant", en: "Beginner" },
   intermediate: { fr: "Intermédiaire", en: "Intermediate" },
   advanced: { fr: "Avancé", en: "Advanced" },

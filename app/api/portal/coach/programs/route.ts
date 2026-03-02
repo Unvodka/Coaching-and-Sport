@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     if (title_fr.length > 255 || (title_en && title_en.length > 255)) {
       return NextResponse.json({ error: "Title too long" }, { status: 400 });
     }
-    if (!["beginner", "intermediate", "advanced"].includes(difficulty)) {
+    if (!["none", "beginner", "intermediate", "advanced"].includes(difficulty)) {
       return NextResponse.json({ error: "Invalid difficulty" }, { status: 400 });
     }
     const weeks = Number(duration_weeks);
@@ -91,12 +91,13 @@ export async function POST(request: NextRequest) {
     if (Array.isArray(exercises) && exercises.length > 0) {
       const exerciseData = exercises
         .filter((ex: { name_fr?: string }) => ex.name_fr && ex.name_fr.trim())
-        .map((ex: { name_fr: string; name_en?: string; sets?: number; reps?: string; rest_seconds?: number; day_number?: number }, i: number) => ({
+        .map((ex: { name_fr: string; name_en?: string; sets?: number; reps?: string; duration_seconds?: number | null; rest_seconds?: number; day_number?: number }, i: number) => ({
           program_id: program.id,
           name_fr: ex.name_fr.trim(),
           name_en: (ex.name_en || "").trim(),
           sets: Number(ex.sets) || 3,
           reps: ex.reps || "10",
+          duration_seconds: ex.duration_seconds != null ? Number(ex.duration_seconds) : null,
           rest_seconds: Number(ex.rest_seconds) || 60,
           day_number: Number(ex.day_number) || 1,
           order_index: i,
