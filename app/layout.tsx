@@ -301,12 +301,16 @@ export default function RootLayout({
   return (
     <html lang="fr" className="scroll-smooth">
       <head>
-        {/* Favicons & App Icons */}
-        <link rel="icon" href="/favicon.ico" sizes="48x48" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
+        {/* Favicons & App Icons — light mode (navy logo) */}
+        <link rel="icon" href="/favicon.ico?v=2" sizes="48x48" media="(prefers-color-scheme: light)" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" media="(prefers-color-scheme: light)" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2" media="(prefers-color-scheme: light)" />
+        {/* Favicons — dark mode (white logo) */}
+        <link rel="icon" href="/favicon-dark.ico?v=2" sizes="48x48" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32-dark.png?v=2" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16-dark.png?v=2" media="(prefers-color-scheme: dark)" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
+        <link rel="manifest" href="/site.webmanifest?v=2" />
         <meta name="theme-color" content="#2563eb" />
 
         {/* Preconnect to external domains for faster resource loading */}
