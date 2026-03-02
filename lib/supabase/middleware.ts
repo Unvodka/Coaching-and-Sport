@@ -1,4 +1,5 @@
 import { createServerClient } from "@supabase/ssr";
+import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function updateSession(request: NextRequest) {
@@ -40,7 +41,12 @@ export async function updateSession(request: NextRequest) {
 
     // Redirect non-coaches away from /portal/coach
     if (user && request.nextUrl.pathname.startsWith("/portal/coach")) {
-      const { data: profile } = await supabase
+      // Use admin client (service role) to bypass RLS for role check
+      const admin = createSupabaseClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!
+      );
+      const { data: profile } = await admin
         .from("profiles")
         .select("role")
         .eq("id", user.id)
