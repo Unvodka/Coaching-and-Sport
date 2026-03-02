@@ -269,6 +269,32 @@ CREATE POLICY "Coach can view all progress"
 
 
 -- ==========================================
+-- PROGRAM ASSIGNMENTS
+-- ==========================================
+CREATE TABLE public.program_assignments (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  program_id UUID NOT NULL REFERENCES public.workout_programs(id) ON DELETE CASCADE,
+  user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  assigned_by UUID NOT NULL REFERENCES public.profiles(id),
+  assigned_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  message TEXT,
+  UNIQUE(program_id, user_id)
+);
+
+ALTER TABLE public.program_assignments ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can view own assignments"
+  ON public.program_assignments FOR SELECT
+  USING (user_id = auth.uid());
+
+CREATE POLICY "Coach can manage all assignments"
+  ON public.program_assignments FOR ALL
+  USING (
+    EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'coach')
+  );
+
+
+-- ==========================================
 -- INDEXES
 -- ==========================================
 CREATE INDEX idx_recipes_author ON public.recipes(author_id);
@@ -278,6 +304,8 @@ CREATE INDEX idx_weight_logs_user_date ON public.weight_logs(user_id, date DESC)
 CREATE INDEX idx_mood_entries_user_date ON public.mood_entries(user_id, date DESC);
 CREATE INDEX idx_workout_exercises_program ON public.workout_exercises(program_id, order_index);
 CREATE INDEX idx_user_progress_user_program ON public.user_workout_progress(user_id, program_id);
+CREATE INDEX idx_program_assignments_user ON public.program_assignments(user_id);
+CREATE INDEX idx_program_assignments_program ON public.program_assignments(program_id);
 
 
 -- ==========================================

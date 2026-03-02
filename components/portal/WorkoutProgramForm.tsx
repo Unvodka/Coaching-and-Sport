@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { createClient } from "@/lib/supabase/client";
+import type { WorkoutProgram, WorkoutExercise } from "@/lib/supabase/database.types";
 
 interface ExerciseInput {
   name_fr: string;
@@ -14,20 +14,35 @@ interface ExerciseInput {
   day_number: number;
 }
 
-export default function WorkoutProgramForm() {
+interface WorkoutProgramFormProps {
+  program?: WorkoutProgram;
+  exercises?: WorkoutExercise[];
+}
+
+export default function WorkoutProgramForm({ program, exercises: existingExercises }: WorkoutProgramFormProps) {
   const router = useRouter();
   const { locale } = useLanguage();
-  const [title_fr, setTitleFr] = useState("");
-  const [title_en, setTitleEn] = useState("");
-  const [description_fr, setDescriptionFr] = useState("");
-  const [description_en, setDescriptionEn] = useState("");
-  const [difficulty, setDifficulty] = useState("intermediate");
-  const [duration_weeks, setDurationWeeks] = useState(4);
-  const [is_public, setIsPublic] = useState(true);
-  const [exercises, setExercises] = useState<ExerciseInput[]>([
-    { name_fr: "", name_en: "", sets: 3, reps: "10", rest_seconds: 60, day_number: 1 },
-  ]);
+  const isEditing = !!program;
+
+  const [title_fr, setTitleFr] = useState(program?.title_fr || "");
+  const [title_en, setTitleEn] = useState(program?.title_en || "");
+  const [description_fr, setDescriptionFr] = useState(program?.description_fr || "");
+  const [description_en, setDescriptionEn] = useState(program?.description_en || "");
+  const [difficulty, setDifficulty] = useState<string>(program?.difficulty || "intermediate");
+  const [duration_weeks, setDurationWeeks] = useState(program?.duration_weeks || 4);
+  const [is_public, setIsPublic] = useState(program?.is_public ?? true);
+  const [exercises, setExercises] = useState<ExerciseInput[]>(
+    existingExercises?.map((ex) => ({
+      name_fr: ex.name_fr,
+      name_en: ex.name_en,
+      sets: ex.sets,
+      reps: ex.reps,
+      rest_seconds: ex.rest_seconds,
+      day_number: ex.day_number,
+    })) || [{ name_fr: "", name_en: "", sets: 3, reps: "10", rest_seconds: 60, day_number: 1 }]
+  );
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
 
   const addExercise = () => {
     setExercises([
@@ -49,49 +64,44 @@ export default function WorkoutProgramForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { setSaving(false); return; }
+    setError("");
 
-    const { data: program, error: programError } = await supabase
-      .from("workout_programs")
-      .insert({
-        coach_id: user.id,
-        title_fr,
-        title_en,
-        description_fr,
-        description_en,
-        difficulty,
-        duration_weeks,
-        is_public,
-      })
-      .select("id")
-      .single();
+    const payload = {
+      title_fr,
+      title_en,
+      description_fr,
+      description_en,
+      difficulty,
+      duration_weeks,
+      is_public,
+      exercises,
+    };
 
-    if (programError || !program) {
+    try {
+      const url = isEditing
+        ? `/api/portal/coach/programs/${program.id}`
+        : "/api/portal/coach/programs";
+      const method = isEditing ? "PUT" : "POST";
+
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const json = await res.json();
+        setError(json.error || "Error");
+        setSaving(false);
+        return;
+      }
+
+      router.push("/portal/coach/programs");
+      router.refresh();
+    } catch {
+      setError(locale === "fr" ? "Erreur de connexion" : "Connection error");
       setSaving(false);
-      return;
     }
-
-    const exerciseData = exercises
-      .filter((ex) => ex.name_fr.trim())
-      .map((ex, i) => ({
-        program_id: program.id,
-        name_fr: ex.name_fr,
-        name_en: ex.name_en,
-        sets: ex.sets,
-        reps: ex.reps,
-        rest_seconds: ex.rest_seconds,
-        day_number: ex.day_number,
-        order_index: i,
-      }));
-
-    if (exerciseData.length > 0) {
-      await supabase.from("workout_exercises").insert(exerciseData);
-    }
-
-    router.push("/portal/workouts");
-    router.refresh();
   };
 
   const inputClass =
@@ -99,6 +109,12 @@ export default function WorkoutProgramForm() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-6">
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 text-sm p-3 rounded-lg">
+          {error}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -242,7 +258,7 @@ export default function WorkoutProgramForm() {
                 <input
                   type="number"
                   min="1"
-                  placeholder="Séries"
+                  placeholder="Sets"
                   value={ex.sets}
                   onChange={(e) => updateExercise(idx, "sets", parseInt(e.target.value) || 1)}
                   className={`${inputClass} text-sm`}
@@ -257,7 +273,7 @@ export default function WorkoutProgramForm() {
                 <input
                   type="number"
                   min="0"
-                  placeholder="Repos (s)"
+                  placeholder={locale === "fr" ? "Repos (s)" : "Rest (s)"}
                   value={ex.rest_seconds}
                   onChange={(e) => updateExercise(idx, "rest_seconds", parseInt(e.target.value) || 0)}
                   className={`${inputClass} text-sm`}
@@ -265,7 +281,7 @@ export default function WorkoutProgramForm() {
                 <input
                   type="number"
                   min="1"
-                  placeholder="Jour"
+                  placeholder={locale === "fr" ? "Jour" : "Day"}
                   value={ex.day_number}
                   onChange={(e) => updateExercise(idx, "day_number", parseInt(e.target.value) || 1)}
                   className={`${inputClass} text-sm`}
@@ -284,6 +300,10 @@ export default function WorkoutProgramForm() {
         >
           {saving
             ? "..."
+            : isEditing
+            ? locale === "fr"
+              ? "Enregistrer"
+              : "Save"
             : locale === "fr"
             ? "Créer le programme"
             : "Create Program"}

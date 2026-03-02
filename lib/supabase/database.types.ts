@@ -263,6 +263,32 @@ export interface Database {
           created_at?: string;
         };
       };
+      program_assignments: {
+        Row: {
+          id: string;
+          program_id: string;
+          user_id: string;
+          assigned_by: string;
+          assigned_at: string;
+          message: string | null;
+        };
+        Insert: {
+          id?: string;
+          program_id: string;
+          user_id: string;
+          assigned_by: string;
+          assigned_at?: string;
+          message?: string | null;
+        };
+        Update: {
+          id?: string;
+          program_id?: string;
+          user_id?: string;
+          assigned_by?: string;
+          assigned_at?: string;
+          message?: string | null;
+        };
+      };
       user_workout_progress: {
         Row: {
           id: string;
@@ -307,4 +333,5 @@ export type WeightLog = Database["public"]["Tables"]["weight_logs"]["Row"];
 export type MoodEntry = Database["public"]["Tables"]["mood_entries"]["Row"];
 export type WorkoutProgram = Database["public"]["Tables"]["workout_programs"]["Row"];
 export type WorkoutExercise = Database["public"]["Tables"]["workout_exercises"]["Row"];
+export type ProgramAssignment = Database["public"]["Tables"]["program_assignments"]["Row"];
 export type UserWorkoutProgress = Database["public"]["Tables"]["user_workout_progress"]["Row"];

@@ -38,6 +38,21 @@ export async function updateSession(request: NextRequest) {
       return NextResponse.redirect(url);
     }
 
+    // Redirect non-coaches away from /portal/coach
+    if (user && request.nextUrl.pathname.startsWith("/portal/coach")) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+
+      if (profile?.role !== "coach") {
+        const url = request.nextUrl.clone();
+        url.pathname = "/portal";
+        return NextResponse.redirect(url);
+      }
+    }
+
     return supabaseResponse;
   } catch (error) {
     console.error("Middleware auth error:", error);
