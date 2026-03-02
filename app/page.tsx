@@ -1,17 +1,12 @@
 import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
+import ServicesSection from "@/components/ServicesSection";
+import OffersSection from "@/components/OffersSection";
 import JsonLd from "@/components/JsonLd";
 
-const AboutSection = dynamic(() => import("@/components/AboutSection"), {
-  loading: () => <div className="min-h-[300px]" />,
-});
-const ServicesSection = dynamic(() => import("@/components/ServicesSection"), {
-  loading: () => <div className="min-h-[400px]" />,
-});
-const OffersSection = dynamic(() => import("@/components/OffersSection"), {
-  loading: () => <div className="min-h-[400px]" />,
-});
+// Below-the-fold — lazy loaded
 const ContactSection = dynamic(() => import("@/components/ContactSection"), {
   loading: () => <div className="min-h-[300px]" />,
 });

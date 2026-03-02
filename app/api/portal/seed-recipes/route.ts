@@ -269,6 +269,17 @@ export async function POST() {
 
     const admin = createAdminClient();
 
+    // Only coaches can seed recipes
+    const { data: profile } = await admin
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+
+    if (profile?.role !== "coach") {
+      return NextResponse.json({ error: "Forbidden — coach role required" }, { status: 403 });
+    }
+
     // Fetch all existing public recipe titles to avoid duplicates
     const { data: existing } = await admin
       .from("recipes")

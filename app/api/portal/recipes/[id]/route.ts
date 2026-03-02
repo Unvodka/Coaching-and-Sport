@@ -1,20 +1,16 @@
-import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
+import { withAuth } from "@/lib/api/auth";
+import { isValidUUID } from "@/lib/config";
 
 export async function GET(
   _request: Request,
   { params }: { params: { id: string } }
 ) {
-  try {
-    const supabase = createClient();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (!isValidUUID(params.id)) {
+    return NextResponse.json({ error: "Invalid recipe ID" }, { status: 400 });
+  }
 
-    if (authError || !user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    const admin = createAdminClient();
-
+  return withAuth(async ({ user, admin }) => {
     const [recipeRes, favRes, profileRes] = await Promise.all([
       admin.from("recipes").select("*").eq("id", params.id).single(),
       admin
@@ -37,25 +33,18 @@ export async function GET(
       userId: user.id,
       userRole: profileRes.data?.role || "user",
     });
-  } catch (error) {
-    console.error("Recipe detail GET error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-  }
+  });
 }
 
 export async function DELETE(
   _request: Request,
   { params }: { params: { id: string } }
 ) {
-  try {
-    const supabase = createClient();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (!isValidUUID(params.id)) {
+    return NextResponse.json({ error: "Invalid recipe ID" }, { status: 400 });
+  }
 
-    if (authError || !user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    const admin = createAdminClient();
+  return withAuth(async ({ user, admin }) => {
     const { error: deleteError } = await admin
       .from("recipes")
       .delete()
@@ -64,12 +53,12 @@ export async function DELETE(
 
     if (deleteError) {
       console.error("Recipe delete error:", deleteError);
-      return NextResponse.json({ error: deleteError.message }, { status: 500 });
+      return NextResponse.json(
+        { error: deleteError.message },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("Recipe DELETE error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-  }
+  });
 }

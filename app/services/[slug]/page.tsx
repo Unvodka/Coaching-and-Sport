@@ -1,10 +1,10 @@
+import { BASE_URL } from "@/lib/config";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SERVICES, getServiceBySlug } from "@/lib/constants";
 import ServiceDetailContent from "@/components/ServiceDetailContent";
 import JsonLd from "@/components/JsonLd";
 
-const BASE_URL = "https://coach-bluewave.com";
 
 interface Props {
   params: { slug: string };

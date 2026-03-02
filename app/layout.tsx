@@ -3,6 +3,7 @@ import Script from 'next/script';
 import { Inter, Playfair_Display, Cormorant_Garamond } from 'next/font/google';
 import { LanguageProvider } from '@/lib/i18n/LanguageContext';
 import { AuthProvider } from '@/lib/supabase/AuthContext';
+import { BASE_URL } from '@/lib/config';
 import JsonLd from '@/components/JsonLd';
 import CookieConsent from '@/components/CookieConsent';
 import './globals.css';
@@ -34,8 +35,6 @@ const cormorant = Cormorant_Garamond({
   display: 'swap',
 });
 
-const BASE_URL = 'https://coach-bluewave.com';
-
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
@@ -46,78 +45,16 @@ export const metadata: Metadata = {
   description:
     "Coach-Bluewave par Arnaud Chevallier — coach sportif et maître-nageur diplômé d'État à Valbonne. Cours de natation (swimming lessons), fitness en plein air, musculation, HIIT et nutrition personnalisée. Personal trainer en personne (Côte d'Azur) et en ligne partout en France. Première séance découverte à 45€.",
   keywords: [
-    // Brand
     'Coach-Bluewave',
-    'coach bluewave',
-    'Arnaud Chevallier coach',
-    // Maître-nageur (FR)
-    'maître-nageur',
-    'maitre nageur',
-    'maître-nageur diplômé',
-    "maître-nageur diplômé d'État",
-    "maître-nageur Côte d'Azur",
-    'maître-nageur Valbonne',
-    'cours de natation maître-nageur',
-    // Natation (FR)
-    'natation',
-    'cours de natation',
-    'cours de natation adulte',
-    'cours de natation Valbonne',
-    'cours de natation Sophia Antipolis',
-    'apprendre à nager adulte',
-    'leçon de natation',
-    'professeur de natation',
-    // Swimming (EN)
-    'swimming teacher',
-    'swimming teacher French Riviera',
-    'swimming lessons',
-    'swimming coach',
-    'learn to swim adult',
-    'private swimming lessons',
-    // Coach sportif (FR)
-    'coach sportif',
     'coach sportif Valbonne',
-    "coach sportif Côte d'Azur",
-    'coach sportif en ligne',
-    'coaching sportif',
-    'coaching sportif en ligne',
-    'coaching sportif personnalisé',
-    'coach personnel',
-    // Personal trainer (EN)
-    'personal trainer',
+    'maître-nageur',
+    'cours de natation',
     'personal trainer French Riviera',
-    'online personal trainer France',
-    'fitness coach',
-    'sports coach',
-    // Fitness (FR + EN)
-    'fitness',
-    'fitness plein air',
-    'fitness Valbonne',
-    "fitness Côte d'Azur",
-    'outdoor fitness',
-    'musculation',
-    'HIIT',
-    'circuit training',
-    'renforcement musculaire',
-    'entraînement fonctionnel',
-    // Weight loss / Perte de poids
-    'perte de poids',
+    'swimming lessons Côte d\'Azur',
+    'fitness coaching',
+    'coaching sportif en ligne',
     'perte de poids coach',
-    'perdre du poids',
-    'maigrir avec coach sportif',
-    'weight loss coach',
-    // Nutrition (FR + EN)
-    'nutrition sportive',
-    'nutrition personnalisée',
-    'coaching nutritionnel',
-    'nutritional coaching',
-    'meal plan',
-    'plan alimentaire',
-    // Remise en forme
-    'remise en forme',
-    'sport après 40 ans',
-    'reprendre le sport',
-    'body transformation',
+    'Arnaud Chevallier',
   ],
   authors: [{ name: 'Arnaud Chevallier', url: BASE_URL }],
   creator: 'Coach-Bluewave',

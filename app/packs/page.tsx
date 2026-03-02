@@ -1,7 +1,7 @@
+import { BASE_URL } from "@/lib/config";
 import { Metadata } from "next";
 import PacksPageContent from "./PacksPageContent";
 
-const BASE_URL = "https://coach-bluewave.com";
 
 export const metadata: Metadata = {
   title: "Packs & Tarifs Cours Particuliers — Natation, Fitness, Musculation",

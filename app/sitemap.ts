@@ -1,8 +1,7 @@
 import { MetadataRoute } from "next";
 import { SERVICES } from "@/lib/constants";
 import { BLOG_POSTS } from "@/lib/blog";
-
-const BASE_URL = "https://coach-bluewave.com";
+import { BASE_URL } from "@/lib/config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const servicePages = SERVICES.map((service) => ({

@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/lib/config";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -6,7 +7,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 
-const BASE_URL = "https://coach-bluewave.com";
 
 export const metadata: Metadata = {
   title: "Blog - Conseils Sport, Natation, Fitness & Nutrition",

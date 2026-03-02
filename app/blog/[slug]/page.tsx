@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/lib/config";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -7,7 +8,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 
-const BASE_URL = "https://coach-bluewave.com";
 
 interface Props {
   params: { slug: string };

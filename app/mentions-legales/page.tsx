@@ -1,6 +1,6 @@
+import { BASE_URL } from "@/lib/config";
 import { Metadata } from "next";
 
-const BASE_URL = "https://coach-bluewave.com";
 
 export const metadata: Metadata = {
   title: "Mentions Légales",

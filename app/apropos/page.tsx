@@ -1,8 +1,8 @@
+import { BASE_URL } from "@/lib/config";
 import { Metadata } from "next";
 import AboutPageContent from "@/components/AboutPageContent";
 import JsonLd from "@/components/JsonLd";
 
-const BASE_URL = "https://coach-bluewave.com";
 
 export const metadata: Metadata = {
   title: "À Propos - Arnaud Chevallier, Coach Sportif & Maître-Nageur",

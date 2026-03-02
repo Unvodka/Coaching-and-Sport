@@ -13,6 +13,7 @@ export default function ContactSection() {
   const [formule, setFormule] = useState("");
   const [message, setMessage] = useState("");
   const [rgpdConsent, setRgpdConsent] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { t } = useLanguage();
 
@@ -25,6 +26,10 @@ export default function ContactSection() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
+    // Honeypot — invisible to users, bots fill it in
+    if (honeypot) return;
+
     setIsSubmitting(true);
 
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
@@ -58,6 +63,7 @@ export default function ContactSection() {
         setFormule("");
         setMessage("");
         setRgpdConsent(false);
+        setHoneypot("");
         setIsSubmitting(false);
       },
       () => {
@@ -92,6 +98,18 @@ export default function ContactSection() {
           onSubmit={handleSubmit}
           className="max-w-[700px] mx-auto bg-white p-8 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-gray-200 max-md:p-6 max-[480px]:p-4"
         >
+          {/* Honeypot — hidden from real users, bots fill this in */}
+          <input
+            type="text"
+            name="website"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            className="hidden"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
+
           <div className="mb-3.5">
             <label htmlFor="contact-name" className="block mb-1.5 text-gray-700 font-semibold text-[0.95rem]">
               {t("contact.fullName")} *

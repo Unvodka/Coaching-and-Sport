@@ -78,11 +78,26 @@ export async function POST(request: Request) {
     const admin = createAdminClient();
 
     if (recipe_id) {
-      // Update existing recipe
-      const { error: updateError } = await admin
+      // Update existing recipe — verify ownership or coach role
+      const { data: profileData } = await admin
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+
+      const isCoach = profileData?.role === "coach";
+
+      const updateQuery = admin
         .from("recipes")
         .update(data)
         .eq("id", recipe_id);
+
+      // Non-coaches can only update their own recipes
+      if (!isCoach) {
+        updateQuery.eq("author_id", user.id);
+      }
+
+      const { error: updateError } = await updateQuery;
       if (updateError) {
         console.error("Recipe update error:", updateError);
         return NextResponse.json({ error: updateError.message }, { status: 500 });

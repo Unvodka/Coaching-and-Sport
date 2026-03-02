@@ -1,5 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
-import { createClient as createAdminClient } from "@supabase/supabase-js";
+import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function POST() {
@@ -18,14 +17,11 @@ export async function POST() {
       );
     }
 
-    // Create admin client with service role key
-    const adminClient = createAdminClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
-    );
+    // Use centralized admin client
+    const admin = createAdminClient();
 
     // Delete the user (cascades to all related data)
-    const { error: deleteError } = await adminClient.auth.admin.deleteUser(
+    const { error: deleteError } = await admin.auth.admin.deleteUser(
       user.id
     );
 
