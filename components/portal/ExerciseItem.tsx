@@ -93,15 +93,17 @@ export default function ExerciseItem({
         )}
       </div>
 
-      <div className="flex items-center gap-4 text-sm text-gray-500 flex-shrink-0">
+      <div className="flex items-center gap-3 text-sm text-gray-500 flex-shrink-0">
         <span>
-          {exercise.sets} {t("portal.workouts.sets")}
+          {locale === "fr"
+            ? `${exercise.sets} séries de ${exercise.reps} répétitions`
+            : `${exercise.sets} sets × ${exercise.reps} reps`}
         </span>
+        <span className="text-gray-300">•</span>
         <span>
-          {exercise.reps} {t("portal.workouts.reps")}
-        </span>
-        <span>
-          {exercise.rest_seconds}s {t("portal.workouts.rest")}
+          {locale === "fr"
+            ? `${exercise.rest_seconds} sec de repos`
+            : `${exercise.rest_seconds}s rest`}
         </span>
       </div>
     </div>
