@@ -1,21 +1,8 @@
 import { NextResponse } from "next/server";
-import { createClient, createAdminClient } from "@/lib/supabase/server";
+import { withAuth } from "@/lib/api/auth";
 
 export async function GET() {
-  // Inline auth (bypassing withAuth to diagnose the display issue)
-  try {
-    const supabase = createClient();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
-
-    if (authError || !user) {
-      return NextResponse.json(
-        { error: "Unauthorized", detail: authError?.message || "No session" },
-        { status: 401 }
-      );
-    }
-
-    const admin = createAdminClient();
-
+  return withAuth(async ({ user, admin }) => {
     // Fetch public programs
     const { data: publicPrograms, error: publicError } = await admin
       .from("workout_programs")
@@ -65,11 +52,5 @@ export async function GET() {
     }, {
       headers: { "Cache-Control": "private, no-cache" },
     });
-  } catch (e) {
-    console.error("Workouts GET error:", e);
-    return NextResponse.json(
-      { error: "Internal server error", detail: String(e) },
-      { status: 500 }
-    );
-  }
+  });
 }

@@ -27,11 +27,7 @@ export async function withAuth(
     } = await supabase.auth.getUser();
 
     if (authError || !user) {
-      console.error("withAuth: auth failed", { authError: authError?.message, hasUser: !!user });
-      return NextResponse.json(
-        { error: "Unauthorized", detail: authError?.message || "No user session" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const admin = createAdminClient();
@@ -53,15 +49,11 @@ export async function withAuthAndRole(
   handler: (ctx: AuthCoachContext) => Promise<NextResponse>
 ): Promise<NextResponse> {
   return withAuth(async ({ user, admin }) => {
-    const { data: profile, error: profileError } = await admin
+    const { data: profile } = await admin
       .from("profiles")
       .select("role")
       .eq("id", user.id)
       .single();
-
-    if (profileError) {
-      console.error("withAuthAndRole: profile fetch error", { userId: user.id, error: profileError.message });
-    }
 
     const isCoach = profile?.role === "coach";
     return handler({ user, admin, isCoach });
@@ -76,9 +68,8 @@ export async function withCoach(
 ): Promise<NextResponse> {
   return withAuthAndRole(async (ctx) => {
     if (!ctx.isCoach) {
-      console.error("withCoach: user is not a coach", { userId: ctx.user.id, email: ctx.user.email });
       return NextResponse.json(
-        { error: "Forbidden — coach role required", userId: ctx.user.id },
+        { error: "Forbidden — coach role required" },
         { status: 403 }
       );
     }
