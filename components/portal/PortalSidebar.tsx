@@ -117,17 +117,17 @@ export default function PortalSidebar({ open, onClose }: PortalSidebarProps) {
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="p-6 border-b border-white/10">
-            <Link href="/" className="block no-underline mb-1">
+            <Link href="/" className="block no-underline mb-1 text-center">
               <Image
                 src="/images/logo-bluewave-white.png"
                 alt="Coach-Bluewave"
                 width={180}
                 height={40}
-                className="h-9 w-auto"
+                className="h-9 w-auto mx-auto"
                 priority
               />
             </Link>
-            <p className="text-xs text-white/60">{t("auth.myPortal")}</p>
+            <p className="text-xs text-white/60 text-center">{t("auth.myPortal")}</p>
           </div>
 
           {/* Navigation */}
