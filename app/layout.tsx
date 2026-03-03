@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { headers } from 'next/headers';
 import Script from 'next/script';
 import { Inter, Playfair_Display } from 'next/font/google';
 import { LanguageProvider } from '@/lib/i18n/LanguageContext';
@@ -299,6 +300,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const nonce = headers().get('x-nonce') ?? '';
+
   return (
     <html lang="fr" className="scroll-smooth">
       <head>
@@ -343,7 +346,7 @@ export default function RootLayout({
         </LanguageProvider>
 
         {/* Google Analytics 4 — lazy loaded to avoid blocking render */}
-        <Script id="ga-consent-default" strategy="lazyOnload">
+        <Script id="ga-consent-default" strategy="lazyOnload" nonce={nonce}>
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -358,8 +361,9 @@ export default function RootLayout({
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-GEJXN9BH9R"
           strategy="lazyOnload"
+          nonce={nonce}
         />
-        <Script id="google-analytics" strategy="lazyOnload">
+        <Script id="google-analytics" strategy="lazyOnload" nonce={nonce}>
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}

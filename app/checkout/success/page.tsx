@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 
 export const metadata: Metadata = {
   title: "Paiement confirmé - Coach-Bluewave",
@@ -14,7 +14,7 @@ interface Props {
 async function getSession(sessionId: string | undefined) {
   if (!sessionId) return null;
   try {
-    const session = await stripe.checkout.sessions.retrieve(sessionId);
+    const session = await getStripe().checkout.sessions.retrieve(sessionId);
     return session.payment_status === "paid" ? session : null;
   } catch {
     return null;

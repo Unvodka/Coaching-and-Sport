@@ -2,8 +2,18 @@ import { createServerClient } from "@supabase/ssr";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { NextResponse, type NextRequest } from "next/server";
 
-export async function updateSession(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({ request });
+export async function updateSession(request: NextRequest, nonce?: string) {
+  // Helper: create NextResponse with optional nonce in request headers
+  function nextResponse() {
+    if (nonce) {
+      const headers = new Headers(request.headers);
+      headers.set("x-nonce", nonce);
+      return NextResponse.next({ request: { headers } });
+    }
+    return NextResponse.next({ request });
+  }
+
+  let supabaseResponse = nextResponse();
 
   try {
     const supabase = createServerClient(
@@ -18,7 +28,7 @@ export async function updateSession(request: NextRequest) {
             cookiesToSet.forEach(({ name, value }) =>
               request.cookies.set(name, value)
             );
-            supabaseResponse = NextResponse.next({ request });
+            supabaseResponse = nextResponse();
             cookiesToSet.forEach(({ name, value, options }) =>
               supabaseResponse.cookies.set(name, value, options)
             );
