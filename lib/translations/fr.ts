@@ -57,7 +57,7 @@ const fr = {
   'about.p2':
     "Spécialisé dans la remise en forme, la perte de poids et le bien-être, j'ai développé une approche globale qui combine plusieurs disciplines sportives pour des résultats durables et harmonieux.",
   'about.p3':
-    ", je peux reçevoir à domicile et j'interviens également dans toute la région des Alpes-Maritimes pour vous offrir le meilleur service possible.",
+    "Je peux vous reçevoir à domicile et j'interviens également dans toute la région des Alpes-Maritimes pour vous offrir le meilleur service possible.",
   'about.cta': 'En savoir plus',
 
   // About page (dedicated /apropos)
