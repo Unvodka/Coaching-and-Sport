@@ -40,7 +40,7 @@ export default function AboutPageContent() {
 
       {/* Main content */}
       <section className="py-20 px-16 max-md:py-12 max-md:px-6">
-        <div className="max-w-[800px] mx-auto">
+        <div className="max-w-[800px] lg:max-w-[70%] mx-auto">
           {/* Bio */}
           <FadeInWhenVisible>
             <h2 className="font-heading text-heading text-[1.8rem] mb-8 font-bold text-center">

@@ -296,35 +296,6 @@ export default function CGVPage() {
           </p>
         </section>
 
-        {/* Article 14 - Médiation */}
-        <section className="mb-10">
-          <h2 className="text-xl font-semibold text-brand-dark mb-4">
-            Article 14 — Médiation et litiges
-          </h2>
-          <p className="text-gray-700 leading-relaxed mb-3">
-            Pour toute réclamation, contactez {LEGAL_INFO.email}.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-3">
-            En cas de litige non résolu à l&apos;amiable, le Client peut
-            recourir au médiateur : {LEGAL_INFO.mediatorName} —{" "}
-            {LEGAL_INFO.mediatorWebsite}
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-3">
-            Plateforme européenne de résolution des litiges :{" "}
-            <a
-              href="https://ec.europa.eu/consumers/odr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-blue hover:underline"
-            >
-              ec.europa.eu/consumers/odr
-            </a>
-          </p>
-          <p className="text-gray-700 leading-relaxed">
-            Les présentes CGV sont soumises au droit français. À défaut de
-            résolution amiable, les tribunaux de Grasse seront compétents.
-          </p>
-        </section>
 
         {/* Article 15 - Divers */}
         <section>

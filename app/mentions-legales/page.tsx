@@ -207,29 +207,6 @@ export default function MentionsLegalesPage() {
           </p>
         </section>
 
-        {/* Section 9 - Médiation */}
-        <section className="mb-10">
-          <h2 className="text-xl font-semibold text-brand-dark mb-4">
-            9. Médiation de la consommation
-          </h2>
-          <p className="text-gray-700 leading-relaxed mb-3">
-            Conformément aux articles L.616-1 et R.616-1 du Code de la
-            consommation, un dispositif de médiation de la consommation est mis
-            en place. Le consommateur peut recourir gratuitement au service de
-            médiation suivant :
-          </p>
-          <div className="space-y-1 text-gray-700 leading-relaxed">
-            <p>
-              <strong>Médiateur :</strong> {LEGAL_INFO.mediatorName}
-            </p>
-            <p>
-              <strong>Site web :</strong> {LEGAL_INFO.mediatorWebsite}
-            </p>
-            <p>
-              <strong>Email :</strong> {LEGAL_INFO.mediatorEmail}
-            </p>
-          </div>
-        </section>
       </div>
     </main>
   );

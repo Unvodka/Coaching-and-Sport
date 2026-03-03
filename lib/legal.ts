@@ -32,11 +32,6 @@ export const LEGAL_INFO = {
   maxKmRadius: '25',
   otherPaymentMethods: 'Chėque',
 
-  // ─── Mediation ─────────────────────────────────────────────
-  mediatorName: 'ANM - Association Nationale des Médiateurs',
-  mediatorWebsite: 'https://www.anm-mediation.com',
-  mediatorEmail: 'contact@anm-mediation.com',
-
   // ─── Third Parties ─────────────────────────────────────────
   emailjsLocation: 'États-Unis / UE',
 } as const;
