@@ -7,8 +7,6 @@ import { useLanguage } from "@/lib/i18n/useLanguage";
 import Header from "./Header";
 import Footer from "./Footer";
 import FadeInWhenVisible from "./animations/FadeInWhenVisible";
-import StaggerContainer from "./animations/StaggerContainer";
-import StaggerItem from "./animations/StaggerItem";
 
 interface Props {
   slug: string;
@@ -68,32 +66,8 @@ export default function ServiceDetailContent({ slug }: Props) {
         ))}
       </section>
 
-      {/* Benefits */}
-      <section className="bg-gradient-to-br from-slate-50 to-slate-100 py-24 px-16 max-md:py-16 max-md:px-6">
-        <FadeInWhenVisible>
-          <h2 className="font-heading text-center text-4xl mb-16 font-extrabold tracking-tight text-heading max-md:text-[2rem]">
-            {t("detail.benefits")}
-          </h2>
-        </FadeInWhenVisible>
-        <StaggerContainer className="grid grid-cols-2 gap-8 max-w-[900px] mx-auto max-md:grid-cols-1">
-          {detail.benefits.map((benefit, i) => (
-            <StaggerItem key={benefit.title} index={i}>
-              <div className="bg-white p-8 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-gray-200 h-full">
-                <div className="text-4xl mb-4">{benefit.icon}</div>
-                <h3 className="text-xl font-bold text-heading mb-2">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-500 leading-[1.7] text-[1.1rem]">
-                  {benefit.description}
-                </p>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-      </section>
-
       {/* Target Audience */}
-      <section className="py-24 px-16 max-md:py-16 max-md:px-6">
+      <section className="bg-gradient-to-br from-slate-50 to-slate-100 py-24 px-16 max-md:py-16 max-md:px-6">
         <FadeInWhenVisible>
           <h2 className="font-heading text-center text-4xl mb-12 font-extrabold tracking-tight text-heading max-md:text-[2rem]">
             {t("detail.targetAudience")}
@@ -113,9 +87,24 @@ export default function ServiceDetailContent({ slug }: Props) {
         </div>
       </section>
 
+      {/* CTA */}
+      <section className="bg-gradient-to-br from-brand-dark to-brand-navy text-white text-center py-20 px-16 max-md:py-14 max-md:px-6">
+        <FadeInWhenVisible>
+          <h2 className="font-heading text-3xl font-bold mb-6 max-md:text-2xl">
+            {detail.ctaText}
+          </h2>
+          <Link
+            href="/#offres"
+            className="inline-block bg-white text-brand-dark py-4 px-10 rounded-lg font-bold text-base transition-all duration-300 no-underline hover:-translate-y-[2px] hover:shadow-[0_8px_25px_rgba(255,255,255,0.3)]"
+          >
+            {t("detail.seeOffers")}
+          </Link>
+        </FadeInWhenVisible>
+      </section>
+
       {/* FAQ Section */}
       {detail.faqs && detail.faqs.length > 0 && (
-        <section className="bg-gradient-to-br from-slate-50 to-slate-100 py-24 px-16 max-md:py-16 max-md:px-6">
+        <section className="py-24 px-16 max-md:py-16 max-md:px-6">
           <FadeInWhenVisible>
             <h2 className="font-heading text-center text-4xl mb-16 font-extrabold tracking-tight text-heading max-md:text-[2rem]">
               {t("detail.faq")}
@@ -140,21 +129,6 @@ export default function ServiceDetailContent({ slug }: Props) {
           </div>
         </section>
       )}
-
-      {/* CTA */}
-      <section className="bg-gradient-to-br from-brand-dark to-brand-navy text-white text-center py-20 px-16 max-md:py-14 max-md:px-6">
-        <FadeInWhenVisible>
-          <h2 className="font-heading text-3xl font-bold mb-6 max-md:text-2xl">
-            {detail.ctaText}
-          </h2>
-          <Link
-            href="/#offres"
-            className="inline-block bg-white text-brand-dark py-4 px-10 rounded-lg font-bold text-base transition-all duration-300 no-underline hover:-translate-y-[2px] hover:shadow-[0_8px_25px_rgba(255,255,255,0.3)]"
-          >
-            {t("detail.seeOffers")}
-          </Link>
-        </FadeInWhenVisible>
-      </section>
 
       <Footer />
     </>

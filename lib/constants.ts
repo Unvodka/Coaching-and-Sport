@@ -42,36 +42,12 @@ const SERVICES_FR: Service[] = [
       heroImageAlt: 'Cours de natation dans une piscine',
       subtitle: "Maîtrisez l'eau, transformez votre corps",
       longDescription: [
-        "La natation est l'un des sports les plus complets qui existe. Elle sollicite l'ensemble des groupes musculaires tout en préservant vos articulations, ce qui en fait une activité idéale à tout âge et pour tous les niveaux de forme physique.",
+        "La natation est l'un des sports les plus complets qui existe. Elle sollicite l'ensemble des groupes musculaires — bras, jambes, dos, abdominaux — tout en préservant vos articulations. L'eau porte votre poids corporel, réduisant le stress articulaire de 90%, ce qui en fait une activité idéale à tout âge, pour la rééducation comme pour la performance.",
+        "Une séance de natation intensive permet de brûler jusqu'à 500 calories par heure, tout en affinant la silhouette et en améliorant l'endurance cardiovasculaire. Le contact avec l'eau procure également un effet apaisant immédiat : la natation réduit le cortisol et favorise la production d'endorphines pour un bien-être durable, corps et esprit.",
         "En tant que maître-nageur diplômé d'État, je vous propose des cours individuels ou en petit groupe adaptés à votre niveau et à vos objectifs. Que vous souhaitiez apprendre les bases, perfectionner votre technique de crawl ou de papillon, ou simplement profiter des bienfaits de l'eau pour votre santé, je vous accompagne à chaque étape.",
         "Chaque séance est structurée pour combiner travail technique, renforcement musculaire aquatique et exercices de cardio dans l'eau. Vous progresserez à votre rythme dans un environnement bienveillant et motivant.",
       ],
-      benefits: [
-        {
-          icon: '💪',
-          title: 'Sport complet',
-          description:
-            "La natation travaille l'ensemble des groupes musculaires : bras, jambes, dos, abdominaux. Un entraînement global sans impact sur les articulations.",
-        },
-        {
-          icon: '🦴',
-          title: 'Doux pour les articulations',
-          description:
-            "L'eau porte votre poids corporel, réduisant le stress articulaire de 90%. Idéal pour la rééducation ou les personnes souffrant de douleurs chroniques.",
-        },
-        {
-          icon: '🔥',
-          title: 'Brûleur de calories',
-          description:
-            "Une séance de natation intensive permet de brûler jusqu'à 500 calories par heure, tout en affinant la silhouette et en améliorant l'endurance cardiovasculaire.",
-        },
-        {
-          icon: '🧘',
-          title: 'Anti-stress naturel',
-          description:
-            "Le contact avec l'eau procure un effet apaisant immédiat. La natation réduit le cortisol et favorise la production d'endorphines pour un bien-être durable.",
-        },
-      ],
+      benefits: [],
       targetAudience: [
         'Débutants souhaitant apprendre à nager en toute confiance',
         'Nageurs intermédiaires voulant perfectionner leur technique',
@@ -124,35 +100,11 @@ const SERVICES_FR: Service[] = [
       subtitle: 'Sculptez votre corps, en salle comme en plein air',
       longDescription: [
         "Le fitness est bien plus qu'un simple entraînement physique — c'est un véritable mode de vie. Mes séances sont conçues pour vous aider à atteindre vos objectifs, que ce soit la perte de poids, la prise de masse musculaire, la tonification ou l'amélioration de votre condition physique générale.",
-        "Chaque programme est élaboré sur mesure en fonction de votre morphologie, votre niveau actuel et vos objectifs personnels. J'utilise une combinaison de musculation, de HIIT, de circuits training et d'exercices fonctionnels pour maximiser vos résultats — en salle ou en plein air selon vos préférences.",
+        "Développez votre force et votre masse musculaire grâce à des exercices ciblés et progressifs. Le fitness accélère votre métabolisme, vous aidant à brûler des calories même au repos. Chaque programme est entièrement adapté à vos besoins — perte de poids, prise de muscle, tonification, préparation sportive ou remise en forme générale — pour des résultats visibles en quelques semaines.",
+        "J'utilise une combinaison de musculation, de HIIT, de circuits training et d'exercices fonctionnels pour maximiser vos résultats — en salle ou en plein air selon vos préférences. Chaque programme est élaboré sur mesure en fonction de votre morphologie, votre niveau actuel et vos objectifs personnels.",
         "Les séances en extérieur se déroulent dans les plus beaux espaces verts de Valbonne et ses alentours. L'air frais oxygène mieux les muscles, la vitamine D naturelle du soleil renforce les os, et le contact avec la nature réduit considérablement le stress. Une combinaison gagnante pour des résultats optimaux.",
       ],
-      benefits: [
-        {
-          icon: '🏋️',
-          title: 'Renforcement musculaire',
-          description:
-            'Développez votre force et votre masse musculaire grâce à des exercices ciblés et progressifs adaptés à votre niveau, en salle ou en extérieur.',
-        },
-        {
-          icon: '🌳',
-          title: 'Entraînement en plein air',
-          description:
-            'Profitez de la nature comme terrain de jeu : course, sprint, circuit training en extérieur pour un entraînement varié et motivant.',
-        },
-        {
-          icon: '⚡',
-          title: 'Boost métabolique',
-          description:
-            'Le fitness accélère votre métabolisme, vous aidant à brûler des calories même au repos. Résultats visibles en quelques semaines.',
-        },
-        {
-          icon: '🎯',
-          title: 'Objectifs personnalisés',
-          description:
-            'Programme entièrement adapté à vos besoins : perte de poids, prise de muscle, tonification, préparation sportive ou remise en forme générale.',
-        },
-      ],
+      benefits: [],
       targetAudience: [
         'Débutants souhaitant se mettre au sport avec un encadrement professionnel',
         'Sportifs intermédiaires cherchant à franchir un palier',
@@ -207,35 +159,11 @@ const SERVICES_FR: Service[] = [
       subtitle: 'Mangez mieux, vivez mieux — sans frustration',
       longDescription: [
         "La nutrition est le pilier fondamental de tout programme de remise en forme. Sans une alimentation adaptée, même le meilleur entraînement ne donnera pas les résultats escomptés. C'est pourquoi je propose un accompagnement nutritionnel personnalisé, complémentaire à vos séances de sport.",
-        "Mon approche se base sur l'équilibre et le plaisir, pas sur les régimes restrictifs. Je vous aide à comprendre vos besoins nutritionnels, à composer des repas savoureux et équilibrés, et à adopter des habitudes alimentaires durables qui s'intègrent naturellement à votre quotidien.",
-        "Grâce à un bilan nutritionnel complet, j'identifie vos carences, vos excès et vos habitudes à ajuster. Ensemble, nous construisons un plan alimentaire réaliste et agréable qui soutient vos objectifs sportifs tout en respectant vos goûts et votre mode de vie.",
+        "Mon approche repose sur un plan alimentaire sur mesure, adapté à vos goûts, votre mode de vie et vos objectifs — pas de régime strict, juste un rééquilibrage intelligent. Grâce à un bilan nutritionnel complet, j'identifie vos carences, vos excès et vos habitudes à ajuster pour des changements ciblés et efficaces.",
+        "Je vous aide à comprendre vos besoins nutritionnels, à composer des repas savoureux et équilibrés, et à adopter des habitudes alimentaires durables qui s'intègrent naturellement à votre quotidien. Des idées de repas simples, rapides et savoureux pour chaque moment de la journée — manger sain n'a jamais été aussi facile.",
+        "Fini l'effet yoyo des régimes. Ensemble, nous construisons un plan alimentaire réaliste et agréable qui soutient vos objectifs sportifs tout en respectant vos goûts et votre mode de vie, pour une santé optimale sur le long terme.",
       ],
-      benefits: [
-        {
-          icon: '🥗',
-          title: 'Plan alimentaire sur mesure',
-          description:
-            'Un programme nutritionnel adapté à vos goûts, votre mode de vie et vos objectifs. Pas de régime strict, juste un rééquilibrage intelligent.',
-        },
-        {
-          icon: '📊',
-          title: 'Bilan nutritionnel complet',
-          description:
-            'Analyse détaillée de vos habitudes alimentaires, identification des carences et des excès pour des ajustements ciblés et efficaces.',
-        },
-        {
-          icon: '🍳',
-          title: 'Recettes et idées repas',
-          description:
-            "Des idées de repas simples, rapides et savoureux pour chaque moment de la journée. Manger sain n'a jamais été aussi facile.",
-        },
-        {
-          icon: '⚖️',
-          title: 'Résultats durables',
-          description:
-            "Fini l'effet yoyo des régimes. Mon approche vise des changements progressifs et durables pour une santé optimale sur le long terme.",
-        },
-      ],
+      benefits: [],
       targetAudience: [
         'Personnes souhaitant perdre du poids de manière saine et durable',
         "Sportifs voulant optimiser leurs performances par l'alimentation",
@@ -292,36 +220,12 @@ const SERVICES_EN: Service[] = [
       heroImageAlt: 'Swimming lesson in a pool',
       subtitle: 'Master the water, transform your body',
       longDescription: [
-        'Swimming is one of the most complete sports in existence. It engages all muscle groups while preserving your joints, making it an ideal activity at any age and for all fitness levels.',
+        'Swimming is one of the most complete sports in existence. It engages all muscle groups — arms, legs, back, abs — while preserving your joints. Water supports your body weight, reducing joint stress by 90%, making it an ideal activity at any age, for rehabilitation as well as performance.',
+        'An intensive swimming session burns up to 500 calories per hour, while toning the body and improving cardiovascular endurance. Contact with water also provides an immediate soothing effect: swimming reduces cortisol and promotes endorphin production for lasting physical and mental well-being.',
         'As a state-certified lifeguard, I offer individual or small group lessons adapted to your level and goals. Whether you want to learn the basics, perfect your crawl or butterfly technique, or simply enjoy the health benefits of water, I support you every step of the way.',
         'Each session is structured to combine technical work, aquatic muscle strengthening and cardio exercises in the water. You will progress at your own pace in a supportive and motivating environment.',
       ],
-      benefits: [
-        {
-          icon: '💪',
-          title: 'Complete sport',
-          description:
-            'Swimming works all muscle groups: arms, legs, back, abs. A full-body workout with no impact on joints.',
-        },
-        {
-          icon: '🦴',
-          title: 'Gentle on joints',
-          description:
-            'Water supports your body weight, reducing joint stress by 90%. Ideal for rehabilitation or people with chronic pain.',
-        },
-        {
-          icon: '🔥',
-          title: 'Calorie burner',
-          description:
-            'An intensive swimming session burns up to 500 calories per hour, while toning the body and improving cardiovascular endurance.',
-        },
-        {
-          icon: '🧘',
-          title: 'Natural stress relief',
-          description:
-            'Contact with water provides an immediate soothing effect. Swimming reduces cortisol and promotes endorphin production for lasting well-being.',
-        },
-      ],
+      benefits: [],
       targetAudience: [
         'Beginners wanting to learn to swim with confidence',
         'Intermediate swimmers looking to perfect their technique',
@@ -374,35 +278,11 @@ const SERVICES_EN: Service[] = [
       subtitle: 'Sculpt your body, indoors or outdoors',
       longDescription: [
         "Fitness is much more than just physical training — it's a true lifestyle. My sessions are designed to help you reach your goals, whether it's weight loss, muscle gain, toning or improving your overall fitness.",
-        'Each program is tailor-made based on your body type, current level and personal goals. I use a combination of weight training, HIIT, circuit training and functional exercises to maximize your results — in the gym or outdoors, as you prefer.',
+        'Build your strength and muscle mass with targeted, progressive exercises. Fitness accelerates your metabolism, helping you burn calories even at rest. Each program is fully adapted to your needs — weight loss, muscle gain, toning, sports preparation or general fitness — for visible results in just a few weeks.',
+        'I use a combination of weight training, HIIT, circuit training and functional exercises to maximize your results — in the gym or outdoors, as you prefer. Each program is tailor-made based on your body type, current level and personal goals.',
         'Outdoor sessions take place in the most beautiful green spaces of Valbonne and its surroundings. Fresh air oxygenates muscles better, natural vitamin D from the sun strengthens bones, and contact with nature significantly reduces stress. A winning combination for optimal results.',
       ],
-      benefits: [
-        {
-          icon: '🏋️',
-          title: 'Muscle strengthening',
-          description:
-            'Build your strength and muscle mass with targeted, progressive exercises adapted to your level, indoors or outdoors.',
-        },
-        {
-          icon: '🌳',
-          title: 'Outdoor training',
-          description:
-            'Enjoy nature as your playground: running, sprinting, outdoor circuit training for a varied and motivating workout.',
-        },
-        {
-          icon: '⚡',
-          title: 'Metabolic boost',
-          description:
-            'Fitness accelerates your metabolism, helping you burn calories even at rest. Visible results in just a few weeks.',
-        },
-        {
-          icon: '🎯',
-          title: 'Personalized goals',
-          description:
-            'Program fully adapted to your needs: weight loss, muscle gain, toning, sports preparation or general fitness.',
-        },
-      ],
+      benefits: [],
       targetAudience: [
         'Beginners wanting to get into sports with professional guidance',
         'Intermediate athletes looking to break through a plateau',
@@ -455,35 +335,11 @@ const SERVICES_EN: Service[] = [
       subtitle: 'Eat better, live better — without frustration',
       longDescription: [
         "Nutrition is the fundamental pillar of any fitness program. Without a proper diet, even the best training won't deliver the expected results. That's why I offer personalized nutritional support, complementary to your sports sessions.",
-        'My approach is based on balance and enjoyment, not restrictive diets. I help you understand your nutritional needs, create delicious and balanced meals, and adopt lasting eating habits that naturally fit into your daily life.',
-        'Through a comprehensive nutritional assessment, I identify your deficiencies, excesses and habits to adjust. Together, we build a realistic and enjoyable eating plan that supports your sports goals while respecting your tastes and lifestyle.',
+        'My approach is built on a custom meal plan tailored to your tastes, lifestyle and goals — no strict diets, just smart rebalancing. Through a comprehensive nutritional assessment, I identify your deficiencies, excesses and habits to adjust for targeted and effective changes.',
+        'I help you understand your nutritional needs, create delicious and balanced meals, and adopt lasting eating habits that naturally fit into your daily life. Simple, quick and delicious meal ideas for every time of day — eating healthy has never been easier.',
+        'No more yo-yo dieting. Together, we build a realistic and enjoyable eating plan that supports your sports goals while respecting your tastes and lifestyle, for optimal long-term health.',
       ],
-      benefits: [
-        {
-          icon: '🥗',
-          title: 'Custom meal plan',
-          description:
-            'A nutritional program tailored to your tastes, lifestyle and goals. No strict diets, just smart rebalancing.',
-        },
-        {
-          icon: '📊',
-          title: 'Complete nutritional assessment',
-          description:
-            'Detailed analysis of your eating habits, identification of deficiencies and excesses for targeted and effective adjustments.',
-        },
-        {
-          icon: '🍳',
-          title: 'Recipes and meal ideas',
-          description:
-            'Simple, quick and delicious meal ideas for every time of day. Eating healthy has never been easier.',
-        },
-        {
-          icon: '⚖️',
-          title: 'Lasting results',
-          description:
-            'No more yo-yo dieting. My approach targets progressive and lasting changes for optimal long-term health.',
-        },
-      ],
+      benefits: [],
       targetAudience: [
         'People wanting to lose weight in a healthy and sustainable way',
         'Athletes wanting to optimize their performance through diet',
