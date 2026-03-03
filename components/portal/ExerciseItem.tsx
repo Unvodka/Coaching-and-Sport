@@ -21,6 +21,7 @@ export default function ExerciseItem({
   const { locale, t } = useLanguage();
   const [loading, setLoading] = useState(false);
 
+  const isCustom = exercise.name_fr === "__custom__";
   const name = locale === "fr" ? exercise.name_fr : (exercise.name_en || exercise.name_fr);
 
   const handleToggle = async () => {
@@ -46,6 +47,16 @@ export default function ExerciseItem({
     setLoading(false);
     onToggle();
   };
+
+  if (isCustom) {
+    return (
+      <div className="p-4 rounded-lg border bg-white border-gray-100">
+        <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
+          {exercise.description_fr}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div

@@ -37,6 +37,9 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
   const { locale } = useLanguage();
   const isEditing = !!program;
 
+  // Detect custom mode from existing data
+  const existingIsCustom = existingExercises?.length === 1 && existingExercises[0].name_fr === "__custom__";
+
   const [title_fr, setTitleFr] = useState(program?.title_fr || "");
   const [title_en, setTitleEn] = useState(program?.title_en || "");
   const [description_fr, setDescriptionFr] = useState(program?.description_fr || "");
@@ -44,8 +47,10 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
   const [difficulty, setDifficulty] = useState<string>(program?.difficulty || "intermediate");
   const [duration_weeks, setDurationWeeks] = useState(program?.duration_weeks || 4);
   const [is_public, setIsPublic] = useState(program?.is_public ?? true);
+  const [isCustom, setIsCustom] = useState(existingIsCustom || false);
+  const [customText, setCustomText] = useState(existingIsCustom ? (existingExercises![0].description_fr || "") : "");
   const [exercises, setExercises] = useState<ExerciseInput[]>(
-    existingExercises?.map((ex) => {
+    (existingExercises && !existingIsCustom) ? existingExercises.map((ex) => {
       const restMin = ex.rest_seconds >= 60 && ex.rest_seconds % 60 === 0;
       const dur = ex.duration_seconds;
       const durMin = dur != null && dur >= 60 && dur % 60 === 0;
@@ -61,7 +66,7 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
         day_number: ex.day_number,
         specificity: ex.description_fr || "",
       };
-    }) || [{ name_fr: "", name_en: "", sets: 3, reps: "10", duration_seconds: null, duration_unit: "sec" as const, rest_seconds: 60, rest_unit: "sec" as const, day_number: 1, specificity: "" }]
+    }) : [{ name_fr: "", name_en: "", sets: 3, reps: "10", duration_seconds: null, duration_unit: "sec" as const, rest_seconds: 60, rest_unit: "sec" as const, day_number: 1, specificity: "" }]
   );
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
@@ -143,14 +148,16 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
       difficulty,
       duration_weeks,
       is_public,
-      exercises: exercises.map(({ rest_unit, rest_seconds, duration_unit, duration_seconds, ...ex }) => ({
-        ...ex,
-        rest_seconds: rest_unit === "min" ? rest_seconds * 60 : rest_seconds,
-        duration_seconds: duration_seconds != null
-          ? (duration_unit === "min" ? duration_seconds * 60 : duration_seconds)
-          : null,
-        specificity: ex.specificity,
-      })),
+      exercises: isCustom
+        ? [{ name_fr: "__custom__", name_en: "", sets: 0, reps: "0", rest_seconds: 0, day_number: 1, duration_seconds: null, specificity: customText }]
+        : exercises.map(({ rest_unit, rest_seconds, duration_unit, duration_seconds, ...ex }) => ({
+            ...ex,
+            rest_seconds: rest_unit === "min" ? rest_seconds * 60 : rest_seconds,
+            duration_seconds: duration_seconds != null
+              ? (duration_unit === "min" ? duration_seconds * 60 : duration_seconds)
+              : null,
+            specificity: ex.specificity,
+          })),
     };
 
     try {
@@ -312,12 +319,52 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
         </div>
       </div>
 
-      {/* Exercises */}
+      {/* Program type toggle */}
       <div>
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-semibold text-heading">
-            {locale === "fr" ? "Exercices" : "Exercises"}
+            {locale === "fr" ? "Contenu du programme" : "Program content"}
           </h3>
+          <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+            <button
+              type="button"
+              onClick={() => setIsCustom(false)}
+              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                !isCustom ? "bg-white text-heading shadow-sm" : "text-gray-500 hover:text-gray-700"
+              }`}
+            >
+              {locale === "fr" ? "Structuré" : "Structured"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsCustom(true)}
+              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                isCustom ? "bg-white text-heading shadow-sm" : "text-gray-500 hover:text-gray-700"
+              }`}
+            >
+              {locale === "fr" ? "Personnalisé" : "Custom"}
+            </button>
+          </div>
+        </div>
+
+        {isCustom ? (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {locale === "fr" ? "Programme libre" : "Free-form program"}
+            </label>
+            <textarea
+              rows={10}
+              value={customText}
+              onChange={(e) => setCustomText(e.target.value)}
+              placeholder={locale === "fr"
+                ? "Décrivez le programme librement...\nEx:\nJour 1 — Haut du corps\n3x12 Développé couché 60kg\n4x10 Rowing barre\n..."
+                : "Describe the program freely...\nE.g.:\nDay 1 — Upper body\n3x12 Bench press 60kg\n4x10 Barbell row\n..."}
+              className={`${inputClass} font-mono text-sm leading-relaxed`}
+            />
+          </div>
+        ) : (
+        <>
+        <div className="flex items-center justify-end mb-4">
           <button
             type="button"
             onClick={addExercise}
@@ -474,6 +521,8 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
             </div>
           ))}
         </div>
+        </>
+        )}
       </div>
 
       {/* User Assignment */}
