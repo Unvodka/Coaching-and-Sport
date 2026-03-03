@@ -53,13 +53,10 @@ const fr = {
   'about.heading.name': 'Arnaud Chevallier',
   'about.heading.role': 'Un coach dédié à votre réussite',
   'about.p1':
-    "Maître-nageur et éducateur sportif diplômé d'état, je me consacre depuis plusieurs années à accompagner mes clients dans leur parcours de transformation physique.",
+    "Maître-nageur et éducateur sportif diplômé d'état, je me consacre depuis plusieurs années à l'enseignement de la natation et des pratiques sportives.",
   'about.p2':
-    "Spécialisé dans l'enseignement, la perte de poids et la remise en forme, j'ai développé une approche globale qui combine plusieurs disciplines sportives pour des résultats durables et harmonieux.",
+    "Spécialisé dans la remise en forme, la perte de poids et le bien-être, j'ai développé une approche globale qui combine plusieurs disciplines sportives pour des résultats durables et harmonieux.",
   'about.p3':
-    'Ma philosophie : un accompagnement bienveillant, des objectifs réalistes et une progression adaptée à votre rythme. Chaque personne est unique, et votre programme le sera aussi.',
-  'about.p4.prefix': 'Basé à Valbonne',
-  'about.p4.suffix':
     ", je peux reçevoir à domicile et j'interviens également dans toute la région des Alpes-Maritimes pour vous offrir le meilleur service possible.",
   'about.cta': 'En savoir plus',
 
@@ -251,13 +248,15 @@ const fr = {
   'portal.profile.update': 'Mettre à jour',
 
   // Cookie consent
-  'cookies.text': 'Ce site utilise des cookies pour mesurer l\'audience et améliorer votre expérience. Vous pouvez accepter ou refuser les cookies non essentiels.',
+  'cookies.text':
+    "Ce site utilise des cookies pour mesurer l'audience et améliorer votre expérience. Vous pouvez accepter ou refuser les cookies non essentiels.",
   'cookies.learnMore': 'En savoir plus',
   'cookies.accept': 'Accepter',
   'cookies.refuse': 'Refuser',
 
   // Contact RGPD
-  'contact.rgpdConsent': 'J\'accepte que mes données soient traitées conformément à la politique de confidentialité.',
+  'contact.rgpdConsent':
+    "J'accepte que mes données soient traitées conformément à la politique de confidentialité.",
 } as const;
 
 export type TranslationKey = keyof typeof fr;
