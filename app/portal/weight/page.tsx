@@ -3,7 +3,6 @@
 import { useEffect, useState, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { useAuth } from "@/lib/supabase/AuthContext";
 const WeightChart = dynamic(() => import("@/components/portal/WeightChart"), { ssr: false });
 import WeightLogForm from "@/components/portal/WeightLogForm";
 import WeightLogList from "@/components/portal/WeightLogList";
@@ -11,7 +10,6 @@ import type { WeightLog } from "@/lib/supabase/database.types";
 
 export default function WeightPage() {
   const { t, locale } = useLanguage();
-  const { user: authUser } = useAuth();
   const [logs, setLogs] = useState<WeightLog[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -36,12 +34,6 @@ export default function WeightPage() {
   useEffect(() => {
     fetchLogs();
   }, [fetchLogs]);
-
-  // Safety timeout
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 5000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const latestWeight = logs.length > 0 ? Number(logs[0].weight_kg) : null;
 
@@ -164,7 +156,7 @@ export default function WeightPage() {
       {logs.length > 0 && <WeightChart logs={logs} />}
 
       {/* Add form — always rendered */}
-      <WeightLogForm userId={authUser?.id} onAdded={fetchLogs} />
+      <WeightLogForm onAdded={fetchLogs} />
 
       {/* History — only when we have data */}
       {logs.length > 0 && (

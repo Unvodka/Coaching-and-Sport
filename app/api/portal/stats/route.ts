@@ -27,6 +27,8 @@ export async function GET() {
       weightLogs: weightRes.count ?? 0,
       moodEntries: moodRes.count ?? 0,
       workoutsCompleted: progressRes.count ?? 0,
+    }, {
+      headers: { "Cache-Control": "private, max-age=30" },
     });
   });
 }

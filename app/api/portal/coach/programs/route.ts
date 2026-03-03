@@ -35,7 +35,9 @@ export async function GET() {
       assigned_user_ids: assignmentMap[p.id] || [],
     }));
 
-    return NextResponse.json({ programs: result });
+    return NextResponse.json({ programs: result }, {
+      headers: { "Cache-Control": "private, max-age=15" },
+    });
   });
 }
 

@@ -55,7 +55,7 @@ export default function DeleteAccountModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 z-[100] flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/60 z-[100] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
       <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 space-y-5">
         {/* Header */}
         <div className="flex items-center gap-3">
@@ -66,6 +66,7 @@ export default function DeleteAccountModal({
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth={2}
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -74,7 +75,7 @@ export default function DeleteAccountModal({
               />
             </svg>
           </div>
-          <h3 className="text-lg font-bold text-gray-900">
+          <h3 id="delete-modal-title" className="text-lg font-bold text-gray-900">
             {locale === "fr"
               ? "Supprimer mon compte"
               : "Delete my account"}

@@ -6,9 +6,11 @@ import { useLanguage } from "@/lib/i18n/useLanguage";
 import ProgramCard from "./ProgramCard";
 import InfoNote from "./InfoNote";
 import FadeInWhenVisible from "./animations/FadeInWhenVisible";
+import Toast from "./Toast";
 
 export default function OffersSection() {
   const [loadingPack, setLoadingPack] = useState<string | null>(null);
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
   const { locale, t } = useLanguage();
 
   const programs = getPrograms(locale);
@@ -31,11 +33,11 @@ export default function OffersSection() {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert(t("offers.checkoutError"));
+        setToast({ message: t("offers.checkoutError"), type: "error" });
         setLoadingPack(null);
       }
     } catch {
-      alert(t("offers.connectionError"));
+      setToast({ message: t("offers.connectionError"), type: "error" });
       setLoadingPack(null);
     }
   };
@@ -45,6 +47,8 @@ export default function OffersSection() {
       id="offres"
       className="bg-gradient-to-br from-slate-50 to-slate-100 py-24 px-16 w-full max-md:py-16 max-md:px-6"
     >
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+
       <FadeInWhenVisible>
         <h2 className="font-heading text-center text-5xl mb-4 font-extrabold tracking-tight text-heading max-md:text-[2.2rem] max-[480px]:text-[1.8rem]">
           {t("offers.title")}

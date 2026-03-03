@@ -12,7 +12,6 @@ const TAG_SUGGESTIONS = [
 ];
 
 interface MoodFormProps {
-  userId?: string;
   onAdded?: () => void;
   inline?: boolean;
 }
@@ -181,6 +180,9 @@ export default function MoodForm({ onAdded, inline }: MoodFormProps) {
               <button
                 key={tag}
                 type="button"
+                role="checkbox"
+                aria-checked={tags.includes(tag)}
+                aria-label={tag}
                 onClick={() => toggleTag(tag)}
                 className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
                   tags.includes(tag)

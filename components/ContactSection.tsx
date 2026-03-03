@@ -4,6 +4,7 @@ import { useState, FormEvent, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import FadeInWhenVisible from "./animations/FadeInWhenVisible";
+import Toast from "./Toast";
 
 export default function ContactSection() {
   const [fromName, setFromName] = useState("");
@@ -14,6 +15,7 @@ export default function ContactSection() {
   const [rgpdConsent, setRgpdConsent] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -40,7 +42,7 @@ export default function ContactSection() {
       serviceId === "YOUR_SERVICE_ID" ||
       templateId === "YOUR_TEMPLATE_ID"
     ) {
-      alert(t("contact.notConfigured"));
+      setToast({ message: t("contact.notConfigured"), type: "error" });
       setIsSubmitting(false);
       return;
     }
@@ -55,7 +57,7 @@ export default function ContactSection() {
 
     emailjs.send(serviceId, templateId, templateParams).then(
       () => {
-        alert(`✅ ${t("contact.success")}`);
+        setToast({ message: t("contact.success"), type: "success" });
         setFromName("");
         setFromEmail("");
         setPhone("");
@@ -66,7 +68,7 @@ export default function ContactSection() {
         setIsSubmitting(false);
       },
       () => {
-        alert(`❌ ${t("contact.error")}`);
+        setToast({ message: t("contact.error"), type: "error" });
         setIsSubmitting(false);
       }
     );
@@ -78,6 +80,8 @@ export default function ContactSection() {
       aria-labelledby="contact-heading"
       className="bg-gradient-to-br from-slate-50 to-slate-100 py-14 px-16 w-full max-md:py-10 max-md:px-6"
     >
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+
       <FadeInWhenVisible>
         <h2
           id="contact-heading"

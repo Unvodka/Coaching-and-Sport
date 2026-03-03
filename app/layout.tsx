@@ -314,6 +314,11 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest?v=3" />
         <meta name="theme-color" content="#2563eb" />
 
+        {/* Hreflang for bilingual SEO */}
+        <link rel="alternate" hrefLang="fr" href={`${BASE_URL}`} />
+        <link rel="alternate" hrefLang="en" href={`${BASE_URL}`} />
+        <link rel="alternate" hrefLang="x-default" href={`${BASE_URL}`} />
+
         {/* Preconnect to external domains for faster resource loading */}
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />

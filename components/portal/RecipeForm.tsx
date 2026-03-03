@@ -19,7 +19,6 @@ const CATEGORIES = [
 
 interface RecipeFormProps {
   recipe?: Recipe;
-  userId?: string;
   userRole?: string;
   onAdded?: () => void;
   inline?: boolean;

@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { withAuth } from "@/lib/api/auth";
 import { validateOrigin } from "@/lib/api/csrf";
 import { rateLimit } from "@/lib/api/rate-limit";
-
-const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+import { DATE_REGEX } from "@/lib/api/validators";
 
 export async function GET() {
   return withAuth(async ({ user, admin }) => {
@@ -18,7 +17,9 @@ export async function GET() {
       return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 
-    return NextResponse.json({ data: data || [] });
+    return NextResponse.json({ data: data || [] }, {
+      headers: { "Cache-Control": "private, max-age=30" },
+    });
   });
 }
 

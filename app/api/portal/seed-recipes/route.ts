@@ -313,7 +313,7 @@ export async function POST() {
 
     if (insertError) {
       console.error("Seed recipes insert error:", insertError);
-      return NextResponse.json({ error: insertError.message }, { status: 500 });
+      return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 
     // Favorite all new recipes for this user

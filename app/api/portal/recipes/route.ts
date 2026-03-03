@@ -3,7 +3,7 @@ import { withAuth } from "@/lib/api/auth";
 import { validateOrigin } from "@/lib/api/csrf";
 import { rateLimit } from "@/lib/api/rate-limit";
 
-const VALID_CATEGORIES = ["general", "breakfast", "lunch", "dinner", "snack", "dessert", "drink"];
+const VALID_CATEGORIES = ["general", "breakfast", "lunch", "dinner", "snack", "smoothie", "dessert", "salad", "soup", "drink"];
 
 export async function GET() {
   return withAuth(async ({ user, admin }) => {
@@ -29,6 +29,8 @@ export async function GET() {
       data: recipesRes.data || [],
       favoriteIds,
       userId: user.id,
+    }, {
+      headers: { "Cache-Control": "private, max-age=30" },
     });
   });
 }

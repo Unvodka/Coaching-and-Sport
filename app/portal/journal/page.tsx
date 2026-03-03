@@ -3,7 +3,6 @@
 import { useEffect, useState, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { useAuth } from "@/lib/supabase/AuthContext";
 import MoodEntryCard from "@/components/portal/MoodEntry";
 const MoodChart = dynamic(() => import("@/components/portal/MoodChart"), { ssr: false });
 import WellnessTip from "@/components/portal/WellnessTip";
@@ -12,7 +11,6 @@ import type { MoodEntry } from "@/lib/supabase/database.types";
 
 export default function JournalPage() {
   const { t, locale } = useLanguage();
-  const { user: authUser } = useAuth();
   const [entries, setEntries] = useState<MoodEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -38,12 +36,6 @@ export default function JournalPage() {
   useEffect(() => {
     fetchEntries();
   }, [fetchEntries]);
-
-  // Safety timeout
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 5000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleAdded = () => {
     fetchEntries();
@@ -91,7 +83,7 @@ export default function JournalPage() {
           <h3 className="font-semibold text-heading mb-4">
             {t("portal.journal.new")}
           </h3>
-          <MoodForm userId={authUser?.id} onAdded={handleAdded} inline />
+          <MoodForm onAdded={handleAdded} inline />
         </div>
       )}
 

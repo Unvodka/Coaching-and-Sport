@@ -46,7 +46,7 @@ export async function PUT(
   const limited = rateLimit(request.headers.get("x-forwarded-for"), "coach-programs-update", { limit: 10 });
   if (limited) return limited;
 
-  return withCoach(async ({ admin }) => {
+  return withCoach(async ({ user, admin }) => {
     const body = await request.json();
     const {
       title_fr, title_en, description_fr, description_en,
@@ -57,8 +57,8 @@ export async function PUT(
       return NextResponse.json({ error: "Title (FR) is required" }, { status: 400 });
     }
 
-    // Update program
-    const { error: updateError } = await admin
+    // Update program (only if owned by this coach)
+    const { data: updated, error: updateError } = await admin
       .from("workout_programs")
       .update({
         title_fr: title_fr.trim(),
@@ -70,11 +70,14 @@ export async function PUT(
         is_public: !!is_public,
         updated_at: new Date().toISOString(),
       })
-      .eq("id", params.id);
+      .eq("id", params.id)
+      .eq("coach_id", user.id)
+      .select("id")
+      .single();
 
-    if (updateError) {
+    if (updateError || !updated) {
       console.error("Update program error:", updateError);
-      return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+      return NextResponse.json({ error: "Program not found or access denied" }, { status: 404 });
     }
 
     // Replace exercises: delete old, insert new
@@ -114,15 +117,18 @@ export async function DELETE(
   const limited = rateLimit(request.headers.get("x-forwarded-for"), "coach-programs-delete", { limit: 10 });
   if (limited) return limited;
 
-  return withCoach(async ({ admin }) => {
-    const { error } = await admin
+  return withCoach(async ({ user, admin }) => {
+    const { data: deleted, error } = await admin
       .from("workout_programs")
       .delete()
-      .eq("id", params.id);
+      .eq("id", params.id)
+      .eq("coach_id", user.id)
+      .select("id")
+      .single();
 
-    if (error) {
+    if (error || !deleted) {
       console.error("Delete program error:", error);
-      return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+      return NextResponse.json({ error: "Program not found or access denied" }, { status: 404 });
     }
 
     return NextResponse.json({ success: true });

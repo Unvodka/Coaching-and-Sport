@@ -52,6 +52,8 @@ export async function GET() {
       assignment_count: assignmentMap[p.id] || 0,
     }));
 
-    return NextResponse.json({ users });
+    return NextResponse.json({ users }, {
+      headers: { "Cache-Control": "private, max-age=15" },
+    });
   });
 }

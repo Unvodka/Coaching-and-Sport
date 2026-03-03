@@ -11,7 +11,7 @@ type Tab = "all" | "mine" | "favorites";
 
 export default function RecipesPage() {
   const { t, locale } = useLanguage();
-  const { user: authUser, profile } = useAuth();
+  const { profile } = useAuth();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
   const [userId, setUserId] = useState<string | null>(null);
@@ -68,12 +68,6 @@ export default function RecipesPage() {
 
     init();
   }, [fetchRecipes]);
-
-  // Safety timeout
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 5000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleRecipeAdded = () => {
     fetchRecipes();
@@ -185,7 +179,6 @@ export default function RecipesPage() {
             {t("portal.recipes.new")}
           </h3>
           <RecipeForm
-            userId={authUser?.id}
             userRole={profile?.role || "user"}
             onAdded={handleRecipeAdded}
             inline

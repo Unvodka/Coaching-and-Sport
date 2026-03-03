@@ -54,6 +54,8 @@ export async function GET(
       weightLogs: weightLogs || [],
       moodEntries: moodEntries || [],
       allPrograms: allPrograms || [],
+    }, {
+      headers: { "Cache-Control": "private, max-age=15" },
     });
   });
 }

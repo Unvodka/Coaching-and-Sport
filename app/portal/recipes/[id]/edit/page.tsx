@@ -11,7 +11,7 @@ export default function EditRecipePage() {
   const params = useParams();
   const id = params.id as string;
   const { locale } = useLanguage();
-  const { user: authUser, profile } = useAuth();
+  const { profile } = useAuth();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -56,7 +56,7 @@ export default function EditRecipePage() {
       <h2 className="text-2xl font-bold text-heading font-heading mb-6">
         {locale === "fr" ? "Modifier la recette" : "Edit Recipe"}
       </h2>
-      <RecipeForm recipe={recipe} userId={authUser?.id} userRole={profile?.role || "user"} />
+      <RecipeForm recipe={recipe} userRole={profile?.role || "user"} />
     </div>
   );
 }
