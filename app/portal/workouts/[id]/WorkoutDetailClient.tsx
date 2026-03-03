@@ -59,7 +59,7 @@ export default function WorkoutDetailClient({
       }, {});
 
   return (
-    <div className="max-w-[52rem] mx-auto space-y-6">
+    <div className="max-w-[60rem] mx-auto space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-heading font-heading">
           {title}
