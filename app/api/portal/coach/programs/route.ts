@@ -1,11 +1,39 @@
 import { NextRequest, NextResponse } from "next/server";
 import { withCoach } from "@/lib/api/auth";
+import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { validateOrigin } from "@/lib/api/csrf";
 import { rateLimit } from "@/lib/api/rate-limit";
 
 export async function GET() {
-  return withCoach(async ({ admin }) => {
-    // Fetch all programs with assignment counts
+  // Inline auth check (bypassing withCoach to diagnose the display issue)
+  try {
+    const supabase = createClient();
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      return NextResponse.json(
+        { error: "Unauthorized", detail: authError?.message || "No session" },
+        { status: 401 }
+      );
+    }
+
+    const admin = createAdminClient();
+
+    // Verify coach role
+    const { data: profile } = await admin
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+
+    if (profile?.role !== "coach") {
+      return NextResponse.json(
+        { error: "Forbidden — coach role required" },
+        { status: 403 }
+      );
+    }
+
+    // Fetch all programs
     const { data: programs, error } = await admin
       .from("workout_programs")
       .select("*")
@@ -15,8 +43,6 @@ export async function GET() {
       console.error("Coach programs list error:", error);
       return NextResponse.json({ error: "Internal server error", detail: error.message }, { status: 500 });
     }
-
-    console.log("Coach programs: found", (programs || []).length, "programs");
 
     // Fetch assignments per program (with user IDs)
     const programIds = (programs || []).map((p) => p.id);
@@ -47,7 +73,13 @@ export async function GET() {
     return NextResponse.json({ programs: result }, {
       headers: { "Cache-Control": "private, no-cache" },
     });
-  });
+  } catch (e) {
+    console.error("Coach programs GET error:", e);
+    return NextResponse.json(
+      { error: "Internal server error", detail: String(e) },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(request: NextRequest) {

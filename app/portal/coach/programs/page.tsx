@@ -39,6 +39,7 @@ export default function CoachProgramsPage() {
   const [users, setUsers] = useState<SimpleUser[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [debugInfo, setDebugInfo] = useState<string | null>(null);
   const [selectedUser, setSelectedUser] = useState<FilterValue>("all");
 
   const fetchData = useCallback(async () => {
@@ -50,12 +51,14 @@ export default function CoachProgramsPage() {
 
       if (programsRes.ok) {
         const json = await programsRes.json();
-        console.log("Programs API response:", JSON.stringify(json).slice(0, 500));
-        setPrograms(json.programs || []);
+        const progs = json.programs || [];
+        setPrograms(progs);
+        setDebugInfo(`v3 | API status: ${programsRes.status} | Programs received: ${progs.length} | ${progs.map((p: ProgramWithAssignments) => p.title_fr).join(", ")}`);
       } else {
         const text = await programsRes.text();
         console.error("Coach programs API error:", programsRes.status, text);
         setError(`Programs API returned ${programsRes.status}: ${text}`);
+        setDebugInfo(`v3 | API status: ${programsRes.status}`);
       }
       if (usersRes.ok) {
         const json = await usersRes.json();
@@ -146,6 +149,13 @@ export default function CoachProgramsPage() {
       {error && (
         <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
           <strong>Error:</strong> {error}
+        </div>
+      )}
+
+      {/* Debug info */}
+      {debugInfo && (
+        <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg text-blue-700 text-xs font-mono whitespace-pre-wrap break-all">
+          {debugInfo}
         </div>
       )}
 

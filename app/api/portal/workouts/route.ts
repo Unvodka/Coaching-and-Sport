@@ -1,8 +1,21 @@
 import { NextResponse } from "next/server";
-import { withAuth } from "@/lib/api/auth";
+import { createClient, createAdminClient } from "@/lib/supabase/server";
 
 export async function GET() {
-  return withAuth(async ({ user, admin }) => {
+  // Inline auth (bypassing withAuth to diagnose the display issue)
+  try {
+    const supabase = createClient();
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      return NextResponse.json(
+        { error: "Unauthorized", detail: authError?.message || "No session" },
+        { status: 401 }
+      );
+    }
+
+    const admin = createAdminClient();
+
     // Fetch public programs
     const { data: publicPrograms, error: publicError } = await admin
       .from("workout_programs")
@@ -34,13 +47,6 @@ export async function GET() {
       }));
     /* eslint-enable @typescript-eslint/no-explicit-any */
 
-    console.log("Workouts API:", {
-      publicCount: (publicPrograms || []).length,
-      assignmentCount: (assignments || []).length,
-      assignedProgramCount: assignedPrograms.length,
-      userId: user.id,
-    });
-
     // Deduplicate: assigned programs that are also public
     const assignedIds = new Set(assignedPrograms.map((p) => p.id as string));
     const publicOnly = (publicPrograms || []).filter((p) => !assignedIds.has(p.id));
@@ -59,5 +65,11 @@ export async function GET() {
     }, {
       headers: { "Cache-Control": "private, no-cache" },
     });
-  });
+  } catch (e) {
+    console.error("Workouts GET error:", e);
+    return NextResponse.json(
+      { error: "Internal server error", detail: String(e) },
+      { status: 500 }
+    );
+  }
 }
