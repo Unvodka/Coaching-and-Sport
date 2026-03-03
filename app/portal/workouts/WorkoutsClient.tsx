@@ -87,7 +87,13 @@ export default function WorkoutsClient({
               )}
               <div className="space-y-4">
                 {publicPrograms.map((program) => (
-                  <WorkoutProgramCard key={program.id} program={program} />
+                  <div key={program.id} className="bg-white rounded-xl border border-gray-100 p-6">
+                    <p className="font-semibold">{program.title_fr || program.title_en || "No title"}</p>
+                    <p className="text-sm text-gray-500">{program.description_fr || "No description"}</p>
+                    <a href={`/portal/workouts/${program.id}`} className="text-brand-blue text-sm mt-2 inline-block">
+                      {locale === "fr" ? "Voir le programme" : "View program"} →
+                    </a>
+                  </div>
                 ))}
               </div>
             </div>
