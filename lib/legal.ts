@@ -25,18 +25,18 @@ export const LEGAL_INFO = {
   sapNumber: '[SAP_NUMBER]',
 
   // ─── Insurance ─────────────────────────────────────────────
-  insuranceCompany: '[INSURANCE_COMPANY]',
+  insuranceCompany: 'SNPMNS',
   insurancePolicyNumber: '[INSURANCE_POLICY_NUMBER]',
 
   // ─── Business Details ──────────────────────────────────────
-  maxKmRadius: '[MAX_KM_RADIUS]',
-  otherPaymentMethods: '[OTHER_PAYMENT_METHODS]',
+  maxKmRadius: '25',
+  otherPaymentMethods: 'Chėque',
 
   // ─── Mediation ─────────────────────────────────────────────
-  mediatorName: '[MEDIATOR_NAME]',
-  mediatorWebsite: '[MEDIATOR_WEBSITE]',
-  mediatorEmail: '[MEDIATOR_EMAIL]',
+  mediatorName: 'ANM - Association Nationale des Médiateurs',
+  mediatorWebsite: 'https://www.anm-mediation.com',
+  mediatorEmail: 'contact@anm-mediation.com',
 
   // ─── Third Parties ─────────────────────────────────────────
-  emailjsLocation: '[EMAILJS_LOCATION]',
+  emailjsLocation: 'États-Unis / UE',
 } as const;
