@@ -17,7 +17,7 @@ export default function ExerciseItem({
   isCompleted,
   onToggle,
 }: ExerciseItemProps) {
-  const { locale, t } = useLanguage();
+  const { locale } = useLanguage();
   const [loading, setLoading] = useState(false);
 
   const isCustom = exercise.name_fr === "__custom__";
