@@ -15,14 +15,14 @@ export default async function WorkoutsPage() {
   const admin = createAdminClient();
 
   // Fetch public programs
-  const { data: publicPrograms } = await admin
+  const { data: publicPrograms, error: publicError } = await admin
     .from("workout_programs")
     .select("*")
     .eq("is_public", true)
     .order("created_at", { ascending: false });
 
   // Fetch programs assigned to this user
-  const { data: assignments } = await admin
+  const { data: assignments, error: assignError } = await admin
     .from("program_assignments")
     .select("program_id, message, assigned_at, workout_programs(*)")
     .eq("user_id", user.id);
@@ -48,11 +48,29 @@ export default async function WorkoutsPage() {
     .eq("id", user.id)
     .single();
 
+  // Temporary debug info
+  const debugInfo = {
+    userId: user.id,
+    publicProgramsCount: publicPrograms?.length ?? "null",
+    publicError: publicError?.message ?? null,
+    assignmentsCount: assignments?.length ?? "null",
+    assignError: assignError?.message ?? null,
+    assignedProgramsCount: assignedPrograms.length,
+    publicOnlyCount: publicOnly.length,
+    isCoach: profile?.role === "coach",
+    timestamp: new Date().toISOString(),
+  };
+
   return (
-    <WorkoutsClient
-      publicPrograms={publicOnly}
-      assignedPrograms={assignedPrograms}
-      isCoach={profile?.role === "coach"}
-    />
+    <>
+      <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-xs font-mono">
+        <strong>DEBUG:</strong> {JSON.stringify(debugInfo)}
+      </div>
+      <WorkoutsClient
+        publicPrograms={publicOnly}
+        assignedPrograms={assignedPrograms}
+        isCoach={profile?.role === "coach"}
+      />
+    </>
   );
 }
