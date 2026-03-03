@@ -56,7 +56,7 @@ export default function ExerciseItem({
 
   return (
     <div
-      className={`flex items-center gap-4 p-4 rounded-lg border transition-colors ${
+      className={`flex items-center gap-4 p-4 lg:p-5 rounded-lg border transition-colors ${
         isCompleted
           ? "bg-green-50 border-green-200"
           : "bg-white border-gray-100"
@@ -80,14 +80,14 @@ export default function ExerciseItem({
 
       <div className="flex-1 min-w-0">
         <p
-          className={`font-medium ${
+          className={`font-medium lg:text-lg ${
             isCompleted ? "text-gray-400 line-through" : "text-heading"
           }`}
         >
           {name}
         </p>
         {exercise.description_fr && (
-          <p className={`text-xs mt-0.5 ${isCompleted ? "text-gray-300" : "text-gray-400"}`}>
+          <p className={`text-sm mt-0.5 ${isCompleted ? "text-gray-300" : "text-gray-400"}`}>
             {exercise.description_fr}
           </p>
         )}
