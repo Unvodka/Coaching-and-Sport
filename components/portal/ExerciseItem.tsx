@@ -79,6 +79,11 @@ export default function ExerciseItem({
         >
           {name}
         </p>
+        {exercise.description_fr && (
+          <p className={`text-xs mt-0.5 ${isCompleted ? "text-gray-300" : "text-gray-400"}`}>
+            {exercise.description_fr}
+          </p>
+        )}
       </div>
 
       <div className="flex items-center gap-4 text-sm text-gray-500 flex-shrink-0">

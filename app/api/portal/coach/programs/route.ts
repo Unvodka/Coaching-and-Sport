@@ -95,7 +95,7 @@ export async function POST(request: NextRequest) {
     if (Array.isArray(exercises) && exercises.length > 0) {
       const exerciseData = exercises
         .filter((ex: { name_fr?: string }) => ex.name_fr && ex.name_fr.trim())
-        .map((ex: { name_fr: string; name_en?: string; sets?: number; reps?: string; duration_seconds?: number | null; rest_seconds?: number; day_number?: number }, i: number) => ({
+        .map((ex: { name_fr: string; name_en?: string; sets?: number; reps?: string; duration_seconds?: number | null; rest_seconds?: number; day_number?: number; specificity?: string }, i: number) => ({
           program_id: program.id,
           name_fr: ex.name_fr.trim(),
           name_en: (ex.name_en || "").trim(),
@@ -104,12 +104,32 @@ export async function POST(request: NextRequest) {
           duration_seconds: ex.duration_seconds != null ? Number(ex.duration_seconds) : null,
           rest_seconds: Number(ex.rest_seconds) || 60,
           day_number: Number(ex.day_number) || 1,
+          description_fr: (ex.specificity || "").trim() || null,
           order_index: i,
         }));
 
       if (exerciseData.length > 0) {
         const { error: exError } = await admin.from("workout_exercises").insert(exerciseData);
         if (exError) console.error("Insert exercises error:", exError);
+      }
+    }
+
+    // Auto-assign public programs to all users
+    if (is_public) {
+      const { data: allUsers } = await admin
+        .from("profiles")
+        .select("id")
+        .neq("role", "coach");
+
+      if (allUsers && allUsers.length > 0) {
+        const assignmentRows = allUsers.map((u) => ({
+          program_id: program.id,
+          user_id: u.id,
+          assigned_by: user.id,
+        }));
+        await admin
+          .from("program_assignments")
+          .upsert(assignmentRows, { onConflict: "program_id,user_id" });
       }
     }
 

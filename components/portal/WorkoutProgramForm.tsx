@@ -23,6 +23,7 @@ interface ExerciseInput {
   rest_seconds: number;
   rest_unit: "sec" | "min";
   day_number: number;
+  specificity: string;
 }
 
 interface WorkoutProgramFormProps {
@@ -58,8 +59,9 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
         rest_seconds: restMin ? ex.rest_seconds / 60 : ex.rest_seconds,
         rest_unit: restMin ? "min" as const : "sec" as const,
         day_number: ex.day_number,
+        specificity: ex.description_fr || "",
       };
-    }) || [{ name_fr: "", name_en: "", sets: 3, reps: "10", duration_seconds: null, duration_unit: "sec" as const, rest_seconds: 60, rest_unit: "sec" as const, day_number: 1 }]
+    }) || [{ name_fr: "", name_en: "", sets: 3, reps: "10", duration_seconds: null, duration_unit: "sec" as const, rest_seconds: 60, rest_unit: "sec" as const, day_number: 1, specificity: "" }]
   );
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
@@ -114,7 +116,7 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
   const addExercise = () => {
     setExercises([
       ...exercises,
-      { name_fr: "", name_en: "", sets: 3, reps: "10", duration_seconds: null, duration_unit: "sec" as const, rest_seconds: 60, rest_unit: "sec" as const, day_number: 1 },
+      { name_fr: "", name_en: "", sets: 3, reps: "10", duration_seconds: null, duration_unit: "sec" as const, rest_seconds: 60, rest_unit: "sec" as const, day_number: 1, specificity: "" },
     ]);
   };
 
@@ -147,6 +149,7 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
         duration_seconds: duration_seconds != null
           ? (duration_unit === "min" ? duration_seconds * 60 : duration_seconds)
           : null,
+        specificity: ex.specificity,
       })),
     };
 
@@ -376,7 +379,7 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
                 </div>
               </div>
               {/* Row 2: Sets, Reps, Duration, Rest */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
                 <div>
                   <label className="block text-xs font-medium text-gray-500 mb-1">
                     {locale === "fr" ? "Séries" : "Sets"}
@@ -455,6 +458,19 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
                   </div>
                 </div>
               </div>
+              {/* Row 3: Spécificité */}
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  {locale === "fr" ? "Spécificité" : "Specifics"}
+                </label>
+                <input
+                  type="text"
+                  placeholder={locale === "fr" ? "Ex: S1: 12 reps 20kg, S2: 10 reps 25kg, S3: 8 reps 30kg" : "E.g. S1: 12 reps 20kg, S2: 10 reps 25kg, S3: 8 reps 30kg"}
+                  value={ex.specificity}
+                  onChange={(e) => updateExercise(idx, "specificity", e.target.value)}
+                  className={`${inputClass} text-sm`}
+                />
+              </div>
             </div>
           ))}
         </div>
@@ -465,79 +481,92 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
         <h3 className="font-semibold text-heading mb-3">
           {locale === "fr" ? "Assigner aux utilisateurs" : "Assign to users"}
         </h3>
-        <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
-          <div className="flex items-center gap-3 mb-3">
-            <input
-              type="text"
-              placeholder={locale === "fr" ? "Rechercher un utilisateur..." : "Search user..."}
-              value={userSearch}
-              onChange={(e) => setUserSearch(e.target.value)}
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none text-gray-800"
-            />
-            <button
-              type="button"
-              onClick={toggleAll}
-              className="px-3 py-2 text-xs font-medium text-brand-blue hover:bg-blue-50 rounded-lg transition-colors whitespace-nowrap"
-            >
-              {selectedUserIds.size === allUsers.length
-                ? (locale === "fr" ? "Tout décocher" : "Deselect all")
-                : (locale === "fr" ? "Tout sélectionner" : "Select all")}
-            </button>
+        {is_public ? (
+          <div className="bg-blue-50 rounded-lg border border-blue-200 p-4">
+            <p className="text-sm text-blue-700 flex items-center gap-2">
+              <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {locale === "fr"
+                ? "Programme public — sera automatiquement assigné à tous les utilisateurs."
+                : "Public program — will be automatically assigned to all users."}
+            </p>
           </div>
-          {allUsers.length === 0 ? (
-            <p className="text-sm text-gray-400 py-2">
-              {locale === "fr" ? "Chargement des utilisateurs..." : "Loading users..."}
-            </p>
-          ) : filteredUsers.length === 0 ? (
-            <p className="text-sm text-gray-400 py-2">
-              {locale === "fr" ? "Aucun résultat" : "No results"}
-            </p>
-          ) : (
-            <div className="max-h-60 overflow-y-auto space-y-1">
-              {filteredUsers.map((user) => (
-                <label
-                  key={user.id}
-                  className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer transition-colors ${
-                    selectedUserIds.has(user.id) ? "bg-blue-50" : "hover:bg-gray-100"
-                  }`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedUserIds.has(user.id)}
-                    onChange={() => toggleUser(user.id)}
-                    className="w-4 h-4 text-brand-blue rounded focus:ring-brand-blue"
-                  />
-                  {user.avatar_url ? (
-                    <Image
-                      src={user.avatar_url}
-                      alt=""
-                      width={28}
-                      height={28}
-                      className="rounded-full"
-                    />
-                  ) : (
-                    <div className="w-7 h-7 rounded-full bg-brand-blue flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-                      {(user.full_name || user.email).charAt(0).toUpperCase()}
-                    </div>
-                  )}
-                  <div className="min-w-0">
-                    <p className="text-sm font-medium text-gray-800 truncate">
-                      {user.full_name || user.email}
-                    </p>
-                    {user.full_name && (
-                      <p className="text-xs text-gray-400 truncate">{user.email}</p>
-                    )}
-                  </div>
-                </label>
-              ))}
+        ) : (
+          <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
+            <div className="flex items-center gap-3 mb-3">
+              <input
+                type="text"
+                placeholder={locale === "fr" ? "Rechercher un utilisateur..." : "Search user..."}
+                value={userSearch}
+                onChange={(e) => setUserSearch(e.target.value)}
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none text-gray-800"
+              />
+              <button
+                type="button"
+                onClick={toggleAll}
+                className="px-3 py-2 text-xs font-medium text-brand-blue hover:bg-blue-50 rounded-lg transition-colors whitespace-nowrap"
+              >
+                {selectedUserIds.size === allUsers.length
+                  ? (locale === "fr" ? "Tout décocher" : "Deselect all")
+                  : (locale === "fr" ? "Tout sélectionner" : "Select all")}
+              </button>
             </div>
-          )}
-          {selectedUserIds.size > 0 && (
-            <p className="text-xs text-gray-500 mt-2 pt-2 border-t border-gray-200">
-              {selectedUserIds.size} {locale === "fr" ? "utilisateur(s) sélectionné(s)" : "user(s) selected"}
-            </p>
-          )}
-        </div>
+            {allUsers.length === 0 ? (
+              <p className="text-sm text-gray-400 py-2">
+                {locale === "fr" ? "Chargement des utilisateurs..." : "Loading users..."}
+              </p>
+            ) : filteredUsers.length === 0 ? (
+              <p className="text-sm text-gray-400 py-2">
+                {locale === "fr" ? "Aucun résultat" : "No results"}
+              </p>
+            ) : (
+              <div className="max-h-60 overflow-y-auto space-y-1">
+                {filteredUsers.map((user) => (
+                  <label
+                    key={user.id}
+                    className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer transition-colors ${
+                      selectedUserIds.has(user.id) ? "bg-blue-50" : "hover:bg-gray-100"
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedUserIds.has(user.id)}
+                      onChange={() => toggleUser(user.id)}
+                      className="w-4 h-4 text-brand-blue rounded focus:ring-brand-blue"
+                    />
+                    {user.avatar_url ? (
+                      <Image
+                        src={user.avatar_url}
+                        alt=""
+                        width={28}
+                        height={28}
+                        className="rounded-full"
+                      />
+                    ) : (
+                      <div className="w-7 h-7 rounded-full bg-brand-blue flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                        {(user.full_name || user.email).charAt(0).toUpperCase()}
+                      </div>
+                    )}
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium text-gray-800 truncate">
+                        {user.full_name || user.email}
+                      </p>
+                      {user.full_name && (
+                        <p className="text-xs text-gray-400 truncate">{user.email}</p>
+                      )}
+                    </div>
+                  </label>
+                ))}
+              </div>
+            )}
+            {selectedUserIds.size > 0 && (
+              <p className="text-xs text-gray-500 mt-2 pt-2 border-t border-gray-200">
+                {selectedUserIds.size} {locale === "fr" ? "utilisateur(s) sélectionné(s)" : "user(s) selected"}
+              </p>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="flex gap-4">
