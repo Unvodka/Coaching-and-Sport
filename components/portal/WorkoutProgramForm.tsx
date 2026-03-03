@@ -325,12 +325,14 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
           <h3 className="font-semibold text-heading">
             {locale === "fr" ? "Contenu du programme" : "Program content"}
           </h3>
-          <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setIsCustom(false)}
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                !isCustom ? "bg-white text-heading shadow-sm" : "text-gray-500 hover:text-gray-700"
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                !isCustom
+                  ? "bg-gradient-to-r from-brand-blue to-brand-navy text-white shadow-md"
+                  : "bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
               }`}
             >
               {locale === "fr" ? "Structuré" : "Structured"}
@@ -338,8 +340,10 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
             <button
               type="button"
               onClick={() => setIsCustom(true)}
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                isCustom ? "bg-white text-heading shadow-sm" : "text-gray-500 hover:text-gray-700"
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                isCustom
+                  ? "bg-gradient-to-r from-brand-blue to-brand-navy text-white shadow-md"
+                  : "bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
               }`}
             >
               {locale === "fr" ? "Personnalisé" : "Custom"}
