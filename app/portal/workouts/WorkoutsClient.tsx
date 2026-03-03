@@ -24,6 +24,9 @@ export default function WorkoutsClient({
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
+      <div className="mb-2 p-3 bg-blue-50 border border-blue-200 rounded-lg text-xs font-mono">
+        <strong>CLIENT DEBUG:</strong> publicPrograms={publicPrograms.length}, assignedPrograms={assignedPrograms.length}, hasAny={String(hasAny)}
+      </div>
       <div className="flex items-center justify-between">
         <div />
         {isCoach && (
