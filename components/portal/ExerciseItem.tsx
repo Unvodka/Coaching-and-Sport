@@ -56,7 +56,7 @@ export default function ExerciseItem({
 
   return (
     <div
-      className={`p-4 lg:p-5 rounded-lg border transition-colors ${
+      className={`p-3 lg:p-4 rounded-lg border transition-colors ${
         isCompleted
           ? "bg-green-50 border-green-200"
           : "bg-white border-gray-100"
