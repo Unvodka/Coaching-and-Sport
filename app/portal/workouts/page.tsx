@@ -11,6 +11,7 @@ export default function WorkoutsPage() {
   const [publicPrograms, setPublicPrograms] = useState<WorkoutProgram[]>([]);
   const [assignedPrograms, setAssignedPrograms] = useState<WorkoutProgram[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [isCoach, setIsCoach] = useState(false);
 
   useEffect(() => {
@@ -22,9 +23,14 @@ export default function WorkoutsPage() {
           setPublicPrograms(json.publicPrograms || []);
           setAssignedPrograms(json.assignedPrograms || []);
           setIsCoach(json.isCoach || false);
+        } else {
+          const text = await res.text();
+          console.error("Workouts API error:", res.status, text);
+          setError(`Workouts API returned ${res.status}: ${text}`);
         }
       } catch (err) {
         console.error("Workouts page error:", err);
+        setError(`Fetch error: ${err instanceof Error ? err.message : String(err)}`);
       } finally {
         setLoading(false);
       }
@@ -52,6 +58,13 @@ export default function WorkoutsPage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
+      {/* Error banner */}
+      {error && (
+        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+          <strong>Error:</strong> {error}
+        </div>
+      )}
+
       <div className="flex items-center justify-between">
         <div />
         {isCoach && (

@@ -34,6 +34,13 @@ export async function GET() {
       }));
     /* eslint-enable @typescript-eslint/no-explicit-any */
 
+    console.log("Workouts API:", {
+      publicCount: (publicPrograms || []).length,
+      assignmentCount: (assignments || []).length,
+      assignedProgramCount: assignedPrograms.length,
+      userId: user.id,
+    });
+
     // Deduplicate: assigned programs that are also public
     const assignedIds = new Set(assignedPrograms.map((p) => p.id as string));
     const publicOnly = (publicPrograms || []).filter((p) => !assignedIds.has(p.id));

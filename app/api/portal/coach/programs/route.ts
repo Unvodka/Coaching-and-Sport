@@ -13,8 +13,10 @@ export async function GET() {
 
     if (error) {
       console.error("Coach programs list error:", error);
-      return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+      return NextResponse.json({ error: "Internal server error", detail: error.message }, { status: 500 });
     }
+
+    console.log("Coach programs: found", (programs || []).length, "programs");
 
     // Fetch assignments per program (with user IDs)
     const programIds = (programs || []).map((p) => p.id);

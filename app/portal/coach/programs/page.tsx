@@ -38,6 +38,7 @@ export default function CoachProgramsPage() {
   const [programs, setPrograms] = useState<ProgramWithAssignments[]>([]);
   const [users, setUsers] = useState<SimpleUser[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [selectedUser, setSelectedUser] = useState<FilterValue>("all");
 
   const fetchData = useCallback(async () => {
@@ -50,14 +51,21 @@ export default function CoachProgramsPage() {
       if (programsRes.ok) {
         const json = await programsRes.json();
         setPrograms(json.programs || []);
+      } else {
+        const text = await programsRes.text();
+        console.error("Coach programs API error:", programsRes.status, text);
+        setError(`Programs API returned ${programsRes.status}: ${text}`);
       }
       if (usersRes.ok) {
         const json = await usersRes.json();
         // Filter out coaches, keep only regular users
         setUsers((json.users || []).filter((u: SimpleUser) => u.role !== "coach"));
+      } else {
+        console.error("Users API error:", usersRes.status);
       }
     } catch (err) {
       console.error("Coach programs fetch error:", err);
+      setError(`Fetch error: ${err instanceof Error ? err.message : String(err)}`);
     } finally {
       setLoading(false);
     }
@@ -130,6 +138,13 @@ export default function CoachProgramsPage() {
           {t("portal.coach.programs.new")}
         </Link>
       </div>
+
+      {/* Error banner */}
+      {error && (
+        <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+          <strong>Error:</strong> {error}
+        </div>
+      )}
 
       {/* User filter */}
       <div className="mb-6">
