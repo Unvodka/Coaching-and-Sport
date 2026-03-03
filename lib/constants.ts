@@ -24,7 +24,6 @@ export function getNavLinks(locale: Locale): NavLink[] {
   return locale === 'en' ? NAV_LINKS_EN : NAV_LINKS_FR;
 }
 
-
 // ─── SERVICES ───────────────────────────────────────────────
 
 const SERVICES_FR: Service[] = [
@@ -43,9 +42,9 @@ const SERVICES_FR: Service[] = [
       subtitle: "Maîtrisez l'eau, transformez votre corps",
       longDescription: [
         "La natation est l'un des sports les plus complets qui existe. Elle sollicite l'ensemble des groupes musculaires — bras, jambes, dos, abdominaux — tout en préservant vos articulations. L'eau porte votre poids corporel, réduisant le stress articulaire de 90%, ce qui en fait une activité idéale à tout âge, pour la rééducation comme pour la performance.",
-        "Une séance de natation intensive permet de brûler jusqu'à 500 calories par heure, tout en affinant la silhouette et en améliorant l'endurance cardiovasculaire. Le contact avec l'eau procure également un effet apaisant immédiat : la natation réduit le cortisol et favorise la production d'endorphines pour un bien-être durable, corps et esprit.",
-        "En tant que maître-nageur diplômé d'État, je vous propose des cours individuels ou en petit groupe adaptés à votre niveau et à vos objectifs. Que vous souhaitiez apprendre les bases, perfectionner votre technique de crawl ou de papillon, ou simplement profiter des bienfaits de l'eau pour votre santé, je vous accompagne à chaque étape.",
-        "Chaque séance est structurée pour combiner travail technique, renforcement musculaire aquatique et exercices de cardio dans l'eau. Vous progresserez à votre rythme dans un environnement bienveillant et motivant.",
+        "Une séance de natation permet de brûler des calories, tout en affinant la silhouette et en améliorant l'endurance et la condition cardiovasculaire. Le contact avec l'eau procure également un effet apaisant immédiat : la natation réduit le cortisol et favorise la production d'endorphines pour un bien-être durable du corps et de l'esprit.",
+        "Je vous propose des cours individuels adaptés à votre niveau et à vos objectifs. Que vous souhaitiez apprendre les bases, perfectionner votre technique de nage, ou simplement profiter des bienfaits de l'eau pour votre santé, je vous accompagne à chaque étape.",
+        "Chaque séance est structurée pour combiner travail technique, renforcement musculaire aquatique et exercices de cardio dans l'eau, mais également découvrir les sensations de flotaison et de glisse. Vous progresserez à votre rythme dans un environnement bienveillant et motivant.",
       ],
       benefits: [],
       targetAudience: [
@@ -96,13 +95,13 @@ const SERVICES_FR: Service[] = [
     detail: {
       heroImageSrc:
         'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80',
-      heroImageAlt: 'Entraînement fitness en salle et en plein air',
-      subtitle: 'Sculptez votre corps, en salle comme en plein air',
+      heroImageAlt: 'Entraînement fitness en plein air ou à domicile',
+      subtitle: 'Sculptez votre corps, en plein air ou chez vous',
       longDescription: [
         "Le fitness est bien plus qu'un simple entraînement physique — c'est un véritable mode de vie. Mes séances sont conçues pour vous aider à atteindre vos objectifs, que ce soit la perte de poids, la prise de masse musculaire, la tonification ou l'amélioration de votre condition physique générale.",
-        "Développez votre force et votre masse musculaire grâce à des exercices ciblés et progressifs. Le fitness accélère votre métabolisme, vous aidant à brûler des calories même au repos. Chaque programme est entièrement adapté à vos besoins — perte de poids, prise de muscle, tonification, préparation sportive ou remise en forme générale — pour des résultats visibles en quelques semaines.",
-        "J'utilise une combinaison de musculation, de HIIT, de circuits training et d'exercices fonctionnels pour maximiser vos résultats — en salle ou en plein air selon vos préférences. Chaque programme est élaboré sur mesure en fonction de votre morphologie, votre niveau actuel et vos objectifs personnels.",
-        "Les séances en extérieur se déroulent dans les plus beaux espaces verts de Valbonne et ses alentours. L'air frais oxygène mieux les muscles, la vitamine D naturelle du soleil renforce les os, et le contact avec la nature réduit considérablement le stress. Une combinaison gagnante pour des résultats optimaux.",
+        'Développez votre force et votre masse musculaire grâce à des exercices ciblés et progressifs. Le fitness accélère votre métabolisme, vous aidant à brûler des calories même au repos. Chaque programme est entièrement adapté à vos besoins — perte de poids, prise de muscle, tonification, préparation sportive ou remise en forme générale — pour des résultats visibles en quelques semaines.',
+        "J'utilise une combinaison de musculation, de circuits training, d'exercices fractionnés, et d'exercices fonctionnels pour maximiser vos résultats. Chaque programme est élaboré sur mesure en fonction de votre morphologie, votre niveau actuel et vos objectifs personnels.",
+        "Les séances en extérieur se déroulent dans les plus beaux décors de la région ou à votre domicile. L'air frais oxygène mieux les muscles, la vitamine D naturelle du soleil renforce les os, et le contact avec la nature réduit considérablement le stress. Une combinaison gagnante pour des résultats optimaux et durables.",
       ],
       benefits: [],
       targetAudience: [
@@ -159,8 +158,8 @@ const SERVICES_FR: Service[] = [
       subtitle: 'Mangez mieux, vivez mieux — sans frustration',
       longDescription: [
         "La nutrition est le pilier fondamental de tout programme de remise en forme. Sans une alimentation adaptée, même le meilleur entraînement ne donnera pas les résultats escomptés. C'est pourquoi je propose un accompagnement nutritionnel personnalisé, complémentaire à vos séances de sport.",
-        "Mon approche repose sur un plan alimentaire sur mesure, adapté à vos goûts, votre mode de vie et vos objectifs — pas de régime strict, juste un rééquilibrage intelligent. Grâce à un bilan nutritionnel complet, j'identifie vos carences, vos excès et vos habitudes à ajuster pour des changements ciblés et efficaces.",
-        "Je vous aide à comprendre vos besoins nutritionnels, à composer des repas savoureux et équilibrés, et à adopter des habitudes alimentaires durables qui s'intègrent naturellement à votre quotidien. Des idées de repas simples, rapides et savoureux pour chaque moment de la journée — manger sain n'a jamais été aussi facile.",
+        "Mon approche repose sur un plan alimentaire sur mesure, adapté à vos goûts, votre mode de vie et vos objectifs - un rééquilibrage intelligent. Grâce à un bilan nutritionnel complet, j'identifie vos carences, vos excès et vos habitudes à ajuster pour des changements ciblés et efficaces.",
+        "Je vous aide à comprendre vos besoins nutritionnels, à composer des repas savoureux et équilibrés, et à adopter de bonnes habitudes alimentaires qui s'intègrent naturellement à votre quotidien. Des idées de repas simples, rapides et savoureux pour chaque moment de la journée — manger sain n'a jamais été aussi facile.",
         "Fini l'effet yoyo des régimes. Ensemble, nous construisons un plan alimentaire réaliste et agréable qui soutient vos objectifs sportifs tout en respectant vos goûts et votre mode de vie, pour une santé optimale sur le long terme.",
       ],
       benefits: [],
@@ -720,4 +719,3 @@ const PRICING_PACKS_EN: PricingPack[] = [
 export function getPricingPacks(locale: Locale): PricingPack[] {
   return locale === 'en' ? PRICING_PACKS_EN : PRICING_PACKS_FR;
 }
-
