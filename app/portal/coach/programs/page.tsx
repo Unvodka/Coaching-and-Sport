@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { createClient, createAdminClient } from "@/lib/supabase/server";
 import CoachProgramsClient from "./CoachProgramsClient";
 
+export const dynamic = "force-dynamic";
+
 export default async function CoachProgramsPage() {
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();

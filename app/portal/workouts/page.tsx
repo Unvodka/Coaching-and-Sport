@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { createClient, createAdminClient } from "@/lib/supabase/server";
 import WorkoutsClient from "./WorkoutsClient";
 
+export const dynamic = "force-dynamic";
+
 export default async function WorkoutsPage() {
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
