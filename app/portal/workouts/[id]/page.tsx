@@ -1,136 +1,55 @@
-"use client";
+import { redirect, notFound } from "next/navigation";
+import { createClient, createAdminClient } from "@/lib/supabase/server";
+import WorkoutDetailClient from "./WorkoutDetailClient";
 
-import { useEffect, useState, useCallback } from "react";
-import { useParams } from "next/navigation";
-import { useLanguage } from "@/lib/i18n/useLanguage";
-import { createClient } from "@/lib/supabase/client";
-import ExerciseItem from "@/components/portal/ExerciseItem";
-import ProgressTracker from "@/components/portal/ProgressTracker";
-import type {
-  WorkoutProgram,
-  WorkoutExercise,
-} from "@/lib/supabase/database.types";
+export const dynamic = "force-dynamic";
 
-export default function WorkoutDetailPage() {
-  const params = useParams();
-  const programId = params.id as string;
-  const { locale } = useLanguage();
+interface PageProps {
+  params: { id: string };
+}
 
-  const [program, setProgram] = useState<WorkoutProgram | null>(null);
-  const [exercises, setExercises] = useState<WorkoutExercise[]>([]);
-  const [completedIds, setCompletedIds] = useState<Set<string>>(new Set());
-  const [loading, setLoading] = useState(true);
+export default async function WorkoutDetailPage({ params }: PageProps) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  const fetchData = useCallback(async () => {
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { setLoading(false); return; }
-
-    const [programRes, exercisesRes, progressRes] = await Promise.all([
-      supabase.from("workout_programs").select("*").eq("id", programId).single(),
-      supabase
-        .from("workout_exercises")
-        .select("*")
-        .eq("program_id", programId)
-        .order("day_number")
-        .order("order_index"),
-      supabase
-        .from("user_workout_progress")
-        .select("exercise_id")
-        .eq("user_id", user.id)
-        .eq("program_id", programId),
-    ]);
-
-    setProgram(programRes.data as WorkoutProgram | null);
-    setExercises((exercisesRes.data as WorkoutExercise[]) || []);
-    setCompletedIds(
-      new Set((progressRes.data || []).map((p: { exercise_id: string }) => p.exercise_id))
-    );
-    setLoading(false);
-  }, [programId]);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  if (loading) {
-    return (
-      <div className="max-w-3xl mx-auto animate-pulse space-y-4">
-        <div className="h-8 bg-gray-200 rounded w-1/2" />
-        <div className="h-4 bg-gray-200 rounded w-3/4" />
-        <div className="h-32 bg-gray-200 rounded" />
-      </div>
-    );
+  if (!user) {
+    redirect("/?login=required");
   }
 
-  if (!program) {
-    return (
-      <div className="text-center py-12 text-gray-500">
-        {locale === "fr" ? "Programme introuvable" : "Program not found"}
-      </div>
-    );
+  const admin = createAdminClient();
+  const programId = params.id;
+
+  const [programRes, exercisesRes, progressRes] = await Promise.all([
+    admin.from("workout_programs").select("*").eq("id", programId).single(),
+    admin
+      .from("workout_exercises")
+      .select("*")
+      .eq("program_id", programId)
+      .order("day_number")
+      .order("order_index"),
+    admin
+      .from("user_workout_progress")
+      .select("exercise_id")
+      .eq("user_id", user.id)
+      .eq("program_id", programId),
+  ]);
+
+  if (!programRes.data) {
+    notFound();
   }
 
-  const title = locale === "fr" ? program.title_fr : (program.title_en || program.title_fr);
-  const description = locale === "fr" ? program.description_fr : (program.description_en || program.description_fr);
-
-  const isCustom = exercises.length === 1 && exercises[0].name_fr === "__custom__";
-
-  // Group exercises by day (structured programs only)
-  const dayGroups = isCustom ? {} : exercises.reduce<Record<number, WorkoutExercise[]>>(
-    (acc, ex) => {
-      const day = ex.day_number;
-      if (!acc[day]) acc[day] = [];
-      acc[day].push(ex);
-      return acc;
-    },
-    {}
+  const completedIds = (progressRes.data || []).map(
+    (p: { exercise_id: string }) => p.exercise_id
   );
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold text-heading font-heading">
-          {title}
-        </h2>
-        {description && (
-          <p className="text-gray-500 mt-2">{description}</p>
-        )}
-      </div>
-
-      {isCustom ? (
-        <div className="bg-white rounded-xl border border-gray-100 p-6">
-          <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
-            {exercises[0].description_fr}
-          </p>
-        </div>
-      ) : (
-        <>
-          <ProgressTracker
-            completed={completedIds.size}
-            total={exercises.length}
-          />
-
-          {Object.entries(dayGroups).map(([day, dayExercises]) => (
-            <div key={day}>
-              <h3 className="font-semibold text-heading mb-3">
-                {locale === "fr" ? `Jour ${day}` : `Day ${day}`}
-              </h3>
-              <div className="space-y-3">
-                {dayExercises.map((exercise) => (
-                  <ExerciseItem
-                    key={exercise.id}
-                    exercise={exercise}
-                    programId={programId}
-                    isCompleted={completedIds.has(exercise.id)}
-                    onToggle={fetchData}
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
-        </>
-      )}
-    </div>
+    <WorkoutDetailClient
+      program={programRes.data}
+      exercises={exercisesRes.data || []}
+      initialCompletedIds={completedIds}
+      programId={programId}
+    />
   );
 }

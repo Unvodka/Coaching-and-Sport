@@ -62,25 +62,10 @@ export default async function CoachProgramsPage() {
 
   const users = (allUsers || []).filter((u) => u.role !== "coach");
 
-  // Temporary debug info
-  const debugInfo = {
-    userId: user.id,
-    programsCount: programs?.length ?? "null",
-    assignmentsCount: assignments.length,
-    usersCount: users.length,
-    programsWithAssignmentsCount: programsWithAssignments.length,
-    timestamp: new Date().toISOString(),
-  };
-
   return (
-    <>
-      <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-xs font-mono">
-        <strong>DEBUG:</strong> {JSON.stringify(debugInfo)}
-      </div>
-      <CoachProgramsClient
-        initialPrograms={programsWithAssignments}
-        initialUsers={users}
-      />
-    </>
+    <CoachProgramsClient
+      initialPrograms={programsWithAssignments}
+      initialUsers={users}
+    />
   );
 }

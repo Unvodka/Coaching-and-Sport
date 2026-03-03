@@ -24,9 +24,6 @@ export default function WorkoutsClient({
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      <div className="mb-2 p-3 bg-blue-50 border border-blue-200 rounded-lg text-xs font-mono">
-        <strong>CLIENT DEBUG:</strong> publicPrograms={publicPrograms.length}, assignedPrograms={assignedPrograms.length}, hasAny={String(hasAny)}
-      </div>
       <div className="flex items-center justify-between">
         <div />
         {isCoach && (
@@ -87,13 +84,7 @@ export default function WorkoutsClient({
               )}
               <div className="space-y-4">
                 {publicPrograms.map((program) => (
-                  <div key={program.id} className="bg-white rounded-xl border border-gray-100 p-6">
-                    <p className="font-semibold">{program.title_fr || program.title_en || "No title"}</p>
-                    <p className="text-sm text-gray-500">{program.description_fr || "No description"}</p>
-                    <a href={`/portal/workouts/${program.id}`} className="text-brand-blue text-sm mt-2 inline-block">
-                      {locale === "fr" ? "Voir le programme" : "View program"} →
-                    </a>
-                  </div>
+                  <WorkoutProgramCard key={program.id} program={program} />
                 ))}
               </div>
             </div>

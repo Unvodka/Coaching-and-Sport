@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { createClient } from "@/lib/supabase/client";
 import type { WorkoutExercise } from "@/lib/supabase/database.types";
 
 interface ExerciseItemProps {
@@ -26,26 +25,23 @@ export default function ExerciseItem({
 
   const handleToggle = async () => {
     setLoading(true);
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { setLoading(false); return; }
-
-    if (isCompleted) {
-      await supabase
-        .from("user_workout_progress")
-        .delete()
-        .eq("user_id", user.id)
-        .eq("exercise_id", exercise.id);
-    } else {
-      await supabase.from("user_workout_progress").insert({
-        user_id: user.id,
-        program_id: programId,
-        exercise_id: exercise.id,
+    try {
+      const res = await fetch(`/api/portal/workouts/${programId}/progress`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          exerciseId: exercise.id,
+          completed: isCompleted,
+        }),
       });
+      if (res.ok) {
+        onToggle();
+      }
+    } catch (err) {
+      console.error("Toggle exercise error:", err);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
-    onToggle();
   };
 
   if (isCustom) {
