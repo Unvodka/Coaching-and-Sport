@@ -83,13 +83,23 @@ export default function AboutPageContent() {
             </p>
           </FadeInWhenVisible>
           <FadeInWhenVisible delay={0.3}>
-            <p className="text-gray-600 mb-12 leading-[1.8] text-[1.1rem]">
+            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
               {t("aboutPage.p4")}
+            </p>
+          </FadeInWhenVisible>
+          <FadeInWhenVisible delay={0.35}>
+            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
+              {t("aboutPage.p5")}
+            </p>
+          </FadeInWhenVisible>
+          <FadeInWhenVisible delay={0.4}>
+            <p className="text-gray-600 mb-12 leading-[1.8] text-[1.1rem]">
+              {t("aboutPage.p6")}
             </p>
           </FadeInWhenVisible>
 
           {/* Qualifications */}
-          <FadeInWhenVisible delay={0.35}>
+          <FadeInWhenVisible delay={0.45}>
             <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-10 mb-12 border border-blue-100">
               <h3 className="font-heading text-heading text-2xl font-bold mb-6 flex items-center gap-3">
                 🎓 {t("aboutPage.qualificationsTitle")}
@@ -109,7 +119,7 @@ export default function AboutPageContent() {
           </FadeInWhenVisible>
 
           {/* Approach */}
-          <FadeInWhenVisible delay={0.4}>
+          <FadeInWhenVisible delay={0.5}>
             <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-10 mb-12 border border-gray-200">
               <h3 className="font-heading text-heading text-2xl font-bold mb-6 flex items-center gap-3">
                 🎯 {t("aboutPage.approachTitle")}
@@ -131,7 +141,7 @@ export default function AboutPageContent() {
           </FadeInWhenVisible>
 
           {/* CTA */}
-          <FadeInWhenVisible delay={0.45}>
+          <FadeInWhenVisible delay={0.55}>
             <div className="text-center bg-gradient-to-br from-brand-dark to-brand-navy rounded-2xl p-12 text-white">
               <h3 className="font-heading text-3xl font-bold mb-6">
                 {t("aboutPage.ctaTitle")}
@@ -146,7 +156,7 @@ export default function AboutPageContent() {
           </FadeInWhenVisible>
 
           {/* Back link */}
-          <FadeInWhenVisible delay={0.5}>
+          <FadeInWhenVisible delay={0.6}>
             <div className="text-center mt-10">
               <Link
                 href="/"

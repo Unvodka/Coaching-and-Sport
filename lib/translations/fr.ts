@@ -71,14 +71,17 @@ const fr = {
   'aboutPage.headingName': 'Arnaud Chevallier',
   'aboutPage.headingRole': 'Coach Sportif & Maître-Nageur',
   'aboutPage.p1':
-    'Maître-nageur et Coach sportif, je me consacre depuis plus de 10 ans à accompagner les personnes dans leur parcours de transformation physique.',
-  //
+    "J'ai grandi sur la Côte d'Azur, entre Antibes et ses alentours, entre mer et montagnes, une nature qui ne m'a jamais quitté. Très tôt, je me suis tourné vers le sport sous toutes ses formes — dans l'eau, sur terre, seul ou en équipe — avec cette envie constante de bouger, de comprendre mon corps et d'aller toujours un peu plus loin.",
   'aboutPage.p2':
-    "Spécialisé dans la pratique multi-sports, la perte de poids, la remise en forme et le bien-être, j'ai développé une approche globale qui combine plusieurs disciplines sportives pour des résultats durables et harmonieux.",
+    "Maître-nageur et éducateur sportif, je me consacre depuis plus de dix ans à accompagner les personnes dans leur parcours de développement physique. J'ai eu la chance de travailler dans des endroits incroyables tels que les Thermes Marins de Monte-Carlo, le Maybourne Riviera, Thalazur, Aquavelo, Aquafit, les bassins de salles de sport parisiennes et dans bien d'autres endroits encore. J'ai aussi exercé dans d'autres domaines, dans d'autres pays, avec d'autres méthodes. Tout cela m'a appris à m'adapter, à écouter, et à me sentir à l'aise partout et avec tout le monde tout aussi bien qu'à acquérir une approche autant différente que technique.",
   'aboutPage.p3':
-    'Ma philosophie : un accompagnement bienveillant, des objectifs réalistes et une progression adaptée à votre rythme. Chaque personne est unique, et votre programme le sera aussi.',
+    "Spécialisé dans la pratique multi-sports, la perte de poids, la remise en forme et le bien-être, j'ai développé au fil des années une approche globale qui combine plusieurs disciplines pour des résultats durables et harmonieux. Mais au-delà de la technique, ce qui me passionne vraiment, c'est l'humain. La psychologie, la manière dont les gens fonctionnent, ce qui les motive ou ce qui les bloque — tout ça me fascine. Et ça se ressent dans ma façon d'enseigner : je ne suis pas là pour balancer des consignes, j'écoute, j'observe, je m'adapte et c'est également ce que je voudrais vous transmettre à travers des exercices et discussions passionnantes et ludiques.",
   'aboutPage.p4':
-    "Basé à Valbonne, j'interviens dans toute la région pour vous offrir le meilleur service possible.",
+    "L'équilibre est au cœur de tout ce que j'enseigne. Équilibre entre le corps et l'esprit, entre l'effort et le plaisir, et entre ce que l'on mange et ce que l'on dépense. Je suis convaincu que le bien-être ne se construit pas dans un seul domaine et qu'il ne vient pas des autres — il vient de nous, il vient quand on apprend l'équilibre de la vie, l'équilibre entre le mouvement, l'alimentation et le mental. C'est cette vision-là que je porte au quotidien, aussi bien dans mes cours que dans mes échanges.",
+  'aboutPage.p5':
+    'Ma philosophie est simple : un accompagnement bienveillant, des objectifs réalistes et une progression adaptée à votre rythme. Chaque personne est unique, et votre programme le sera aussi.',
+  'aboutPage.p6':
+    "Amoureux de la nature, curieux de tout, souriant et plein d'énergie, je fais partie de ceux qui donnent envie de se bouger et de prendre soin de soi — sans se prendre la tête. Basé à Valbonne, j'interviens sur toute la Côte d'Azur et le Var pour vous offrir le meilleur accompagnement possible. Que ce soit au bord d'un bassin, en plein air, à votre domicile ou autour d'une bonne conversation, j'aime transmettre avec simplicité, sincérité et bonne humeur.",
   'aboutPage.qualificationsTitle': 'Mes Atouts',
   'aboutPage.q1': "Brevet d'État de Maître-Nageur Sauveteur",
   'aboutPage.q2': 'Éducateur sportif spécialisé',

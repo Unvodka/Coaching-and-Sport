@@ -72,13 +72,17 @@ const en: Record<TranslationKey, string> = {
   "aboutPage.headingName": "Arnaud Chevallier",
   "aboutPage.headingRole": "Fitness Coach & Certified Swimming Teacher and Lifeguard",
   "aboutPage.p1":
-    "Certified lifeguard and sports coach, I have been dedicated for several years to helping my clients on their physical transformation journey.",
+    "I grew up on the French Riviera, between Antibes and its surroundings, between sea and mountains — a natural environment that has never left me. From an early age, I turned to sport in all its forms — in the water, on land, alone or as a team — with a constant desire to move, understand my body, and always push a little further.",
   "aboutPage.p2":
-    "Specializing in weight loss and fitness, I have developed a holistic approach that combines multiple sports disciplines for lasting and balanced results.",
+    "Lifeguard and sports educator, I have been dedicated for over ten years to helping people on their physical development journey. I have had the chance to work in incredible places such as the Thermes Marins de Monte-Carlo, the Maybourne Riviera, Thalazur, Aquavelo, Aquafit, Parisian gym pools, and many other venues. I have also worked in other fields, in other countries, with other methods. All of this taught me to adapt, to listen, and to feel comfortable everywhere and with everyone, while acquiring an approach that is as unique as it is technical.",
   "aboutPage.p3":
-    "My philosophy: supportive guidance, realistic goals, and progress adapted to your pace. Every person is unique, and your program will be too.",
+    "Specializing in multi-sport practice, weight loss, fitness and well-being, I have developed over the years a holistic approach that combines multiple disciplines for lasting and balanced results. But beyond technique, what truly fascinates me is people. Psychology, how people function, what motivates or blocks them — all of this captivates me. And it shows in my teaching: I'm not here to bark orders, I listen, I observe, I adapt, and that's also what I want to pass on to you through engaging and fun exercises and discussions.",
   "aboutPage.p4":
-    "Based in Valbonne, I work throughout the region to offer you the best possible service.",
+    "Balance is at the heart of everything I teach. Balance between body and mind, between effort and pleasure, and between what we eat and what we burn. I am convinced that well-being is not built in a single area and doesn't come from others — it comes from within, when we learn life's balance, the balance between movement, nutrition and mindset. This is the vision I carry every day, both in my classes and in my conversations.",
+  "aboutPage.p5":
+    "My philosophy is simple: supportive guidance, realistic goals, and progress adapted to your pace. Every person is unique, and your program will be too.",
+  "aboutPage.p6":
+    "A nature lover, curious about everything, smiling and full of energy, I'm one of those people who make you want to get moving and take care of yourself — without overthinking it. Based in Valbonne, I work across the entire French Riviera and the Var to offer you the best possible support. Whether it's by a pool, outdoors, at your home, or over a good conversation, I love to share with simplicity, sincerity and good humor.",
   "aboutPage.qualificationsTitle": "My Strengths",
   "aboutPage.q1": "State-certified Lifeguard",
   "aboutPage.q2": "Specialized sports educator",
