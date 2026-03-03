@@ -10,9 +10,12 @@ export default function AboutSection() {
   return (
     <section id="apropos" className="bg-white py-24 px-16 w-full max-md:py-16 max-md:px-6">
       <FadeInWhenVisible>
-        <h2 className="font-heading text-center text-5xl mb-6 font-extrabold tracking-tight text-heading max-md:text-[2.2rem] max-[480px]:text-[1.8rem]">
+        <h2 className="font-heading text-center text-5xl mb-2 font-extrabold tracking-tight text-heading max-md:text-[2.2rem] max-[480px]:text-[1.8rem]">
           Arnaud Chevallier
         </h2>
+        <p className="text-center text-xl text-gray-500 font-semibold mb-6 max-md:text-lg">
+          Un coach dédié à votre réussite !
+        </p>
       </FadeInWhenVisible>
       <div className="flex flex-col items-center text-center max-w-[800px] mx-auto">
         <FadeInWhenVisible delay={0.2}>
