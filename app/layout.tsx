@@ -313,7 +313,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon-dark.ico?v=3" sizes="48x48" media="(prefers-color-scheme: dark)" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32-dark.png?v=3" media="(prefers-color-scheme: dark)" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16-dark.png?v=3" media="(prefers-color-scheme: dark)" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=3" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=4" />
         <link rel="manifest" href="/site.webmanifest?v=3" />
         <meta name="theme-color" content="#2563eb" />
 
