@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import type { WorkoutExercise } from "@/lib/supabase/database.types";
 
@@ -13,36 +12,13 @@ interface ExerciseItemProps {
 
 export default function ExerciseItem({
   exercise,
-  programId,
   isCompleted,
   onToggle,
 }: ExerciseItemProps) {
   const { locale } = useLanguage();
-  const [loading, setLoading] = useState(false);
 
   const isCustom = exercise.name_fr === "__custom__";
   const name = locale === "fr" ? exercise.name_fr : (exercise.name_en || exercise.name_fr);
-
-  const handleToggle = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/portal/workouts/${programId}/progress`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          exerciseId: exercise.id,
-          completed: isCompleted,
-        }),
-      });
-      if (res.ok) {
-        onToggle();
-      }
-    } catch (err) {
-      console.error("Toggle exercise error:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (isCustom) {
     return (
@@ -64,8 +40,7 @@ export default function ExerciseItem({
     >
       <div className="flex items-start gap-3 lg:gap-4">
         <button
-          onClick={handleToggle}
-          disabled={loading}
+          onClick={onToggle}
           className={`w-6 h-6 mt-0.5 rounded-full border-2 flex items-center justify-center transition-colors flex-shrink-0 ${
             isCompleted
               ? "bg-green-500 border-green-500"

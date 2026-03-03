@@ -27,17 +27,44 @@ export default function WorkoutDetailClient({
     new Set(initialCompletedIds)
   );
 
-  const refreshProgress = useCallback(async () => {
-    try {
-      const res = await fetch(`/api/portal/workouts/${programId}/progress`);
-      if (res.ok) {
-        const json = await res.json();
-        setCompletedIds(new Set(json.completedIds || []));
-      }
-    } catch (err) {
-      console.error("Failed to refresh progress:", err);
-    }
-  }, [programId]);
+  const handleToggle = useCallback(
+    (exerciseId: string) => {
+      const wasCompleted = completedIds.has(exerciseId);
+
+      // Optimistic update — instant UI change
+      setCompletedIds((prev) => {
+        const next = new Set(prev);
+        if (wasCompleted) {
+          next.delete(exerciseId);
+        } else {
+          next.add(exerciseId);
+        }
+        return next;
+      });
+
+      // Fire API call in the background
+      fetch(`/api/portal/workouts/${programId}/progress`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          exerciseId,
+          completed: wasCompleted,
+        }),
+      }).catch(() => {
+        // Revert on failure
+        setCompletedIds((prev) => {
+          const reverted = new Set(prev);
+          if (wasCompleted) {
+            reverted.add(exerciseId);
+          } else {
+            reverted.delete(exerciseId);
+          }
+          return reverted;
+        });
+      });
+    },
+    [completedIds, programId]
+  );
 
   const title =
     locale === "fr" ? program.title_fr : program.title_en || program.title_fr;
@@ -94,7 +121,7 @@ export default function WorkoutDetailClient({
                     exercise={exercise}
                     programId={programId}
                     isCompleted={completedIds.has(exercise.id)}
-                    onToggle={refreshProgress}
+                    onToggle={() => handleToggle(exercise.id)}
                   />
                 ))}
               </div>
