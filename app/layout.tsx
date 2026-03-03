@@ -323,9 +323,9 @@ export default function RootLayout({
         <link rel="alternate" hrefLang="x-default" href={`${BASE_URL}`} />
 
         {/* Preconnect to external domains for faster resource loading */}
-        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <JsonLd data={professionalServiceJsonLd} />
         <JsonLd data={personJsonLd} />

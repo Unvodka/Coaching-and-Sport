@@ -33,6 +33,7 @@ export default function ServiceDetailContent({ slug }: Props) {
           className="object-cover"
           priority
           sizes="100vw"
+          quality={75}
         />
         <div className="absolute inset-0 bg-black/50 z-[1]" />
         <div className="relative z-10 text-center text-white px-8">

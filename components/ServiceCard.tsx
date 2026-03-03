@@ -25,6 +25,9 @@ export default function ServiceCard({
         width={800}
         height={220}
         className="w-full h-[220px] object-cover"
+        quality={75}
+        loading="lazy"
+        sizes="(max-width: 768px) 100vw, 33vw"
       />
       <div className="p-8 flex-1 flex flex-col">
         <h3 className="text-2xl mb-4 text-heading font-bold">{title}</h3>

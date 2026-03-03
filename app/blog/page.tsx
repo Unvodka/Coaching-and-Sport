@@ -97,6 +97,8 @@ export default function BlogPage() {
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={75}
+                  loading="lazy"
                 />
                 <div className="absolute top-4 left-4 bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full">
                   {post.category}
