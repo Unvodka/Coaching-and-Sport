@@ -273,12 +273,20 @@ export default function CoachUserDetailPage() {
                       {a.message && ` — ${a.message}`}
                     </p>
                   </div>
-                  <button
-                    onClick={() => handleRemoveAssignment(a.program_id)}
-                    className="text-xs text-red-500 hover:text-red-700 font-medium"
-                  >
-                    {t("portal.coach.users.removeAssignment")}
-                  </button>
+                  <div className="flex items-center gap-3 flex-shrink-0">
+                    <Link
+                      href={`/portal/coach/programs/${a.program_id}`}
+                      className="text-xs text-brand-blue hover:underline font-medium no-underline"
+                    >
+                      {locale === "fr" ? "Modifier" : "Edit"}
+                    </Link>
+                    <button
+                      onClick={() => handleRemoveAssignment(a.program_id)}
+                      className="text-xs text-red-500 hover:text-red-700 font-medium"
+                    >
+                      {t("portal.coach.users.removeAssignment")}
+                    </button>
+                  </div>
                 </div>
               );
             })}
