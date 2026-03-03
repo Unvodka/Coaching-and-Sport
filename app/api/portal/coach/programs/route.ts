@@ -18,13 +18,20 @@ export async function GET() {
 
     // Fetch assignments per program (with user IDs)
     const programIds = (programs || []).map((p) => p.id);
-    const { data: assignments } = await admin
-      .from("program_assignments")
-      .select("program_id, user_id")
-      .in("program_id", programIds);
+    let assignments: { program_id: string; user_id: string }[] = [];
+    if (programIds.length > 0) {
+      const { data, error: assignError } = await admin
+        .from("program_assignments")
+        .select("program_id, user_id")
+        .in("program_id", programIds);
+      if (assignError) {
+        console.error("Fetch program assignments error:", assignError);
+      }
+      assignments = data || [];
+    }
 
     const assignmentMap: Record<string, string[]> = {};
-    (assignments || []).forEach((a) => {
+    assignments.forEach((a) => {
       if (!assignmentMap[a.program_id]) assignmentMap[a.program_id] = [];
       assignmentMap[a.program_id].push(a.user_id);
     });
@@ -36,7 +43,7 @@ export async function GET() {
     }));
 
     return NextResponse.json({ programs: result }, {
-      headers: { "Cache-Control": "private, max-age=15" },
+      headers: { "Cache-Control": "private, no-cache" },
     });
   });
 }
@@ -127,9 +134,12 @@ export async function POST(request: NextRequest) {
           user_id: u.id,
           assigned_by: user.id,
         }));
-        await admin
+        const { error: assignError } = await admin
           .from("program_assignments")
           .upsert(assignmentRows, { onConflict: "program_id,user_id" });
+        if (assignError) {
+          console.error("Auto-assign public program error:", assignError);
+        }
       }
     }
 

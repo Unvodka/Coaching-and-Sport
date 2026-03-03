@@ -117,9 +117,12 @@ export async function PUT(
           user_id: u.id,
           assigned_by: user.id,
         }));
-        await admin
+        const { error: assignError } = await admin
           .from("program_assignments")
           .upsert(assignmentRows, { onConflict: "program_id,user_id" });
+        if (assignError) {
+          console.error("Auto-assign public program error:", assignError);
+        }
       }
     }
 

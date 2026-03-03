@@ -43,8 +43,8 @@ export default function CoachProgramsPage() {
   const fetchData = useCallback(async () => {
     try {
       const [programsRes, usersRes] = await Promise.all([
-        fetch("/api/portal/coach/programs"),
-        fetch("/api/portal/coach/users"),
+        fetch("/api/portal/coach/programs", { cache: "no-store" }),
+        fetch("/api/portal/coach/users", { cache: "no-store" }),
       ]);
 
       if (programsRes.ok) {

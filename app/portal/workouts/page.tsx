@@ -16,7 +16,7 @@ export default function WorkoutsPage() {
   useEffect(() => {
     async function fetchPrograms() {
       try {
-        const res = await fetch("/api/portal/workouts");
+        const res = await fetch("/api/portal/workouts", { cache: "no-store" });
         if (res.ok) {
           const json = await res.json();
           setPublicPrograms(json.publicPrograms || []);
