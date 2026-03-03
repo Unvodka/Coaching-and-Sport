@@ -18,7 +18,7 @@ export default function EditCoachProgramPage() {
   useEffect(() => {
     async function fetchProgram() {
       try {
-        const res = await fetch(`/api/portal/coach/programs/${id}`, { cache: "no-store" });
+        const res = await fetch(`/api/portal/coach/programs/${id}`, { cache: "no-store", credentials: "include" });
         if (res.ok) {
           const json = await res.json();
           setProgram(json.program);

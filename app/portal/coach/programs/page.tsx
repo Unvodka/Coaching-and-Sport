@@ -44,12 +44,13 @@ export default function CoachProgramsPage() {
   const fetchData = useCallback(async () => {
     try {
       const [programsRes, usersRes] = await Promise.all([
-        fetch("/api/portal/coach/programs", { cache: "no-store" }),
-        fetch("/api/portal/coach/users", { cache: "no-store" }),
+        fetch("/api/portal/coach/programs", { cache: "no-store", credentials: "include" }),
+        fetch("/api/portal/coach/users", { cache: "no-store", credentials: "include" }),
       ]);
 
       if (programsRes.ok) {
         const json = await programsRes.json();
+        console.log("Programs API response:", JSON.stringify(json).slice(0, 500));
         setPrograms(json.programs || []);
       } else {
         const text = await programsRes.text();
@@ -61,7 +62,9 @@ export default function CoachProgramsPage() {
         // Filter out coaches, keep only regular users
         setUsers((json.users || []).filter((u: SimpleUser) => u.role !== "coach"));
       } else {
-        console.error("Users API error:", usersRes.status);
+        const text = await usersRes.text();
+        console.error("Users API error:", usersRes.status, text);
+        setError((prev) => prev ? `${prev} | Users API ${usersRes.status}: ${text}` : `Users API ${usersRes.status}: ${text}`);
       }
     } catch (err) {
       console.error("Coach programs fetch error:", err);
@@ -200,11 +203,19 @@ export default function CoachProgramsPage() {
               : (locale === "fr" ? "Aucun programme pour ce filtre" : "No programs for this filter")}
           </h3>
           {selectedUser === "all" && (
-            <p className="text-gray-500">
-              {locale === "fr"
-                ? "Créez votre premier programme d'entraînement."
-                : "Create your first workout program."}
-            </p>
+            <>
+              <p className="text-gray-500">
+                {locale === "fr"
+                  ? "Créez votre premier programme d'entraînement."
+                  : "Create your first workout program."}
+              </p>
+              <p className="text-xs text-gray-400 mt-2">
+                Debug: API returned 0 programs.{" "}
+                <a href="/api/portal/debug" target="_blank" className="underline">
+                  View diagnostics
+                </a>
+              </p>
+            </>
           )}
         </div>
       ) : (
