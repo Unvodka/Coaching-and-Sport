@@ -178,7 +178,7 @@ export default function DashboardPage() {
         <DashboardCard
           title={t("portal.workouts")}
           value={stats.workoutsCompleted}
-          subtitle={locale === "fr" ? "exercices complétés" : "exercises completed"}
+          subtitle={locale === "fr" ? "programmes disponibles" : "programs available"}
           href="/portal/workouts"
           color="bg-green-100 text-green-600"
           icon={
