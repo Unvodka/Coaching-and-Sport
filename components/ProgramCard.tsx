@@ -49,7 +49,7 @@ export default function ProgramCard({
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-black/10" />
         {featuredBadge && (
           <span className={`absolute top-3 right-3 text-white py-1 px-3 rounded-full text-[0.65rem] font-bold uppercase tracking-wider shadow-md ${
-            isFeatured ? "bg-brand-blue" : "bg-emerald-600"
+            isFeatured ? "bg-brand-blue" : "bg-emerald-500"
           }`}>
             {featuredBadge}
           </span>
@@ -122,11 +122,6 @@ export default function ProgramCard({
           {price}
         </div>
         <p className="text-gray-400 text-[1.0125rem] mb-4">{priceDetails}</p>
-        {taxCreditNote && (
-          <p className="text-emerald-600 text-[0.78rem] font-semibold mb-4 bg-emerald-50 rounded-lg px-3 py-1.5 leading-snug">
-            {taxCreditNote}
-          </p>
-        )}
         <span className="bg-gradient-to-br from-brand-blue to-brand-navy text-white py-3 px-8 rounded-lg font-bold transition-all duration-300 inline-block w-full text-center text-[1rem] cursor-pointer hover:opacity-90">
           {isLoading ? t("offers.redirecting") : ctaText}
         </span>
