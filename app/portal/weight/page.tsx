@@ -148,6 +148,46 @@ export default function WeightPage() {
                 </p>
               </div>
             )}
+            {logs[0].bone_mass_kg && (
+              <div className="border-l border-gray-200 pl-6">
+                <p className="text-xs text-gray-400 uppercase tracking-wider">
+                  {locale === "fr" ? "Os" : "Bone"}
+                </p>
+                <p className="text-lg font-semibold text-violet-600">
+                  {Number(logs[0].bone_mass_kg)} kg
+                </p>
+              </div>
+            )}
+            {logs[0].bmi && (
+              <div className="border-l border-gray-200 pl-6">
+                <p className="text-xs text-gray-400 uppercase tracking-wider">
+                  IMC
+                </p>
+                <p className="text-lg font-semibold text-pink-600">
+                  {Number(logs[0].bmi)}
+                </p>
+              </div>
+            )}
+            {logs[0].bmr_kcal && (
+              <div className="border-l border-gray-200 pl-6">
+                <p className="text-xs text-gray-400 uppercase tracking-wider">
+                  {locale === "fr" ? "Métab." : "BMR"}
+                </p>
+                <p className="text-lg font-semibold text-orange-500">
+                  {Number(logs[0].bmr_kcal)} kcal
+                </p>
+              </div>
+            )}
+            {logs[0].daily_cal_kcal && (
+              <div className="border-l border-gray-200 pl-6">
+                <p className="text-xs text-gray-400 uppercase tracking-wider">
+                  Kcal
+                </p>
+                <p className="text-lg font-semibold text-teal-600">
+                  {Number(logs[0].daily_cal_kcal)} kcal
+                </p>
+              </div>
+            )}
           </div>
         </div>
       )}

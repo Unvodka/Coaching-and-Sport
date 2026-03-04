@@ -14,6 +14,10 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
   const [visceralFat, setVisceralFat] = useState("");
   const [muscleMassKg, setMuscleMassKg] = useState("");
   const [waterPct, setWaterPct] = useState("");
+  const [boneMassKg, setBoneMassKg] = useState("");
+  const [bmrKcal, setBmrKcal] = useState("");
+  const [dailyCalKcal, setDailyCalKcal] = useState("");
+  const [bmi, setBmi] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [notes, setNotes] = useState("");
   const [saving, setSaving] = useState(false);
@@ -38,6 +42,10 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
           visceral_fat: visceralFat || null,
           muscle_mass_kg: muscleMassKg || null,
           water_pct: waterPct || null,
+          bone_mass_kg: boneMassKg || null,
+          bmr_kcal: bmrKcal || null,
+          daily_cal_kcal: dailyCalKcal || null,
+          bmi: bmi || null,
           date,
           notes: notes || null,
         }),
@@ -60,6 +68,10 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
       setVisceralFat("");
       setMuscleMassKg("");
       setWaterPct("");
+      setBoneMassKg("");
+      setBmrKcal("");
+      setDailyCalKcal("");
+      setBmi("");
       setNotes("");
       setSuccess(true);
       setSaving(false);
@@ -150,21 +162,6 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
             </div>
             <div>
               <label className="block text-xs font-medium text-gray-500 mb-1">
-                {locale === "fr" ? "Graisse viscérale" : "Visceral fat"}
-              </label>
-              <input
-                type="number"
-                step="0.5"
-                min="1"
-                max="60"
-                value={visceralFat}
-                onChange={(e) => setVisceralFat(e.target.value)}
-                placeholder="8.0"
-                className={`${inputClass} w-full`}
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">
                 {locale === "fr" ? "Masse musculaire (kg)" : "Muscle mass (kg)"}
               </label>
               <input
@@ -180,6 +177,21 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
             </div>
             <div>
               <label className="block text-xs font-medium text-gray-500 mb-1">
+                {locale === "fr" ? "Masse osseuse (kg)" : "Bone mass (kg)"}
+              </label>
+              <input
+                type="number"
+                step="0.1"
+                min="0.5"
+                max="10"
+                value={boneMassKg}
+                onChange={(e) => setBoneMassKg(e.target.value)}
+                placeholder="2.5"
+                className={`${inputClass} w-full`}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">
                 {locale === "fr" ? "Masse d'eau (%)" : "Water mass (%)"}
               </label>
               <input
@@ -190,6 +202,66 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
                 value={waterPct}
                 onChange={(e) => setWaterPct(e.target.value)}
                 placeholder="55.0"
+                className={`${inputClass} w-full`}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">
+                {locale === "fr" ? "Graisse viscérale" : "Visceral fat"}
+              </label>
+              <input
+                type="number"
+                step="0.5"
+                min="1"
+                max="60"
+                value={visceralFat}
+                onChange={(e) => setVisceralFat(e.target.value)}
+                placeholder="8.0"
+                className={`${inputClass} w-full`}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">
+                IMC / BMI
+              </label>
+              <input
+                type="number"
+                step="0.1"
+                min="10"
+                max="60"
+                value={bmi}
+                onChange={(e) => setBmi(e.target.value)}
+                placeholder="22.5"
+                className={`${inputClass} w-full`}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">
+                {locale === "fr" ? "Métabolisme (kcal)" : "BMR (kcal)"}
+              </label>
+              <input
+                type="number"
+                step="1"
+                min="500"
+                max="5000"
+                value={bmrKcal}
+                onChange={(e) => setBmrKcal(e.target.value)}
+                placeholder="1600"
+                className={`${inputClass} w-full`}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">
+                {locale === "fr" ? "Apport calorique (kcal)" : "Daily calories (kcal)"}
+              </label>
+              <input
+                type="number"
+                step="1"
+                min="500"
+                max="10000"
+                value={dailyCalKcal}
+                onChange={(e) => setDailyCalKcal(e.target.value)}
+                placeholder="2000"
                 className={`${inputClass} w-full`}
               />
             </div>

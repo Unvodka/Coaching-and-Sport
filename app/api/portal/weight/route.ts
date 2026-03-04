@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
 
   return withAuth(async ({ user, admin }) => {
     const body = await request.json();
-    const { weight_kg, body_fat_pct, visceral_fat, muscle_mass_kg, water_pct, date, notes } = body;
+    const { weight_kg, body_fat_pct, visceral_fat, muscle_mass_kg, water_pct, bone_mass_kg, bmr_kcal, daily_cal_kcal, bmi, date, notes } = body;
 
     if (!weight_kg) {
       return NextResponse.json({ error: "weight_kg is required" }, { status: 400 });
@@ -47,6 +47,10 @@ export async function POST(request: NextRequest) {
     const parsedVisceralFat = visceral_fat ? parseFloat(visceral_fat) : null;
     const parsedMuscleMass = muscle_mass_kg ? parseFloat(muscle_mass_kg) : null;
     const parsedWater = water_pct ? parseFloat(water_pct) : null;
+    const parsedBoneMass = bone_mass_kg ? parseFloat(bone_mass_kg) : null;
+    const parsedBmr = bmr_kcal ? parseInt(bmr_kcal) : null;
+    const parsedDailyCal = daily_cal_kcal ? parseInt(daily_cal_kcal) : null;
+    const parsedBmi = bmi ? parseFloat(bmi) : null;
 
     if (isNaN(parsedWeight) || parsedWeight < 20 || parsedWeight > 350) {
       return NextResponse.json({ error: "Invalid weight value" }, { status: 400 });
@@ -63,6 +67,18 @@ export async function POST(request: NextRequest) {
     if (parsedWater !== null && (isNaN(parsedWater) || parsedWater < 20 || parsedWater > 80)) {
       return NextResponse.json({ error: "Invalid water percentage" }, { status: 400 });
     }
+    if (parsedBoneMass !== null && (isNaN(parsedBoneMass) || parsedBoneMass < 0.5 || parsedBoneMass > 10)) {
+      return NextResponse.json({ error: "Invalid bone mass value" }, { status: 400 });
+    }
+    if (parsedBmr !== null && (isNaN(parsedBmr) || parsedBmr < 500 || parsedBmr > 5000)) {
+      return NextResponse.json({ error: "Invalid BMR value" }, { status: 400 });
+    }
+    if (parsedDailyCal !== null && (isNaN(parsedDailyCal) || parsedDailyCal < 500 || parsedDailyCal > 10000)) {
+      return NextResponse.json({ error: "Invalid daily calorie value" }, { status: 400 });
+    }
+    if (parsedBmi !== null && (isNaN(parsedBmi) || parsedBmi < 10 || parsedBmi > 60)) {
+      return NextResponse.json({ error: "Invalid BMI value" }, { status: 400 });
+    }
     if (date && !DATE_REGEX.test(date)) {
       return NextResponse.json({ error: "Invalid date format" }, { status: 400 });
     }
@@ -77,6 +93,10 @@ export async function POST(request: NextRequest) {
       visceral_fat: parsedVisceralFat,
       muscle_mass_kg: parsedMuscleMass,
       water_pct: parsedWater,
+      bone_mass_kg: parsedBoneMass,
+      bmr_kcal: parsedBmr,
+      daily_cal_kcal: parsedDailyCal,
+      bmi: parsedBmi,
       date: date || new Date().toISOString().split("T")[0],
       notes: notes || null,
     });

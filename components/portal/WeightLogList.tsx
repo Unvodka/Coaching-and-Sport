@@ -15,7 +15,7 @@ export default function WeightLogList({ logs, onDeleted }: WeightLogListProps) {
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const hasComposition = logs.some(
-    (l) => l.body_fat_pct || l.visceral_fat || l.muscle_mass_kg || l.water_pct
+    (l) => l.body_fat_pct || l.visceral_fat || l.muscle_mass_kg || l.water_pct || l.bone_mass_kg || l.bmr_kcal || l.daily_cal_kcal || l.bmi
   );
 
   const handleDelete = async (id: string) => {
@@ -62,13 +62,25 @@ export default function WeightLogList({ logs, onDeleted }: WeightLogListProps) {
                     {locale === "fr" ? "Graisse" : "Fat"}
                   </th>
                   <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase whitespace-nowrap">
-                    {locale === "fr" ? "Viscérale" : "Visceral"}
-                  </th>
-                  <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase whitespace-nowrap">
                     {locale === "fr" ? "Muscles" : "Muscle"}
                   </th>
                   <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase whitespace-nowrap">
+                    {locale === "fr" ? "Os" : "Bone"}
+                  </th>
+                  <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase whitespace-nowrap">
                     {locale === "fr" ? "Eau" : "Water"}
+                  </th>
+                  <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase whitespace-nowrap">
+                    {locale === "fr" ? "Viscérale" : "Visceral"}
+                  </th>
+                  <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase whitespace-nowrap">
+                    IMC
+                  </th>
+                  <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase whitespace-nowrap">
+                    {locale === "fr" ? "Métab." : "BMR"}
+                  </th>
+                  <th className="px-4 py-3 text-xs font-medium text-gray-500 uppercase whitespace-nowrap">
+                    Kcal
                   </th>
                 </>
               )}
@@ -97,14 +109,26 @@ export default function WeightLogList({ logs, onDeleted }: WeightLogListProps) {
                     <td className="px-4 py-3 text-sm text-amber-600">
                       {formatVal(log.body_fat_pct, " %")}
                     </td>
-                    <td className="px-4 py-3 text-sm text-red-500">
-                      {formatVal(log.visceral_fat, "")}
-                    </td>
                     <td className="px-4 py-3 text-sm text-emerald-600">
                       {formatVal(log.muscle_mass_kg, " kg")}
                     </td>
+                    <td className="px-4 py-3 text-sm text-violet-600">
+                      {formatVal(log.bone_mass_kg, " kg")}
+                    </td>
                     <td className="px-4 py-3 text-sm text-cyan-600">
                       {formatVal(log.water_pct, " %")}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-red-500">
+                      {formatVal(log.visceral_fat, "")}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-pink-600">
+                      {formatVal(log.bmi, "")}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-orange-500">
+                      {formatVal(log.bmr_kcal, "")}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-teal-600">
+                      {formatVal(log.daily_cal_kcal, "")}
                     </td>
                   </>
                 )}

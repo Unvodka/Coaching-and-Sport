@@ -117,6 +117,10 @@ export interface Database {
           visceral_fat: number | null;
           muscle_mass_kg: number | null;
           water_pct: number | null;
+          bone_mass_kg: number | null;
+          bmr_kcal: number | null;
+          daily_cal_kcal: number | null;
+          bmi: number | null;
           date: string;
           notes: string | null;
           created_at: string;
@@ -129,6 +133,10 @@ export interface Database {
           visceral_fat?: number | null;
           muscle_mass_kg?: number | null;
           water_pct?: number | null;
+          bone_mass_kg?: number | null;
+          bmr_kcal?: number | null;
+          daily_cal_kcal?: number | null;
+          bmi?: number | null;
           date?: string;
           notes?: string | null;
           created_at?: string;
@@ -141,6 +149,10 @@ export interface Database {
           visceral_fat?: number | null;
           muscle_mass_kg?: number | null;
           water_pct?: number | null;
+          bone_mass_kg?: number | null;
+          bmr_kcal?: number | null;
+          daily_cal_kcal?: number | null;
+          bmi?: number | null;
           date?: string;
           notes?: string | null;
           created_at?: string;
