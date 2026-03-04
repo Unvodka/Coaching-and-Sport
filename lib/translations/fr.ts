@@ -257,6 +257,19 @@ const fr = {
   // Contact RGPD
   'contact.rgpdConsent':
     "J'accepte que mes données soient traitées conformément à la politique de confidentialité.",
+
+  // Blog
+  'blog.title': 'Blog',
+  'blog.subtitle': "Conseils d'expert en sport, natation, fitness et nutrition pour atteindre vos objectifs",
+  'blog.readingTime': 'de lecture',
+  'blog.readArticle': "Lire l'article →",
+  'blog.backToBlog': '← Retour au blog',
+  'blog.by': 'Par Arnaud Chevallier',
+  'blog.relatedArticles': 'Articles similaires',
+  'blog.readMore': 'Lire →',
+  'blog.cta.title': "Prêt à passer à l'action ?",
+  'blog.cta.subtitle': "Bénéficiez d'un accompagnement personnalisé avec un coach sportif diplômé à Valbonne.",
+  'blog.cta.button': 'Réserver une séance découverte',
 } as const;
 
 export type TranslationKey = keyof typeof fr;

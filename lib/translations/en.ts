@@ -254,6 +254,19 @@ const en: Record<TranslationKey, string> = {
   // Contact RGPD
   'contact.rgpdConsent':
     'I agree that my data will be processed in accordance with the privacy policy.',
+
+  // Blog
+  'blog.title': 'Blog',
+  'blog.subtitle': 'Expert tips on sport, swimming, fitness and nutrition to reach your goals',
+  'blog.readingTime': 'read',
+  'blog.readArticle': 'Read article →',
+  'blog.backToBlog': '← Back to blog',
+  'blog.by': 'By Arnaud Chevallier',
+  'blog.relatedArticles': 'Related Articles',
+  'blog.readMore': 'Read →',
+  'blog.cta.title': 'Ready to take action?',
+  'blog.cta.subtitle': 'Get personalized coaching from a certified sports coach in Valbonne.',
+  'blog.cta.button': 'Book a discovery session',
 };
 
 export default en;
