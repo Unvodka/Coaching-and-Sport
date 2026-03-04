@@ -41,7 +41,7 @@ const fr = {
     'Bilan initial gratuit • Suivi personnalisé • Conseils nutrition • Motivation continue',
   'info.securePayment': 'Paiement sécurisé par Stripe',
   'info.paymentMethods':
-    'Cryptage SSL 256 bits • 3D Secure • CB, Visa, Mastercard, Apple Pay',
+    'Cryptage SSL 256 bits • 3D Secure • CB, Visa, Mastercard, Apple Pay, Google Pay',
   'info.sessionsNote':
     "Les séances peuvent être utilisées pour n'importe quelle activité : natation, fitness ou activités extérieures",
   'info.needAdvice': 'Besoin de conseils pour choisir ?',
@@ -140,7 +140,7 @@ const fr = {
   'security.badge2.title': '3D Secure activé',
   'security.badge2.desc': 'Double authentification bancaire',
   'security.badge3.title': 'CB, Visa, Mastercard',
-  'security.badge3.desc': 'Apple Pay également accepté',
+  'security.badge3.desc': 'Apple Pay & Google Pay acceptés',
 
   // Packs page
   'packs.title': 'Packs Cours Particuliers',

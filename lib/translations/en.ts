@@ -41,7 +41,7 @@ const en: Record<TranslationKey, string> = {
     'Free initial assessment • Personalized follow-up • Nutrition advice • Continuous motivation',
   'info.securePayment': 'Secured payment by Stripe',
   'info.paymentMethods':
-    'SSL 256-bit encryption • 3D Secure • CB, Visa, Mastercard, Apple Pay',
+    'SSL 256-bit encryption • 3D Secure • CB, Visa, Mastercard, Apple Pay, Google Pay',
   'info.sessionsNote':
     'Sessions can be used for any activity: swimming, fitness, or outdoor training',
   'info.needAdvice': 'Need help choosing?',
@@ -137,7 +137,7 @@ const en: Record<TranslationKey, string> = {
   'security.badge2.title': '3D Secure enabled',
   'security.badge2.desc': 'Bank double authentication',
   'security.badge3.title': 'CB, Visa, Mastercard',
-  'security.badge3.desc': 'Apple Pay also accepted',
+  'security.badge3.desc': 'Apple Pay & Google Pay accepted',
 
   // Packs page
   'packs.title': 'Private Lesson Packs',
