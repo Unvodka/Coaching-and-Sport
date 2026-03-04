@@ -26,7 +26,7 @@ export const LEGAL_INFO = {
 
   // ─── Insurance ─────────────────────────────────────────────
   insuranceCompany: 'SNPMNS',
-  insurancePolicyNumber: '[INSURANCE_POLICY_NUMBER]',
+  insurancePolicyNumber: '639 7892 90 000',
 
   // ─── Business Details ──────────────────────────────────────
   maxKmRadius: '25',
