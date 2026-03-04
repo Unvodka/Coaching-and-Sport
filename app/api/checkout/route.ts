@@ -51,7 +51,6 @@ export async function POST(request: NextRequest) {
 
     const session = await getStripe().checkout.sessions.create({
       mode: "payment",
-      automatic_payment_methods: { enabled: true },
       line_items: [
         {
           price_data: {
