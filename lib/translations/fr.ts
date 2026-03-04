@@ -174,8 +174,6 @@ const fr = {
   'portal.recipes': 'Recettes',
   'portal.recipes.new': 'Nouvelle recette',
   'portal.recipes.search': 'Rechercher une recette...',
-  'portal.recipes.favorites': 'Favoris',
-  'portal.recipes.myRecipes': 'Mes recettes',
   'portal.recipes.all': 'Toutes',
   'portal.recipes.category': 'Catégorie',
   'portal.recipes.ingredients': 'Ingrédients',

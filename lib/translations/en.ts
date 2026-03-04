@@ -170,8 +170,6 @@ const en: Record<TranslationKey, string> = {
   'portal.recipes': 'Recipes',
   'portal.recipes.new': 'New Recipe',
   'portal.recipes.search': 'Search recipes...',
-  'portal.recipes.favorites': 'Favorites',
-  'portal.recipes.myRecipes': 'My Recipes',
   'portal.recipes.all': 'All',
   'portal.recipes.category': 'Category',
   'portal.recipes.ingredients': 'Ingredients',

@@ -69,7 +69,7 @@ const HEALTHY_RECIPES = [
       "1. Disposer la roquette dans une assiette.\n2. Couper l'avocat en tranches et le concombre en rondelles.\n3. Disposer le saumon fumé par-dessus.\n4. Préparer la vinaigrette : mélanger huile d'olive, jus de citron et moutarde.\n5. Parsemer de graines de sésame et arroser de vinaigrette.",
     instructions_en:
       "1. Arrange arugula on a plate.\n2. Slice avocado and cucumber.\n3. Layer smoked salmon on top.\n4. Prepare dressing: mix olive oil, lemon juice, and mustard.\n5. Sprinkle with sesame seeds and drizzle with dressing.",
-    category: "salad",
+    category: "lunch",
     image_url: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop",
   },
   {
@@ -235,7 +235,7 @@ const HEALTHY_RECIPES = [
       "1. Éplucher et couper la butternut en cubes.\n2. Faire revenir l'oignon et l'ail émincés dans l'huile d'olive pendant 3 minutes.\n3. Ajouter les cubes de butternut, le curcuma et la muscade. Mélanger.\n4. Verser le bouillon de légumes et porter à ébullition.\n5. Laisser mijoter 20-25 minutes jusqu'à ce que la courge soit tendre.\n6. Mixer finement, ajouter la crème fraîche et rectifier l'assaisonnement.\n7. Servir dans des bols, parsemer de noisettes concassées.",
     instructions_en:
       "1. Peel and cube the butternut squash.\n2. Sauté minced onion and garlic in olive oil for 3 minutes.\n3. Add squash cubes, turmeric, and nutmeg. Stir.\n4. Pour in vegetable broth and bring to a boil.\n5. Simmer 20-25 minutes until squash is tender.\n6. Blend until smooth, stir in cream, and adjust seasoning.\n7. Serve in bowls, topped with crushed hazelnuts.",
-    category: "soup",
+    category: "dinner",
     image_url: "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600&h=400&fit=crop",
   },
   {
@@ -258,7 +258,7 @@ const HEALTHY_RECIPES = [
       "1. Laver et émincer les poireaux. Éplucher et couper les pommes de terre en morceaux.\n2. Faire revenir l'oignon et l'ail dans l'huile d'olive 2 minutes.\n3. Ajouter les poireaux et faire suer 5 minutes à feu doux.\n4. Ajouter les pommes de terre et le bouillon. Porter à ébullition.\n5. Cuire à couvert pendant 20 minutes à feu moyen.\n6. Mixer le tout jusqu'à consistance lisse.\n7. Incorporer la crème fraîche, assaisonner.\n8. Servir chaud avec la ciboulette ciselée et un filet d'huile d'olive.",
     instructions_en:
       "1. Wash and slice leeks. Peel and chop potatoes.\n2. Sauté onion and garlic in olive oil for 2 minutes.\n3. Add leeks and sweat for 5 minutes on low heat.\n4. Add potatoes and broth. Bring to a boil.\n5. Cover and cook for 20 minutes on medium heat.\n6. Blend until smooth.\n7. Stir in cream, season to taste.\n8. Serve hot with snipped chives and a drizzle of olive oil.",
-    category: "soup",
+    category: "dinner",
     image_url: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&h=400&fit=crop",
   },
 ];

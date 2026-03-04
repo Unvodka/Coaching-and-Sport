@@ -7,7 +7,7 @@ import RecipeCard from "@/components/portal/RecipeCard";
 import RecipeForm from "@/components/portal/RecipeForm";
 import type { Recipe } from "@/lib/supabase/database.types";
 
-type Tab = "all" | "mine" | "favorites";
+type MealFilter = "all" | "breakfast" | "lunch" | "snack" | "dinner";
 
 export default function RecipesPage() {
   const { t, locale } = useLanguage();
@@ -15,7 +15,7 @@ export default function RecipesPage() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
   const [userId, setUserId] = useState<string | null>(null);
-  const [tab, setTab] = useState<Tab>("all");
+  const [filter, setFilter] = useState<MealFilter>("all");
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -57,7 +57,6 @@ export default function RecipesPage() {
           const seedRes = await fetch("/api/portal/seed-recipes", { method: "POST" });
           const seedJson = await seedRes.json();
           if (seedRes.ok && !seedJson.alreadyExists) {
-            // Re-fetch to show the new recipes
             await fetchRecipes();
           }
         } catch (err) {
@@ -71,15 +70,12 @@ export default function RecipesPage() {
 
   const handleRecipeAdded = () => {
     fetchRecipes();
-    // Switch to "mine" tab to show the newly created recipe
-    setTab("mine");
   };
 
   const filtered = useMemo(() => {
     const query = search.toLowerCase();
     return recipes.filter((r) => {
-      if (tab === "mine" && r.author_id !== userId) return false;
-      if (tab === "favorites" && !favoriteIds.has(r.id)) return false;
+      if (filter !== "all" && r.category !== filter) return false;
       if (query) {
         const title = locale === "fr" ? r.title_fr : (r.title_en || r.title_fr);
         return (
@@ -89,26 +85,29 @@ export default function RecipesPage() {
       }
       return true;
     });
-  }, [recipes, tab, userId, favoriteIds, search, locale]);
+  }, [recipes, filter, search, locale]);
 
-  const tabs: { key: Tab; label: string }[] = [
-    { key: "all", label: t("portal.recipes.all") },
-    { key: "mine", label: t("portal.recipes.myRecipes") },
-    { key: "favorites", label: t("portal.recipes.favorites") },
+  const mealFilters: { key: MealFilter; labelFr: string; labelEn: string }[] = [
+    { key: "all", labelFr: "Toutes", labelEn: "All" },
+    { key: "breakfast", labelFr: "Petit déjeuner", labelEn: "Breakfast" },
+    { key: "lunch", labelFr: "Déjeuner", labelEn: "Lunch" },
+    { key: "snack", labelFr: "Encas", labelEn: "Snack" },
+    { key: "dinner", labelFr: "Dîner", labelEn: "Dinner" },
   ];
 
   const emptyTitle = () => {
     if (search) return locale === "fr" ? "Aucune recette trouvée" : "No recipes found";
-    if (tab === "favorites") return locale === "fr" ? "Pas encore de favoris" : "No favorites yet";
     return locale === "fr" ? "Pas encore de recettes !" : "No recipes yet!";
   };
 
   const emptyDescription = () => {
     if (search) return locale === "fr" ? "Essayez avec d'autres mots-clés." : "Try different keywords.";
-    if (tab === "favorites") {
+    if (filter !== "all") {
+      const filterLabel = mealFilters.find((f) => f.key === filter);
+      const name = locale === "fr" ? filterLabel?.labelFr : filterLabel?.labelEn;
       return locale === "fr"
-        ? "Explorez les recettes et ajoutez-les à vos favoris."
-        : "Browse recipes and add them to your favorites.";
+        ? `Aucune recette dans la catégorie "${name}".`
+        : `No recipes in the "${name}" category.`;
     }
     return locale === "fr"
       ? "Ajoutez votre première recette pour commencer à construire votre collection."
@@ -118,8 +117,8 @@ export default function RecipesPage() {
   if (loading) {
     return (
       <div className="max-w-6xl mx-auto">
-        <div className="flex gap-2 mb-6">
-          {[1, 2, 3].map((i) => (
+        <div className="flex flex-wrap gap-2 mb-6">
+          {[1, 2, 3, 4, 5].map((i) => (
             <div key={i} className="h-10 w-24 bg-gray-200 rounded-lg animate-pulse" />
           ))}
         </div>
@@ -140,18 +139,18 @@ export default function RecipesPage() {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-        <div className="flex gap-2">
-          {tabs.map((t) => (
+        <div className="flex flex-wrap gap-2">
+          {mealFilters.map((f) => (
             <button
-              key={t.key}
-              onClick={() => setTab(t.key)}
+              key={f.key}
+              onClick={() => setFilter(f.key)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                tab === t.key
+                filter === f.key
                   ? "bg-brand-blue text-white"
                   : "bg-white text-gray-600 hover:bg-gray-50 border border-gray-200"
               }`}
             >
-              {t.label}
+              {locale === "fr" ? f.labelFr : f.labelEn}
             </button>
           ))}
         </div>
@@ -219,7 +218,7 @@ export default function RecipesPage() {
           <p className="text-gray-500 max-w-md mx-auto mb-6">
             {emptyDescription()}
           </p>
-          {!search && tab !== "favorites" && (
+          {!search && filter === "all" && (
             <button
               onClick={() => setShowForm(true)}
               className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg font-semibold hover:opacity-90 transition-opacity"
@@ -230,9 +229,9 @@ export default function RecipesPage() {
               {locale === "fr" ? "Créer ma première recette" : "Create my first recipe"}
             </button>
           )}
-          {tab === "favorites" && (
+          {filter !== "all" && (
             <button
-              onClick={() => setTab("all")}
+              onClick={() => setFilter("all")}
               className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg font-semibold hover:opacity-90 transition-opacity"
             >
               {locale === "fr" ? "Voir toutes les recettes" : "Browse all recipes"}

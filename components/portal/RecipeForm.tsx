@@ -13,8 +13,6 @@ const CATEGORIES = [
   "snack",
   "smoothie",
   "dessert",
-  "salad",
-  "soup",
 ];
 
 interface RecipeFormProps {
