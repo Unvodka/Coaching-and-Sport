@@ -318,8 +318,8 @@ export default function RootLayout({
         <meta name="theme-color" content="#2563eb" />
 
         {/* Hreflang for bilingual SEO */}
+        {/* Single-URL bilingual site: only x-default + fr. No separate /en/ URL exists. */}
         <link rel="alternate" hrefLang="fr" href={`${BASE_URL}`} />
-        <link rel="alternate" hrefLang="en" href={`${BASE_URL}`} />
         <link rel="alternate" hrefLang="x-default" href={`${BASE_URL}`} />
 
         {/* Preconnect to external domains for faster resource loading */}

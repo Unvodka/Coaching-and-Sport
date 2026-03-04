@@ -72,9 +72,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(authUser);
 
         if (authUser) {
-          const { data: { session: authSession } } = await supabase.auth.getSession();
-          if (mounted) setSession(authSession);
-
+          // getUser() already validates the JWT server-side.
+          // getSession() is intentionally omitted — it only reads from local storage
+          // without server validation, which is less secure. Session state is managed
+          // by onAuthStateChange below.
           const profileData = await fetchProfile(supabase, authUser.id);
           if (mounted) setProfile(profileData);
         } else {
@@ -142,8 +143,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const refreshProfile = async () => {
+    if (!user?.id) return;
     const supabase = createClient();
-    const profileData = await fetchProfile(supabase, user?.id || "");
+    const profileData = await fetchProfile(supabase, user.id);
     if (profileData) setProfile(profileData);
   };
 

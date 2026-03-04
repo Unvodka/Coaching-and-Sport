@@ -1,6 +1,12 @@
 import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
+// This route is only available in development/staging environments.
+// It is intentionally blocked in production to prevent accidental data seeding.
+if (process.env.NODE_ENV === "production") {
+  // Module-level guard: if somehow reached, the POST handler will also guard below.
+}
+
 const HEALTHY_RECIPES = [
   {
     title_fr: "Bowl Poulet Grillé & Quinoa",
@@ -258,6 +264,11 @@ const HEALTHY_RECIPES = [
 ];
 
 export async function POST() {
+  // Hard block in production — this endpoint is for dev/staging only
+  if (process.env.NODE_ENV === "production") {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
   try {
     // Verify user
     const supabase = createClient();
