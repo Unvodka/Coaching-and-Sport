@@ -420,6 +420,7 @@ const PROGRAMS_FR: Program[] = [
     taxCreditNote: '💳 50% de crédit d\'impôt éligible (SAP)',
     ctaText: 'Voir les packs',
     ctaHref: '/packs',
+    featuredBadge: "🏠 50% CRÉDIT D'IMPÔT",
   },
   {
     imageSrc:
@@ -522,6 +523,7 @@ const PROGRAMS_EN: Program[] = [
     taxCreditNote: '💳 50% tax credit eligible (SAP)',
     ctaText: 'See packs',
     ctaHref: '/packs',
+    featuredBadge: '🏠 50% TAX CREDIT',
   },
   {
     imageSrc:

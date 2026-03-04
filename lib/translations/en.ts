@@ -10,7 +10,7 @@ const en: Record<TranslationKey, string> = {
 
   // Hero
   'hero.subtitle':
-    'Lifeguard and sports coach specializing in weight loss and fitness',
+    'Lifeguard and sports educator specializing in weight loss, fitness and well-being',
   'hero.cta': 'Start my transformation',
 
   // Services section
@@ -53,11 +53,11 @@ const en: Record<TranslationKey, string> = {
   'about.heading.name': 'Arnaud Chevallier',
   'about.heading.role': 'A coach dedicated to your success',
   'about.p1':
-    'Certified lifeguard and sports coach, I have been dedicated for several years to helping my clients on their physical transformation journey.',
+    'State-certified lifeguard and sports educator, I have been dedicated for several years to teaching swimming and sports activities.',
   'about.p2':
-    'Specializing in weight loss and fitness, I have developed a holistic approach that combines multiple sports disciplines for lasting and balanced results.',
+    'Specializing in fitness, weight loss and well-being, I have developed a holistic approach that combines multiple sports disciplines for lasting and balanced results.',
   'about.p3':
-    ', I work throughout the region to offer you the best possible service.',
+    'I can welcome you at home and also work throughout the Alpes-Maritimes region to offer you the best possible service.',
   'about.cta': 'Learn more',
 
   // About page (dedicated /apropos)
@@ -65,8 +65,7 @@ const en: Record<TranslationKey, string> = {
   'aboutPage.subtitle': 'Discover my journey and coaching philosophy',
   'aboutPage.heading': 'Arnaud Chevallier — Sports Coach & Certified Lifeguard',
   'aboutPage.headingName': 'Arnaud Chevallier',
-  'aboutPage.headingRole':
-    'Fitness Coach & Certified Swimming Teacher and Lifeguard',
+  'aboutPage.headingRole': 'Sports Coach & Lifeguard',
   'aboutPage.p1':
     'I grew up on the French Riviera, between Antibes and its surroundings, between sea and mountains — a natural environment that has never left me. From an early age, I turned to sport in all its forms — in the water, on land, alone or as a team — with a constant desire to move, understand my body, and always push a little further.',
   'aboutPage.p2':
