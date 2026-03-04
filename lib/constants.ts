@@ -419,7 +419,7 @@ const PROGRAMS_FR: Program[] = [
     priceDetails: 'par séance',
     ctaText: 'Voir les packs',
     ctaHref: '/packs',
-    featuredBadge: "🏠 50% CRÉDIT D'IMPÔT",
+    featuredBadge: "💰 50% CRÉDIT D'IMPÔT",
   },
   {
     imageSrc:
@@ -489,11 +489,24 @@ const PROGRAMS_FR: Program[] = [
       'Changement radical de mode de vie',
       'Gagner en confiance et en énergie',
     ],
-    price: '499€',
-    priceNumeric: 499,
+    price: '549€',
+    priceNumeric: 549,
     priceUnit: '',
     priceDetails: 'Programme de 3 mois',
     ctaText: 'Transformer mon corps',
+  },
+  {
+    imageSrc:
+      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80',
+    title: 'Test (1€)',
+    description: 'Carte de test — à supprimer.',
+    features: ['Test paiement'],
+    goals: ['Vérifier le checkout'],
+    price: '1€',
+    priceNumeric: 1,
+    priceUnit: '',
+    priceDetails: 'Test uniquement',
+    ctaText: 'Tester',
   },
 ];
 
@@ -521,7 +534,7 @@ const PROGRAMS_EN: Program[] = [
     priceDetails: 'per session',
     ctaText: 'See packs',
     ctaHref: '/packs',
-    featuredBadge: '🏠 50% TAX CREDIT',
+    featuredBadge: '💰 50% TAX CREDIT',
   },
   {
     imageSrc:
@@ -592,11 +605,24 @@ const PROGRAMS_EN: Program[] = [
       'Radical lifestyle change',
       'Gain confidence and energy',
     ],
-    price: '499€',
-    priceNumeric: 499,
+    price: '549€',
+    priceNumeric: 549,
     priceUnit: '',
     priceDetails: '3-month program',
     ctaText: 'Transform my body',
+  },
+  {
+    imageSrc:
+      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80',
+    title: 'Test (1€)',
+    description: 'Test card — to be removed.',
+    features: ['Test payment'],
+    goals: ['Verify checkout'],
+    price: '1€',
+    priceNumeric: 1,
+    priceUnit: '',
+    priceDetails: 'Test only',
+    ctaText: 'Test',
   },
 ];
 
