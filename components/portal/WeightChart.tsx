@@ -140,21 +140,26 @@ export default function WeightChart({ logs }: WeightChartProps) {
 
   // Custom label renderer for data points
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const renderLabel = (color: string) => (props: any) => {
-    const { x, y, value } = props;
-    if (value == null) return null;
-    return (
-      <text
-        x={x}
-        y={y - 10}
-        fill={color}
-        fontSize={11}
-        fontWeight={600}
-        textAnchor="middle"
-      >
-        {value}
-      </text>
-    );
+  const renderLabel = (color: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const DataLabel = (props: any) => {
+      const { x, y, value } = props;
+      if (value == null) return null;
+      return (
+        <text
+          x={x}
+          y={y - 10}
+          fill={color}
+          fontSize={11}
+          fontWeight={600}
+          textAnchor="middle"
+        >
+          {value}
+        </text>
+      );
+    };
+    DataLabel.displayName = "DataLabel";
+    return DataLabel;
   };
 
   if (data.length === 0) return null;
