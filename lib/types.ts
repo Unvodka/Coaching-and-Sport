@@ -46,6 +46,7 @@ export interface Program {
   priceNumeric?: number;
   priceUnit?: string;
   priceDetails: string;
+  taxCreditNote?: string;
   ctaText: string;
   ctaHref?: string;
   isFeatured?: boolean;
