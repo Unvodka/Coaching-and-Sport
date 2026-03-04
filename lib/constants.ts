@@ -86,15 +86,13 @@ const SERVICES_FR: Service[] = [
   },
   {
     slug: 'fitness-plein-air',
-    imageSrc:
-      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80',
+    imageSrc: '/images/outdoor.jpg',
     imageAlt: 'Fitness & Plein Air',
     title: 'Fitness & Plein Air',
     description:
       'Entraînements personnalisés en salle ou en extérieur : musculation, HIIT, circuit training et exercices fonctionnels pour sculpter votre corps et vous dépasser.',
     detail: {
-      heroImageSrc:
-        'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80',
+      heroImageSrc: '/images/outdoor.jpg',
       heroImageAlt: 'Entraînement fitness en plein air ou à domicile',
       subtitle: 'Sculptez votre corps, en plein air ou chez vous',
       longDescription: [
@@ -264,15 +262,13 @@ const SERVICES_EN: Service[] = [
   },
   {
     slug: 'fitness-plein-air',
-    imageSrc:
-      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80',
+    imageSrc: '/images/outdoor.jpg',
     imageAlt: 'Fitness & Outdoor Training',
     title: 'Fitness & Outdoor Training',
     description:
       'Personalized workouts indoors or outdoors: weight training, HIIT, circuit training and functional exercises to sculpt your body and push your limits.',
     detail: {
-      heroImageSrc:
-        'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80',
+      heroImageSrc: '/images/outdoor.jpg',
       heroImageAlt: 'Fitness training indoors and outdoors',
       subtitle: 'Sculpt your body, indoors or outdoors',
       longDescription: [
