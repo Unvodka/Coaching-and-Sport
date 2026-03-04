@@ -21,7 +21,6 @@ export default function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   const title = locale === "en" ? post.titleEn : post.title;
-  const description = locale === "en" ? post.descriptionEn : post.description;
   const category = locale === "en" ? post.categoryEn : post.category;
   const imageAlt = locale === "en" ? post.imageAltEn : post.imageAlt;
   const content = locale === "en" ? post.contentEn : post.content;
