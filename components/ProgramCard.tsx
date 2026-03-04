@@ -18,7 +18,6 @@ export default function ProgramCard({
   goals,
   price,
   priceDetails,
-  taxCreditNote,
   ctaText,
   ctaHref,
   isFeatured,
