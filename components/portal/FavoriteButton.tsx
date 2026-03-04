@@ -4,7 +4,6 @@ import { useState } from "react";
 
 interface FavoriteButtonProps {
   recipeId: string;
-  userId: string;
   initialFavorited: boolean;
 }
 

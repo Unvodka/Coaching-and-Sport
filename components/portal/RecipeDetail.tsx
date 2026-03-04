@@ -112,7 +112,6 @@ export default function RecipeDetail({ recipeId }: RecipeDetailProps) {
           {currentUserId && (
             <FavoriteButton
               recipeId={recipe.id}
-              userId={currentUserId}
               initialFavorited={isFavorited}
             />
           )}

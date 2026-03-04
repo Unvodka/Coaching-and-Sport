@@ -4,8 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import WellnessProgram from "@/components/portal/WellnessProgram";
-
-const MOOD_EMOJIS = ["😢", "😟", "😕", "😐", "🙂", "😊", "😄", "😁", "🤩", "🥳"];
+import { MOOD_EMOJIS } from "@/lib/constants";
 const TAG_SUGGESTIONS = [
   "sport", "nutrition", "sommeil", "stress", "motivation",
   "fatigue", "énergie", "progrès", "repos", "méditation",

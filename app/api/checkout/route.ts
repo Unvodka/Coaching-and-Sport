@@ -5,7 +5,6 @@ import { rateLimit } from "@/lib/api/rate-limit";
 
 // Allowed prices in cents — must match lib/constants.ts packs
 const ALLOWED_PRICES: Record<number, string[]> = {
-  100: ["Test (1€)"],
   6000: ["Séance Découverte", "Discovery Session", "Séance à l'unité", "Single Session"],
   7900: ["Coaching en Ligne", "Online Coaching"],
   14900: ["Coaching Premium", "Premium Coaching"],

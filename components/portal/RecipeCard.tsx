@@ -48,7 +48,6 @@ export default function RecipeCard({ recipe, isFavorited, userId }: RecipeCardPr
           {userId && (
             <FavoriteButton
               recipeId={recipe.id}
-              userId={userId}
               initialFavorited={isFavorited}
             />
           )}

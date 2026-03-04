@@ -1,9 +1,8 @@
 "use client";
 
 import { useLanguage } from "@/lib/i18n/useLanguage";
+import { MOOD_EMOJIS } from "@/lib/constants";
 import type { MoodEntry as MoodEntryType } from "@/lib/supabase/database.types";
-
-const MOOD_EMOJIS = ["😢", "😟", "😕", "😐", "🙂", "😊", "😄", "😁", "🤩", "🥳"];
 
 interface MoodEntryProps {
   entry: MoodEntryType;
