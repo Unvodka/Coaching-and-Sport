@@ -3,21 +3,19 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { use } from "react";
 import { BLOG_POSTS, getBlogPostBySlug } from "@/lib/blog";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 export default function BlogPostPage({ params }: Props) {
-  const { slug } = use(params);
   const { locale, t } = useLanguage();
 
-  const post = getBlogPostBySlug(slug);
+  const post = getBlogPostBySlug(params.slug);
   if (!post) notFound();
 
   const title = locale === "en" ? post.titleEn : post.title;
