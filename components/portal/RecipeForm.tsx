@@ -11,7 +11,6 @@ const CATEGORIES = [
   "lunch",
   "dinner",
   "snack",
-  "smoothie",
   "dessert",
 ];
 

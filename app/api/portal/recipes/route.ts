@@ -3,7 +3,7 @@ import { withAuth } from "@/lib/api/auth";
 import { validateOrigin } from "@/lib/api/csrf";
 import { rateLimit } from "@/lib/api/rate-limit";
 
-const VALID_CATEGORIES = ["general", "breakfast", "lunch", "dinner", "snack", "smoothie", "dessert", "drink"];
+const VALID_CATEGORIES = ["general", "breakfast", "lunch", "dinner", "snack", "dessert", "drink"];
 
 export async function GET() {
   return withAuth(async ({ user, admin }) => {

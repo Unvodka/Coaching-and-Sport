@@ -48,7 +48,7 @@ const HEALTHY_RECIPES = [
       "1. Mettre tous les ingrédients dans un blender.\n2. Mixer pendant 1 minute jusqu'à obtenir une texture lisse.\n3. Ajuster la consistance avec plus de lait si nécessaire.\n4. Servir immédiatement.",
     instructions_en:
       "1. Add all ingredients to a blender.\n2. Blend for 1 minute until smooth.\n3. Adjust consistency with more milk if needed.\n4. Serve immediately.",
-    category: "smoothie",
+    category: "snack",
     image_url: "https://images.unsplash.com/photo-1638176066666-ffb2f013c7dd?w=600&h=400&fit=crop",
   },
   {
