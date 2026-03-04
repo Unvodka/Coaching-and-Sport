@@ -26,33 +26,29 @@ interface MetricConfig {
   labelEn: string;
   color: string;
   unit: string;
-  yAxisId: string;
 }
 
-const METRICS: MetricConfig[] = [
-  { key: "weight", labelFr: "Poids", labelEn: "Weight", color: "#2563eb", unit: " kg", yAxisId: "kg" },
-  { key: "bodyFat", labelFr: "Masse graisseuse", labelEn: "Body fat", color: "#f59e0b", unit: " %", yAxisId: "pct" },
-  { key: "visceralFat", labelFr: "Graisse viscérale", labelEn: "Visceral fat", color: "#ef4444", unit: "", yAxisId: "visc" },
-  { key: "muscle", labelFr: "Masse musculaire", labelEn: "Muscle mass", color: "#10b981", unit: " kg", yAxisId: "kg" },
-  { key: "water", labelFr: "Masse d'eau", labelEn: "Water mass", color: "#06b6d4", unit: " %", yAxisId: "pct" },
+const KG_METRICS: MetricConfig[] = [
+  { key: "weight", labelFr: "Poids", labelEn: "Weight", color: "#2563eb", unit: " kg" },
+  { key: "muscle", labelFr: "Masse musculaire", labelEn: "Muscle mass", color: "#10b981", unit: " kg" },
 ];
+
+const PCT_METRICS: MetricConfig[] = [
+  { key: "bodyFat", labelFr: "Masse graisseuse", labelEn: "Body fat", color: "#f59e0b", unit: " %" },
+  { key: "water", labelFr: "Masse d'eau", labelEn: "Water mass", color: "#06b6d4", unit: " %" },
+  { key: "visceralFat", labelFr: "Graisse viscérale", labelEn: "Visceral fat", color: "#ef4444", unit: "" },
+];
+
+const ALL_METRICS = [...KG_METRICS, ...PCT_METRICS];
+
+const tooltipStyle = {
+  borderRadius: "8px",
+  border: "1px solid #e5e7eb",
+  boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+};
 
 export default function WeightChart({ logs }: WeightChartProps) {
   const { locale } = useLanguage();
-
-  const hasCompositionData = useMemo(
-    () => logs.some((l) => l.body_fat_pct || l.visceral_fat || l.muscle_mass_kg || l.water_pct),
-    [logs]
-  );
-
-  const [activeMetrics, setActiveMetrics] = useState<Set<MetricKey>>(() => {
-    const set = new Set<MetricKey>(["weight"]);
-    if (logs.some((l) => l.body_fat_pct)) set.add("bodyFat");
-    if (logs.some((l) => l.visceral_fat)) set.add("visceralFat");
-    if (logs.some((l) => l.muscle_mass_kg)) set.add("muscle");
-    if (logs.some((l) => l.water_pct)) set.add("water");
-    return set;
-  });
 
   const data = useMemo(
     () =>
@@ -72,8 +68,45 @@ export default function WeightChart({ logs }: WeightChartProps) {
     [logs]
   );
 
-  const toggleMetric = (key: MetricKey) => {
-    setActiveMetrics((prev) => {
+  // Determine which metrics have data
+  const availableKg = useMemo(
+    () =>
+      KG_METRICS.filter((m) => {
+        if (m.key === "weight") return true;
+        if (m.key === "muscle") return logs.some((l) => l.muscle_mass_kg);
+        return false;
+      }),
+    [logs]
+  );
+
+  const availablePct = useMemo(
+    () =>
+      PCT_METRICS.filter((m) => {
+        if (m.key === "bodyFat") return logs.some((l) => l.body_fat_pct);
+        if (m.key === "water") return logs.some((l) => l.water_pct);
+        if (m.key === "visceralFat") return logs.some((l) => l.visceral_fat);
+        return false;
+      }),
+    [logs]
+  );
+
+  const [activeKg, setActiveKg] = useState<Set<MetricKey>>(() => {
+    const set = new Set<MetricKey>(["weight"]);
+    if (logs.some((l) => l.muscle_mass_kg)) set.add("muscle");
+    return set;
+  });
+
+  const [activePct, setActivePct] = useState<Set<MetricKey>>(() => {
+    const set = new Set<MetricKey>();
+    if (logs.some((l) => l.body_fat_pct)) set.add("bodyFat");
+    if (logs.some((l) => l.water_pct)) set.add("water");
+    if (logs.some((l) => l.visceral_fat)) set.add("visceralFat");
+    return set;
+  });
+
+  const toggleMetric = (key: MetricKey, group: "kg" | "pct") => {
+    const setter = group === "kg" ? setActiveKg : setActivePct;
+    setter((prev) => {
       const next = new Set(prev);
       if (next.has(key)) {
         if (next.size > 1) next.delete(key);
@@ -87,122 +120,144 @@ export default function WeightChart({ logs }: WeightChartProps) {
   const { minKg, maxKg } = useMemo(() => {
     const kgValues = data.flatMap((d) => {
       const vals: number[] = [];
-      if (activeMetrics.has("weight")) vals.push(d.weight);
-      if (activeMetrics.has("muscle") && d.muscle) vals.push(d.muscle);
+      if (activeKg.has("weight")) vals.push(d.weight);
+      if (activeKg.has("muscle") && d.muscle) vals.push(d.muscle);
       return vals;
     });
     return {
       minKg: kgValues.length > 0 ? Math.floor(Math.min(...kgValues) - 2) : 0,
       maxKg: kgValues.length > 0 ? Math.ceil(Math.max(...kgValues) + 2) : 100,
     };
-  }, [data, activeMetrics]);
+  }, [data, activeKg]);
 
-  const availableMetrics = useMemo(
-    () =>
-      METRICS.filter((m) => {
-        if (m.key === "weight") return true;
-        if (!hasCompositionData) return false;
-        return logs.some((l) => {
-          if (m.key === "bodyFat") return l.body_fat_pct;
-          if (m.key === "visceralFat") return l.visceral_fat;
-          if (m.key === "muscle") return l.muscle_mass_kg;
-          if (m.key === "water") return l.water_pct;
-          return false;
-        });
-      }),
-    [logs, hasCompositionData]
-  );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const formatTooltip = (value: any, name: any) => {
+    const metric = ALL_METRICS.find((m) => m.key === name);
+    if (!metric) return [`${value}`, name];
+    const label = locale === "fr" ? metric.labelFr : metric.labelEn;
+    return [`${value}${metric.unit}`, label];
+  };
 
   if (data.length === 0) return null;
 
+  const hasPctData = availablePct.length > 0;
+
   return (
-    <div className="bg-white rounded-xl border border-gray-100 p-6">
-      {/* Metric toggles */}
-      {availableMetrics.length > 1 && (
-        <div className="flex flex-wrap gap-2 mb-4">
-          {availableMetrics.map((m) => (
-            <button
-              key={m.key}
-              onClick={() => toggleMetric(m.key)}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
-                activeMetrics.has(m.key)
-                  ? "text-white shadow-sm"
-                  : "bg-gray-100 text-gray-500 hover:bg-gray-200"
-              }`}
-              style={activeMetrics.has(m.key) ? { backgroundColor: m.color } : undefined}
-            >
-              <span
-                className="w-2 h-2 rounded-full"
-                style={{ backgroundColor: m.color }}
+    <div className="space-y-6">
+      {/* KG Chart */}
+      <div className="bg-white rounded-xl border border-gray-100 p-6">
+        <h3 className="text-sm font-semibold text-heading mb-3">
+          {locale === "fr" ? "Poids (kg)" : "Weight (kg)"}
+        </h3>
+
+        {availableKg.length > 1 && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {availableKg.map((m) => (
+              <button
+                key={m.key}
+                onClick={() => toggleMetric(m.key, "kg")}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                  activeKg.has(m.key)
+                    ? "text-white shadow-sm"
+                    : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                }`}
+                style={activeKg.has(m.key) ? { backgroundColor: m.color } : undefined}
+              >
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: m.color }} />
+                {locale === "fr" ? m.labelFr : m.labelEn}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <ResponsiveContainer width="100%" height={220}>
+          <LineChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+            <XAxis dataKey="date" tick={{ fontSize: 12, fill: "#9ca3af" }} tickLine={false} />
+            <YAxis
+              domain={[minKg, maxKg]}
+              tick={{ fontSize: 12, fill: "#9ca3af" }}
+              tickLine={false}
+              unit=" kg"
+            />
+            <Tooltip contentStyle={tooltipStyle} formatter={formatTooltip} />
+            {activeKg.size > 1 && <Legend />}
+            {KG_METRICS.map((m) =>
+              activeKg.has(m.key) ? (
+                <Line
+                  key={m.key}
+                  type="monotone"
+                  dataKey={m.key}
+                  stroke={m.color}
+                  strokeWidth={2.5}
+                  dot={{ fill: m.color, strokeWidth: 0, r: 4 }}
+                  activeDot={{ fill: m.color, strokeWidth: 0, r: 6 }}
+                  connectNulls
+                  name={m.key}
+                />
+              ) : null
+            )}
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* % Chart */}
+      {hasPctData && (
+        <div className="bg-white rounded-xl border border-gray-100 p-6">
+          <h3 className="text-sm font-semibold text-heading mb-3">
+            {locale === "fr" ? "Composition (%)" : "Composition (%)"}
+          </h3>
+
+          {availablePct.length > 1 && (
+            <div className="flex flex-wrap gap-2 mb-4">
+              {availablePct.map((m) => (
+                <button
+                  key={m.key}
+                  onClick={() => toggleMetric(m.key, "pct")}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                    activePct.has(m.key)
+                      ? "text-white shadow-sm"
+                      : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                  }`}
+                  style={activePct.has(m.key) ? { backgroundColor: m.color } : undefined}
+                >
+                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: m.color }} />
+                  {locale === "fr" ? m.labelFr : m.labelEn}
+                </button>
+              ))}
+            </div>
+          )}
+
+          <ResponsiveContainer width="100%" height={220}>
+            <LineChart data={data}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+              <XAxis dataKey="date" tick={{ fontSize: 12, fill: "#9ca3af" }} tickLine={false} />
+              <YAxis
+                tick={{ fontSize: 12, fill: "#9ca3af" }}
+                tickLine={false}
+                unit=" %"
               />
-              {locale === "fr" ? m.labelFr : m.labelEn}
-            </button>
-          ))}
+              <Tooltip contentStyle={tooltipStyle} formatter={formatTooltip} />
+              {activePct.size > 1 && <Legend />}
+              {PCT_METRICS.map((m) =>
+                activePct.has(m.key) ? (
+                  <Line
+                    key={m.key}
+                    type="monotone"
+                    dataKey={m.key}
+                    stroke={m.color}
+                    strokeWidth={2.5}
+                    dot={{ fill: m.color, strokeWidth: 0, r: 4 }}
+                    activeDot={{ fill: m.color, strokeWidth: 0, r: 6 }}
+                    connectNulls
+                    name={m.key}
+                  />
+                ) : null
+              )}
+            </LineChart>
+          </ResponsiveContainer>
         </div>
       )}
-
-      <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-          <XAxis
-            dataKey="date"
-            tick={{ fontSize: 12, fill: "#9ca3af" }}
-            tickLine={false}
-          />
-          <YAxis
-            yAxisId="kg"
-            domain={[minKg, maxKg]}
-            tick={{ fontSize: 12, fill: "#9ca3af" }}
-            tickLine={false}
-            unit=" kg"
-            hide={!activeMetrics.has("weight") && !activeMetrics.has("muscle")}
-          />
-          <YAxis
-            yAxisId="pct"
-            orientation="right"
-            tick={{ fontSize: 12, fill: "#9ca3af" }}
-            tickLine={false}
-            unit=" %"
-            hide={!activeMetrics.has("bodyFat") && !activeMetrics.has("water")}
-          />
-          <YAxis
-            yAxisId="visc"
-            orientation="right"
-            hide={true}
-          />
-          <Tooltip
-            contentStyle={{
-              borderRadius: "8px",
-              border: "1px solid #e5e7eb",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-            }}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            formatter={(value: any, name: any) => {
-              const metric = METRICS.find((m) => m.key === name);
-              if (!metric) return [`${value}`, name];
-              const label = locale === "fr" ? metric.labelFr : metric.labelEn;
-              return [`${value}${metric.unit}`, label];
-            }}
-          />
-          {availableMetrics.length > 1 && activeMetrics.size > 1 && <Legend />}
-          {METRICS.map((m) =>
-            activeMetrics.has(m.key) ? (
-              <Line
-                key={m.key}
-                type="monotone"
-                dataKey={m.key}
-                yAxisId={m.yAxisId}
-                stroke={m.color}
-                strokeWidth={2.5}
-                dot={{ fill: m.color, strokeWidth: 0, r: 4 }}
-                activeDot={{ fill: m.color, strokeWidth: 0, r: 6 }}
-                connectNulls
-                name={m.key}
-              />
-            ) : null
-          )}
-        </LineChart>
-      </ResponsiveContainer>
     </div>
   );
 }
