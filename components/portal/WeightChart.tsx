@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -103,6 +103,25 @@ export default function WeightChart({ logs }: WeightChartProps) {
     if (logs.some((l) => l.visceral_fat)) set.add("visceralFat");
     return set;
   });
+
+  // Auto-activate new metrics when data becomes available (e.g. after form submit)
+  useEffect(() => {
+    setActiveKg((prev) => {
+      const next = new Set(prev);
+      if (logs.some((l) => l.muscle_mass_kg)) next.add("muscle");
+      return next.size !== prev.size ? next : prev;
+    });
+  }, [logs]);
+
+  useEffect(() => {
+    setActivePct((prev) => {
+      const next = new Set(prev);
+      if (logs.some((l) => l.body_fat_pct)) next.add("bodyFat");
+      if (logs.some((l) => l.water_pct)) next.add("water");
+      if (logs.some((l) => l.visceral_fat)) next.add("visceralFat");
+      return next.size !== prev.size ? next : prev;
+    });
+  }, [logs]);
 
   const toggleMetric = (key: MetricKey, group: "kg" | "pct") => {
     const setter = group === "kg" ? setActiveKg : setActivePct;
