@@ -48,7 +48,7 @@ export default function ProgramCard({
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-black/10" />
         {featuredBadge && (
           <span className={`absolute top-3 right-3 text-white py-1 px-3 rounded-full text-[0.65rem] font-bold uppercase tracking-wider shadow-md ${
-            isFeatured ? "bg-brand-blue" : "bg-emerald-600/70"
+            isFeatured ? "bg-brand-blue" : "bg-brand-blue"
           }`}>
             {featuredBadge}
           </span>

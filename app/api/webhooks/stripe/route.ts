@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
+import { sendPaymentConfirmation } from "@/lib/email";
 import Stripe from "stripe";
 
 // Stripe sends raw body — disable Next.js body parsing
@@ -42,14 +43,40 @@ export async function POST(request: NextRequest) {
   switch (event.type) {
     case "checkout.session.completed": {
       const session = event.data.object as Stripe.Checkout.Session;
+      const amount = session.amount_total || 0;
+      const customerEmail = session.customer_email || session.customer_details?.email;
+
       console.log(
         `✅ Payment successful: ${session.id}`,
-        `| Amount: ${(session.amount_total || 0) / 100}€`,
-        `| Customer: ${session.customer_email || "N/A"}`
+        `| Amount: ${amount / 100}€`,
+        `| Customer: ${customerEmail || "N/A"}`
       );
 
-      // Future: update database, send confirmation email, etc.
-      // For now, we log the successful payment for tracking.
+      // Retrieve line items to get product title
+      let productTitle = "Coach-Bluewave";
+      try {
+        const lineItems = await getStripe().checkout.sessions.listLineItems(session.id, { limit: 1 });
+        if (lineItems.data.length > 0) {
+          productTitle = lineItems.data[0].description || productTitle;
+        }
+      } catch (err) {
+        console.error("Failed to retrieve line items:", err);
+      }
+
+      // Send confirmation emails (non-blocking)
+      if (customerEmail) {
+        try {
+          await sendPaymentConfirmation({
+            customerEmail,
+            amount,
+            productTitle,
+          });
+          console.log(`📧 Confirmation emails sent for session ${session.id}`);
+        } catch (err) {
+          console.error("Failed to send confirmation emails:", err);
+        }
+      }
+
       break;
     }
 
