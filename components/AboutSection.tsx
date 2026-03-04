@@ -10,7 +10,7 @@ export default function AboutSection() {
   return (
     <section
       id="apropos"
-      className="bg-gray-50 py-24 px-16 w-full max-md:py-16 max-md:px-6"
+      className="bg-gray-100 py-24 px-16 w-full max-md:py-16 max-md:px-6"
     >
       <FadeInWhenVisible>
         <h2 className="font-heading text-center text-5xl mb-4 font-extrabold tracking-tight text-heading max-md:text-[2.2rem] max-[480px]:text-[1.8rem]">
