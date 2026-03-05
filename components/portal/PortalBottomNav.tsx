@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import { useAuth } from "@/lib/supabase/AuthContext";
 
 const NAV_ITEMS = [
   {
@@ -61,7 +60,6 @@ const NAV_ITEMS = [
 export default function PortalBottomNav() {
   const pathname = usePathname();
   const { locale } = useLanguage();
-  const { profile } = useAuth();
 
   const isActive = (href: string) => {
     if (href === "/portal") return pathname === "/portal";
