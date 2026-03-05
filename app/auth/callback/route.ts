@@ -6,33 +6,49 @@ export async function GET(request: Request) {
   const code = searchParams.get("code");
   const next = searchParams.get("next") ?? "/portal";
 
-  if (code) {
-    const supabase = createClient();
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
-    if (!error) {
-      // Ensure profile exists
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const admin = createAdminClient();
-        const { data: existingProfile } = await admin
-          .from("profiles")
-          .select("id")
-          .eq("id", user.id)
-          .single();
-
-        if (!existingProfile) {
-          await admin.from("profiles").insert({
-            id: user.id,
-            email: user.email || "",
-            full_name: user.user_metadata?.full_name || user.user_metadata?.name || "",
-            avatar_url: user.user_metadata?.avatar_url || user.user_metadata?.picture || null,
-          });
-        }
-      }
-
-      return NextResponse.redirect(`${origin}${next}`);
-    }
+  if (!code) {
+    return NextResponse.redirect(`${origin}/?auth_error=true`);
   }
 
-  return NextResponse.redirect(`${origin}/?auth_error=true`);
+  const supabase = createClient();
+  const { error } = await supabase.auth.exchangeCodeForSession(code);
+
+  if (error) {
+    console.error("exchangeCodeForSession error:", error.message);
+    return NextResponse.redirect(`${origin}/?auth_error=true`);
+  }
+
+  // Session exchanged successfully — always redirect to portal.
+  // Profile upsert is best-effort: wrap fully so it NEVER blocks the redirect.
+  try {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      const admin = createAdminClient();
+      const { data: existingProfile } = await admin
+        .from("profiles")
+        .select("id")
+        .eq("id", user.id)
+        .single();
+
+      if (!existingProfile) {
+        await admin.from("profiles").insert({
+          id: user.id,
+          email: user.email || "",
+          full_name:
+            user.user_metadata?.full_name ||
+            user.user_metadata?.name ||
+            "",
+          avatar_url:
+            user.user_metadata?.avatar_url ||
+            user.user_metadata?.picture ||
+            null,
+        });
+      }
+    }
+  } catch (profileError) {
+    // Non-fatal — log and continue. The user can still access the portal.
+    console.error("Profile upsert error (non-fatal):", profileError);
+  }
+
+  return NextResponse.redirect(`${origin}${next}`);
 }

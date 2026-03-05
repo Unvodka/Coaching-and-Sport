@@ -18,7 +18,6 @@ const nextConfig = {
   },
   async headers() {
     return [
-      // SW served by next-pwa — still needs correct headers
       {
         source: "/sw.js",
         headers: [
@@ -56,60 +55,61 @@ const nextConfig = {
 };
 
 export default withPWA({
-  dest: "public",           // SW output location
-  cacheOnFrontEndNav: true, // cache pages as user navigates
-  aggressiveFrontEndNavCaching: true,
-  reloadOnOnline: true,     // reload stale content when back online
+  dest: "public",
+  // Do NOT cache navigations aggressively — auth middleware must always run
+  cacheOnFrontEndNav: false,
+  aggressiveFrontEndNavCaching: false,
+  reloadOnOnline: true,
   swcMinify: true,
-  disable: process.env.NODE_ENV === "development", // disable in dev to avoid noise
+  disable: process.env.NODE_ENV === "development",
   workboxOptions: {
     disableDevLogs: true,
-    // Pre-cache the portal shell routes on first SW install
-    additionalManifestEntries: [
-      { url: "/portal", revision: null },
-      { url: "/portal/weight", revision: null },
-      { url: "/portal/workouts", revision: null },
-      { url: "/portal/recipes", revision: null },
-      { url: "/portal/journal", revision: null },
-      { url: "/portal/profile", revision: null },
-      { url: "/offline", revision: null },
-    ],
-    // Don't cache Supabase, Stripe or API calls
+    // Only precache static assets (hashed filenames = safe forever).
+    // Never precache HTML pages — they are auth-dependent and must
+    // go through middleware on every request.
+    additionalManifestEntries: [],
     runtimeCaching: [
       {
-        // Next.js static assets — cache-first, 1 year
+        // Homepage and auth routes — network-only, NEVER cache.
+        // Middleware must run on every request to handle auth redirects.
+        urlPattern: /^https:\/\/coach-bluewave\.com(\/|\/auth\/.*)$/i,
+        handler: "NetworkOnly",
+      },
+      {
+        // Portal pages — network-first, 1h stale fallback.
+        // Short TTL so code updates reach users quickly.
+        urlPattern: /^https:\/\/coach-bluewave\.com\/portal.*/i,
+        handler: "NetworkFirst",
+        options: {
+          cacheName: "portal-pages-v2",
+          networkTimeoutSeconds: 8,
+          expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 }, // 1 hour
+        },
+      },
+      {
+        // Next.js static assets — cache-first, 1 year (hashed filenames).
         urlPattern: /^\/_next\/static\/.*/i,
         handler: "CacheFirst",
         options: {
-          cacheName: "next-static",
+          cacheName: "next-static-v2",
           expiration: { maxEntries: 200, maxAgeSeconds: 365 * 24 * 60 * 60 },
         },
       },
       {
-        // Images — cache-first, 30 days
+        // Images — cache-first, 30 days.
         urlPattern: /^https:\/\/coach-bluewave\.com\/images\/.*/i,
         handler: "CacheFirst",
         options: {
-          cacheName: "images",
+          cacheName: "images-v2",
           expiration: { maxEntries: 60, maxAgeSeconds: 30 * 24 * 60 * 60 },
         },
       },
       {
-        // Portal pages — network-first, 24h stale fallback
-        urlPattern: /^https:\/\/coach-bluewave\.com\/portal.*/i,
-        handler: "NetworkFirst",
-        options: {
-          cacheName: "portal-pages",
-          networkTimeoutSeconds: 10,
-          expiration: { maxEntries: 30, maxAgeSeconds: 24 * 60 * 60 },
-        },
-      },
-      {
-        // Google Fonts
+        // Google Fonts — stale-while-revalidate.
         urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com\/.*/i,
         handler: "StaleWhileRevalidate",
         options: {
-          cacheName: "google-fonts",
+          cacheName: "google-fonts-v2",
           expiration: { maxEntries: 10, maxAgeSeconds: 365 * 24 * 60 * 60 },
         },
       },
