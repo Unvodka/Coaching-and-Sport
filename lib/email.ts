@@ -13,7 +13,13 @@ function getResend(): Resend {
 }
 
 const COACH_EMAIL = "chevallier.a06@gmail.com";
-const FROM_EMAIL = "Coach-Bluewave <onboarding@resend.dev>";
+
+// Use verified domain in production — set RESEND_FROM_EMAIL in your env vars.
+// Example: "Coach Bluewave <contact@coachbluewave.com>"
+// Until your domain is verified on Resend, keep using onboarding@resend.dev
+// (emails can only be sent to your own address in that case).
+const FROM_EMAIL =
+  process.env.RESEND_FROM_EMAIL ?? "Coach Bluewave <onboarding@resend.dev>";
 
 interface PaymentEmailParams {
   customerEmail: string;

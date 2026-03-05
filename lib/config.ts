@@ -36,6 +36,10 @@ export function getServerEnv() {
     supabaseServiceKey: requireEnv("SUPABASE_SERVICE_ROLE_KEY"),
     stripeSecretKey: requireEnv("STRIPE_SECRET_KEY"),
     stripeWebhookSecret: optionalEnv("STRIPE_WEBHOOK_SECRET", ""),
+    resendApiKey: requireEnv("RESEND_API_KEY"),
+    // Set this once your domain is verified on Resend:
+    // e.g. "Coach Bluewave <contact@coachbluewave.com>"
+    resendFromEmail: optionalEnv("RESEND_FROM_EMAIL", "Coach Bluewave <onboarding@resend.dev>"),
   };
 }
 

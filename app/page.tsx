@@ -6,6 +6,7 @@ import ServicesSection from "@/components/ServicesSection";
 import OffersSection from "@/components/OffersSection";
 import JsonLd from "@/components/JsonLd";
 import { FAQ_FR } from "@/lib/faq";
+import { BASE_URL } from "@/lib/config";
 
 // Below-the-fold — lazy loaded
 const ContactSection = dynamic(() => import("@/components/ContactSection"), {
@@ -21,9 +22,13 @@ const Footer = dynamic(() => import("@/components/Footer"), {
   loading: () => <div className="min-h-[200px]" />,
 });
 
+// Use only FR FAQs for the schema — single canonical language per page.
+// The page URL is the French homepage (/), so FR is the correct language.
+// Each service page has its own separate FAQPage schema — no duplication.
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": `${BASE_URL}/#faq`,
   mainEntity: FAQ_FR.map((faq) => ({
     "@type": "Question",
     name: faq.question,

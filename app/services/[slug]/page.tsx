@@ -108,9 +108,10 @@ export default function ServicePage({ params }: Props) {
     serviceType: service.title,
   };
 
-  const faqJsonLd = {
+  const faqJsonLd = service.detail.faqs.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    "@id": `${BASE_URL}/services/${service.slug}#faq`,
     mainEntity: service.detail.faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
@@ -119,7 +120,7 @@ export default function ServicePage({ params }: Props) {
         text: faq.answer,
       },
     })),
-  };
+  } : null;
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -149,7 +150,7 @@ export default function ServicePage({ params }: Props) {
   return (
     <>
       <JsonLd data={serviceJsonLd} />
-      <JsonLd data={faqJsonLd} />
+      {faqJsonLd && <JsonLd data={faqJsonLd} />}
       <JsonLd data={breadcrumbJsonLd} />
       <ServiceDetailContent slug={params.slug} />
     </>
