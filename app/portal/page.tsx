@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useAuth } from "@/lib/supabase/AuthContext";
 import DashboardCard from "@/components/portal/DashboardCard";
+import InstallPWAButton from "@/components/portal/InstallPWAButton";
 
 interface DashboardStats {
   recipes: number;
@@ -87,6 +88,9 @@ export default function DashboardPage() {
         </h2>
         <p className="text-gray-500 mt-1">{t("portal.dashboardSubtitle")}</p>
       </div>
+
+      {/* PWA install prompt — only shown on mobile when not yet installed */}
+      <InstallPWAButton />
 
       {/* Getting started section when no activity */}
       {totalActivity === 0 && (
