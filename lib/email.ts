@@ -95,12 +95,14 @@ export async function sendPaymentConfirmation({
   const results = await Promise.allSettled([
     getResend().emails.send({
       from: FROM_EMAIL,
+      replyTo: COACH_EMAIL,
       to: customerEmail,
       subject: `Confirmation de paiement — ${productTitle}`,
       html: customerHtml,
     }),
     getResend().emails.send({
       from: FROM_EMAIL,
+      replyTo: COACH_EMAIL,
       to: COACH_EMAIL,
       subject: `Nouveau paiement : ${productTitle} (${amountFormatted} €)`,
       html: coachHtml,
