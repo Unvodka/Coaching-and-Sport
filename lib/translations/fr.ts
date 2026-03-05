@@ -41,7 +41,7 @@ const fr = {
     'Bilan initial gratuit • Suivi personnalisé • Conseils nutrition • Motivation continue',
   'info.securePayment': 'Paiement sécurisé par Stripe',
   'info.paymentMethods':
-    'Cryptage SSL 256 bits • 3D Secure • CB, Visa, Mastercard, Apple Pay, Google Pay',
+    'Cryptage SSL • 3D Secure • CB, Visa, Mastercard, Apple Pay, Google Pay',
   'info.sessionsNote':
     "Les séances peuvent être utilisées pour n'importe quelle activité : natation, fitness ou activités extérieures",
   'info.needAdvice': 'Besoin de conseils pour choisir ?',
@@ -136,7 +136,7 @@ const fr = {
   // Security badges
   'security.securedByStripe': 'Paiement sécurisé par Stripe · 3D Secure',
   'security.badge1.title': 'Paiement 100% sécurisé',
-  'security.badge1.desc': 'Cryptage SSL 256 bits',
+  'security.badge1.desc': 'Cryptage SSL',
   'security.badge2.title': '3D Secure activé',
   'security.badge2.desc': 'Double authentification bancaire',
   'security.badge3.title': 'CB, Visa, Mastercard',
@@ -150,7 +150,7 @@ const fr = {
 
   // Checkout
   'security.checkoutSecured':
-    'Votre paiement a été sécurisé par Stripe · 3D Secure · SSL 256 bits',
+    'Votre paiement a été sécurisé par Stripe · 3D Secure · SSL',
   'checkout.success.title': 'Paiement réussi !',
   'checkout.success.message':
     'Merci pour votre confiance. Vous recevrez un email de confirmation avec tous les détails de votre réservation.',
