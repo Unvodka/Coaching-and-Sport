@@ -1,6 +1,8 @@
 import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
+
 // This route is only available in development/staging environments.
 // It is intentionally blocked in production to prevent accidental data seeding.
 if (process.env.NODE_ENV === "production") {

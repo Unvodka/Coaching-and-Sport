@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { withCoach } from "@/lib/api/auth";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   return withCoach(async ({ admin }) => {
     // Fetch all profiles

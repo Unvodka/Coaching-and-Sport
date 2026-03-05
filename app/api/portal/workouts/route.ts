@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { withAuth } from "@/lib/api/auth";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   return withAuth(async ({ user, admin }) => {
     // Fetch public programs

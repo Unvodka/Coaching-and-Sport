@@ -4,6 +4,8 @@ import { validateOrigin } from "@/lib/api/csrf";
 import { rateLimit } from "@/lib/api/rate-limit";
 import { DATE_REGEX } from "@/lib/api/validators";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   return withAuth(async ({ user, admin }) => {
     const { data, error } = await admin

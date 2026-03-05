@@ -3,6 +3,8 @@ import { withAuth } from "@/lib/api/auth";
 import { validateOrigin } from "@/lib/api/csrf";
 import { rateLimit } from "@/lib/api/rate-limit";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   return withAuth(async ({ user, admin }) => {
     const { data, error } = await admin

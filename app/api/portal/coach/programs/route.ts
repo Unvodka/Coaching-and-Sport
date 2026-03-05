@@ -3,6 +3,8 @@ import { withCoach } from "@/lib/api/auth";
 import { validateOrigin } from "@/lib/api/csrf";
 import { rateLimit } from "@/lib/api/rate-limit";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   return withCoach(async ({ admin }) => {
     const { data: programs, error } = await admin
