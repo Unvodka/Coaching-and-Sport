@@ -68,19 +68,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     async function init() {
       try {
-        // Step 1: getSession() reads from localStorage — instant, no network.
-        // This resolves isLoading immediately so the UI isn't stuck.
+        // getSession() reads from localStorage — instant, no network call.
+        // Resolves isLoading immediately so UI isn't blocked.
         const { data: { session: localSession } } = await supabase.auth.getSession();
 
         if (!mounted) return;
 
         if (localSession?.user) {
-          // We have a local session — show the user immediately
+          // Show user immediately from local session
           setSession(localSession);
           setUser(localSession.user);
           setIsLoading(false); // unblock UI right away
 
-          // Step 2: validate with server in background (security check)
+          // Validate with server in background
           const { data: { user: validatedUser } } = await supabase.auth.getUser();
           if (!mounted) return;
 
@@ -89,13 +89,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             const profileData = await fetchProfile(supabase, validatedUser.id);
             if (mounted) setProfile(profileData);
           } else {
-            // Server rejected the session — clear it
+            // Server rejected the session — clear everything
             setUser(null);
             setSession(null);
             setProfile(null);
+            // isLoading already false — no need to set again
           }
         } else {
-          // No local session at all — definitely not logged in
+          // No local session — not logged in
           setUser(null);
           setSession(null);
           setProfile(null);
@@ -107,7 +108,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     }
 
-    init();
+    // Safety net: if init() hangs for any reason, unblock after 3s
+    const safetyTimer = setTimeout(() => {
+      if (mounted) setIsLoading(false);
+    }, 3000);
+
+    init().finally(() => clearTimeout(safetyTimer));
 
     const {
       data: { subscription },
@@ -116,6 +122,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (!mounted) return;
         setSession(newSession);
         setUser(newSession?.user ?? null);
+        setIsLoading(false);
 
         if (newSession?.user) {
           const profileData = await fetchProfile(supabase, newSession.user.id);
@@ -123,13 +130,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } else {
           setProfile(null);
         }
-
-        setIsLoading(false);
       }
     );
 
     return () => {
       mounted = false;
+      clearTimeout(safetyTimer);
       subscription.unsubscribe();
     };
   }, []);
