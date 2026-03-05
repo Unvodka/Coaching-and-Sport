@@ -10,6 +10,7 @@ interface BeforeInstallPromptEvent extends Event {
 export default function InstallPWAButton() {
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isIOS, setIsIOS] = useState(false);
+  const [isIOSChrome, setIsIOSChrome] = useState(false);
   const [isInstalled, setIsInstalled] = useState(false);
   const [showIOSGuide, setShowIOSGuide] = useState(false);
 
@@ -20,11 +21,17 @@ export default function InstallPWAButton() {
       return;
     }
 
-    // iOS detection
-    const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    // iOS detection — covers Safari, Chrome, Firefox, Edge on iOS
+    // (all use WebKit on iOS and don't support beforeinstallprompt)
+    const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
     setIsIOS(ios);
 
-    // Android/desktop Chrome install prompt
+    // Chrome on iOS identifies itself with "CriOS" in the user agent
+    const iosChrome = ios && /CriOS/i.test(navigator.userAgent);
+    setIsIOSChrome(iosChrome);
+
+    // Android/desktop Chrome install prompt (not fired on iOS)
     const handler = (e: Event) => {
       e.preventDefault();
       setInstallPrompt(e as BeforeInstallPromptEvent);
@@ -79,12 +86,26 @@ export default function InstallPWAButton() {
       {/* iOS step-by-step guide */}
       {showIOSGuide && (
         <div className="mt-4 pt-4 border-t border-white/20 text-sm text-white/90 space-y-2">
-          <p className="font-semibold">Pour installer sur iPhone / iPad :</p>
-          <ol className="list-decimal list-inside space-y-1 text-white/80">
-            <li>Appuyez sur le bouton <strong>Partager</strong> <span className="inline-block">⎋</span> en bas de Safari</li>
-            <li>Faites défiler et appuyez sur <strong>« Sur l&apos;écran d&apos;accueil »</strong></li>
-            <li>Appuyez sur <strong>Ajouter</strong> en haut à droite</li>
-          </ol>
+          {isIOSChrome ? (
+            <>
+              <p className="font-semibold">Pour installer sur iPhone avec Chrome :</p>
+              <ol className="list-decimal list-inside space-y-1 text-white/80">
+                <li>Appuyez sur les <strong>3 points</strong> ⋮ en bas à droite</li>
+                <li>Appuyez sur <strong>« Partager… »</strong></li>
+                <li>Appuyez sur <strong>« Sur l&apos;écran d&apos;accueil »</strong></li>
+                <li>Appuyez sur <strong>Ajouter</strong></li>
+              </ol>
+            </>
+          ) : (
+            <>
+              <p className="font-semibold">Pour installer sur iPhone / iPad (Safari) :</p>
+              <ol className="list-decimal list-inside space-y-1 text-white/80">
+                <li>Appuyez sur le bouton <strong>Partager</strong> ⎋ en bas</li>
+                <li>Faites défiler et appuyez sur <strong>« Sur l&apos;écran d&apos;accueil »</strong></li>
+                <li>Appuyez sur <strong>Ajouter</strong> en haut à droite</li>
+              </ol>
+            </>
+          )}
           <button
             onClick={() => setShowIOSGuide(false)}
             className="text-white/60 text-xs underline mt-1"
