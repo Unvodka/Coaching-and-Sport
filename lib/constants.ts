@@ -495,19 +495,6 @@ const PROGRAMS_FR: Program[] = [
     priceDetails: 'Programme de 3 mois',
     ctaText: 'Transformer mon corps',
   },
-  {
-    imageSrc:
-      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80',
-    title: 'Test (1€)',
-    description: 'Carte de test — à supprimer.',
-    features: ['Test paiement'],
-    goals: ['Vérifier le checkout'],
-    price: '1€',
-    priceNumeric: 1,
-    priceUnit: '',
-    priceDetails: 'Test uniquement',
-    ctaText: 'Tester',
-  },
 ];
 
 const PROGRAMS_EN: Program[] = [
@@ -610,19 +597,6 @@ const PROGRAMS_EN: Program[] = [
     priceUnit: '',
     priceDetails: '3-month program',
     ctaText: 'Transform my body',
-  },
-  {
-    imageSrc:
-      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80',
-    title: 'Test (1€)',
-    description: 'Test card — to be removed.',
-    features: ['Test payment'],
-    goals: ['Verify checkout'],
-    price: '1€',
-    priceNumeric: 1,
-    priceUnit: '',
-    priceDetails: 'Test only',
-    ctaText: 'Test',
   },
 ];
 
