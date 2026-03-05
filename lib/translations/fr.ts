@@ -53,11 +53,11 @@ const fr = {
   'about.heading.name': 'Arnaud Chevallier',
   'about.heading.role': 'Un coach dédié à votre réussite',
   'about.p1':
-    "Maître-nageur et éducateur sportif diplômé d'état, je me consacre depuis plusieurs années à l'enseignement de la natation et des pratiques sportives.",
+    "Je me consacre depuis plusieurs années à l'enseignement de la natation et des pratiques sportives.",
   'about.p2':
     "Spécialisé dans la remise en forme, la perte de poids et le bien-être, j'ai développé une approche globale qui combine plusieurs disciplines sportives pour des résultats durables et harmonieux.",
   'about.p3':
-    "Je peux vous reçevoir à domicile et j'interviens également dans toute la région des Alpes-Maritimes pour vous offrir le meilleur service possible.",
+    " Je peux vous reçevoir à domicile et j'interviens également dans toute la région des Alpes-Maritimes pour vous offrir le meilleur service possible.",
   'about.cta': 'En savoir plus',
 
   // About page (dedicated /apropos)
@@ -258,7 +258,8 @@ const fr = {
 
   // Blog
   'blog.title': 'Blog',
-  'blog.subtitle': "Conseils d'expert en sport, natation, fitness et nutrition pour atteindre vos objectifs",
+  'blog.subtitle':
+    "Conseils d'expert en sport, natation, fitness et nutrition pour atteindre vos objectifs",
   'blog.readingTime': 'de lecture',
   'blog.readArticle': "Lire l'article →",
   'blog.backToBlog': '← Retour au blog',
@@ -266,7 +267,8 @@ const fr = {
   'blog.relatedArticles': 'Articles similaires',
   'blog.readMore': 'Lire →',
   'blog.cta.title': "Prêt à passer à l'action ?",
-  'blog.cta.subtitle': "Bénéficiez d'un accompagnement personnalisé avec un coach sportif diplômé à Valbonne.",
+  'blog.cta.subtitle':
+    "Bénéficiez d'un accompagnement personnalisé avec un coach sportif diplômé à Valbonne.",
   'blog.cta.button': 'Réserver une séance découverte',
 } as const;
 

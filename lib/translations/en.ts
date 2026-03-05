@@ -57,7 +57,7 @@ const en: Record<TranslationKey, string> = {
   'about.p2':
     'Specializing in fitness, weight loss and well-being, I have developed a holistic approach that combines multiple sports disciplines for lasting and balanced results.',
   'about.p3':
-    'I can welcome you at home and also work throughout the Alpes-Maritimes region to offer you the best possible service.',
+    ' I can welcome you at home and also work throughout the Alpes-Maritimes region to offer you the best possible service.',
   'about.cta': 'Learn more',
 
   // About page (dedicated /apropos)
@@ -254,7 +254,8 @@ const en: Record<TranslationKey, string> = {
 
   // Blog
   'blog.title': 'Blog',
-  'blog.subtitle': 'Expert tips on sport, swimming, fitness and nutrition to reach your goals',
+  'blog.subtitle':
+    'Expert tips on sport, swimming, fitness and nutrition to reach your goals',
   'blog.readingTime': 'read',
   'blog.readArticle': 'Read article →',
   'blog.backToBlog': '← Back to blog',
@@ -262,7 +263,8 @@ const en: Record<TranslationKey, string> = {
   'blog.relatedArticles': 'Related Articles',
   'blog.readMore': 'Read →',
   'blog.cta.title': 'Ready to take action?',
-  'blog.cta.subtitle': 'Get personalized coaching from a certified sports coach in Valbonne.',
+  'blog.cta.subtitle':
+    'Get personalized coaching from a certified sports coach in Valbonne.',
   'blog.cta.button': 'Book a discovery session',
 };
 
