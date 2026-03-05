@@ -18,8 +18,11 @@ export async function middleware(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const path = request.nextUrl.pathname;
 
-  // Only run auth for protected routes
+  // Run auth session refresh on homepage too — needed so the Supabase
+  // session cookie is valid immediately after Google OAuth redirects back.
+  // Also run on portal, auth, and API portal routes as before.
   const needsAuth =
+    path === "/" ||
     path.startsWith("/portal") ||
     path.startsWith("/auth") ||
     path.startsWith("/api/portal");
