@@ -7,6 +7,7 @@ import { AuthProvider } from '@/lib/supabase/AuthContext';
 import { BASE_URL } from '@/lib/config';
 import JsonLd from '@/components/JsonLd';
 import CookieConsent from '@/components/CookieConsent';
+import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration';
 import './globals.css';
 
 export const viewport: Viewport = {
@@ -314,7 +315,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32-dark.png?v=3" media="(prefers-color-scheme: dark)" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16-dark.png?v=3" media="(prefers-color-scheme: dark)" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=9" />
-        <link rel="manifest" href="/site.webmanifest?v=3" />
+        <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#2563eb" />
 
         {/* Hreflang for bilingual SEO */}
@@ -343,6 +344,7 @@ export default function RootLayout({
         <LanguageProvider>
           <AuthProvider>{children}</AuthProvider>
           <CookieConsent />
+          <ServiceWorkerRegistration />
         </LanguageProvider>
 
         {/* Google Analytics 4 — lazy loaded to avoid blocking render */}

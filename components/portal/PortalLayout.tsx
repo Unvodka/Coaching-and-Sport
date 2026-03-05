@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import PortalSidebar from "./PortalSidebar";
 import PortalHeader from "./PortalHeader";
+import PortalBottomNav from "./PortalBottomNav";
 
 const PAGE_TITLES: Record<string, { fr: string; en: string }> = {
   "/portal": { fr: "Tableau de bord", en: "Dashboard" },
@@ -52,10 +53,13 @@ export default function PortalLayoutClient({
           onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
         />
 
-        <main className="flex-1 overflow-y-auto p-6">
+        {/* pb-16 on mobile = space for the bottom nav bar */}
+        <main className="flex-1 overflow-y-auto p-6 pb-20 lg:pb-6">
           {children}
         </main>
       </div>
+
+      <PortalBottomNav />
     </div>
   );
 }
