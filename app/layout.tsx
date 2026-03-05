@@ -7,6 +7,7 @@ import { AuthProvider } from '@/lib/supabase/AuthContext';
 import { BASE_URL } from '@/lib/config';
 import JsonLd from '@/components/JsonLd';
 import CookieConsent from '@/components/CookieConsent';
+import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration';
 import './globals.css';
 
 export const viewport: Viewport = {
@@ -343,6 +344,7 @@ export default function RootLayout({
         <LanguageProvider>
           <AuthProvider>{children}</AuthProvider>
           <CookieConsent />
+          <ServiceWorkerRegistration />
         </LanguageProvider>
 
         {/* Google Analytics 4 — lazy loaded to avoid blocking render */}
