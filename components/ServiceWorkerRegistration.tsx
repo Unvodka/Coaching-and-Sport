@@ -1,32 +1,27 @@
 "use client";
 
 import { useEffect } from "react";
+import { Workbox } from "workbox-window";
 
 export default function ServiceWorkerRegistration() {
   useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("/sw.js", { scope: "/" })
-        .then((reg) => {
-          console.log("[SW] Registered:", reg.scope);
+    if (
+      typeof window === "undefined" ||
+      !("serviceWorker" in navigator) ||
+      process.env.NODE_ENV !== "production"
+    ) return;
 
-          // Auto-update when a new SW is available
-          reg.addEventListener("updatefound", () => {
-            const newWorker = reg.installing;
-            if (!newWorker) return;
-            newWorker.addEventListener("statechange", () => {
-              if (
-                newWorker.state === "installed" &&
-                navigator.serviceWorker.controller
-              ) {
-                // New content available — reload to activate
-                window.location.reload();
-              }
-            });
-          });
-        })
-        .catch((err) => console.error("[SW] Registration failed:", err));
-    }
+    const wb = new Workbox("/sw.js");
+
+    // When a new SW is waiting, activate it immediately and reload
+    wb.addEventListener("waiting", () => {
+      wb.messageSkipWaiting();
+      window.location.reload();
+    });
+
+    wb.register().catch((err) =>
+      console.error("[SW] Registration failed:", err)
+    );
   }, []);
 
   return null;
