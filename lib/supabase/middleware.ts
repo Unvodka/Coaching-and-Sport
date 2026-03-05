@@ -3,7 +3,6 @@ import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function updateSession(request: NextRequest, nonce?: string) {
-  // Helper: create NextResponse with optional nonce in request headers
   function nextResponse() {
     if (nonce) {
       const headers = new Headers(request.headers);
@@ -41,17 +40,28 @@ export async function updateSession(request: NextRequest, nonce?: string) {
       data: { user },
     } = await supabase.auth.getUser();
 
-    // Redirect unauthenticated users away from /portal
-    if (!user && request.nextUrl.pathname.startsWith("/portal")) {
+    const path = request.nextUrl.pathname;
+
+    // Logged-in users visiting the homepage → send them straight to portal.
+    // This is the correct place for this redirect: server-side in middleware,
+    // before the page renders. Avoids any client-side loop.
+    if (user && path === "/") {
       const url = request.nextUrl.clone();
-      url.pathname = "/";
-      url.searchParams.set("login", "required");
+      url.pathname = "/portal";
+      url.search = ""; // strip any ?login=required or ?auth_error params
       return NextResponse.redirect(url);
     }
 
-    // Redirect non-coaches away from /portal/coach
-    if (user && request.nextUrl.pathname.startsWith("/portal/coach")) {
-      // Use admin client (service role) to bypass RLS for role check
+    // Unauthenticated users trying to access portal → back to homepage
+    if (!user && path.startsWith("/portal")) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/";
+      url.search = "";
+      return NextResponse.redirect(url);
+    }
+
+    // Non-coaches trying to access /portal/coach → back to portal
+    if (user && path.startsWith("/portal/coach")) {
       const admin = createSupabaseClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.SUPABASE_SERVICE_ROLE_KEY!

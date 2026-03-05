@@ -5,7 +5,6 @@ import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
 import OffersSection from "@/components/OffersSection";
 import JsonLd from "@/components/JsonLd";
-import AuthRedirect from "@/components/AuthRedirect";
 import { FAQ_FR } from "@/lib/faq";
 import { BASE_URL } from "@/lib/config";
 
@@ -43,7 +42,6 @@ const faqJsonLd = {
 export default function Home() {
   return (
     <>
-      <AuthRedirect />
       <JsonLd data={faqJsonLd} />
       <Header />
       <main id="main-content">

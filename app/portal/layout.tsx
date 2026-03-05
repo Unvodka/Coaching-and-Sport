@@ -1,6 +1,4 @@
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
 import PortalLayoutClient from "@/components/portal/PortalLayout";
 
 export const metadata: Metadata = {
@@ -8,19 +6,15 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function PortalLayout({
+// Auth is enforced by middleware (lib/supabase/middleware.ts).
+// Unauthenticated requests never reach here — middleware redirects to /?login=required.
+// We do NOT call supabase.auth.getUser() here to avoid a second redundant
+// server-side auth check that can race with the middleware cookie write and
+// cause an incorrect redirect loop.
+export default function PortalLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect("/?login=required");
-  }
-
   return <PortalLayoutClient>{children}</PortalLayoutClient>;
 }

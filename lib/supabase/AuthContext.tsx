@@ -37,8 +37,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch profile: API route first (reliable auth), fallback to direct query
-  async function fetchProfile(supabase: ReturnType<typeof createClient>, userId: string): Promise<Profile | null> {
+  async function fetchProfile(
+    supabase: ReturnType<typeof createClient>,
+    userId: string
+  ): Promise<Profile | null> {
     try {
       const res = await fetch("/api/portal/profile");
       if (res.ok) {
@@ -46,7 +48,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return data.profile as Profile | null;
       }
     } catch {
-      // API failed, try direct query
+      // fall through to direct query
     }
     try {
       const { data } = await supabase
@@ -66,55 +68,68 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     async function init() {
       try {
-        const { data: { user: authUser } } = await supabase.auth.getUser();
+        // Step 1: getSession() reads from localStorage — instant, no network.
+        // This resolves isLoading immediately so the UI isn't stuck.
+        const { data: { session: localSession } } = await supabase.auth.getSession();
 
         if (!mounted) return;
-        setUser(authUser);
 
-        if (authUser) {
-          // getUser() already validates the JWT server-side.
-          // getSession() is intentionally omitted — it only reads from local storage
-          // without server validation, which is less secure. Session state is managed
-          // by onAuthStateChange below.
-          const profileData = await fetchProfile(supabase, authUser.id);
-          if (mounted) setProfile(profileData);
+        if (localSession?.user) {
+          // We have a local session — show the user immediately
+          setSession(localSession);
+          setUser(localSession.user);
+          setIsLoading(false); // unblock UI right away
+
+          // Step 2: validate with server in background (security check)
+          const { data: { user: validatedUser } } = await supabase.auth.getUser();
+          if (!mounted) return;
+
+          if (validatedUser) {
+            setUser(validatedUser);
+            const profileData = await fetchProfile(supabase, validatedUser.id);
+            if (mounted) setProfile(profileData);
+          } else {
+            // Server rejected the session — clear it
+            setUser(null);
+            setSession(null);
+            setProfile(null);
+          }
         } else {
+          // No local session at all — definitely not logged in
+          setUser(null);
           setSession(null);
           setProfile(null);
+          setIsLoading(false);
         }
       } catch (error) {
         console.error("Auth init error:", error);
-      } finally {
         if (mounted) setIsLoading(false);
       }
     }
 
     init();
 
-    const safetyTimer = setTimeout(() => {
-      if (mounted) setIsLoading(false);
-    }, 4000);
-
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (_event: string, newSession: Session | null) => {
-      if (!mounted) return;
-      setSession(newSession);
-      setUser(newSession?.user ?? null);
+    } = supabase.auth.onAuthStateChange(
+      async (_event: string, newSession: Session | null) => {
+        if (!mounted) return;
+        setSession(newSession);
+        setUser(newSession?.user ?? null);
 
-      if (newSession?.user) {
-        const profileData = await fetchProfile(supabase, newSession.user.id);
-        if (mounted) setProfile(profileData);
-      } else {
-        setProfile(null);
+        if (newSession?.user) {
+          const profileData = await fetchProfile(supabase, newSession.user.id);
+          if (mounted) setProfile(profileData);
+        } else {
+          setProfile(null);
+        }
+
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
-    });
+    );
 
     return () => {
       mounted = false;
-      clearTimeout(safetyTimer);
       subscription.unsubscribe();
     };
   }, []);
