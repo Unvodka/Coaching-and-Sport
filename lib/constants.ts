@@ -2,7 +2,18 @@ import { NavLink, Service, Program, PricingPack, Locale } from './types';
 
 // ─── MOOD EMOJIS ────────────────────────────────────────────
 
-export const MOOD_EMOJIS = ["😢", "😟", "😕", "😐", "🙂", "😊", "😄", "😁", "🤩", "🥳"];
+export const MOOD_EMOJIS = [
+  '😢',
+  '😟',
+  '😕',
+  '😐',
+  '🙂',
+  '😊',
+  '😄',
+  '😁',
+  '🤩',
+  '🥳',
+];
 
 // ─── NAV LINKS ──────────────────────────────────────────────
 
@@ -89,12 +100,12 @@ const SERVICES_FR: Service[] = [
     },
   },
   {
-    slug: 'fitness-plein-air',
+    slug: 'aquafitness-fitness-plein-air',
     imageSrc: '/images/Running-medium.jpg',
     imageAlt: 'Fitness & Plein Air',
-    title: 'Fitness & Plein Air',
+    title: 'Aquafitness/Fitness & Plein Air',
     description:
-      'Entraînements personnalisés en salle ou en extérieur : musculation, HIIT, circuit training et exercices fonctionnels pour sculpter votre corps et vous dépasser.',
+      'Entraînements personnalisés à domicile ou en extérieur : musculation, HIIT, circuit training et exercices fonctionnels pour sculpter votre corps et vous dépasser.',
     detail: {
       heroImageSrc: '/images/Running-medium.jpg',
       heroImageAlt: 'Entraînement fitness en plein air ou à domicile',
@@ -124,7 +135,7 @@ const SERVICES_FR: Service[] = [
           question:
             'Les séances en plein air se déroulent-elles même en hiver ?',
           answer:
-            "Oui, grâce au climat de la Côte d'Azur, les séances en extérieur sont possibles quasiment toute l'année. En cas de mauvais temps, nous basculons sur une séance en salle ou en intérieur.",
+            "Oui, grâce au climat de la Côte d'Azur, les séances en extérieur sont possibles quasiment toute l'année. En cas de mauvais temps, nous basculons sur une séance en intérieur.",
         },
         {
           question: 'Je suis débutant(e), le fitness est-il adapté pour moi ?',
@@ -140,7 +151,7 @@ const SERVICES_FR: Service[] = [
         {
           question: 'Quel équipement faut-il pour les séances en plein air ?',
           answer:
-            'Simplement une tenue de sport confortable et des baskets adaptées. Je fournis tout le matériel nécessaire (élastiques, haltères, tapis) pour les séances en extérieur.',
+            'Simplement une tenue de sport confortable et des baskets adaptées ou juste un maillot de bain. Je fournis tout le matériel nécessaire (élastiques, haltères, tapis) pour les séances en extérieur.',
         },
       ],
     },
@@ -214,7 +225,7 @@ const SERVICES_EN: Service[] = [
     imageAlt: 'Swimming',
     title: 'Swimming',
     description:
-      'Swimming lessons with a certified lifeguard (maître-nageur), adapted to all levels. Technical improvement, endurance and weight loss through a complete activity that is gentle on the joints.',
+      'Swimming lessons with a certified swimming teacher, adapted to all levels. Technical improvement, endurance and weight loss through a complete activity that is gentle on the joints.',
     detail: {
       heroImageSrc:
         'https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=1600&q=80',
@@ -223,13 +234,13 @@ const SERVICES_EN: Service[] = [
       longDescription: [
         'Swimming is one of the most complete sports in existence. It engages all muscle groups — arms, legs, back, abs — while preserving your joints. Water supports your body weight, reducing joint stress by 90%, making it an ideal activity at any age, for rehabilitation as well as performance.',
         'An intensive swimming session burns up to 500 calories per hour, while toning the body and improving cardiovascular endurance. Contact with water also provides an immediate soothing effect: swimming reduces cortisol and promotes endorphin production for lasting physical and mental well-being.',
-        'As a state-certified lifeguard, I offer individual or small group lessons adapted to your level and goals. Whether you want to learn the basics, perfect your crawl or butterfly technique, or simply enjoy the health benefits of water, I support you every step of the way.',
+        'I offer individual or small group lessons adapted to your level and goals. Whether you want to learn the basics, perfect your crawl or butterfly technique, or simply enjoy the health benefits of water, I support you every step of the way.',
         'Each session is structured to combine technical work, aquatic muscle strengthening and cardio exercises in the water. You will progress at your own pace in a supportive and motivating environment.',
       ],
       benefits: [],
       targetAudience: [
         'Beginners wanting to learn to swim with confidence',
-        'Intermediate swimmers looking to perfect their technique',
+        'Intermediate swimmers looking to improve their technique',
         'Athletes in rehabilitation or returning to physical activity',
         'People looking for a gentle activity to lose weight',
         'Seniors wanting to maintain their fitness and mobility',
@@ -401,7 +412,7 @@ const PROGRAMS_FR: Program[] = [
       'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80',
     title: 'Cours Particuliers',
     description:
-      'Un accompagnement 100% personnalisé pour atteindre vos objectifs rapidement avec un suivi individuel de qualité.',
+      'Un accompagnement 100% personnalisé pour atteindre vos objectifs pas à pas avec des corrections techniques dans un cadre ludique.',
     features: [
       "Séances individuelles d'une heure",
       'Programme entièrement sur mesure',
@@ -413,7 +424,7 @@ const PROGRAMS_FR: Program[] = [
       'Apprendre les bases ou perfectionner votre technique',
       'Progresser à votre rythme avec un encadrement dédié',
       'Obtenir des résultats rapides et visibles',
-      'Aisance aquatique / Aquaphobie',
+      "Aisance aquatique / Vaincre l'aquaphobie",
     ],
     price: '60€',
     priceDetails: 'par séance',

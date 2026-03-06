@@ -1,25 +1,25 @@
-import { Resend } from "resend";
+import { Resend } from 'resend';
 
 let _resend: Resend | null = null;
 
 function getResend(): Resend {
   if (!_resend) {
     if (!process.env.RESEND_API_KEY) {
-      throw new Error("Missing RESEND_API_KEY environment variable");
+      throw new Error('Missing RESEND_API_KEY environment variable');
     }
     _resend = new Resend(process.env.RESEND_API_KEY);
   }
   return _resend;
 }
 
-const COACH_EMAIL = "chevallier.a06@gmail.com";
+const COACH_EMAIL = 'chevallier.a06@gmail.com';
 
 // Use verified domain in production — set RESEND_FROM_EMAIL in your env vars.
 // Example: "Coach Bluewave <contact@coachbluewave.com>"
 // Until your domain is verified on Resend, keep using onboarding@resend.dev
 // (emails can only be sent to your own address in that case).
 const FROM_EMAIL =
-  process.env.RESEND_FROM_EMAIL ?? "Coach Bluewave <onboarding@resend.dev>";
+  process.env.RESEND_FROM_EMAIL ?? 'Coach Bluewave <onboarding@resend.dev>';
 
 interface PaymentEmailParams {
   customerEmail: string;
@@ -32,7 +32,7 @@ export async function sendPaymentConfirmation({
   amount,
   productTitle,
 }: PaymentEmailParams) {
-  const amountFormatted = (amount / 100).toLocaleString("fr-FR", {
+  const amountFormatted = (amount / 100).toLocaleString('fr-FR', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
@@ -63,7 +63,7 @@ export async function sendPaymentConfirmation({
         </p>
       </div>
       <div style="text-align: center; margin-top: 32px; color: #94a3b8; font-size: 13px;">
-        <p>Arnaud Chevallier — Coach Sportif & Maître-Nageur</p>
+        <p>Arnaud Chevallier — Educateur Sportif & Maître-Nageur</p>
         <p>chevallier.a06@gmail.com</p>
       </div>
     </div>
@@ -110,8 +110,8 @@ export async function sendPaymentConfirmation({
   ]);
 
   for (const result of results) {
-    if (result.status === "rejected") {
-      console.error("Email send error:", result.reason);
+    if (result.status === 'rejected') {
+      console.error('Email send error:', result.reason);
     }
   }
 
