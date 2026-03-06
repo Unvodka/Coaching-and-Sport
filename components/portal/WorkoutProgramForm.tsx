@@ -591,7 +591,7 @@ export default function WorkoutProgramForm({ program, exercises: existingExercis
                     {user.avatar_url ? (
                       <Image
                         src={user.avatar_url}
-                        alt=""
+                        alt="Avatar utilisateur"
                         width={28}
                         height={28}
                         className="rounded-full"

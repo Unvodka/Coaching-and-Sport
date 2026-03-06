@@ -316,7 +316,16 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16-dark.png?v=3" media="(prefers-color-scheme: dark)" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=9" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#2563eb" />
+        <meta name="theme-color" content="#202124" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#2563eb" media="(prefers-color-scheme: light)" />
+
+        {/* Preload LCP hero image for faster paint */}
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero-valbonne.webp"
+          type="image/webp"
+        />
 
         {/* Hreflang for bilingual SEO */}
         {/* Single-URL bilingual site: only x-default + fr. No separate /en/ URL exists. */}

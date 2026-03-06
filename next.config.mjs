@@ -1,8 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Strip all console.* in production except errors/warnings
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false,
   },
+
+  // Compress HTML/JS responses (gzip)
+  compress: true,
+
+  // Avoid exposing Next.js version in response headers
+  poweredByHeader: false,
+
+  // Tree-shake large packages to keep the client bundle lean
+  experimental: {
+    optimizePackageImports: ["recharts", "@supabase/supabase-js", "@supabase/ssr"],
+  },
+
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
@@ -28,7 +41,14 @@ const nextConfig = {
         source: "/site.webmanifest",
         headers: [
           { key: "Content-Type", value: "application/manifest+json" },
-          { key: "Cache-Control", value: "public, max-age=3600" },
+          { key: "Cache-Control", value: "public, max-age=3600, stale-while-revalidate=86400" },
+        ],
+      },
+      {
+        // Favicons — long cache with versioning via ?v= query param
+        source: "/:file(favicon.*|apple-touch-icon.*|android-chrome.*)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=86400" },
         ],
       },
       {
@@ -44,8 +64,8 @@ const nextConfig = {
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "X-DNS-Prefetch-Control", value: "on" },
-          { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
-          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(self)" },
         ],
       },
     ];
