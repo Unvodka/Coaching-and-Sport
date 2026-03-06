@@ -427,7 +427,7 @@ const PROGRAMS_FR: Program[] = [
       "Aisance aquatique / Vaincre l'aquaphobie",
     ],
     price: '60€',
-    priceDetails: 'par séance',
+    priceDetails: 'par séance - Tarif dégressif',
     ctaText: 'Voir les packs',
     ctaHref: '/packs',
     featuredBadge: "💰 50% CRÉDIT D'IMPÔT",
