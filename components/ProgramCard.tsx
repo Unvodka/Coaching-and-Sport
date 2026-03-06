@@ -30,7 +30,7 @@ export default function ProgramCard({
   const [showGoals, setShowGoals] = useState(false);
   const isStripe = !!onCheckout;
 
-  const cardClasses = `bg-white rounded-2xl overflow-hidden flex flex-col transition-shadow duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_35px_rgba(37,99,235,0.12)] no-underline ${
+  const cardClasses = `bg-white rounded-2xl overflow-hidden flex flex-col h-full transition-shadow duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_35px_rgba(37,99,235,0.12)] no-underline ${
     isFeatured ? "border-[3px] border-brand-blue" : "border border-gray-200"
   } ${isLoading ? "opacity-60 pointer-events-none" : ""}`;
 
@@ -59,7 +59,7 @@ export default function ProgramCard({
       </div>
 
       {/* Body */}
-      <div className="p-5 flex flex-col text-center max-md:p-6">
+      <div className="p-5 flex flex-col flex-1 text-center max-md:p-6">
         <p className="text-gray-500 leading-[1.6] mb-5 text-[1.0125rem] min-h-[4.5rem] max-md:min-h-0">{description}</p>
 
         {/* Toggle buttons row */}

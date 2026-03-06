@@ -62,9 +62,9 @@ export default function OffersSection() {
 
       <div className="w-full">
         {/* Programs Grid */}
-        <div className="grid grid-cols-4 items-start gap-6 mb-16 max-lg:grid-cols-2 max-md:grid-cols-1 max-w-[1600px] mx-auto">
+        <div className="grid grid-cols-4 items-stretch gap-6 mb-16 max-lg:grid-cols-2 max-md:grid-cols-1 max-w-[1600px] mx-auto">
           {programs.map((program, i) => (
-            <FadeInWhenVisible key={program.title} delay={i * 0.15}>
+            <FadeInWhenVisible key={program.title} delay={i * 0.15} className="h-full">
               <ProgramCard
                 {...program}
                 isLoading={loadingPack === program.title}
