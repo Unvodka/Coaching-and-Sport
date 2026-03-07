@@ -10,6 +10,11 @@ function getPeriod(sub: Stripe.Subscription): { start: number; end: number } {
   return { start: s.current_period_start, end: s.current_period_end };
 }
 
+function getInvoiceSubscriptionId(invoice: Stripe.Invoice): string | null {
+  const inv = invoice as unknown as Record<string, unknown>;
+  return (inv.subscription as string) ?? null;
+}
+
 export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
@@ -96,10 +101,11 @@ export async function POST(request: NextRequest) {
     // ── Recurring payment succeeded ────────────────────────────────────────
     case "invoice.payment_succeeded": {
       const invoice = event.data.object as Stripe.Invoice;
-      if (!invoice.subscription) break;
+      const invoiceSubId = getInvoiceSubscriptionId(invoice);
+      if (!invoiceSubId) break;
 
       try {
-        const sub = await getStripe().subscriptions.retrieve(invoice.subscription as string);
+        const sub = await getStripe().subscriptions.retrieve(invoiceSubId);
         const userId = sub.metadata?.user_id;
         if (!userId) break;
 
@@ -145,10 +151,11 @@ export async function POST(request: NextRequest) {
     // ── Payment failed ─────────────────────────────────────────────────────
     case "invoice.payment_failed": {
       const invoice = event.data.object as Stripe.Invoice;
-      if (!invoice.subscription) break;
+      const invoiceSubId = getInvoiceSubscriptionId(invoice);
+      if (!invoiceSubId) break;
 
       try {
-        const sub = await getStripe().subscriptions.retrieve(invoice.subscription as string);
+        const sub = await getStripe().subscriptions.retrieve(invoiceSubId);
         const userId = sub.metadata?.user_id;
         if (!userId) break;
 
