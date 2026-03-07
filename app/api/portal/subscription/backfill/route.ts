@@ -109,16 +109,23 @@ export async function POST() {
           if (!subId) continue;
           const paidAt = invoice.status_transitions?.paid_at;
 
+          // Skip draft invoices — they have no real payment yet
+          if (invoice.status === "draft") continue;
+
+          const invoiceStatus = invoice.status === "paid" ? "paid"
+            : invoice.status === "open" ? "open"
+            : "failed";
+
           const { error: invError } = await admin.from("subscription_payments").upsert({
             id: invoice.id,
             subscription_id: subId,
             user_id: user.id,
-            amount_cents: invoice.amount_paid,
+            amount_cents: invoice.amount_paid > 0 ? invoice.amount_paid : invoice.amount_due,
             currency: invoice.currency,
-            status: invoice.status === "paid" ? "paid" : invoice.status === "open" ? "open" : "failed",
+            status: invoiceStatus,
             invoice_url: invoice.hosted_invoice_url ?? null,
             invoice_pdf: invoice.invoice_pdf ?? null,
-            paid_at: paidAt ? new Date(paidAt * 1000).toISOString() : null,
+            paid_at: paidAt ? new Date(paidAt * 1000).toISOString() : (invoice.status === "paid" ? new Date().toISOString() : null),
           }, { onConflict: "id" });
 
           if (invError) {
