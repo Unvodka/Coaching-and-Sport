@@ -355,38 +355,37 @@ export default function SubscriptionPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-slate-100 bg-slate-50">
-                  <th className="text-left px-6 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Date</th>
-                  <th className="text-left px-6 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Montant</th>
-                  <th className="text-left px-6 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Statut</th>
-                  <th className="text-right px-6 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Facture</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Date</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Montant</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Statut</th>
+                  <th className="text-right px-3 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider w-10"></th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {payments.map((p) => (
                   <tr key={p.id} className="hover:bg-slate-50 transition-colors">
-                    <td className="px-6 py-4 text-slate-600">
+                    <td className="px-4 py-4 text-slate-600 whitespace-nowrap">
                       {p.paid_at ? formatDate(p.paid_at) : formatDate(p.created_at)}
                     </td>
-                    <td className="px-6 py-4 font-semibold text-slate-800">
+                    <td className="px-4 py-4 font-semibold text-slate-800 whitespace-nowrap">
                       {formatAmount(p.amount_cents, p.currency)}
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-4 py-4">
                       <span className={`font-medium ${PAYMENT_STATUS[p.status]?.color ?? "text-slate-500"}`}>
                         {PAYMENT_STATUS[p.status]?.label ?? p.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-right">
+                    <td className="px-3 py-4 text-right w-10">
                       {p.invoice_url ? (
                         <a
                           href={p.invoice_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-brand-blue hover:underline text-xs font-medium"
+                          className="inline-flex items-center justify-center text-brand-blue hover:opacity-70" title="Voir la facture"
                         >
                           <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                           </svg>
-                          Voir
                         </a>
                       ) : (
                         <span className="text-slate-300 text-xs">—</span>
