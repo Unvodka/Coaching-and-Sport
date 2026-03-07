@@ -236,7 +236,7 @@ export default function SubscriptionPage() {
                   {subscription.cancel_at_period_end ? "Actif jusqu'au" : "Prochain renouvellement"}
                 </p>
                 <p className="text-sm font-semibold text-slate-700">
-                  {(() => { const d = new Date(subscription.created_at); d.setMonth(d.getMonth() + 1); return formatDate(d.toISOString()); })()}
+                  {(() => { const d = new Date(subscription.created_at); d.setMonth(d.getMonth() + subscription.minimum_months); return formatDate(d.toISOString()); })()}
                 </p>
               </div>
               <div className="bg-slate-50 rounded-xl p-4">
@@ -250,7 +250,7 @@ export default function SubscriptionPage() {
               </div>
               <div className="bg-slate-50 rounded-xl p-4">
                 <p className="text-xs text-slate-400 font-medium mb-1">Prochain paiement</p>
-                <p className="text-sm font-semibold text-slate-700">{(() => { const d = new Date(subscription.created_at); d.setMonth(d.getMonth() + 1); return formatDate(d.toISOString()); })()}</p>
+                <p className="text-sm font-semibold text-slate-700">{(() => { const d = new Date(subscription.created_at); d.setMonth(d.getMonth() + subscription.minimum_months); return formatDate(d.toISOString()); })()}</p>
               </div>
             </div>
 
