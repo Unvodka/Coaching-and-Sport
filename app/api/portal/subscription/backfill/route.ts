@@ -15,14 +15,16 @@ function getPeriod(sub: Stripe.Subscription): { start: number | null; end: numbe
   return { start, end };
 }
 
-function getInvoiceSubscriptionId(invoice: Stripe.Invoice): string | null {
+function getInvoiceSubId(invoice: Stripe.Invoice): string | null {
   const inv = invoice as unknown as Record<string, unknown>;
-  return (inv.subscription as string) ?? null;
+  const sub = inv.subscription;
+  if (typeof sub === "string" && sub.length > 0) return sub;
+  if (sub && typeof sub === "object" && "id" in sub) return (sub as { id: string }).id;
+  return null;
 }
 
 export async function POST() {
   try {
-    // Auth check
     const supabase = createClient();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) {
@@ -31,7 +33,6 @@ export async function POST() {
 
     const admin = createAdminClient();
 
-    // Get profile email
     const { data: profile, error: profileError } = await admin
       .from("profiles")
       .select("email")
@@ -45,14 +46,14 @@ export async function POST() {
       return NextResponse.json({ error: "Email introuvable dans le profil" }, { status: 404 });
     }
 
-    // Find Stripe customers by email
     const stripe = getStripe();
     const customers = await stripe.customers.list({ email: profile.email, limit: 5 });
 
     if (customers.data.length === 0) {
       return NextResponse.json({
-        message: `Aucun client Stripe trouvé pour l'email: ${profile.email}`,
-        imported: 0,
+        message: `Aucun client Stripe trouvé pour: ${profile.email}`,
+        subscriptions: 0,
+        payments: 0,
       });
     }
 
@@ -60,6 +61,7 @@ export async function POST() {
     let paymentsImported = 0;
 
     for (const customer of customers.data) {
+      // ── Import subscriptions ──────────────────────────────────────────────
       const subscriptions = await stripe.subscriptions.list({
         customer: customer.id,
         limit: 10,
@@ -69,7 +71,10 @@ export async function POST() {
       for (const sub of subscriptions.data) {
         const meta = sub.metadata || {};
         const period = getPeriod(sub);
-        const programTitle = meta.program_title || sub.items.data[0]?.price?.nickname || "Abonnement";
+        const programTitle = meta.program_title
+          || sub.items.data[0]?.price?.nickname
+          || sub.items.data[0]?.price?.product as string
+          || "Abonnement";
         const minimumMonths = parseInt(meta.minimum_commitment_months ?? "1");
 
         const { error: subError } = await admin.from("subscriptions").upsert({
@@ -90,50 +95,70 @@ export async function POST() {
         }, { onConflict: "id" });
 
         if (subError) {
-          return NextResponse.json({ error: `Erreur Supabase (subscription): ${subError.message}` }, { status: 500 });
+          return NextResponse.json({ error: `Erreur subscription: ${subError.message}` }, { status: 500 });
         }
-
         subsImported++;
 
-        // Stamp user_id on Stripe metadata for future webhook events
+        // Stamp user_id on Stripe metadata for future webhooks
         if (!meta.user_id) {
           await stripe.subscriptions.update(sub.id, {
             metadata: { ...meta, user_id: user.id, program_title: programTitle },
           });
         }
+      }
 
-        const invoices = await stripe.invoices.list({ subscription: sub.id, limit: 24 });
+      // ── Import invoices by customer (catches all, even if sub link is odd) ─
+      const invoices = await stripe.invoices.list({
+        customer: customer.id,
+        limit: 50,
+      });
 
-        for (const invoice of invoices.data) {
-          const subId = getInvoiceSubscriptionId(invoice);
-          if (!subId) continue;
-          const paidAt = invoice.status_transitions?.paid_at;
+      for (const invoice of invoices.data) {
+        if (invoice.status === "draft") continue;
 
-          // Skip draft invoices — they have no real payment yet
-          if (invoice.status === "draft") continue;
+        // Find matching subscription in our DB
+        const subId = getInvoiceSubId(invoice);
 
-          const invoiceStatus = invoice.status === "paid" ? "paid"
-            : invoice.status === "open" ? "open"
-            : "failed";
+        // Only import if we have a matching subscription for this user
+        if (subId) {
+          const { data: existingSub } = await admin
+            .from("subscriptions")
+            .select("id")
+            .eq("id", subId)
+            .eq("user_id", user.id)
+            .maybeSingle();
 
-          const { error: invError } = await admin.from("subscription_payments").upsert({
-            id: invoice.id,
-            subscription_id: subId,
-            user_id: user.id,
-            amount_cents: invoice.amount_paid > 0 ? invoice.amount_paid : invoice.amount_due,
-            currency: invoice.currency,
-            status: invoiceStatus,
-            invoice_url: invoice.hosted_invoice_url ?? null,
-            invoice_pdf: invoice.invoice_pdf ?? null,
-            paid_at: paidAt ? new Date(paidAt * 1000).toISOString() : (invoice.status === "paid" ? new Date().toISOString() : null),
-          }, { onConflict: "id" });
-
-          if (invError) {
-            return NextResponse.json({ error: `Erreur Supabase (payment): ${invError.message}` }, { status: 500 });
-          }
-
-          paymentsImported++;
+          if (!existingSub) continue;
+        } else {
+          continue; // skip invoices not tied to a subscription
         }
+
+        const paidAt = invoice.status_transitions?.paid_at;
+        const amountCents = invoice.amount_paid > 0
+          ? invoice.amount_paid
+          : invoice.amount_due;
+
+        const invoiceStatus = invoice.status === "paid" ? "paid"
+          : invoice.status === "open" ? "open"
+          : "failed";
+
+        const { error: invError } = await admin.from("subscription_payments").upsert({
+          id: invoice.id,
+          subscription_id: subId,
+          user_id: user.id,
+          amount_cents: amountCents,
+          currency: invoice.currency,
+          status: invoiceStatus,
+          invoice_url: invoice.hosted_invoice_url ?? null,
+          invoice_pdf: invoice.invoice_pdf ?? null,
+          paid_at: paidAt ? new Date(paidAt * 1000).toISOString()
+            : (invoice.status === "paid" ? new Date().toISOString() : null),
+        }, { onConflict: "id" });
+
+        if (invError) {
+          return NextResponse.json({ error: `Erreur payment: ${invError.message}` }, { status: 500 });
+        }
+        paymentsImported++;
       }
     }
 
