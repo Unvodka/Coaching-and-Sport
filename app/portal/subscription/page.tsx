@@ -226,9 +226,9 @@ export default function SubscriptionPage() {
           <div className="p-6 space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-slate-50 rounded-xl p-4">
-                <p className="text-xs text-slate-400 font-medium mb-1">Début de période</p>
+                <p className="text-xs text-slate-400 font-medium mb-1">Abonnement débuté</p>
                 <p className="text-sm font-semibold text-slate-700">
-                  {subscription.current_period_start ? formatDate(subscription.current_period_start) : "—"}
+                  {formatDate(subscription.created_at)}
                 </p>
               </div>
               <div className="bg-slate-50 rounded-xl p-4">
@@ -236,7 +236,7 @@ export default function SubscriptionPage() {
                   {subscription.cancel_at_period_end ? "Actif jusqu'au" : "Prochain renouvellement"}
                 </p>
                 <p className="text-sm font-semibold text-slate-700">
-                  {subscription.current_period_end ? formatDate(subscription.current_period_end) : "—"}
+                  {(() => { const d = new Date(subscription.created_at); d.setMonth(d.getMonth() + 1); return formatDate(d.toISOString()); })()}
                 </p>
               </div>
               <div className="bg-slate-50 rounded-xl p-4">
