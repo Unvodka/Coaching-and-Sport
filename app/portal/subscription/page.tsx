@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useLanguage } from "@/lib/i18n/useLanguage";
 
 interface Subscription {
   id: string;
@@ -57,7 +56,6 @@ function formatDate(dateStr: string) {
 }
 
 export default function SubscriptionPage() {
-  const { t } = useLanguage();
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [payments, setPayments] = useState<Payment[]>([]);
   const [loading, setLoading] = useState(true);
@@ -155,7 +153,7 @@ export default function SubscriptionPage() {
             </svg>
           </div>
           <p className="text-slate-600 text-lg font-medium mb-2">Aucun abonnement actif</p>
-          <p className="text-slate-400 text-sm mb-6">Vous n'avez pas encore souscrit à un programme mensuel.</p>
+          <p className="text-slate-400 text-sm mb-6">Vous n&apos;avez pas encore souscrit à un programme mensuel.</p>
           <a
             href="/#offres"
             className="inline-flex items-center gap-2 bg-brand-blue text-white px-6 py-3 rounded-xl font-semibold text-sm hover:bg-blue-700 transition-colors no-underline"
@@ -237,7 +235,7 @@ export default function SubscriptionPage() {
                     <div>
                       <p className="text-sm font-semibold text-blue-800 mb-0.5">Engagement en cours</p>
                       <p className="text-xs text-blue-600">
-                        L'annulation sera disponible à partir du{" "}
+                        L&apos;annulation sera disponible à partir du{" "}
                         <strong>{cancelAvailableDate ? formatDate(cancelAvailableDate.toISOString()) : "—"}</strong>
                         {" "}({monthsUntilCancel} mois restants).
                       </p>
@@ -250,7 +248,7 @@ export default function SubscriptionPage() {
                     )}
                     {cancelSuccess && (
                       <p className="text-sm text-green-700 mb-3 bg-green-50 border border-green-200 rounded-lg px-4 py-2">
-                        Annulation programmée — votre accès reste actif jusqu'à la fin de la période.
+                        Annulation programmée — votre accès reste actif jusqu&apos;à la fin de la période.
                       </p>
                     )}
                     {!showConfirm ? (
@@ -258,14 +256,14 @@ export default function SubscriptionPage() {
                         onClick={() => setShowConfirm(true)}
                         className="text-sm text-red-500 hover:text-red-700 underline transition-colors cursor-pointer"
                       >
-                        Annuler l'abonnement
+                        Annuler l&apos;abonnement
                       </button>
                     ) : (
                       <div className="bg-red-50 border border-red-200 rounded-xl p-4 space-y-3">
-                        <p className="text-sm font-semibold text-red-800">Confirmer l'annulation ?</p>
+                        <p className="text-sm font-semibold text-red-800">Confirmer l&apos;annulation ?</p>
                         <p className="text-xs text-red-600">
-                          L'abonnement se terminera à la fin de la période en cours ({subscription.current_period_end ? formatDate(subscription.current_period_end) : "—"}).
-                          Vous conservez l'accès jusqu'à cette date.
+                          L&apos;abonnement se terminera à la fin de la période en cours ({subscription.current_period_end ? formatDate(subscription.current_period_end) : "—"}).
+                          Vous conservez l&apos;accès jusqu&apos;à cette date.
                         </p>
                         <div className="flex gap-3">
                           <button
@@ -273,13 +271,13 @@ export default function SubscriptionPage() {
                             disabled={canceling}
                             className="flex-1 bg-red-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-red-700 disabled:opacity-60 transition-colors cursor-pointer"
                           >
-                            {canceling ? "Annulation..." : "Confirmer l'annulation"}
+                            {canceling ? "Annulation..." : "Confirmer l&apos;annulation"}
                           </button>
                           <button
                             onClick={() => { setShowConfirm(false); setCancelError(null); }}
                             className="flex-1 bg-white border border-slate-200 text-slate-700 text-sm font-semibold py-2 px-4 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer"
                           >
-                            Conserver l'abonnement
+                            Conserver l&apos;abonnement
                           </button>
                         </div>
                       </div>
