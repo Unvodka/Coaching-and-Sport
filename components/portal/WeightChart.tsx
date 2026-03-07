@@ -201,29 +201,6 @@ export default function WeightChart({ logs }: WeightChartProps) {
     return [`${value}${metric.unit}`, label];
   };
 
-  // Custom label renderer for data points
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const renderLabel = (color: string) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const DataLabel = (props: any) => {
-      const { x, y, value } = props;
-      if (value == null) return null;
-      return (
-        <text
-          x={x}
-          y={y - 10}
-          fill={color}
-          fontSize={11}
-          fontWeight={600}
-          textAnchor="middle"
-        >
-          {value}
-        </text>
-      );
-    };
-    DataLabel.displayName = "DataLabel";
-    return DataLabel;
-  };
 
   if (data.length === 0) return null;
 
@@ -231,12 +208,12 @@ export default function WeightChart({ logs }: WeightChartProps) {
   const hasKcalData = availableKcal.length > 0;
 
   const renderToggles = (metrics: MetricConfig[], active: Set<MetricKey>, group: "kg" | "pct" | "kcal") => (
-    <div className="flex flex-wrap gap-2 mb-4">
+    <div className="flex flex-wrap gap-1.5 mb-4 justify-center">
       {metrics.map((m) => (
         <button
           key={m.key}
           onClick={() => toggleMetric(m.key, group)}
-          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+          className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
             active.has(m.key)
               ? "text-white shadow-sm"
               : "bg-gray-100 text-gray-500 hover:bg-gray-200"
@@ -284,7 +261,6 @@ export default function WeightChart({ logs }: WeightChartProps) {
                   activeDot={{ fill: m.color, strokeWidth: 0, r: 6 }}
                   connectNulls
                   name={m.key}
-                  label={renderLabel(m.color)}
                 />
               ) : null
             )}
@@ -324,7 +300,6 @@ export default function WeightChart({ logs }: WeightChartProps) {
                     activeDot={{ fill: m.color, strokeWidth: 0, r: 6 }}
                     connectNulls
                     name={m.key}
-                    label={renderLabel(m.color)}
                   />
                 ) : null
               )}
@@ -365,7 +340,6 @@ export default function WeightChart({ logs }: WeightChartProps) {
                     activeDot={{ fill: m.color, strokeWidth: 0, r: 6 }}
                     connectNulls
                     name={m.key}
-                    label={renderLabel(m.color)}
                   />
                 ) : null
               )}
