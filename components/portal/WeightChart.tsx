@@ -34,7 +34,7 @@ const KG_METRICS: MetricConfig[] = [
 ];
 
 const PCT_METRICS: MetricConfig[] = [
-  { key: "bodyFat", labelFr: "Masse graisseuse", labelEn: "Body fat", color: "#f59e0b", unit: " %" },
+  { key: "bodyFat", labelFr: "Masse graisseuse", labelEn: "Body fat", color: "#22c55e", unit: " %" },
   { key: "water", labelFr: "Masse d'eau", labelEn: "Water mass", color: "#06b6d4", unit: " %" },
   { key: "visceralFat", labelFr: "Graisse viscérale", labelEn: "Visceral fat", color: "#f97316", unit: "" },
   { key: "bmi", labelFr: "IMC", labelEn: "BMI", color: "#ec4899", unit: "" },
