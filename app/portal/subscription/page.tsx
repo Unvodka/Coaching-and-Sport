@@ -249,8 +249,8 @@ export default function SubscriptionPage() {
                 </p>
               </div>
               <div className="bg-slate-50 rounded-xl p-4">
-                <p className="text-xs text-slate-400 font-medium mb-1">Abonné depuis</p>
-                <p className="text-sm font-semibold text-slate-700">{formatDate(subscription.created_at)}</p>
+                <p className="text-xs text-slate-400 font-medium mb-1">Prochain paiement</p>
+                <p className="text-sm font-semibold text-slate-700">{(() => { const d = new Date(subscription.created_at); d.setMonth(d.getMonth() + 1); return formatDate(d.toISOString()); })()}</p>
               </div>
             </div>
 
