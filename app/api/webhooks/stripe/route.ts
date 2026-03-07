@@ -5,9 +5,16 @@ import { createAdminClient } from "@/lib/supabase/server";
 import Stripe from "stripe";
 
 // Helper to safely extract period timestamps from Stripe subscription
-function getPeriod(sub: Stripe.Subscription): { start: number; end: number } {
-  const s = sub as unknown as Record<string, number>;
-  return { start: s.current_period_start, end: s.current_period_end };
+function safeDateISO(ts: unknown): string | null {
+  if (!ts || typeof ts !== "number" || isNaN(ts)) return null;
+  try { return new Date(ts * 1000).toISOString(); } catch { return null; }
+}
+
+function getPeriod(sub: Stripe.Subscription): { start: number | null; end: number | null } {
+  const s = sub as unknown as Record<string, unknown>;
+  const start = typeof s.current_period_start === "number" ? s.current_period_start : null;
+  const end = typeof s.current_period_end === "number" ? s.current_period_end : null;
+  return { start, end };
 }
 
 function getInvoiceSubscriptionId(invoice: Stripe.Invoice): string | null {
@@ -76,8 +83,8 @@ export async function POST(request: NextRequest) {
               currency: sub.currency,
               interval: sub.items.data[0]?.price?.recurring?.interval ?? "month",
               minimum_months: parseInt(meta.minimum_commitment_months ?? "1"),
-              current_period_start: new Date(getPeriod(sub).start * 1000).toISOString(),
-              current_period_end: new Date(getPeriod(sub).end * 1000).toISOString(),
+              current_period_start: safeDateISO(getPeriod(sub).start),
+              current_period_end: safeDateISO(getPeriod(sub).end),
               cancel_at_period_end: sub.cancel_at_period_end,
               updated_at: new Date().toISOString(),
             }, { onConflict: "id" });
@@ -120,8 +127,8 @@ export async function POST(request: NextRequest) {
           currency: sub.currency,
           interval: sub.items.data[0]?.price?.recurring?.interval ?? "month",
           minimum_months: parseInt(sub.metadata?.minimum_commitment_months ?? "1"),
-          current_period_start: new Date(getPeriod(sub).start * 1000).toISOString(),
-          current_period_end: new Date(getPeriod(sub).end * 1000).toISOString(),
+          current_period_start: safeDateISO(getPeriod(sub).start),
+          current_period_end: safeDateISO(getPeriod(sub).end),
           cancel_at_period_end: sub.cancel_at_period_end,
           updated_at: new Date().toISOString(),
         }, { onConflict: "id" });
@@ -190,9 +197,9 @@ export async function POST(request: NextRequest) {
         await admin.from("subscriptions").update({
           status: sub.status,
           cancel_at_period_end: sub.cancel_at_period_end,
-          canceled_at: sub.canceled_at ? new Date(sub.canceled_at * 1000).toISOString() : null,
-          current_period_start: new Date(getPeriod(sub).start * 1000).toISOString(),
-          current_period_end: new Date(getPeriod(sub).end * 1000).toISOString(),
+          canceled_at: safeDateISO(sub.canceled_at ?? null),
+          current_period_start: safeDateISO(getPeriod(sub).start),
+          current_period_end: safeDateISO(getPeriod(sub).end),
           updated_at: new Date().toISOString(),
         }).eq("id", sub.id);
       } catch (err) {

@@ -3,9 +3,16 @@ import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { getStripe } from "@/lib/stripe";
 import Stripe from "stripe";
 
-function getPeriod(sub: Stripe.Subscription): { start: number; end: number } {
-  const s = sub as unknown as Record<string, number>;
-  return { start: s.current_period_start, end: s.current_period_end };
+function safeDateISO(ts: unknown): string | null {
+  if (!ts || typeof ts !== "number" || isNaN(ts)) return null;
+  try { return new Date(ts * 1000).toISOString(); } catch { return null; }
+}
+
+function getPeriod(sub: Stripe.Subscription): { start: number | null; end: number | null } {
+  const s = sub as unknown as Record<string, unknown>;
+  const start = typeof s.current_period_start === "number" ? s.current_period_start : null;
+  const end = typeof s.current_period_end === "number" ? s.current_period_end : null;
+  return { start, end };
 }
 
 function getInvoiceSubscriptionId(invoice: Stripe.Invoice): string | null {
@@ -75,10 +82,10 @@ export async function POST() {
           currency: sub.currency,
           interval: sub.items.data[0]?.price?.recurring?.interval ?? "month",
           minimum_months: minimumMonths,
-          current_period_start: new Date(period.start * 1000).toISOString(),
-          current_period_end: new Date(period.end * 1000).toISOString(),
+          current_period_start: safeDateISO(period.start),
+          current_period_end: safeDateISO(period.end),
           cancel_at_period_end: sub.cancel_at_period_end,
-          canceled_at: sub.canceled_at ? new Date(sub.canceled_at * 1000).toISOString() : null,
+          canceled_at: safeDateISO(sub.canceled_at ?? null),
           updated_at: new Date().toISOString(),
         }, { onConflict: "id" });
 
