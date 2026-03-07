@@ -84,6 +84,21 @@ export async function POST() {
         }
         const minimumMonths = parseInt(meta.minimum_commitment_months ?? "1");
 
+        // If period dates are null, try to get them from the latest invoice
+        let periodStart = period.start;
+        let periodEnd = period.end;
+        if (!periodStart || !periodEnd) {
+          try {
+            const latestInvoices = await stripe.invoices.list({ subscription: sub.id, limit: 1 });
+            const inv = latestInvoices.data[0];
+            if (inv) {
+              const invRaw = inv as unknown as Record<string, unknown>;
+              if (!periodStart && typeof invRaw.period_start === "number") periodStart = invRaw.period_start;
+              if (!periodEnd && typeof invRaw.period_end === "number") periodEnd = invRaw.period_end;
+            }
+          } catch { /* ignore */ }
+        }
+
         const { error: subError } = await admin.from("subscriptions").upsert({
           id: sub.id,
           user_id: user.id,
@@ -94,8 +109,8 @@ export async function POST() {
           currency: sub.currency,
           interval: sub.items.data[0]?.price?.recurring?.interval ?? "month",
           minimum_months: minimumMonths,
-          current_period_start: safeDateISO(period.start),
-          current_period_end: safeDateISO(period.end),
+          current_period_start: safeDateISO(periodStart),
+          current_period_end: safeDateISO(periodEnd),
           cancel_at_period_end: sub.cancel_at_period_end,
           canceled_at: safeDateISO(sub.canceled_at ?? null),
           updated_at: new Date().toISOString(),
