@@ -5,6 +5,7 @@ import { rateLimit } from "@/lib/api/rate-limit";
 
 // Allowed prices in cents — must match lib/constants.ts packs
 const ALLOWED_PRICES: Record<number, string[]> = {
+  100: ["TEST - Paiement Récurrent", "TEST - Recurring Payment"],
   6000: ["Séance Découverte", "Discovery Session", "Séance à l'unité", "Single Session"],
   7900: ["Coaching en Ligne", "Online Coaching"],
   14900: ["Coaching Premium", "Premium Coaching"],
@@ -15,7 +16,7 @@ const ALLOWED_PRICES: Record<number, string[]> = {
 };
 
 // Monthly subscription prices (in cents)
-const SUBSCRIPTION_PRICES = new Set([7900, 14900, 21900]);
+const SUBSCRIPTION_PRICES = new Set([100, 7900, 14900, 21900]);
 
 export async function POST(request: NextRequest) {
   // CSRF protection
@@ -68,6 +69,14 @@ export async function POST(request: NextRequest) {
           quantity: 1,
         },
       ],
+      ...(isSubscription ? {
+        subscription_data: {
+          metadata: {
+            minimum_commitment_months: '3',
+            program: title,
+          },
+        },
+      } : {}),
       success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/checkout/cancel`,
     });

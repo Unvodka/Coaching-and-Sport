@@ -506,6 +506,23 @@ const PROGRAMS_FR: Program[] = [
     priceDetails: 'Engagement de 3 mois minimum',
     ctaText: 'Transformer mon corps',
   },
+  {
+    imageSrc: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80',
+    title: 'TEST - Paiement Récurrent',
+    description: '⚠️ Carte de test uniquement. Paiement récurrent mensuel à 1€/mois pendant 3 mois.',
+    features: [
+      'Test de paiement récurrent Stripe',
+      'Carte test : 4242 4242 4242 4242',
+      'Engagement 3 mois minimum',
+      'À supprimer avant production',
+    ],
+    goals: ['Vérifier le flux de paiement mensuel'],
+    price: '1€/mois',
+    priceNumeric: 1,
+    priceUnit: '/mois',
+    priceDetails: 'TEST — Engagement 3 mois minimum',
+    ctaText: '🧪 Tester le paiement',
+  },
 ];
 
 const PROGRAMS_EN: Program[] = [
@@ -608,6 +625,23 @@ const PROGRAMS_EN: Program[] = [
     priceUnit: '/month',
     priceDetails: '3-month minimum commitment',
     ctaText: 'Transform my body',
+  },
+  {
+    imageSrc: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80',
+    title: 'TEST - Recurring Payment',
+    description: '⚠️ Test card only. Monthly recurring payment at 1€/month for 3 months.',
+    features: [
+      'Stripe recurring payment test',
+      'Test card: 4242 4242 4242 4242',
+      '3-month minimum commitment',
+      'Remove before going live',
+    ],
+    goals: ['Verify monthly payment flow'],
+    price: '1€/month',
+    priceNumeric: 1,
+    priceUnit: '/month',
+    priceDetails: 'TEST — 3-month minimum commitment',
+    ctaText: '🧪 Test payment',
   },
 ];
 
