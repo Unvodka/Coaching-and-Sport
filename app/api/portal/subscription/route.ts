@@ -48,7 +48,9 @@ export async function GET() {
         for (const invoice of invoices.data) {
           if (invoice.status === "draft") continue;
           const subId = getInvoiceSubId(invoice);
-          if (!subId || subId !== subscription.id) continue;
+          // Accept invoices linked to this subscription OR unlinked invoices for this customer
+          if (subId && subId !== subscription.id) continue;
+          const resolvedSubId = subId ?? subscription.id;
 
           const paidAt = invoice.status_transitions?.paid_at;
           const amountCents = invoice.amount_paid > 0 ? invoice.amount_paid : invoice.amount_due;
@@ -57,7 +59,7 @@ export async function GET() {
 
           await admin.from("subscription_payments").upsert({
             id: invoice.id,
-            subscription_id: subId,
+            subscription_id: resolvedSubId,
             user_id: user.id,
             amount_cents: amountCents,
             currency: invoice.currency,

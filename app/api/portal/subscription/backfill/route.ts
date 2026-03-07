@@ -71,10 +71,17 @@ export async function POST() {
       for (const sub of subscriptions.data) {
         const meta = sub.metadata || {};
         const period = getPeriod(sub);
-        const programTitle = meta.program_title
-          || sub.items.data[0]?.price?.nickname
-          || sub.items.data[0]?.price?.product as string
-          || "Abonnement";
+        // Resolve product name: prefer metadata, then price nickname, then fetch product name
+        let programTitle = meta.program_title || sub.items.data[0]?.price?.nickname || "";
+        if (!programTitle) {
+          const productId = sub.items.data[0]?.price?.product;
+          if (productId && typeof productId === "string") {
+            try {
+              const product = await stripe.products.retrieve(productId);
+              programTitle = product.name || "Abonnement";
+            } catch { programTitle = "Abonnement"; }
+          } else { programTitle = "Abonnement"; }
+        }
         const minimumMonths = parseInt(meta.minimum_commitment_months ?? "1");
 
         const { error: subError } = await admin.from("subscriptions").upsert({
