@@ -2,13 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { validateOrigin } from "@/lib/api/csrf";
 import { rateLimit } from "@/lib/api/rate-limit";
+import { createClient } from "@/lib/supabase/server";
 
 // Allowed prices in cents — must match lib/constants.ts packs
 const ALLOWED_PRICES: Record<number, string[]> = {
   100: ["TEST - Paiement Récurrent", "TEST - Recurring Payment"],
   6000: ["Séance Découverte", "Discovery Session", "Séance à l'unité", "Single Session"],
   7900: ["Coaching en Ligne", "Online Coaching"],
-  14900: ["Coaching Premium", "Premium Coaching"],
+  14900: ["Advanced Training", "Coaching Premium", "Premium Coaching"],
   24900: ["Pack 5 Séances", "5-Session Pack"],
   49900: ["Pack 10 Séances", "10-Session Pack"],
   21900: ["Transformation", "Transformation"],
@@ -18,12 +19,18 @@ const ALLOWED_PRICES: Record<number, string[]> = {
 // Monthly subscription prices (in cents)
 const SUBSCRIPTION_PRICES = new Set([100, 7900, 14900, 21900]);
 
+// Minimum commitment months per price
+const MINIMUM_MONTHS: Record<number, number> = {
+  100: 3,   // TEST
+  7900: 1,  // Coaching en Ligne — 1 month minimum
+  14900: 3, // Advanced Training — 3 months minimum
+  21900: 3, // Transformation — 3 months minimum
+};
+
 export async function POST(request: NextRequest) {
-  // CSRF protection
   const originError = validateOrigin(request);
   if (originError) return originError;
 
-  // Rate limit: 5 checkout attempts per minute per IP
   const rateLimitError = rateLimit(
     request.headers.get("x-forwarded-for"),
     "checkout",
@@ -35,26 +42,24 @@ export async function POST(request: NextRequest) {
     const { title, priceInCents } = await request.json();
 
     if (!title || !priceInCents) {
-      return NextResponse.json(
-        { error: "Titre et prix requis" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Titre et prix requis" }, { status: 400 });
     }
 
-    // Validate price is an allowed value
     const allowedTitles = ALLOWED_PRICES[priceInCents];
     if (!allowedTitles) {
-      return NextResponse.json(
-        { error: "Prix invalide" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Prix invalide" }, { status: 400 });
     }
+
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
 
     const origin = request.headers.get("origin") || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
     const isSubscription = SUBSCRIPTION_PRICES.has(priceInCents);
+    const minimumMonths = MINIMUM_MONTHS[priceInCents] ?? 1;
 
     const session = await getStripe().checkout.sessions.create({
       mode: isSubscription ? "subscription" : "payment",
+      ...(user?.email ? { customer_email: user.email } : {}),
       line_items: [
         {
           price_data: {
@@ -72,8 +77,9 @@ export async function POST(request: NextRequest) {
       ...(isSubscription ? {
         subscription_data: {
           metadata: {
-            minimum_commitment_months: '3',
-            program: title,
+            user_id: user?.id ?? "",
+            minimum_commitment_months: String(minimumMonths),
+            program_title: title,
           },
         },
       } : {}),

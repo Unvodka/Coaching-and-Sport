@@ -278,6 +278,97 @@ export interface Database {
           created_at?: string;
         };
       };
+      subscriptions: {
+        Row: {
+          id: string;
+          user_id: string;
+          stripe_customer_id: string;
+          status: string;
+          program_title: string;
+          amount_cents: number;
+          currency: string;
+          interval: string;
+          minimum_months: number;
+          current_period_start: string | null;
+          current_period_end: string | null;
+          cancel_at_period_end: boolean;
+          canceled_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id: string;
+          user_id: string;
+          stripe_customer_id: string;
+          status: string;
+          program_title: string;
+          amount_cents: number;
+          currency?: string;
+          interval?: string;
+          minimum_months?: number;
+          current_period_start?: string | null;
+          current_period_end?: string | null;
+          cancel_at_period_end?: boolean;
+          canceled_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          stripe_customer_id?: string;
+          status?: string;
+          program_title?: string;
+          amount_cents?: number;
+          currency?: string;
+          interval?: string;
+          minimum_months?: number;
+          current_period_start?: string | null;
+          current_period_end?: string | null;
+          cancel_at_period_end?: boolean;
+          canceled_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      subscription_payments: {
+        Row: {
+          id: string;
+          subscription_id: string;
+          user_id: string;
+          amount_cents: number;
+          currency: string;
+          status: string;
+          invoice_url: string | null;
+          invoice_pdf: string | null;
+          paid_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id: string;
+          subscription_id: string;
+          user_id: string;
+          amount_cents: number;
+          currency?: string;
+          status: string;
+          invoice_url?: string | null;
+          invoice_pdf?: string | null;
+          paid_at?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          subscription_id?: string;
+          user_id?: string;
+          amount_cents?: number;
+          currency?: string;
+          status?: string;
+          invoice_url?: string | null;
+          invoice_pdf?: string | null;
+          paid_at?: string | null;
+          created_at?: string;
+        };
+      };
       program_assignments: {
         Row: {
           id: string;
@@ -341,6 +432,9 @@ export interface Database {
 }
 
 // Convenience types
+export type Subscription = Database["public"]["Tables"]["subscriptions"]["Row"];
+export type SubscriptionPayment = Database["public"]["Tables"]["subscription_payments"]["Row"];
+// 
 export type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 export type Recipe = Database["public"]["Tables"]["recipes"]["Row"];
 export type RecipeFavorite = Database["public"]["Tables"]["recipe_favorites"]["Row"];

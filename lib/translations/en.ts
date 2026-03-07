@@ -236,6 +236,7 @@ const en: Record<TranslationKey, string> = {
   'portal.coach.assignedToYou': 'Assigned to you',
 
   // Portal - Profile
+  'portal.subscription': 'My subscription',
   'portal.profile': 'My Profile',
   'portal.profile.name': 'First Name',
   'portal.profile.email': 'Email',

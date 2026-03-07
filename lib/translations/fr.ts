@@ -240,6 +240,7 @@ const fr = {
   'portal.coach.assignedToYou': 'Assignés pour vous',
 
   // Portal - Profile
+  'portal.subscription': 'Mon abonnement',
   'portal.profile': 'Mon profil',
   'portal.profile.name': 'Prénom',
   'portal.profile.email': 'Email',
