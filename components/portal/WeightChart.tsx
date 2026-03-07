@@ -219,7 +219,6 @@ export default function WeightChart({ logs }: WeightChartProps) {
           }`}
           style={active.has(m.key) ? { backgroundColor: m.color } : undefined}
         >
-          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: m.color }} />
           {locale === "fr" ? m.labelFr : m.labelEn}
         </button>
       ))}
