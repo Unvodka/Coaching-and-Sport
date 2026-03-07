@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Subscription {
   id: string;
@@ -66,8 +66,11 @@ export default function SubscriptionPage() {
   const [backfilling, setBackfilling] = useState(false);
   const [backfillMsg, setBackfillMsg] = useState<string | null>(null);
 
-  const fetchData = async () => {
-    setLoading(true);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const fetchData = async (preserveScroll = false) => {
+    const scrollTop = preserveScroll && scrollRef.current ? scrollRef.current.scrollTop : 0;
+    setLoading(!preserveScroll);
     try {
       const res = await fetch("/api/portal/subscription");
       const data = await res.json();
@@ -77,6 +80,11 @@ export default function SubscriptionPage() {
       // silently fail — show empty state
     } finally {
       setLoading(false);
+      if (preserveScroll && scrollRef.current) {
+        requestAnimationFrame(() => {
+          if (scrollRef.current) scrollRef.current.scrollTop = scrollTop;
+        });
+      }
     }
   };
 
@@ -117,7 +125,7 @@ export default function SubscriptionPage() {
         ? `Erreur : ${data.error}`
         : data.message ?? "Import terminé.";
       setBackfillMsg(detail);
-      if (data.subscriptions > 0) await fetchData();
+      if (data.subscriptions > 0) await fetchData(true);
     } catch {
       setBackfillMsg("Erreur réseau lors de l&apos;import.");
     } finally {
@@ -150,7 +158,7 @@ export default function SubscriptionPage() {
       })()
     : null;
 
-  if (loading) {
+  if (loading && !subscription && payments.length === 0) {
     return (
       <div className="flex items-center justify-center py-24">
         <div className="w-8 h-8 border-4 border-brand-blue border-t-transparent rounded-full animate-spin" />
@@ -159,7 +167,7 @@ export default function SubscriptionPage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto space-y-8">
+    <div ref={scrollRef} className="max-w-3xl mx-auto space-y-8">
       <h2 className="text-2xl font-bold text-heading font-heading">
         Mon abonnement
       </h2>
