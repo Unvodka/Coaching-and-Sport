@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { withAuth } from "@/lib/api/auth";
+import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { getStripe } from "@/lib/stripe";
 import Stripe from "stripe";
 
@@ -13,25 +13,40 @@ function getInvoiceSubscriptionId(invoice: Stripe.Invoice): string | null {
   return (inv.subscription as string) ?? null;
 }
 
-// One-time backfill: imports existing Stripe subscriptions + invoices for the
-// authenticated user into Supabase. Safe to call multiple times (upsert).
 export async function POST() {
-  return withAuth(async ({ user, admin }) => {
-    const { data: profile } = await admin
+  try {
+    // Auth check
+    const supabase = createClient();
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError || !user) {
+      return NextResponse.json({ error: "Non authentifié" }, { status: 401 });
+    }
+
+    const admin = createAdminClient();
+
+    // Get profile email
+    const { data: profile, error: profileError } = await admin
       .from("profiles")
       .select("email")
       .eq("id", user.id)
       .single();
 
+    if (profileError) {
+      return NextResponse.json({ error: `Erreur profil: ${profileError.message}` }, { status: 500 });
+    }
     if (!profile?.email) {
-      return NextResponse.json({ error: "Profil introuvable" }, { status: 404 });
+      return NextResponse.json({ error: "Email introuvable dans le profil" }, { status: 404 });
     }
 
+    // Find Stripe customers by email
     const stripe = getStripe();
     const customers = await stripe.customers.list({ email: profile.email, limit: 5 });
 
     if (customers.data.length === 0) {
-      return NextResponse.json({ message: "Aucun client Stripe trouvé pour cet email.", imported: 0 });
+      return NextResponse.json({
+        message: `Aucun client Stripe trouvé pour l'email: ${profile.email}`,
+        imported: 0,
+      });
     }
 
     let subsImported = 0;
@@ -50,7 +65,7 @@ export async function POST() {
         const programTitle = meta.program_title || sub.items.data[0]?.price?.nickname || "Abonnement";
         const minimumMonths = parseInt(meta.minimum_commitment_months ?? "1");
 
-        await admin.from("subscriptions").upsert({
+        const { error: subError } = await admin.from("subscriptions").upsert({
           id: sub.id,
           user_id: user.id,
           stripe_customer_id: customer.id,
@@ -66,6 +81,10 @@ export async function POST() {
           canceled_at: sub.canceled_at ? new Date(sub.canceled_at * 1000).toISOString() : null,
           updated_at: new Date().toISOString(),
         }, { onConflict: "id" });
+
+        if (subError) {
+          return NextResponse.json({ error: `Erreur Supabase (subscription): ${subError.message}` }, { status: 500 });
+        }
 
         subsImported++;
 
@@ -83,7 +102,7 @@ export async function POST() {
           if (!subId) continue;
           const paidAt = invoice.status_transitions?.paid_at;
 
-          await admin.from("subscription_payments").upsert({
+          const { error: invError } = await admin.from("subscription_payments").upsert({
             id: invoice.id,
             subscription_id: subId,
             user_id: user.id,
@@ -95,6 +114,10 @@ export async function POST() {
             paid_at: paidAt ? new Date(paidAt * 1000).toISOString() : null,
           }, { onConflict: "id" });
 
+          if (invError) {
+            return NextResponse.json({ error: `Erreur Supabase (payment): ${invError.message}` }, { status: 500 });
+          }
+
           paymentsImported++;
         }
       }
@@ -105,5 +128,10 @@ export async function POST() {
       subscriptions: subsImported,
       payments: paymentsImported,
     });
-  });
+
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Erreur inconnue";
+    console.error("Backfill error:", message);
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }
