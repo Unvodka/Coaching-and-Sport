@@ -113,10 +113,13 @@ export default function SubscriptionPage() {
     try {
       const res = await fetch("/api/portal/subscription/backfill", { method: "POST" });
       const data = await res.json();
-      setBackfillMsg(data.message ?? "Import terminé.");
-      await fetchData();
+      const detail = data.error
+        ? `Erreur : ${data.error}`
+        : data.message ?? "Import terminé.";
+      setBackfillMsg(detail);
+      if (data.subscriptions > 0) await fetchData();
     } catch {
-      setBackfillMsg("Erreur lors de l'import.");
+      setBackfillMsg("Erreur réseau lors de l&apos;import.");
     } finally {
       setBackfilling(false);
     }
