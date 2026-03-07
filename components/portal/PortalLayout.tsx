@@ -42,13 +42,13 @@ export default function PortalLayoutClient({
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50" style={{ minHeight: "100dvh" }}>
+    <div className="flex bg-gray-50" style={{ height: "100dvh", overflow: "hidden" }}>
       <PortalSidebar
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
       />
 
-      <div className="flex-1 flex flex-col min-w-0 min-h-screen">
+      <div className="flex-1 flex flex-col min-w-0" style={{ height: "100dvh", overflowY: "auto", overscrollBehavior: "none" }}>
         <PortalHeader
           title={getTitle()}
           onMenuToggle={() => setSidebarOpen(!sidebarOpen)}

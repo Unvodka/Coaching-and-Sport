@@ -29,7 +29,7 @@ export default function PortalHeader({ title, onMenuToggle }: PortalHeaderProps)
   return (
     <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sticky top-0 z-30">
       {/* Left: hamburger + title */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 min-w-0 flex-1">
         <button
           onClick={onMenuToggle}
           className="lg:hidden p-2 rounded-md hover:bg-gray-100 transition-colors"
@@ -39,7 +39,7 @@ export default function PortalHeader({ title, onMenuToggle }: PortalHeaderProps)
             <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-        <h1 className="text-lg font-semibold text-heading">{title}</h1>
+        <h1 className="text-lg font-semibold text-heading truncate whitespace-nowrap">{title}</h1>
       </div>
 
       {/* Right: language + user menu */}
