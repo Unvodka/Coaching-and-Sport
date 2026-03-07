@@ -10,9 +10,12 @@ const ALLOWED_PRICES: Record<number, string[]> = {
   14900: ["Coaching Premium", "Premium Coaching"],
   24900: ["Pack 5 Séances", "5-Session Pack"],
   49900: ["Pack 10 Séances", "10-Session Pack"],
-  54900: ["Transformation", "Transformation"],
+  21900: ["Transformation", "Transformation"],
   84900: ["Pack 20 Séances", "20-Session Pack"],
 };
+
+// Monthly subscription prices (in cents)
+const SUBSCRIPTION_PRICES = new Set([7900, 14900, 21900]);
 
 export async function POST(request: NextRequest) {
   // CSRF protection
@@ -47,9 +50,10 @@ export async function POST(request: NextRequest) {
     }
 
     const origin = request.headers.get("origin") || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const isSubscription = SUBSCRIPTION_PRICES.has(priceInCents);
 
     const session = await getStripe().checkout.sessions.create({
-      mode: "payment",
+      mode: isSubscription ? "subscription" : "payment",
       line_items: [
         {
           price_data: {
@@ -59,6 +63,7 @@ export async function POST(request: NextRequest) {
               description: `Coach-Bluewave - ${title}`,
             },
             unit_amount: priceInCents,
+            ...(isSubscription ? { recurring: { interval: "month" } } : {}),
           },
           quantity: 1,
         },

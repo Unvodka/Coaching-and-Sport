@@ -28,7 +28,7 @@ export default function Toast({ message, type = "error", onClose, duration = 500
     <div
       role="alert"
       aria-live="assertive"
-      className={`fixed top-6 right-6 z-[200] max-w-sm px-5 py-3 rounded-lg text-white text-sm font-medium shadow-lg transition-all duration-300 ${bgColor} ${
+      className={`fixed top-24 right-6 z-[200] max-w-sm px-5 py-3 rounded-lg text-white text-sm font-medium shadow-lg transition-all duration-300 ${bgColor} ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
       }`}
     >
