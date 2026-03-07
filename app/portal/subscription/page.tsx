@@ -231,21 +231,11 @@ export default function SubscriptionPage() {
                   {formatDate(subscription.created_at)}
                 </p>
               </div>
-              <div className="bg-slate-50 rounded-xl p-4">
-                <p className="text-xs text-slate-400 font-medium mb-1">
-                  {subscription.cancel_at_period_end ? "Actif jusqu'au" : "Prochain renouvellement"}
-                </p>
-                <p className="text-sm font-semibold text-slate-700">
-                  {(() => { const d = new Date(subscription.created_at); d.setMonth(d.getMonth() + subscription.minimum_months); return formatDate(d.toISOString()); })()}
-                </p>
-              </div>
+
               <div className="bg-slate-50 rounded-xl p-4">
                 <p className="text-xs text-slate-400 font-medium mb-1">Engagement minimum</p>
                 <p className="text-sm font-semibold text-slate-700">
                   {subscription.minimum_months} mois
-                  {monthsElapsed >= subscription.minimum_months
-                    ? " ✅ atteint"
-                    : ` (encore ${monthsUntilCancel} mois)`}
                 </p>
               </div>
               <div className="bg-slate-50 rounded-xl p-4">
