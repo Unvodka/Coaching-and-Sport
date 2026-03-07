@@ -16,6 +16,7 @@ const PAGE_TITLES: Record<string, { fr: string; en: string }> = {
   "/portal/journal/new": { fr: "Nouvelle entrée", en: "New Entry" },
   "/portal/workouts": { fr: "Programmes", en: "Programs" },
   "/portal/profile": { fr: "Mon profil", en: "My Profile" },
+  "/portal/subscription": { fr: "Mon abonnement", en: "My Subscription" },
 };
 
 export default function PortalLayoutClient({
@@ -47,14 +48,14 @@ export default function PortalLayoutClient({
         onClose={() => setSidebarOpen(false)}
       />
 
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 min-h-screen">
         <PortalHeader
           title={getTitle()}
           onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
         />
 
         {/* pb-16 on mobile = space for the bottom nav bar */}
-        <main className="flex-1 overflow-y-auto p-6 pb-20 lg:pb-6">
+        <main className="flex-1 p-6 pb-20 lg:pb-6">
           {children}
         </main>
       </div>
