@@ -4,10 +4,10 @@ import { sendPaymentConfirmation } from "@/lib/email";
 import { createAdminClient } from "@/lib/supabase/server";
 import Stripe from "stripe";
 
-// Stripe Subscription has current_period_start/end but older @types may miss them
-interface StripeSub extends Stripe.Subscription {
-  current_period_start: number;
-  current_period_end: number;
+// Helper to safely extract period timestamps from Stripe subscription
+function getPeriod(sub: Stripe.Subscription): { start: number; end: number } {
+  const s = sub as unknown as Record<string, number>;
+  return { start: s.current_period_start, end: s.current_period_end };
 }
 
 export const runtime = "nodejs";
@@ -71,8 +71,8 @@ export async function POST(request: NextRequest) {
               currency: sub.currency,
               interval: sub.items.data[0]?.price?.recurring?.interval ?? "month",
               minimum_months: parseInt(meta.minimum_commitment_months ?? "1"),
-              current_period_start: new Date((sub as StripeSub).current_period_start * 1000).toISOString(),
-              current_period_end: new Date((sub as StripeSub).current_period_end * 1000).toISOString(),
+              current_period_start: new Date(getPeriod(sub).start * 1000).toISOString(),
+              current_period_end: new Date(getPeriod(sub).end * 1000).toISOString(),
               cancel_at_period_end: sub.cancel_at_period_end,
               updated_at: new Date().toISOString(),
             }, { onConflict: "id" });
@@ -114,8 +114,8 @@ export async function POST(request: NextRequest) {
           currency: sub.currency,
           interval: sub.items.data[0]?.price?.recurring?.interval ?? "month",
           minimum_months: parseInt(sub.metadata?.minimum_commitment_months ?? "1"),
-          current_period_start: new Date((sub as StripeSub).current_period_start * 1000).toISOString(),
-          current_period_end: new Date((sub as StripeSub).current_period_end * 1000).toISOString(),
+          current_period_start: new Date(getPeriod(sub).start * 1000).toISOString(),
+          current_period_end: new Date(getPeriod(sub).end * 1000).toISOString(),
           cancel_at_period_end: sub.cancel_at_period_end,
           updated_at: new Date().toISOString(),
         }, { onConflict: "id" });
@@ -184,8 +184,8 @@ export async function POST(request: NextRequest) {
           status: sub.status,
           cancel_at_period_end: sub.cancel_at_period_end,
           canceled_at: sub.canceled_at ? new Date(sub.canceled_at * 1000).toISOString() : null,
-          current_period_start: new Date((sub as StripeSub).current_period_start * 1000).toISOString(),
-          current_period_end: new Date((sub as StripeSub).current_period_end * 1000).toISOString(),
+          current_period_start: new Date(getPeriod(sub).start * 1000).toISOString(),
+          current_period_end: new Date(getPeriod(sub).end * 1000).toISOString(),
           updated_at: new Date().toISOString(),
         }).eq("id", sub.id);
       } catch (err) {
