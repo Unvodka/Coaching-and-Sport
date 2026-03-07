@@ -30,13 +30,13 @@ interface MetricConfig {
 const KG_METRICS: MetricConfig[] = [
   { key: "weight", labelFr: "Poids", labelEn: "Weight", color: "#2563eb", unit: " kg" },
   { key: "muscle", labelFr: "Masse musculaire", labelEn: "Muscle mass", color: "#10b981", unit: " kg" },
-  { key: "boneMass", labelFr: "Masse osseuse", labelEn: "Bone mass", color: "#8b5cf6", unit: " kg" },
+  { key: "boneMass", labelFr: "Masse osseuse", labelEn: "Bone mass", color: "#f43f5e", unit: " kg" },
 ];
 
 const PCT_METRICS: MetricConfig[] = [
   { key: "bodyFat", labelFr: "Masse graisseuse", labelEn: "Body fat", color: "#f59e0b", unit: " %" },
   { key: "water", labelFr: "Masse d'eau", labelEn: "Water mass", color: "#06b6d4", unit: " %" },
-  { key: "visceralFat", labelFr: "Graisse viscérale", labelEn: "Visceral fat", color: "#ef4444", unit: "" },
+  { key: "visceralFat", labelFr: "Graisse viscérale", labelEn: "Visceral fat", color: "#f97316", unit: "" },
   { key: "bmi", labelFr: "IMC", labelEn: "BMI", color: "#ec4899", unit: "" },
 ];
 
