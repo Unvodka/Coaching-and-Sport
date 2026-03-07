@@ -9,7 +9,6 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Legend,
 } from "recharts";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import type { WeightLog } from "@/lib/supabase/database.types";
@@ -248,7 +247,7 @@ export default function WeightChart({ logs }: WeightChartProps) {
               unit=" kg"
             />
             <Tooltip contentStyle={tooltipStyle} formatter={formatTooltip} />
-            {activeKg.size > 1 && <Legend />}
+            
             {KG_METRICS.map((m) =>
               activeKg.has(m.key) ? (
                 <Line
@@ -287,7 +286,7 @@ export default function WeightChart({ logs }: WeightChartProps) {
                 unit=" %"
               />
               <Tooltip contentStyle={tooltipStyle} formatter={formatTooltip} />
-              {activePct.size > 1 && <Legend />}
+              
               {PCT_METRICS.map((m) =>
                 activePct.has(m.key) ? (
                   <Line
@@ -327,7 +326,7 @@ export default function WeightChart({ logs }: WeightChartProps) {
                 unit=" kcal"
               />
               <Tooltip contentStyle={tooltipStyle} formatter={formatTooltip} />
-              {activeKcal.size > 1 && <Legend />}
+              
               {KCAL_METRICS.map((m) =>
                 activeKcal.has(m.key) ? (
                   <Line
