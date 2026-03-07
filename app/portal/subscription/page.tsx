@@ -63,6 +63,8 @@ export default function SubscriptionPage() {
   const [cancelError, setCancelError] = useState<string | null>(null);
   const [cancelSuccess, setCancelSuccess] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [backfilling, setBackfilling] = useState(false);
+  const [backfillMsg, setBackfillMsg] = useState<string | null>(null);
 
   const fetchData = async () => {
     setLoading(true);
@@ -102,6 +104,21 @@ export default function SubscriptionPage() {
     } finally {
       setCanceling(false);
       setShowConfirm(false);
+    }
+  };
+
+  const handleBackfill = async () => {
+    setBackfilling(true);
+    setBackfillMsg(null);
+    try {
+      const res = await fetch("/api/portal/subscription/backfill", { method: "POST" });
+      const data = await res.json();
+      setBackfillMsg(data.message ?? "Import terminé.");
+      await fetchData();
+    } catch {
+      setBackfillMsg("Erreur lors de l'import.");
+    } finally {
+      setBackfilling(false);
     }
   };
 
@@ -160,6 +177,17 @@ export default function SubscriptionPage() {
           >
             Voir les offres
           </a>
+          <div className="mt-4 border-t border-slate-100 pt-4">
+            <p className="text-xs text-slate-400 mb-2">Vous avez déjà souscrit un abonnement&nbsp;?</p>
+            {backfillMsg && <p className="text-xs text-green-600 mb-2">{backfillMsg}</p>}
+            <button
+              onClick={handleBackfill}
+              disabled={backfilling}
+              className="text-xs text-brand-blue underline hover:text-blue-700 disabled:opacity-50 cursor-pointer"
+            >
+              {backfilling ? "Import en cours..." : "Synchroniser depuis Stripe"}
+            </button>
+          </div>
         </div>
       )}
 
