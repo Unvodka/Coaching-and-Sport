@@ -167,7 +167,7 @@ export default function SubscriptionPage() {
   }
 
   return (
-    <div ref={scrollRef} className="max-w-3xl mx-auto space-y-8">
+    <div ref={scrollRef} className="max-w-3xl mx-auto space-y-8 pt-5">
       <h2 className="text-2xl font-bold text-heading font-heading">
         Mon abonnement
       </h2>
