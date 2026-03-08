@@ -105,15 +105,15 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
         )}
 
         {/* Date */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+        <div className="flex items-center gap-3">
+          <label className="text-sm font-medium text-gray-700 flex-shrink-0">
             {t("portal.weight.date")}
           </label>
           <input
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none transition-all text-gray-800"
+            className="px-3 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none transition-all text-gray-800 text-sm"
           />
         </div>
 
