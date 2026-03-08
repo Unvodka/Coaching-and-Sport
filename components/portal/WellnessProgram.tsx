@@ -17,6 +17,11 @@ interface DayPlan {
   activity: { fr: string; en: string };
   duration: string;
   detail: { fr: string; en: string };
+  alternative?: {
+    icon: string;
+    activity: { fr: string; en: string };
+    detail: { fr: string; en: string };
+  };
 }
 
 interface Program {
@@ -189,6 +194,14 @@ function getProgram(mood: number, energy: number, sleep: number | null, stress: 
             fr: "L'eau a un effet naturellement apaisant sur le système nerveux. Nage douce ou aquagym, sans objectif de performance. Concentrez-vous sur la sensation de l'eau et votre respiration. Excellent anti-stress prouvé scientifiquement.",
             en: "Water has a naturally soothing effect on the nervous system. Gentle swimming or aqua gym, with no performance goal. Focus on the sensation of the water and your breathing. Scientifically proven excellent stress reliever.",
           },
+          alternative: {
+            icon: "🚶",
+            activity: { fr: "Marche en forêt / plein air", en: "Forest / outdoor walk" },
+            detail: {
+              fr: "La nature a le même effet apaisant que l'eau. Marche lente de 30 min dans un parc ou en forêt, sans téléphone. Pratiquez le 'shinrin-yoku' (bain de forêt) : observez, respirez, ressentez. Réduit le cortisol de 16%.",
+              en: "Nature has the same soothing effect as water. Slow 30-min walk in a park or forest, without your phone. Practice 'shinrin-yoku' (forest bathing): observe, breathe, feel. Reduces cortisol by 16%.",
+            },
+          },
         },
         {
           icon: "🌿",
@@ -275,6 +288,14 @@ function getProgram(mood: number, energy: number, sleep: number | null, stress: 
             fr: "Avec un esprit clair et reposé, c'est le meilleur moment pour travailler la technique. 200m échauffement, puis focus sur l'alignement du corps, la prise d'eau et la rotation. Filmez-vous si possible pour analyser vos mouvements.",
             en: "With a clear and rested mind, this is the best time to work on technique. 200m warm-up, then focus on body alignment, catch, and rotation. Film yourself if possible to analyze your movements.",
           },
+          alternative: {
+            icon: "🚴",
+            activity: { fr: "Vélo ou yoga dynamique", en: "Cycling or dynamic yoga" },
+            detail: {
+              fr: "Le vélo (30 min de fractionné doux) ou une session de yoga vinyasa travaillent à la fois la technique de mouvement, la respiration et la coordination. Parfait pour développer la conscience corporelle sans piscine.",
+              en: "Cycling (30 min light intervals) or a vinyasa yoga session work on movement technique, breathing, and coordination. Perfect for developing body awareness without a pool.",
+            },
+          },
         },
         {
           icon: "🥗",
@@ -353,6 +374,14 @@ function getProgram(mood: number, energy: number, sleep: number | null, stress: 
             fr: "Nage tranquille ou exercices dans l'eau. L'eau détend les muscles et apaise le système nerveux. Pas de performance, juste du bien-être.",
             en: "Calm swimming or water exercises. Water relaxes muscles and soothes the nervous system. No performance goals, just well-being.",
           },
+          alternative: {
+            icon: "🧘",
+            activity: { fr: "Yoga restauratif ou marche douce", en: "Restorative yoga or gentle walk" },
+            detail: {
+              fr: "Séquence de yoga au sol (posture de l'enfant, papillon, jambes au mur) pendant 25 min, ou marche tranquille de 30 min. Ces pratiques calment le système nerveux aussi efficacement que l'eau.",
+              en: "Floor yoga sequence (child's pose, butterfly, legs up the wall) for 25 min, or a gentle 30-min walk. These practices calm the nervous system as effectively as water.",
+            },
+          },
         },
         {
           icon: "🌅",
@@ -411,6 +440,14 @@ function getProgram(mood: number, energy: number, sleep: number | null, stress: 
           detail: {
             fr: "Échauffement 200m, puis 10×50m en crawl avec 20s de repos entre chaque. Terminez par 200m de nage au choix en relâchant le rythme.",
             en: "200m warm-up, then 10×50m freestyle with 20s rest between each. Finish with 200m of any stroke at a relaxed pace.",
+          },
+          alternative: {
+            icon: "🥊",
+            activity: { fr: "Boxe ou HIIT intensif", en: "Boxing or intensive HIIT" },
+            detail: {
+              fr: "5 rounds de 3 min : shadow boxing, burpees, squat jumps, mountain climbers, corde à sauter — 30s de repos entre chaque. Même intensité que la natation intensive, même libération d'endorphines.",
+              en: "5 rounds of 3 min: shadow boxing, burpees, squat jumps, mountain climbers, jump rope — 30s rest between each. Same intensity as intensive swimming, same endorphin release.",
+            },
           },
         },
         {
@@ -489,6 +526,14 @@ function getProgram(mood: number, energy: number, sleep: number | null, stress: 
             fr: "Travaillez votre technique : 200m d'échauffement, puis des éducatifs (rattrapé, bras tendus, battements). L'eau est excellente pour la concentration et la détente.",
             en: "Work on your technique: 200m warm-up, then drills (catch-up, fingertip drag, kick sets). Water is excellent for focus and relaxation.",
           },
+          alternative: {
+            icon: "🚴",
+            activity: { fr: "Vélo ou elliptique technique", en: "Cycling or elliptical technique" },
+            detail: {
+              fr: "30 min de vélo en travaillant la cadence et la position, ou elliptique en alternant résistances. Même bénéfice cardio et technique que la natation, sans accès à une piscine.",
+              en: "30 min cycling focusing on cadence and position, or elliptical alternating resistance levels. Same cardio and technical benefit as swimming, without pool access.",
+            },
+          },
         },
         {
           icon: "📝",
@@ -547,6 +592,14 @@ function getProgram(mood: number, energy: number, sleep: number | null, stress: 
           detail: {
             fr: "Nage très douce en dos crawlé ou brasse. L'eau soutient le corps et détend les muscles sans effort intense. Profitez de l'apesanteur.",
             en: "Very gentle backstroke or breaststroke. Water supports the body and relaxes muscles without intense effort. Enjoy the weightlessness.",
+          },
+          alternative: {
+            icon: "🚶",
+            activity: { fr: "Marche douce + étirements", en: "Gentle walk + stretching" },
+            detail: {
+              fr: "20 min de marche tranquille suivies de 10 min d'étirements doux du corps entier. La marche lente avec des étirements offre le même bénéfice de récupération active que la nage douce.",
+              en: "20 min gentle walk followed by 10 min of full-body soft stretching. Slow walking with stretching offers the same active recovery benefit as gentle swimming.",
+            },
           },
         },
         {
@@ -615,6 +668,14 @@ function getProgram(mood: number, energy: number, sleep: number | null, stress: 
           fr: "300m d'échauffement varié, puis 8×50m sprint crawl (repos 15s), 4×100m en nage complète, 200m de récupération. Visez l'excellence technique.",
           en: "300m varied warm-up, then 8×50m freestyle sprint (15s rest), 4×100m full stroke, 200m recovery. Aim for technical excellence.",
         },
+        alternative: {
+          icon: "🏃",
+          activity: { fr: "Fractionné intensif course à pied", en: "Intensive running intervals" },
+          detail: {
+            fr: "Échauffement 10 min, puis 10×200m sprint (récupération 30s trot), retour au calme 10 min. Même charge cardiovasculaire et anaérobie que la natation avec sprints. Visez un effort maximal sur chaque sprint.",
+            en: "10 min warm-up, then 10×200m sprint (30s jog recovery), 10 min cool-down. Same cardiovascular and anaerobic load as swimming sprints. Aim for maximum effort on each sprint.",
+          },
+        },
       },
       {
         icon: "🔥",
@@ -647,7 +708,9 @@ function getProgram(mood: number, energy: number, sleep: number | null, stress: 
 export default function WellnessProgram({ moodScore, energyLevel, sleepQuality, stressLevel, onDismiss }: WellnessProgramProps) {
   const { locale } = useLanguage();
   const [expandedDay, setExpandedDay] = useState<number | null>(0);
+  const [altDays, setAltDays] = useState<Record<number, boolean>>({});
   const program = getProgram(moodScore, energyLevel, sleepQuality ?? null, stressLevel ?? null);
+  const toggleAlt = (i: number) => setAltDays(prev => ({ ...prev, [i]: !prev[i] }));
 
   return (
     <div className="bg-gradient-to-br from-white to-indigo-50/30 rounded-xl border border-indigo-100 shadow-sm overflow-hidden w-full">
@@ -695,7 +758,9 @@ export default function WellnessProgram({ moodScore, energyLevel, sleepQuality, 
                 onClick={() => setExpandedDay(expandedDay === i ? null : i)}
                 className="w-full flex items-center gap-2.5 px-4 py-2.5 text-left"
               >
-                <span className="text-base leading-none flex-shrink-0 w-5 text-center">{day.icon}</span>
+                <span className="text-base leading-none flex-shrink-0 w-5 text-center">
+                  {altDays[i] && day.alternative ? day.alternative.icon : day.icon}
+                </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-1.5">
                     <span className="text-xs font-bold text-indigo-400 uppercase">
@@ -705,7 +770,9 @@ export default function WellnessProgram({ moodScore, energyLevel, sleepQuality, 
                     <span className="text-xs text-gray-500">{day.duration}</span>
                   </div>
                   <p className="text-sm font-medium text-heading leading-tight truncate">
-                    {locale === "fr" ? day.activity.fr : day.activity.en}
+                    {altDays[i] && day.alternative
+                      ? (locale === "fr" ? day.alternative.activity.fr : day.alternative.activity.en)
+                      : (locale === "fr" ? day.activity.fr : day.activity.en)}
                   </p>
                 </div>
                 <svg
@@ -722,9 +789,21 @@ export default function WellnessProgram({ moodScore, energyLevel, sleepQuality, 
               </button>
               {expandedDay === i && (
                 <div className="px-4 pb-3 pl-11">
-                  <p className="text-xs text-gray-600 leading-relaxed" style={{ width: "90%" }}>
-                    {locale === "fr" ? day.detail.fr : day.detail.en}
+                  <p className="text-xs text-gray-600 leading-relaxed mb-2" style={{ width: "90%" }}>
+                    {altDays[i] && day.alternative
+                      ? (locale === "fr" ? day.alternative.detail.fr : day.alternative.detail.en)
+                      : (locale === "fr" ? day.detail.fr : day.detail.en)}
                   </p>
+                  {day.alternative && (
+                    <button
+                      onClick={() => toggleAlt(i)}
+                      className="text-xs text-indigo-500 hover:text-indigo-700 font-medium underline underline-offset-2"
+                    >
+                      {altDays[i]
+                        ? (locale === "fr" ? "🏊 Voir avec natation" : "🏊 Show swimming version")
+                        : (locale === "fr" ? "🚫 Sans natation / piscine" : "🚫 No swimming / pool")}
+                    </button>
+                  )}
                 </div>
               )}
             </div>

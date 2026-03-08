@@ -118,8 +118,8 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
         </div>
 
         {/* Mood Score */}
-        <div className="bg-white rounded-xl border border-gray-100 p-4">
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+        <div className="bg-white rounded-xl border border-gray-100 px-4 py-3">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             {t("portal.journal.mood")} — {MOOD_EMOJIS[moodScore - 1]} {moodScore}/10
           </label>
           <input
@@ -137,8 +137,8 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
         </div>
 
         {/* Energy Level */}
-        <div className="bg-white rounded-xl border border-gray-100 p-4">
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+        <div className="bg-white rounded-xl border border-gray-100 px-4 py-3">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             {t("portal.journal.energy")} — {energyLevel}/10
           </label>
           <input
@@ -156,8 +156,8 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
         </div>
 
         {/* Sleep Quality */}
-        <div className="bg-white rounded-xl border border-gray-100 p-4">
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+        <div className="bg-white rounded-xl border border-gray-100 px-4 py-3">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             {locale === "fr" ? "Qualité du sommeil" : "Sleep quality"} — {sleepQuality}/10
           </label>
           <input
@@ -175,8 +175,8 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
         </div>
 
         {/* Stress Level */}
-        <div className="bg-white rounded-xl border border-gray-100 p-4">
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+        <div className="bg-white rounded-xl border border-gray-100 px-4 py-3">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             {locale === "fr" ? "Niveau de stress" : "Stress level"} — {stressLevel}/10
           </label>
           <input
