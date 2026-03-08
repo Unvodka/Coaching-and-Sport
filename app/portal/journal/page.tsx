@@ -85,7 +85,7 @@ export default function JournalPage() {
       {/* Inline form */}
       {showForm && (
         <div className="bg-white rounded-xl border border-gray-100 px-4 pt-4 pb-3">
-          <h3 className="font-semibold text-heading mb-2">
+          <h3 className="font-semibold text-heading mb-2 text-center">
             {t("portal.journal.new")}
           </h3>
           <MoodForm onAdded={handleAdded} inline onProgramReady={handleProgramReady} />
