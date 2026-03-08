@@ -375,24 +375,26 @@ export default function WellnessProgram({ moodScore, energyLevel, onDismiss }: W
   return (
     <div className="bg-gradient-to-br from-white to-indigo-50/30 rounded-xl border border-indigo-100 shadow-sm overflow-hidden">
       {/* Header */}
-      <div className="px-6 pt-6 pb-4">
+      <div className="px-6 pt-5 pb-4">
+        {/* Row 1: emoji + label + dismiss */}
         <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-2">
-            <span className="text-xl">{program.emoji}</span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-base leading-none">{program.emoji}</span>
             <p className="text-xs font-semibold text-indigo-500 uppercase tracking-wider">
               {locale === "fr" ? "Programme recommandé" : "Recommended program"}
             </p>
           </div>
           <button
             onClick={onDismiss}
-            className="text-gray-400 hover:text-gray-600 transition-colors p-1 flex-shrink-0"
+            className="text-gray-400 hover:text-gray-600 transition-colors p-1 flex-shrink-0 -mr-1"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-        <h3 className="text-lg font-bold text-heading leading-tight w-[90%] mb-3">
+        {/* Row 2: title at 90% width */}
+        <h3 className="text-lg font-bold text-heading leading-snug mb-3" style={{ width: "90%" }}>
           {locale === "fr" ? program.title.fr : program.title.en}
         </h3>
         <p className="text-sm text-gray-600 leading-relaxed">
@@ -401,12 +403,12 @@ export default function WellnessProgram({ moodScore, energyLevel, onDismiss }: W
       </div>
 
       {/* Days */}
-      <div className="pb-2">
-        <div className="space-y-2 w-full">
+      <div className="px-6 pb-2">
+        <div className="space-y-2">
           {program.days.map((day, i) => (
             <div
               key={i}
-              className={`border-y transition-all w-full ${
+              className={`rounded-lg border transition-all w-full ${
                 expandedDay === i
                   ? "bg-white border-indigo-200 shadow-sm"
                   : "bg-white/60 border-gray-100 hover:border-gray-200"
