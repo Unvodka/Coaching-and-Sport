@@ -29,10 +29,8 @@ export default function MoodChart({ entries }: MoodChartProps) {
           }),
           mood: entry.mood_score,
           energy: entry.energy_level,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          sleep: (entry as any).sleep_quality ?? null,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          stress: (entry as any).stress_level ?? null,
+          sleep: entry.sleep_quality ?? null,
+          stress: entry.stress_level ?? null,
         })),
     [entries]
   );

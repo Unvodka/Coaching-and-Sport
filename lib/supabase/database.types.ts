@@ -164,6 +164,8 @@ export interface Database {
           user_id: string;
           mood_score: number;
           energy_level: number;
+          sleep_quality: number | null;
+          stress_level: number | null;
           notes: string | null;
           tags: string[];
           date: string;
@@ -174,6 +176,8 @@ export interface Database {
           user_id: string;
           mood_score: number;
           energy_level: number;
+          sleep_quality?: number | null;
+          stress_level?: number | null;
           notes?: string | null;
           tags?: string[];
           date?: string;
@@ -184,6 +188,8 @@ export interface Database {
           user_id?: string;
           mood_score?: number;
           energy_level?: number;
+          sleep_quality?: number | null;
+          stress_level?: number | null;
           notes?: string | null;
           tags?: string[];
           date?: string;

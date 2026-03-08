@@ -34,13 +34,23 @@ export default function MoodEntry({ entry, onDeleted }: MoodEntryProps) {
                 { day: "numeric", month: "long", year: "numeric" }
               )}
             </p>
-            <div className="flex items-center gap-4 mt-1">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1">
               <span className="text-sm text-gray-700">
                 {locale === "fr" ? "Humeur" : "Mood"}: <strong>{entry.mood_score}/10</strong>
               </span>
               <span className="text-sm text-gray-700">
                 {locale === "fr" ? "Énergie" : "Energy"}: <strong>{entry.energy_level}/10</strong>
               </span>
+              {entry.sleep_quality != null && (
+                <span className="text-sm text-gray-700">
+                  {locale === "fr" ? "Sommeil" : "Sleep"}: <strong>{entry.sleep_quality}/10</strong>
+                </span>
+              )}
+              {entry.stress_level != null && (
+                <span className="text-sm text-gray-700">
+                  {locale === "fr" ? "Stress" : "Stress"}: <strong>{entry.stress_level}/10</strong>
+                </span>
+              )}
             </div>
           </div>
         </div>
