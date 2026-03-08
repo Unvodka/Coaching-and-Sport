@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/lib/i18n/useLanguage";
@@ -24,11 +25,9 @@ interface Tip {
 }
 
 // Pick a stable variant based on today's date so it doesn't change on re-render
-function pickVariant<T>(arr: T[], seed: number): T {
-  return arr[seed % arr.length];
+function pickRandom<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
 }
-
-const TODAY_SEED = new Date().getDate() + new Date().getMonth() * 31;
 
 // ─── LOW MOOD, LOW ENERGY (mood ≤3, energy ≤4) ───────────────────────────────
 const LOW_LOW: Tip[] = [
@@ -295,7 +294,8 @@ function getTips(mood: number, energy: number): Tip[] {
 export default function WellnessTip({ moodScore, energyLevel }: WellnessTipProps) {
   const { locale } = useLanguage();
   const tips = getTips(moodScore, energyLevel);
-  const tip = pickVariant(tips, TODAY_SEED);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const tip = useMemo(() => pickRandom(tips), [moodScore, energyLevel]);
   const showCoachReminder = moodScore <= 6;
 
   return (
