@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
 
   return withAuth(async ({ user, admin }) => {
     const body = await request.json();
-    const { mood_score, energy_level, notes, tags, date } = body;
+    const { mood_score, energy_level, sleep_quality, stress_level, notes, tags, date } = body;
 
     if (mood_score === undefined || energy_level === undefined) {
       return NextResponse.json({ error: "mood_score and energy_level are required" }, { status: 400 });
@@ -52,6 +52,14 @@ export async function POST(request: NextRequest) {
     }
     if (isNaN(parsedEnergy) || parsedEnergy < 1 || parsedEnergy > 10 || !Number.isInteger(parsedEnergy)) {
       return NextResponse.json({ error: "energy_level must be an integer between 1 and 10" }, { status: 400 });
+    }
+    const parsedSleep = sleep_quality !== undefined && sleep_quality !== null ? Number(sleep_quality) : null;
+    const parsedStress = stress_level !== undefined && stress_level !== null ? Number(stress_level) : null;
+    if (parsedSleep !== null && (isNaN(parsedSleep) || parsedSleep < 1 || parsedSleep > 10 || !Number.isInteger(parsedSleep))) {
+      return NextResponse.json({ error: "sleep_quality must be an integer between 1 and 10" }, { status: 400 });
+    }
+    if (parsedStress !== null && (isNaN(parsedStress) || parsedStress < 1 || parsedStress > 10 || !Number.isInteger(parsedStress))) {
+      return NextResponse.json({ error: "stress_level must be an integer between 1 and 10" }, { status: 400 });
     }
     if (notes && (typeof notes !== "string" || notes.length > 5000)) {
       return NextResponse.json({ error: "Invalid notes" }, { status: 400 });
@@ -69,6 +77,8 @@ export async function POST(request: NextRequest) {
       user_id: user.id,
       mood_score: parsedMood,
       energy_level: parsedEnergy,
+      sleep_quality: parsedSleep,
+      stress_level: parsedStress,
       notes: notes || null,
       tags: tags || [],
       date: date || new Date().toISOString().split("T")[0],
