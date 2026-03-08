@@ -89,8 +89,8 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
   };
 
   return (
-    <div className={inline ? "space-y-6" : "max-w-2xl mx-auto space-y-8"}>
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <div className={inline ? "space-y-3" : "max-w-2xl mx-auto space-y-5"}>
+      <form onSubmit={handleSubmit} className="space-y-3">
         {error && (
           <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg">
             {error}
@@ -118,7 +118,7 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
         </div>
 
         {/* Mood Score */}
-        <div className="bg-white rounded-xl border border-gray-100 p-6">
+        <div className="bg-white rounded-xl border border-gray-100 p-4">
           <label className="block text-sm font-medium text-gray-700 mb-3">
             {t("portal.journal.mood")} — {MOOD_EMOJIS[moodScore - 1]} {moodScore}/10
           </label>
@@ -137,7 +137,7 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
         </div>
 
         {/* Energy Level */}
-        <div className="bg-white rounded-xl border border-gray-100 p-6">
+        <div className="bg-white rounded-xl border border-gray-100 p-4">
           <label className="block text-sm font-medium text-gray-700 mb-3">
             {t("portal.journal.energy")} — {energyLevel}/10
           </label>
@@ -156,7 +156,7 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
         </div>
 
         {/* Sleep Quality */}
-        <div className="bg-white rounded-xl border border-gray-100 p-6">
+        <div className="bg-white rounded-xl border border-gray-100 p-4">
           <label className="block text-sm font-medium text-gray-700 mb-3">
             {locale === "fr" ? "Qualité du sommeil" : "Sleep quality"} — {sleepQuality}/10
           </label>
@@ -175,7 +175,7 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
         </div>
 
         {/* Stress Level */}
-        <div className="bg-white rounded-xl border border-gray-100 p-6">
+        <div className="bg-white rounded-xl border border-gray-100 p-4">
           <label className="block text-sm font-medium text-gray-700 mb-3">
             {locale === "fr" ? "Niveau de stress" : "Stress level"} — {stressLevel}/10
           </label>
