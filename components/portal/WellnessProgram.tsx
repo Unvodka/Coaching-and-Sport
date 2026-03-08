@@ -401,12 +401,12 @@ export default function WellnessProgram({ moodScore, energyLevel, onDismiss }: W
       </div>
 
       {/* Days */}
-      <div className="px-6 pb-2">
+      <div className="pb-2">
         <div className="space-y-2 w-full">
           {program.days.map((day, i) => (
             <div
               key={i}
-              className={`rounded-lg border transition-all w-full ${
+              className={`border-y transition-all w-full ${
                 expandedDay === i
                   ? "bg-white border-indigo-200 shadow-sm"
                   : "bg-white/60 border-gray-100 hover:border-gray-200"
