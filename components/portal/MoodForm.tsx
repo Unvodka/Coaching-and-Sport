@@ -116,7 +116,6 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
             className="px-3 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none transition-all text-gray-800 text-sm"
           />
         </div>
-
         {/* Mood Score */}
         <div className="bg-white rounded-xl border border-gray-100 px-3 py-2.5">
           <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -135,7 +134,6 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
             <span>{locale === "fr" ? "Excellent" : "Excellent"}</span>
           </div>
         </div>
-
         {/* Energy Level */}
         <div className="bg-white rounded-xl border border-gray-100 px-3 py-2.5">
           <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -154,7 +152,6 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
             <span>{locale === "fr" ? "Plein d'énergie" : "Full of energy"}</span>
           </div>
         </div>
-
         {/* Sleep Quality */}
         <div className="bg-white rounded-xl border border-gray-100 px-3 py-2.5">
           <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -173,7 +170,6 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
             <span>{locale === "fr" ? "Excellent" : "Excellent"}</span>
           </div>
         </div>
-
         {/* Stress Level */}
         <div className="bg-white rounded-xl border border-gray-100 px-3 py-2.5">
           <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -192,7 +188,6 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
             <span>{locale === "fr" ? "Très stressé(e)" : "Very stressed"}</span>
           </div>
         </div>
-
         {/* Notes */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
