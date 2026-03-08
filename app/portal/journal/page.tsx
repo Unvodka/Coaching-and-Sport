@@ -15,7 +15,7 @@ export default function JournalPage() {
   const [entries, setEntries] = useState<MoodEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [program, setProgram] = useState<{ mood: number; energy: number } | null>(null);
+  const [program, setProgram] = useState<{ mood: number; energy: number; sleep: number | null; stress: number | null } | null>(null);
 
   const fetchEntries = useCallback(async () => {
     try {
@@ -43,8 +43,8 @@ export default function JournalPage() {
     fetchEntries();
   };
 
-  const handleProgramReady = (mood: number, energy: number) => {
-    setProgram({ mood, energy });
+  const handleProgramReady = (mood: number, energy: number, sleep: number | null, stress: number | null) => {
+    setProgram({ mood, energy, sleep, stress });
   };
 
   if (loading) {
@@ -97,6 +97,8 @@ export default function JournalPage() {
         <WellnessProgram
           moodScore={program.mood}
           energyLevel={program.energy}
+          sleepQuality={program.sleep}
+          stressLevel={program.stress}
           onDismiss={() => setProgram(null)}
         />
       )}

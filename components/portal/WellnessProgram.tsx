@@ -7,6 +7,8 @@ import { useLanguage } from "@/lib/i18n/useLanguage";
 interface WellnessProgramProps {
   moodScore: number;
   energyLevel: number;
+  sleepQuality?: number | null;
+  stressLevel?: number | null;
   onDismiss: () => void;
 }
 
@@ -27,7 +29,282 @@ interface Program {
   ctaHref: string;
 }
 
-function getProgram(mood: number, energy: number): Program {
+function getProgram(mood: number, energy: number, sleep: number | null, stress: number | null): Program {
+
+  // ── SLEEP-PRIORITY PROGRAMS ──────────────────────────────────────────────
+  // Bad sleep + high stress → Programme Sommeil & Déstress
+  if (sleep !== null && stress !== null && sleep <= 4 && stress >= 7) {
+    return {
+      emoji: "😴",
+      title: {
+        fr: "Programme Sommeil & Déstress — 5 jours pour retrouver la sérénité",
+        en: "Sleep & De-stress Program — 5 days to find serenity",
+      },
+      intro: {
+        fr: "Mauvais sommeil et stress élevé forment un cercle vicieux difficile à briser. Ce programme combine des techniques de gestion du stress, des rituels de sommeil et une activité physique douce pour couper ce cycle et restaurer votre équilibre.",
+        en: "Poor sleep and high stress form a vicious cycle that's hard to break. This program combines stress management techniques, sleep rituals, and gentle physical activity to break this cycle and restore your balance.",
+      },
+      days: [
+        {
+          icon: "🫁",
+          activity: { fr: "Cohérence cardiaque & respiration", en: "Cardiac coherence & breathing" },
+          duration: "10 min",
+          detail: {
+            fr: "3 fois par jour (matin, midi, soir) : inspirez 5 secondes, expirez 5 secondes, pendant 5 minutes. Cette technique réduit le cortisol en 8 minutes. Utilisez une app comme Kardia ou RespiRelax.",
+            en: "3 times a day (morning, noon, evening): inhale 5 seconds, exhale 5 seconds, for 5 minutes. This technique reduces cortisol in 8 minutes. Use an app like Kardia or RespiRelax.",
+          },
+        },
+        {
+          icon: "🚶",
+          activity: { fr: "Marche déstressante en nature", en: "Stress-relief walk in nature" },
+          duration: "30 min",
+          detail: {
+            fr: "Marche lente en plein air, sans téléphone. Concentrez-vous sur 5 choses que vous voyez, 4 que vous entendez, 3 que vous touchez. Cette technique de pleine conscience ancre dans le présent et coupe le flux de pensées stressantes.",
+            en: "Slow walk outdoors, without your phone. Focus on 5 things you see, 4 you hear, 3 you touch. This mindfulness technique grounds you in the present and cuts the flow of stressful thoughts.",
+          },
+        },
+        {
+          icon: "🛁",
+          activity: { fr: "Rituel bain chaud + digital detox", en: "Warm bath ritual + digital detox" },
+          duration: "45 min",
+          detail: {
+            fr: "1h30 avant de dormir : bain chaud à 38-40°C pendant 20 min (abaisse la température corporelle et déclenche le sommeil), puis aucun écran. Lisez, méditez ou écoutez de la musique douce.",
+            en: "1.5h before sleep: warm bath at 38-40°C for 20 min (lowers body temperature and triggers sleep), then no screens. Read, meditate, or listen to soft music.",
+          },
+        },
+        {
+          icon: "🧘",
+          activity: { fr: "Yoga Nidra (sommeil yogique)", en: "Yoga Nidra (yogic sleep)" },
+          duration: "25 min",
+          detail: {
+            fr: "Allongez-vous confortablement et suivez une séance de Yoga Nidra guidée (YouTube ou app Insight Timer). Cette pratique équivaut à 2-3h de sommeil réparateur et réduit le cortisol de 30%. Idéal avant de dormir.",
+            en: "Lie down comfortably and follow a guided Yoga Nidra session (YouTube or Insight Timer app). This practice is equivalent to 2-3h of restorative sleep and reduces cortisol by 30%. Ideal before sleeping.",
+          },
+        },
+        {
+          icon: "📓",
+          activity: { fr: "Journaling anti-stress + bilan", en: "Anti-stress journaling + review" },
+          duration: "15 min",
+          detail: {
+            fr: "Chaque soir, écrivez : 3 choses positives du jour, 1 chose qui vous a stressé(e) et comment vous l'avez gérée, et vos intentions pour demain. Vider l'esprit sur papier améliore la qualité du sommeil de 42%.",
+            en: "Each evening, write: 3 positive things from the day, 1 thing that stressed you and how you handled it, and your intentions for tomorrow. Emptying the mind on paper improves sleep quality by 42%.",
+          },
+        },
+      ],
+      bonusTip: {
+        fr: "Évitez la caféine après 14h, gardez votre chambre à 18-19°C et levez-vous à la même heure chaque jour même le week-end. La régularité est la clé d'un sommeil de qualité.",
+        en: "Avoid caffeine after 2pm, keep your bedroom at 18-19°C, and wake up at the same time every day including weekends. Consistency is the key to quality sleep.",
+      },
+      ctaLabel: { fr: "Explorer les recettes anti-stress", en: "Explore anti-stress recipes" },
+      ctaHref: "/portal/recipes",
+    };
+  }
+
+  // Bad sleep only (sleep ≤ 4, stress not high) → Programme Récupération Sommeil
+  if (sleep !== null && sleep <= 4 && (stress === null || stress < 7)) {
+    return {
+      emoji: "🌙",
+      title: {
+        fr: "Programme Récupération Sommeil — 5 jours pour mieux dormir",
+        en: "Sleep Recovery Program — 5 days to sleep better",
+      },
+      intro: {
+        fr: "La qualité du sommeil impacte directement votre énergie, votre humeur et vos performances sportives. Ce programme restructure vos habitudes de sommeil avec des approches scientifiquement prouvées pour retrouver des nuits réparatrices.",
+        en: "Sleep quality directly impacts your energy, mood, and sports performance. This program restructures your sleep habits with scientifically proven approaches to restore restorative nights.",
+      },
+      days: [
+        {
+          icon: "⏰",
+          activity: { fr: "Anchor sleep — heure fixe de réveil", en: "Anchor sleep — fixed wake time" },
+          duration: "Toute la semaine",
+          detail: {
+            fr: "La règle n°1 : réveillez-vous à la même heure chaque matin, même le week-end. Cela synchronise votre horloge circadienne en 3-5 jours. Exposez-vous à la lumière naturelle dans les 30 minutes suivant le réveil.",
+            en: "Rule #1: wake up at the same time every morning, even on weekends. This syncs your circadian clock in 3-5 days. Expose yourself to natural light within 30 minutes of waking.",
+          },
+        },
+        {
+          icon: "🏃",
+          activity: { fr: "Activité physique matinale", en: "Morning physical activity" },
+          duration: "20 min",
+          detail: {
+            fr: "Une activité physique le matin (même courte) améliore le sommeil du soir de 65%. Jogging, vélo, natation ou HIIT léger. L'important est de la faire avant 14h pour ne pas perturber le sommeil.",
+            en: "Morning physical activity (even brief) improves evening sleep by 65%. Jogging, cycling, swimming, or light HIIT. The key is to do it before 2pm to avoid disrupting sleep.",
+          },
+        },
+        {
+          icon: "🍵",
+          activity: { fr: "Nutrition pro-sommeil", en: "Sleep-friendly nutrition" },
+          duration: "Toute la semaine",
+          detail: {
+            fr: "Favorisez le soir : tryptophane (dinde, œufs, banane), magnésium (amandes, épinards), tisane de camomille ou valériane. Évitez l'alcool, le sucre raffiné et les repas copieux après 20h.",
+            en: "Favor in the evening: tryptophan (turkey, eggs, banana), magnesium (almonds, spinach), chamomile or valerian tea. Avoid alcohol, refined sugar, and heavy meals after 8pm.",
+          },
+        },
+        {
+          icon: "📵",
+          activity: { fr: "Protocole chambre noire", en: "Dark room protocol" },
+          duration: "1h avant le coucher",
+          detail: {
+            fr: "1h avant de dormir : pas d'écrans (ou lunettes anti-lumière bleue), lumières tamisées, température chambre à 18°C, oreiller frais. Utilisez des bouchons d'oreilles ou un masque si nécessaire.",
+            en: "1h before sleep: no screens (or blue light glasses), dim lights, room temperature at 18°C, cool pillow. Use earplugs or a sleep mask if needed.",
+          },
+        },
+        {
+          icon: "🧘",
+          activity: { fr: "Relaxation musculaire progressive", en: "Progressive muscle relaxation" },
+          duration: "15 min",
+          detail: {
+            fr: "Au lit : contractez chaque groupe musculaire 5 secondes puis relâchez, des pieds vers la tête. Cette technique réduit l'hyperactivation physique et mentale qui empêche de dormir. Pratiquez-la chaque soir.",
+            en: "In bed: tense each muscle group for 5 seconds then release, from feet to head. This technique reduces the physical and mental hyperactivation that prevents sleep. Practice it every evening.",
+          },
+        },
+      ],
+      bonusTip: {
+        fr: "Tenez un journal de sommeil cette semaine : heure de coucher, de lever, qualité ressentie. Identifier vos patterns est la première étape pour les améliorer. Votre journal bien-être est parfait pour ça !",
+        en: "Keep a sleep diary this week: bedtime, wake time, perceived quality. Identifying your patterns is the first step to improving them. Your wellness journal is perfect for that!",
+      },
+      ctaLabel: { fr: "Voir les recettes du soir", en: "See evening recipes" },
+      ctaHref: "/portal/recipes",
+    };
+  }
+
+  // High stress only (stress ≥ 7, sleep not bad) → Programme Anti-Stress
+  if (stress !== null && stress >= 7 && (sleep === null || sleep > 4)) {
+    return {
+      emoji: "🧠",
+      title: {
+        fr: "Programme Anti-Stress — 5 jours pour retrouver le calme",
+        en: "Anti-Stress Program — 5 days to find calm",
+      },
+      intro: {
+        fr: "Un stress chronique élevé épuise le corps et l'esprit progressivement. Ce programme combine activité physique, techniques mentales et nutrition ciblée pour réduire durablement votre niveau de cortisol et retrouver un équilibre sain.",
+        en: "Chronic high stress gradually exhausts body and mind. This program combines physical activity, mental techniques, and targeted nutrition to sustainably reduce your cortisol levels and restore a healthy balance.",
+      },
+      days: [
+        {
+          icon: "🏊",
+          activity: { fr: "Natation ou activité aquatique", en: "Swimming or water activity" },
+          duration: "30 min",
+          detail: {
+            fr: "L'eau a un effet naturellement apaisant sur le système nerveux. Nage douce ou aquagym, sans objectif de performance. Concentrez-vous sur la sensation de l'eau et votre respiration. Excellent anti-stress prouvé scientifiquement.",
+            en: "Water has a naturally soothing effect on the nervous system. Gentle swimming or aqua gym, with no performance goal. Focus on the sensation of the water and your breathing. Scientifically proven excellent stress reliever.",
+          },
+        },
+        {
+          icon: "🌿",
+          activity: { fr: "Méditation mindfulness", en: "Mindfulness meditation" },
+          duration: "15 min",
+          detail: {
+            fr: "Asseyez-vous confortablement et observez vos pensées sans les juger. Quand l'esprit vagabonde, ramenez doucement l'attention à la respiration. Même 10 minutes par jour réduisent le stress perçu de 35% en 8 semaines.",
+            en: "Sit comfortably and observe your thoughts without judging them. When the mind wanders, gently bring attention back to breathing. Even 10 minutes a day reduces perceived stress by 35% in 8 weeks.",
+          },
+        },
+        {
+          icon: "💪",
+          activity: { fr: "Sport intensif libérateur", en: "Intense liberating workout" },
+          duration: "35 min",
+          detail: {
+            fr: "Le sport intense est l'un des meilleurs régulateurs du cortisol. Circuit HIIT, boxe, course rapide — donnez tout pendant 30 min. Après l'effort, votre corps entre dans un état de relaxation profonde dit 'post-exercise hypotension'.",
+            en: "Intense exercise is one of the best cortisol regulators. HIIT circuit, boxing, fast running — give it your all for 30 min. After the effort, your body enters a state of deep relaxation called post-exercise hypotension.",
+          },
+        },
+        {
+          icon: "🍽️",
+          activity: { fr: "Nutrition anti-cortisol", en: "Anti-cortisol nutrition" },
+          duration: "Toute la semaine",
+          detail: {
+            fr: "Privilégiez : oméga-3 (saumon, sardines, noix), magnésium (chocolat noir 70%+, amandes), vitamine C (kiwi, poivron rouge), adaptogènes (ashwagandha, rhodiola). Réduisez caféine, alcool et sucre raffiné.",
+            en: "Prioritize: omega-3 (salmon, sardines, walnuts), magnesium (70%+ dark chocolate, almonds), vitamin C (kiwi, red pepper), adaptogens (ashwagandha, rhodiola). Reduce caffeine, alcohol, and refined sugar.",
+          },
+        },
+        {
+          icon: "🤝",
+          activity: { fr: "Connexion sociale & lâcher-prise", en: "Social connection & letting go" },
+          duration: "Selon disponibilité",
+          detail: {
+            fr: "Le lien social est l'antidote naturel au stress. Planifiez une activité avec des proches, appelez un ami, rejoignez un cours collectif. Et pratiquez le lâcher-prise : identifiez ce que vous ne contrôlez pas et décidez consciemment de ne plus y dépenser d'énergie.",
+            en: "Social connection is the natural antidote to stress. Plan an activity with loved ones, call a friend, join a group class. And practice letting go: identify what you don't control and consciously decide to stop spending energy on it.",
+          },
+        },
+      ],
+      bonusTip: {
+        fr: "Le stress chronique vide vos réserves de magnésium. Une supplémentation en magnésium bisglycinate (300-400mg/jour le soir) peut réduire significativement l'anxiété et améliorer la qualité du sommeil en 3-4 semaines.",
+        en: "Chronic stress depletes your magnesium reserves. Magnesium bisglycinate supplementation (300-400mg/day in the evening) can significantly reduce anxiety and improve sleep quality within 3-4 weeks.",
+      },
+      ctaLabel: { fr: "Explorer les recettes anti-stress", en: "Explore anti-stress recipes" },
+      ctaHref: "/portal/recipes",
+    };
+  }
+
+  // Good sleep + low stress + good mood → Programme Optimisation Performance
+  if (sleep !== null && stress !== null && sleep >= 7 && stress <= 3 && mood >= 7) {
+    return {
+      emoji: "⚡",
+      title: {
+        fr: "Programme Optimisation — 5 jours pour atteindre l'excellence",
+        en: "Optimization Program — 5 days to reach excellence",
+      },
+      intro: {
+        fr: "Vous êtes dans des conditions optimales : bon sommeil, stress maîtrisé, moral au top. C'est le moment d'optimiser chaque aspect de votre bien-être pour atteindre votre meilleur niveau de performance physique et mentale.",
+        en: "You're in optimal conditions: good sleep, controlled stress, great mood. This is the time to optimize every aspect of your well-being to reach your best physical and mental performance level.",
+      },
+      days: [
+        {
+          icon: "🏋️",
+          activity: { fr: "Séance de force maximale", en: "Maximum strength session" },
+          duration: "50 min",
+          detail: {
+            fr: "Profitez de votre récupération optimale pour pousser vos charges au maximum. Travaillez en pyramide ascendante sur squats, soulevé de terre et développé couché. Restez entre 3-6 répétitions avec des charges lourdes.",
+            en: "Take advantage of your optimal recovery to push your weights to the maximum. Work in ascending pyramid on squats, deadlifts, and bench press. Stay between 3-6 reps with heavy loads.",
+          },
+        },
+        {
+          icon: "🧠",
+          activity: { fr: "Entraînement mental & visualisation", en: "Mental training & visualization" },
+          duration: "20 min",
+          detail: {
+            fr: "Les sportifs de haut niveau consacrent 20% de leur entraînement au mental. Pratiquez la visualisation : fermez les yeux et imaginez-vous atteindre votre objectif en détail, en ressentant les sensations. 10 min matin et soir.",
+            en: "Elite athletes dedicate 20% of their training to mental work. Practice visualization: close your eyes and imagine yourself achieving your goal in detail, feeling the sensations. 10 min morning and evening.",
+          },
+        },
+        {
+          icon: "🏊",
+          activity: { fr: "Entraînement technique en piscine", en: "Technical pool training" },
+          duration: "45 min",
+          detail: {
+            fr: "Avec un esprit clair et reposé, c'est le meilleur moment pour travailler la technique. 200m échauffement, puis focus sur l'alignement du corps, la prise d'eau et la rotation. Filmez-vous si possible pour analyser vos mouvements.",
+            en: "With a clear and rested mind, this is the best time to work on technique. 200m warm-up, then focus on body alignment, catch, and rotation. Film yourself if possible to analyze your movements.",
+          },
+        },
+        {
+          icon: "🥗",
+          activity: { fr: "Optimisation nutritionnelle", en: "Nutritional optimization" },
+          duration: "Toute la semaine",
+          detail: {
+            fr: "En état optimal, optimisez la fenêtre anabolique : 30g de protéines dans les 30 minutes post-entraînement, glucides complexes 2h avant l'effort, créatine monohydrate (5g/jour) pour maximiser les gains de force.",
+            en: "In optimal state, optimize the anabolic window: 30g protein within 30 minutes post-workout, complex carbs 2h before effort, creatine monohydrate (5g/day) to maximize strength gains.",
+          },
+        },
+        {
+          icon: "📈",
+          activity: { fr: "Bilan performance & nouveaux objectifs", en: "Performance review & new goals" },
+          duration: "30 min",
+          detail: {
+            fr: "Analysez vos données (journal, poids, compositions), mesurez vos progrès et fixez des objectifs SMART pour les 4 prochaines semaines. Challengez-vous : un objectif qui ne vous fait pas un peu peur n'est pas assez ambitieux.",
+            en: "Analyze your data (journal, weight, compositions), measure your progress and set SMART goals for the next 4 weeks. Challenge yourself: a goal that doesn't scare you a little isn't ambitious enough.",
+          },
+        },
+      ],
+      bonusTip: {
+        fr: "Documentez tout cette semaine : poids de vos charges, temps de récupération, ressenti. Ces données sont précieuses pour reproduire ces conditions optimales. Votre journal bien-être est votre meilleur allié.",
+        en: "Document everything this week: weights, recovery times, how you feel. This data is precious for reproducing these optimal conditions. Your wellness journal is your best ally.",
+      },
+      ctaLabel: { fr: "Voir les programmes d'entraînement", en: "See workout programs" },
+      ctaHref: "/portal/workouts",
+    };
+  }
+
+  // ── EXISTING MOOD × ENERGY PROGRAMS ─────────────────────────────────────
   // Mood bas + énergie basse → Programme douceur & récupération
   if (mood <= 3 && energy <= 4) {
     return {
@@ -367,10 +644,10 @@ function getProgram(mood: number, energy: number): Program {
   };
 }
 
-export default function WellnessProgram({ moodScore, energyLevel, onDismiss }: WellnessProgramProps) {
+export default function WellnessProgram({ moodScore, energyLevel, sleepQuality, stressLevel, onDismiss }: WellnessProgramProps) {
   const { locale } = useLanguage();
   const [expandedDay, setExpandedDay] = useState<number | null>(0);
-  const program = getProgram(moodScore, energyLevel);
+  const program = getProgram(moodScore, energyLevel, sleepQuality ?? null, stressLevel ?? null);
 
   return (
     <div className="bg-gradient-to-br from-white to-indigo-50/30 rounded-xl border border-indigo-100 shadow-sm overflow-hidden w-full">

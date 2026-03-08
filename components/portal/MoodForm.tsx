@@ -8,7 +8,7 @@ import { MOOD_EMOJIS } from "@/lib/constants";
 interface MoodFormProps {
   onAdded?: () => void;
   inline?: boolean;
-  onProgramReady?: (mood: number, energy: number) => void;
+  onProgramReady?: (mood: number, energy: number, sleep: number | null, stress: number | null) => void;
 }
 
 export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormProps) {
@@ -74,7 +74,7 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
         setSuccess(true);
         setSaving(false);
         onAdded();
-        onProgramReady?.(_mood, _energy);
+        onProgramReady?.(_mood, _energy, sleepQuality, stressLevel);
         setTimeout(() => setSuccess(false), 4000);
       } else {
         // Standalone page mode: redirect back
