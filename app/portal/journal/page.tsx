@@ -6,6 +6,7 @@ import { useLanguage } from "@/lib/i18n/useLanguage";
 import MoodEntryCard from "@/components/portal/MoodEntry";
 const MoodChart = dynamic(() => import("@/components/portal/MoodChart"), { ssr: false });
 import WellnessTip from "@/components/portal/WellnessTip";
+import WellnessProgram from "@/components/portal/WellnessProgram";
 import MoodForm from "@/components/portal/MoodForm";
 import type { MoodEntry } from "@/lib/supabase/database.types";
 
@@ -14,6 +15,7 @@ export default function JournalPage() {
   const [entries, setEntries] = useState<MoodEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [program, setProgram] = useState<{ mood: number; energy: number } | null>(null);
 
   const fetchEntries = useCallback(async () => {
     try {
@@ -39,7 +41,10 @@ export default function JournalPage() {
 
   const handleAdded = () => {
     fetchEntries();
-    // Keep form open so user sees the data appear below
+  };
+
+  const handleProgramReady = (mood: number, energy: number) => {
+    setProgram({ mood, energy });
   };
 
   if (loading) {
@@ -83,8 +88,17 @@ export default function JournalPage() {
           <h3 className="font-semibold text-heading mb-4">
             {t("portal.journal.new")}
           </h3>
-          <MoodForm onAdded={handleAdded} inline />
+          <MoodForm onAdded={handleAdded} inline onProgramReady={handleProgramReady} />
         </div>
+      )}
+
+      {/* Wellness program — rendered outside form card so it's full width */}
+      {program && (
+        <WellnessProgram
+          moodScore={program.mood}
+          energyLevel={program.energy}
+          onDismiss={() => setProgram(null)}
+        />
       )}
 
       {entries.length === 0 && !showForm ? (

@@ -3,15 +3,15 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import WellnessProgram from "@/components/portal/WellnessProgram";
 import { MOOD_EMOJIS } from "@/lib/constants";
 
 interface MoodFormProps {
   onAdded?: () => void;
   inline?: boolean;
+  onProgramReady?: (mood: number, energy: number) => void;
 }
 
-export default function MoodForm({ onAdded, inline }: MoodFormProps) {
+export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormProps) {
   const router = useRouter();
   const { t, locale } = useLanguage();
 
@@ -24,9 +24,6 @@ export default function MoodForm({ onAdded, inline }: MoodFormProps) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
-  const [showProgram, setShowProgram] = useState(false);
-  const [submittedMood, setSubmittedMood] = useState(5);
-  const [submittedEnergy, setSubmittedEnergy] = useState(5);
 
   const resetForm = () => {
     setMoodScore(5);
@@ -42,7 +39,6 @@ export default function MoodForm({ onAdded, inline }: MoodFormProps) {
     setSaving(true);
     setError(null);
     setSuccess(false);
-    setShowProgram(false);
 
     try {
       const res = await fetch("/api/portal/mood", {
@@ -72,13 +68,13 @@ export default function MoodForm({ onAdded, inline }: MoodFormProps) {
 
       // Inline mode: show success + wellness program, reset form, notify parent
       if (inline && onAdded) {
-        setSubmittedMood(moodScore);
-        setSubmittedEnergy(energyLevel);
+        const _mood = moodScore;
+        const _energy = energyLevel;
         resetForm();
         setSuccess(true);
-        setShowProgram(true);
         setSaving(false);
         onAdded();
+        onProgramReady?.(_mood, _energy);
         setTimeout(() => setSuccess(false), 4000);
       } else {
         // Standalone page mode: redirect back
@@ -102,11 +98,8 @@ export default function MoodForm({ onAdded, inline }: MoodFormProps) {
         )}
         {success && (
           <div className="p-3 bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg flex items-center gap-2">
-            <span className="text-lg">{MOOD_EMOJIS[submittedMood - 1]}</span>
             <span>
-              {locale === "fr"
-                ? `Entrée enregistrée ! Humeur ${submittedMood}/10 · Énergie ${submittedEnergy}/10`
-                : `Entry saved! Mood ${submittedMood}/10 · Energy ${submittedEnergy}/10`}
+              {locale === "fr" ? "Entrée enregistrée !" : "Entry saved!"}
             </span>
           </div>
         )}
@@ -243,14 +236,6 @@ export default function MoodForm({ onAdded, inline }: MoodFormProps) {
         </div>
       </form>
 
-      {/* Wellness program recommendation after submission */}
-      {showProgram && inline && (
-        <WellnessProgram
-          moodScore={submittedMood}
-          energyLevel={submittedEnergy}
-          onDismiss={() => setShowProgram(false)}
-        />
-      )}
     </div>
   );
 }
