@@ -21,7 +21,11 @@ export default function MoodChart({ entries }: MoodChartProps) {
   const data = useMemo(
     () =>
       [...entries]
-        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+        .sort((a, b) => {
+          const dateDiff = new Date(a.date).getTime() - new Date(b.date).getTime();
+          if (dateDiff !== 0) return dateDiff;
+          return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+        })
         .map((entry) => ({
           date: new Date(entry.date).toLocaleDateString("fr-FR", {
             day: "2-digit",
