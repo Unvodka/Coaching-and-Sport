@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useAuth } from "@/lib/supabase/AuthContext";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-import DeleteAccountModal from "@/components/portal/DeleteAccountModal";
 
 export default function ProfileForm() {
   const { user, profile, refreshProfile } = useAuth();
@@ -13,7 +12,6 @@ export default function ProfileForm() {
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [initialized, setInitialized] = useState(false);
 
   // Sync with profile when it loads (only once)
@@ -68,31 +66,21 @@ export default function ProfileForm() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-6">
-      {/* Avatar */}
-      <div className="flex items-center gap-6">
+      {/* Avatar top-right */}
+      <div className="flex justify-end">
         {profile?.avatar_url ? (
           <Image
             src={profile.avatar_url}
             alt={profile.full_name || ""}
-            width={80}
-            height={80}
+            width={56}
+            height={56}
             className="rounded-full"
           />
         ) : (
-          <div className="w-20 h-20 rounded-full bg-brand-blue flex items-center justify-center text-white text-2xl font-bold">
+          <div className="w-14 h-14 rounded-full bg-brand-blue flex items-center justify-center text-white text-xl font-bold">
             {(fullName || user?.email || "U").charAt(0).toUpperCase()}
           </div>
         )}
-        <div>
-          <p className="font-semibold text-heading">{fullName || user?.email}</p>
-          <p className="text-sm text-gray-500">
-            {profile?.role === "coach"
-              ? "Coach"
-              : locale === "fr"
-              ? "Membre"
-              : "Member"}
-          </p>
-        </div>
       </div>
 
       {/* First Name */}
@@ -167,31 +155,7 @@ export default function ProfileForm() {
           : t("portal.profile.update")}
       </button>
 
-      {/* Danger Zone */}
-      <div className="mt-12 pt-8 border-t border-gray-200">
-        <div className="border border-red-200 rounded-xl p-6 bg-red-50/30">
-          <h3 className="text-lg font-semibold text-red-700 mb-2">
-            {locale === "fr" ? "Zone de danger" : "Danger zone"}
-          </h3>
-          <p className="text-sm text-gray-600 mb-4">
-            {locale === "fr"
-              ? "La suppression de votre compte est définitive. Toutes vos données (recettes, suivi de poids, journal, progression) seront supprimées."
-              : "Deleting your account is permanent. All your data (recipes, weight tracking, journal, progress) will be deleted."}
-          </p>
-          <button
-            type="button"
-            onClick={() => setShowDeleteModal(true)}
-            className="px-5 py-2.5 bg-red-600 text-white rounded-lg font-semibold text-sm hover:bg-red-700 transition-colors"
-          >
-            {locale === "fr" ? "Supprimer mon compte" : "Delete my account"}
-          </button>
-        </div>
-      </div>
 
-      <DeleteAccountModal
-        open={showDeleteModal}
-        onClose={() => setShowDeleteModal(false)}
-      />
     </form>
   );
 }
