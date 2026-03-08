@@ -6,7 +6,7 @@ import { useLanguage } from "@/lib/i18n/useLanguage";
 import WellnessProgram from "@/components/portal/WellnessProgram";
 import { MOOD_EMOJIS } from "@/lib/constants";
 const TAG_SUGGESTIONS = [
-  "sport", "nutrition", "motivation",
+  "sport", "nutrition", "sommeil", "stress", "motivation",
   "fatigue", "énergie", "progrès", "repos", "méditation",
 ];
 
