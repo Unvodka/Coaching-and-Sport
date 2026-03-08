@@ -105,7 +105,7 @@ export default function MoodForm({ onAdded, inline, onProgramReady }: MoodFormPr
         )}
 
         {/* Date */}
-        <div className="flex items-center justify-center gap-3">
+        <div className="flex items-center justify-center gap-3" style={{ marginBottom: "15px" }}>
           <label className="text-sm font-medium text-gray-700 flex-shrink-0">
             {t("portal.weight.date")}
           </label>
