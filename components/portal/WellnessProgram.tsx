@@ -375,36 +375,36 @@ export default function WellnessProgram({ moodScore, energyLevel, onDismiss }: W
   return (
     <div className="bg-gradient-to-br from-white to-indigo-50/30 rounded-xl border border-indigo-100 shadow-sm overflow-hidden">
       {/* Header */}
-      <div className="px-6 pt-5 pb-4">
+      <div className="px-4 pt-4 pb-3">
         {/* Row 1: emoji + label + dismiss */}
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center justify-between mb-1.5">
           <div className="flex items-center gap-1.5">
-            <span className="text-base leading-none">{program.emoji}</span>
+            <span className="text-sm leading-none">{program.emoji}</span>
             <p className="text-xs font-semibold text-indigo-500 uppercase tracking-wider">
               {locale === "fr" ? "Programme recommandé" : "Recommended program"}
             </p>
           </div>
           <button
             onClick={onDismiss}
-            className="text-gray-400 hover:text-gray-600 transition-colors p-1 flex-shrink-0 -mr-1"
+            className="text-gray-400 hover:text-gray-600 transition-colors p-0.5 flex-shrink-0 -mr-0.5"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
         {/* Row 2: title at 90% width */}
-        <h3 className="text-lg font-bold text-heading leading-snug mb-3" style={{ width: "90%" }}>
+        <h3 className="text-base font-bold text-heading leading-snug mb-2" style={{ width: "90%" }}>
           {locale === "fr" ? program.title.fr : program.title.en}
         </h3>
-        <p className="text-sm text-gray-600 leading-relaxed">
+        <p className="text-xs text-gray-600 leading-relaxed">
           {locale === "fr" ? program.intro.fr : program.intro.en}
         </p>
       </div>
 
       {/* Days */}
-      <div className="px-6 pb-2">
-        <div className="space-y-2">
+      <div className="px-4 pb-2">
+        <div className="space-y-1.5">
           {program.days.map((day, i) => (
             <div
               key={i}
@@ -416,23 +416,23 @@ export default function WellnessProgram({ moodScore, energyLevel, onDismiss }: W
             >
               <button
                 onClick={() => setExpandedDay(expandedDay === i ? null : i)}
-                className="w-full flex items-center gap-3 px-4 py-3 text-left"
+                className="w-full flex items-center gap-2.5 px-3 py-2.5 text-left"
               >
-                <span className="text-lg flex-shrink-0">{day.icon}</span>
+                <span className="text-base leading-none flex-shrink-0 w-5 text-center">{day.icon}</span>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
                     <span className="text-xs font-bold text-indigo-400 uppercase">
                       {locale === "fr" ? `Jour ${i + 1}` : `Day ${i + 1}`}
                     </span>
                     <span className="text-xs text-gray-400">·</span>
                     <span className="text-xs text-gray-500">{day.duration}</span>
                   </div>
-                  <p className="text-sm font-medium text-heading truncate">
+                  <p className="text-sm font-medium text-heading leading-tight truncate">
                     {locale === "fr" ? day.activity.fr : day.activity.en}
                   </p>
                 </div>
                 <svg
-                  className={`w-4 h-4 text-gray-400 transition-transform flex-shrink-0 ${
+                  className={`w-3.5 h-3.5 text-gray-400 transition-transform flex-shrink-0 ${
                     expandedDay === i ? "rotate-180" : ""
                   }`}
                   fill="none"
@@ -444,8 +444,8 @@ export default function WellnessProgram({ moodScore, energyLevel, onDismiss }: W
                 </svg>
               </button>
               {expandedDay === i && (
-                <div className="px-4 pb-3 pl-12">
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                <div className="px-3 pb-2.5 pl-10">
+                  <p className="text-xs text-gray-600 leading-relaxed">
                     {locale === "fr" ? day.detail.fr : day.detail.en}
                   </p>
                 </div>
@@ -456,9 +456,9 @@ export default function WellnessProgram({ moodScore, energyLevel, onDismiss }: W
       </div>
 
       {/* Bonus tip */}
-      <div className="mx-6 my-4 px-4 py-3 bg-amber-50/80 border border-amber-200/60 rounded-lg">
-        <div className="flex items-start gap-2">
-          <span className="text-sm flex-shrink-0">💡</span>
+      <div className="mx-4 my-3 px-3 py-2.5 bg-amber-50/80 border border-amber-200/60 rounded-lg">
+        <div className="flex items-start gap-1.5">
+          <span className="text-xs flex-shrink-0 leading-relaxed">💡</span>
           <p className="text-xs text-amber-800 leading-relaxed">
             <span className="font-semibold">{locale === "fr" ? "Conseil bonus : " : "Bonus tip: "}</span>
             {locale === "fr" ? program.bonusTip.fr : program.bonusTip.en}
@@ -467,7 +467,7 @@ export default function WellnessProgram({ moodScore, energyLevel, onDismiss }: W
       </div>
 
       {/* CTA */}
-      <div className="px-6 pb-6">
+      <div className="px-4 pb-4">
         <Link
           href={program.ctaHref}
           className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity no-underline"
