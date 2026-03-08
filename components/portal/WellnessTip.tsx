@@ -301,26 +301,26 @@ export default function WellnessTip({ moodScore, energyLevel }: WellnessTipProps
   return (
     <div className="space-y-4">
       {/* Main wellness tip card */}
-      <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
-        <div className="flex items-start gap-4">
-          <span className="text-4xl flex-shrink-0">{tip.emoji}</span>
-          <div className="flex-1">
-            <h3 className="font-semibold text-heading text-lg mb-2">
-              {locale === "fr" ? tip.title.fr : tip.title.en}
-            </h3>
-            <p className="text-gray-600 text-sm leading-relaxed mb-4">
-              {locale === "fr" ? tip.message.fr : tip.message.en}
-            </p>
-            <Link
-              href={tip.href}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity no-underline w-fit"
-            >
-              {locale === "fr" ? tip.action.fr : tip.action.en}
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
-          </div>
+      <div className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xl leading-none flex-shrink-0">{tip.emoji}</span>
+          <h3 className="font-semibold text-heading text-base leading-snug">
+            {locale === "fr" ? tip.title.fr : tip.title.en}
+          </h3>
+        </div>
+        <div style={{ width: "90%" }}>
+          <p className="text-gray-600 text-sm leading-relaxed mb-4">
+            {locale === "fr" ? tip.message.fr : tip.message.en}
+          </p>
+          <Link
+            href={tip.href}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity no-underline w-fit"
+          >
+            {locale === "fr" ? tip.action.fr : tip.action.en}
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </Link>
         </div>
       </div>
 
