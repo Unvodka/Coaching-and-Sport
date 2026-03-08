@@ -373,7 +373,7 @@ export default function WellnessProgram({ moodScore, energyLevel, onDismiss }: W
   const program = getProgram(moodScore, energyLevel);
 
   return (
-    <div className="bg-gradient-to-br from-white to-indigo-50/30 rounded-xl border border-indigo-100 shadow-sm overflow-hidden">
+    <div className="bg-gradient-to-br from-white to-indigo-50/30 rounded-xl border border-indigo-100 shadow-sm overflow-hidden w-full">
       {/* Header */}
       <div className="px-4 pt-4 pb-3">
         {/* Row 1: emoji + label + dismiss */}
@@ -393,30 +393,30 @@ export default function WellnessProgram({ moodScore, energyLevel, onDismiss }: W
             </svg>
           </button>
         </div>
-        {/* Row 2: title at 90% width */}
+        {/* Row 2: title + intro both at 90% width */}
         <h3 className="text-base font-bold text-heading leading-snug mb-2" style={{ width: "90%" }}>
           {locale === "fr" ? program.title.fr : program.title.en}
         </h3>
-        <p className="text-xs text-gray-600 leading-relaxed">
+        <p className="text-xs text-gray-600 leading-relaxed" style={{ width: "90%" }}>
           {locale === "fr" ? program.intro.fr : program.intro.en}
         </p>
       </div>
 
-      {/* Days */}
-      <div className="px-4 pb-2">
-        <div className="space-y-1.5">
+      {/* Days — no horizontal padding so cards go full width */}
+      <div className="pb-2">
+        <div className="space-y-px">
           {program.days.map((day, i) => (
             <div
               key={i}
-              className={`rounded-lg border transition-all w-full ${
+              className={`border-y transition-all w-full ${
                 expandedDay === i
-                  ? "bg-white border-indigo-200 shadow-sm"
-                  : "bg-white/60 border-gray-100 hover:border-gray-200"
+                  ? "bg-white border-indigo-100"
+                  : "bg-white/60 border-gray-100 hover:bg-white"
               }`}
             >
               <button
                 onClick={() => setExpandedDay(expandedDay === i ? null : i)}
-                className="w-full flex items-center gap-2.5 px-3 py-2.5 text-left"
+                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-left"
               >
                 <span className="text-base leading-none flex-shrink-0 w-5 text-center">{day.icon}</span>
                 <div className="flex-1 min-w-0">
@@ -444,8 +444,8 @@ export default function WellnessProgram({ moodScore, energyLevel, onDismiss }: W
                 </svg>
               </button>
               {expandedDay === i && (
-                <div className="px-3 pb-2.5 pl-10">
-                  <p className="text-xs text-gray-600 leading-relaxed">
+                <div className="px-4 pb-3 pl-11">
+                  <p className="text-xs text-gray-600 leading-relaxed" style={{ width: "90%" }}>
                     {locale === "fr" ? day.detail.fr : day.detail.en}
                   </p>
                 </div>
