@@ -74,21 +74,21 @@ export default function MoodChart({ entries }: MoodChartProps) {
             type="monotone"
             dataKey="mood"
             name="Humeur"
-            stroke="#2563eb"
-            fill="#2563eb"
+            stroke="#22c55e"
+            fill="#22c55e"
             fillOpacity={0.12}
             strokeWidth={2}
-            dot={{ r: 3, fill: "#2563eb", strokeWidth: 0 }}
+            dot={{ r: 3, fill: "#22c55e", strokeWidth: 0 }}
           />
           <Area
             type="monotone"
             dataKey="energy"
             name="Énergie"
-            stroke="#9333ea"
-            fill="#9333ea"
+            stroke="#eab308"
+            fill="#eab308"
             fillOpacity={0.08}
             strokeWidth={2}
-            dot={{ r: 3, fill: "#9333ea", strokeWidth: 0 }}
+            dot={{ r: 3, fill: "#eab308", strokeWidth: 0 }}
           />
           {hasSleeep && (
             <Area
