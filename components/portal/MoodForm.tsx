@@ -5,10 +5,6 @@ import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import WellnessProgram from "@/components/portal/WellnessProgram";
 import { MOOD_EMOJIS } from "@/lib/constants";
-const TAG_SUGGESTIONS = [
-  "sport", "nutrition", "sommeil", "stress", "motivation",
-  "fatigue", "énergie", "progrès", "repos", "méditation",
-];
 
 interface MoodFormProps {
   onAdded?: () => void;
@@ -21,8 +17,9 @@ export default function MoodForm({ onAdded, inline }: MoodFormProps) {
 
   const [moodScore, setMoodScore] = useState(5);
   const [energyLevel, setEnergyLevel] = useState(5);
+  const [sleepQuality, setSleepQuality] = useState(5);
+  const [stressLevel, setStressLevel] = useState(5);
   const [notes, setNotes] = useState("");
-  const [tags, setTags] = useState<string[]>([]);
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -31,17 +28,12 @@ export default function MoodForm({ onAdded, inline }: MoodFormProps) {
   const [submittedMood, setSubmittedMood] = useState(5);
   const [submittedEnergy, setSubmittedEnergy] = useState(5);
 
-  const toggleTag = (tag: string) => {
-    setTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    );
-  };
-
   const resetForm = () => {
     setMoodScore(5);
     setEnergyLevel(5);
+    setSleepQuality(5);
+    setStressLevel(5);
     setNotes("");
-    setTags([]);
     setDate(new Date().toISOString().split("T")[0]);
   };
 
@@ -59,8 +51,9 @@ export default function MoodForm({ onAdded, inline }: MoodFormProps) {
         body: JSON.stringify({
           mood_score: moodScore,
           energy_level: energyLevel,
+          sleep_quality: sleepQuality,
+          stress_level: stressLevel,
           notes: notes || null,
-          tags,
           date,
         }),
       });
@@ -169,29 +162,41 @@ export default function MoodForm({ onAdded, inline }: MoodFormProps) {
           </div>
         </div>
 
-        {/* Tags */}
-        <div>
+        {/* Sleep Quality */}
+        <div className="bg-white rounded-xl border border-gray-100 p-6">
           <label className="block text-sm font-medium text-gray-700 mb-3">
-            {t("portal.journal.tags")}
+            {locale === "fr" ? "Qualité du sommeil" : "Sleep quality"} — {sleepQuality}/10
           </label>
-          <div className="flex flex-wrap gap-2">
-            {TAG_SUGGESTIONS.map((tag) => (
-              <button
-                key={tag}
-                type="button"
-                role="checkbox"
-                aria-checked={tags.includes(tag)}
-                aria-label={tag}
-                onClick={() => toggleTag(tag)}
-                className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
-                  tags.includes(tag)
-                    ? "bg-brand-blue text-white"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                }`}
-              >
-                {tag}
-              </button>
-            ))}
+          <input
+            type="range"
+            min="1"
+            max="10"
+            value={sleepQuality}
+            onChange={(e) => setSleepQuality(parseInt(e.target.value))}
+            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+          />
+          <div className="flex justify-between text-xs text-gray-400 mt-1">
+            <span>{locale === "fr" ? "Très mauvais" : "Very poor"}</span>
+            <span>{locale === "fr" ? "Excellent" : "Excellent"}</span>
+          </div>
+        </div>
+
+        {/* Stress Level */}
+        <div className="bg-white rounded-xl border border-gray-100 p-6">
+          <label className="block text-sm font-medium text-gray-700 mb-3">
+            {locale === "fr" ? "Niveau de stress" : "Stress level"} — {stressLevel}/10
+          </label>
+          <input
+            type="range"
+            min="1"
+            max="10"
+            value={stressLevel}
+            onChange={(e) => setStressLevel(parseInt(e.target.value))}
+            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-rose-500"
+          />
+          <div className="flex justify-between text-xs text-gray-400 mt-1">
+            <span>{locale === "fr" ? "Aucun stress" : "No stress"}</span>
+            <span>{locale === "fr" ? "Très stressé(e)" : "Very stressed"}</span>
           </div>
         </div>
 
