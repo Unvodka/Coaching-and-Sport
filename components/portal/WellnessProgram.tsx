@@ -35,6 +35,83 @@ interface Program {
 }
 
 function getProgram(mood: number, energy: number, sleep: number | null, stress: number | null): Program {
+  // ── HIGH PERFORMER: 3+ values ≥ 8 → Programme Athlète Complet ────────────
+  const values = [mood, energy, sleep ?? 0, stress !== null ? (10 - stress) : 0];
+  const highCount = values.filter(v => v >= 8).length;
+  if (highCount >= 3) {
+    return {
+      emoji: "🏅",
+      title: {
+        fr: "Programme Athlète Complet — 5 jours pour performer au sommet",
+        en: "Complete Athlete Program — 5 days to perform at your peak",
+      },
+      intro: {
+        fr: "Vous êtes dans un état exceptionnel : énergie, humeur, sommeil et maîtrise du stress tous au vert. Ce programme exploite cette fenêtre optimale avec 3 séances de sport intensives et 2 séances de mobilité pour maximiser vos gains tout en préservant votre récupération.",
+        en: "You're in exceptional shape: energy, mood, sleep, and stress control all in the green. This program exploits this optimal window with 3 intensive sport sessions and 2 mobility sessions to maximize gains while preserving recovery.",
+      },
+      days: [
+        {
+          icon: "🏋️",
+          activity: { fr: "Musculation — Force & puissance", en: "Strength training — Power & force" },
+          duration: "50 min",
+          detail: {
+            fr: "Séance complète en pyramide ascendante : Squats (5×5), Développé couché (5×5), Soulevé de terre (4×5), Tractions (4×max). Charges maximales, repos 2-3 min entre les séries. Profitez de votre état optimal pour battre vos records.",
+            en: "Full session in ascending pyramid: Squats (5×5), Bench press (5×5), Deadlift (4×5), Pull-ups (4×max). Maximum loads, 2-3 min rest between sets. Use your optimal state to beat your records.",
+          },
+        },
+        {
+          icon: "🧘",
+          activity: { fr: "Mobilité & stretching profond — Haut du corps", en: "Mobility & deep stretching — Upper body" },
+          duration: "35 min",
+          detail: {
+            fr: "Mobilité articulaire des épaules, poignets et thoracique (10 min), puis stretching profond pectoraux, dos et biceps (15 min), puis foam roller sur les zones travaillées la veille (10 min). La mobilité régulière augmente les performances de 20%.",
+            en: "Joint mobility for shoulders, wrists, and thoracic spine (10 min), then deep stretching for chest, back, and biceps (15 min), then foam roller on yesterday's worked areas (10 min). Regular mobility increases performance by 20%.",
+          },
+        },
+        {
+          icon: "🏊",
+          activity: { fr: "Natation — Endurance & technique", en: "Swimming — Endurance & technique" },
+          duration: "45 min",
+          detail: {
+            fr: "Échauffement 300m varié, puis 6×100m en nage complète avec 20s de repos, puis 4×50m sprint, puis 200m récupération. Travaillez la technique sur chaque longueur : alignement, prise d'eau, rotation des hanches.",
+            en: "300m varied warm-up, then 6×100m full stroke with 20s rest, then 4×50m sprint, then 200m recovery. Work on technique every length: alignment, catch, hip rotation.",
+          },
+          alternative: {
+            icon: "🚴",
+            activity: { fr: "Vélo / cardio intensif", en: "Cycling / intensive cardio" },
+            detail: {
+              fr: "45 min de vélo en alternant 5 min à 70% de fréquence cardiaque max et 2 min à 90%. Même bénéfice cardiovasculaire et endurance que la natation sans piscine. Terminez par 5 min à rythme léger.",
+              en: "45 min cycling alternating 5 min at 70% max heart rate and 2 min at 90%. Same cardiovascular and endurance benefit as swimming without a pool. Finish with 5 min at easy pace.",
+            },
+          },
+        },
+        {
+          icon: "🧘",
+          activity: { fr: "Mobilité & stretching profond — Bas du corps", en: "Mobility & deep stretching — Lower body" },
+          duration: "35 min",
+          detail: {
+            fr: "Mobilité hanches, genoux et chevilles (10 min), puis stretching profond quadriceps, ischio-jambiers et fessiers (15 min), puis foam roller sur les jambes (10 min). Indispensable après les séances de force pour éviter les blessures et favoriser la croissance musculaire.",
+            en: "Hip, knee, and ankle mobility (10 min), then deep stretching for quads, hamstrings, and glutes (15 min), then foam roller on legs (10 min). Essential after strength sessions to prevent injury and promote muscle growth.",
+          },
+        },
+        {
+          icon: "🔥",
+          activity: { fr: "HIIT complet + gainage avancé", en: "Full HIIT + advanced core" },
+          duration: "40 min",
+          detail: {
+            fr: "5 rounds de Tabata (20s effort / 10s repos × 8) : burpees, squat jumps, sprint sur place, mountain climbers. Puis 10 min de gainage avancé : planche latérale, dragon flag, ab wheel, relevés de jambes. Donnez tout sur le dernier jour !",
+            en: "5 Tabata rounds (20s work / 10s rest × 8): burpees, jump squats, high knees, mountain climbers. Then 10 min advanced core: side plank, dragon flag, ab wheel, leg raises. Give everything on the last day!",
+          },
+        },
+      ],
+      bonusTip: {
+        fr: "Dans cet état optimal, votre corps assimile mieux les protéines. Visez 2g de protéines par kg de poids corporel cette semaine, répartis sur 4-5 prises. Dormez minimum 7h30 pour maximiser la synthèse musculaire pendant ce programme intensif.",
+        en: "In this optimal state, your body absorbs protein better. Aim for 2g of protein per kg of body weight this week, spread over 4-5 meals. Sleep at least 7h30 to maximize muscle synthesis during this intensive program.",
+      },
+      ctaLabel: { fr: "Voir les programmes d'entraînement", en: "See workout programs" },
+      ctaHref: "/portal/workouts",
+    };
+  }
 
   // ── SLEEP-PRIORITY PROGRAMS ──────────────────────────────────────────────
   // Bad sleep + high stress → Programme Sommeil & Déstress
