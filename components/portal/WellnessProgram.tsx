@@ -734,10 +734,10 @@ export default function WellnessProgram({ moodScore, energyLevel, sleepQuality, 
           </button>
         </div>
         {/* Row 2: title + intro both at 90% width */}
-        <h3 className="text-base font-bold text-heading leading-snug mb-2" style={{ width: "90%" }}>
+        <h3 className="text-base font-bold text-heading leading-snug mb-2 text-center" style={{ width: "90%" }}>
           {locale === "fr" ? program.title.fr : program.title.en}
         </h3>
-        <p className="text-xs text-gray-600 leading-relaxed" style={{ width: "90%" }}>
+        <p className="text-xs text-gray-600 leading-relaxed text-center" style={{ width: "90%" }}>
           {locale === "fr" ? program.intro.fr : program.intro.en}
         </p>
       </div>
@@ -813,9 +813,8 @@ export default function WellnessProgram({ moodScore, energyLevel, sleepQuality, 
 
       {/* Bonus tip */}
       <div className="mx-4 my-3 px-3 py-2.5 bg-amber-50/80 border border-amber-200/60 rounded-lg">
-        <div className="flex items-start gap-1.5">
-          <span className="text-xs flex-shrink-0 leading-relaxed">💡</span>
-          <p className="text-xs text-amber-800 leading-relaxed">
+        <div className="text-center">
+          <p className="text-xs text-amber-800 leading-relaxed text-center">
             <span className="font-semibold">{locale === "fr" ? "Conseil bonus : " : "Bonus tip: "}</span>
             {locale === "fr" ? program.bonusTip.fr : program.bonusTip.en}
           </p>
