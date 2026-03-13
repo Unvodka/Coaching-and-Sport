@@ -12,17 +12,13 @@ export default function WeightPage() {
   const { t, locale } = useLanguage();
   const [logs, setLogs] = useState<WeightLog[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
 
   const fetchLogs = useCallback(async () => {
     try {
       const res = await fetch("/api/portal/weight");
       const json = await res.json();
-
-      if (!res.ok) {
-        console.error("Weight fetch error:", json.error);
-        return;
-      }
-
+      if (!res.ok) { console.error("Weight fetch error:", json.error); return; }
       setLogs(json.data as WeightLog[]);
     } catch (err) {
       console.error("Weight page error:", err);
@@ -31,9 +27,9 @@ export default function WeightPage() {
     }
   }, []);
 
-  useEffect(() => {
-    fetchLogs();
-  }, [fetchLogs]);
+  useEffect(() => { fetchLogs(); }, [fetchLogs]);
+
+  const handleAdded = () => { fetchLogs(); setShowForm(false); };
 
   const latestWeight = logs.length > 0 ? Number(logs[0].weight_kg) : null;
 
@@ -50,22 +46,68 @@ export default function WeightPage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
+
+      {/* Top bar with toggle button */}
+      <div className="flex justify-end">
+        <button
+          onClick={() => setShowForm((v) => !v)}
+          className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-colors ${
+            showForm
+              ? "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              : "bg-gradient-to-r from-brand-blue to-brand-navy text-white hover:opacity-90"
+          }`}
+        >
+          {showForm ? (
+            <>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              {locale === "fr" ? "Fermer" : "Close"}
+            </>
+          ) : (
+            <>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+              {locale === "fr" ? "Nouvelle entrée" : "New entry"}
+            </>
+          )}
+        </button>
+      </div>
+
+      {/* Inline form */}
+      {showForm && (
+        <div className="bg-white rounded-xl border border-gray-100 px-4 pt-4 pb-3">
+          <h3 className="font-semibold text-heading mb-2 text-center">
+            {locale === "fr" ? "Nouvelle entrée" : "New entry"}
+          </h3>
+          <WeightLogForm onAdded={handleAdded} />
+        </div>
+      )}
+
       {/* Empty state */}
-      {logs.length === 0 && (
+      {logs.length === 0 && !showForm && (
         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-xl p-8 text-center">
           <svg className="w-16 h-16 mx-auto text-blue-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
           </svg>
           <h3 className="text-lg font-semibold text-heading mb-2">
-            {locale === "fr"
-              ? "Commencez votre suivi de poids !"
-              : "Start tracking your weight!"}
+            {locale === "fr" ? "Commencez votre suivi de poids !" : "Start tracking your weight!"}
           </h3>
           <p className="text-gray-500 max-w-md mx-auto mb-4">
             {locale === "fr"
-              ? "Ajoutez votre première pesée ci-dessous pour commencer à suivre votre progression."
-              : "Add your first weight entry below to start tracking your progress."}
+              ? "Ajoutez votre première pesée pour commencer à suivre votre progression."
+              : "Add your first weight entry to start tracking your progress."}
           </p>
+          <button
+            onClick={() => setShowForm(true)}
+            className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg font-semibold hover:opacity-90 transition-opacity"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            {locale === "fr" ? "Ajouter ma première pesée" : "Add my first entry"}
+          </button>
         </div>
       )}
 
@@ -74,131 +116,42 @@ export default function WeightPage() {
         <div className="bg-white rounded-xl border border-gray-100 p-6">
           <div className="flex flex-wrap items-center gap-6">
             <div>
-              <p className="text-sm text-gray-500">
-                {t("portal.weight.current")}
-              </p>
-              <p className="text-3xl font-bold text-heading">
-                {latestWeight} kg
-              </p>
+              <p className="text-sm text-gray-500">{t("portal.weight.current")}</p>
+              <p className="text-3xl font-bold text-heading">{latestWeight} kg</p>
             </div>
             {logs.length >= 2 && (
               <div>
-                <p className="text-sm text-gray-500">
-                  {t("portal.weight.progress")}
-                </p>
+                <p className="text-sm text-gray-500">{t("portal.weight.progress")}</p>
                 {(() => {
-                  const sorted = [...logs].sort(
-                    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-                  );
+                  const sorted = [...logs].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
                   const first = Number(sorted[0].weight_kg);
                   const last = Number(sorted[sorted.length - 1].weight_kg);
                   const diff = last - first;
                   const isLoss = diff < 0;
                   return (
-                    <p
-                      className={`text-lg font-semibold ${
-                        isLoss ? "text-green-600" : "text-orange-600"
-                      }`}
-                    >
-                      {diff > 0 ? "+" : ""}
-                      {diff.toFixed(1)} kg
+                    <p className={`text-lg font-semibold ${isLoss ? "text-green-600" : "text-orange-600"}`}>
+                      {diff > 0 ? "+" : ""}{diff.toFixed(1)} kg
                     </p>
                   );
                 })()}
               </div>
             )}
-            {/* Body composition latest values */}
-            {logs[0].body_fat_pct && (
-              <div className="border-l border-gray-200 pl-6">
-                <p className="text-xs text-gray-400 uppercase tracking-wider">
-                  {locale === "fr" ? "Graisse" : "Body fat"}
-                </p>
-                <p className="text-lg font-semibold text-amber-600">
-                  {Number(logs[0].body_fat_pct)} %
-                </p>
-              </div>
-            )}
-            {logs[0].visceral_fat && (
-              <div className="border-l border-gray-200 pl-6">
-                <p className="text-xs text-gray-400 uppercase tracking-wider">
-                  {locale === "fr" ? "Viscérale" : "Visceral"}
-                </p>
-                <p className="text-lg font-semibold text-red-500">
-                  {Number(logs[0].visceral_fat)}
-                </p>
-              </div>
-            )}
-            {logs[0].muscle_mass_kg && (
-              <div className="border-l border-gray-200 pl-6">
-                <p className="text-xs text-gray-400 uppercase tracking-wider">
-                  {locale === "fr" ? "Muscles" : "Muscle"}
-                </p>
-                <p className="text-lg font-semibold text-emerald-600">
-                  {Number(logs[0].muscle_mass_kg)} kg
-                </p>
-              </div>
-            )}
-            {logs[0].water_pct && (
-              <div className="border-l border-gray-200 pl-6">
-                <p className="text-xs text-gray-400 uppercase tracking-wider">
-                  {locale === "fr" ? "Eau" : "Water"}
-                </p>
-                <p className="text-lg font-semibold text-cyan-600">
-                  {Number(logs[0].water_pct)} %
-                </p>
-              </div>
-            )}
-            {logs[0].bone_mass_kg && (
-              <div className="border-l border-gray-200 pl-6">
-                <p className="text-xs text-gray-400 uppercase tracking-wider">
-                  {locale === "fr" ? "Os" : "Bone"}
-                </p>
-                <p className="text-lg font-semibold text-violet-600">
-                  {Number(logs[0].bone_mass_kg)} kg
-                </p>
-              </div>
-            )}
-            {logs[0].bmi && (
-              <div className="border-l border-gray-200 pl-6">
-                <p className="text-xs text-gray-400 uppercase tracking-wider">
-                  IMC
-                </p>
-                <p className="text-lg font-semibold text-pink-600">
-                  {Number(logs[0].bmi)}
-                </p>
-              </div>
-            )}
-            {logs[0].bmr_kcal && (
-              <div className="border-l border-gray-200 pl-6">
-                <p className="text-xs text-gray-400 uppercase tracking-wider">
-                  {locale === "fr" ? "Métab." : "BMR"}
-                </p>
-                <p className="text-lg font-semibold text-orange-500">
-                  {Number(logs[0].bmr_kcal)} kcal
-                </p>
-              </div>
-            )}
-            {logs[0].daily_cal_kcal && (
-              <div className="border-l border-gray-200 pl-6">
-                <p className="text-xs text-gray-400 uppercase tracking-wider">
-                  Kcal
-                </p>
-                <p className="text-lg font-semibold text-teal-600">
-                  {Number(logs[0].daily_cal_kcal)} kcal
-                </p>
-              </div>
-            )}
+            {logs[0].body_fat_pct && (<div className="border-l border-gray-200 pl-6"><p className="text-xs text-gray-400 uppercase tracking-wider">{locale === "fr" ? "Graisse" : "Body fat"}</p><p className="text-lg font-semibold text-amber-600">{Number(logs[0].body_fat_pct)} %</p></div>)}
+            {logs[0].visceral_fat && (<div className="border-l border-gray-200 pl-6"><p className="text-xs text-gray-400 uppercase tracking-wider">{locale === "fr" ? "Viscérale" : "Visceral"}</p><p className="text-lg font-semibold text-red-500">{Number(logs[0].visceral_fat)}</p></div>)}
+            {logs[0].muscle_mass_kg && (<div className="border-l border-gray-200 pl-6"><p className="text-xs text-gray-400 uppercase tracking-wider">{locale === "fr" ? "Muscles" : "Muscle"}</p><p className="text-lg font-semibold text-emerald-600">{Number(logs[0].muscle_mass_kg)} kg</p></div>)}
+            {logs[0].water_pct && (<div className="border-l border-gray-200 pl-6"><p className="text-xs text-gray-400 uppercase tracking-wider">{locale === "fr" ? "Eau" : "Water"}</p><p className="text-lg font-semibold text-cyan-600">{Number(logs[0].water_pct)} %</p></div>)}
+            {logs[0].bone_mass_kg && (<div className="border-l border-gray-200 pl-6"><p className="text-xs text-gray-400 uppercase tracking-wider">{locale === "fr" ? "Os" : "Bone"}</p><p className="text-lg font-semibold text-violet-600">{Number(logs[0].bone_mass_kg)} kg</p></div>)}
+            {logs[0].bmi && (<div className="border-l border-gray-200 pl-6"><p className="text-xs text-gray-400 uppercase tracking-wider">IMC</p><p className="text-lg font-semibold text-pink-600">{Number(logs[0].bmi)}</p></div>)}
+            {logs[0].bmr_kcal && (<div className="border-l border-gray-200 pl-6"><p className="text-xs text-gray-400 uppercase tracking-wider">{locale === "fr" ? "Métab." : "BMR"}</p><p className="text-lg font-semibold text-orange-500">{Number(logs[0].bmr_kcal)} kcal</p></div>)}
+            {logs[0].daily_cal_kcal && (<div className="border-l border-gray-200 pl-6"><p className="text-xs text-gray-400 uppercase tracking-wider">Kcal</p><p className="text-lg font-semibold text-teal-600">{Number(logs[0].daily_cal_kcal)} kcal</p></div>)}
           </div>
         </div>
       )}
 
-      {/* Chart — only when we have data */}
+      {/* Chart */}
       {logs.length > 0 && <WeightChart logs={logs} />}
 
-      {/* Add form — always rendered */}
-      <WeightLogForm onAdded={fetchLogs} />
-
-      {/* History — only when we have data */}
+      {/* History */}
       {logs.length > 0 && (
         <div>
           <h3 className="font-semibold text-heading mb-3">
