@@ -92,7 +92,11 @@ export default function WeightLogList({ logs, onDeleted }: WeightLogListProps) {
           </thead>
           <tbody className="divide-y divide-gray-100">
             {[...logs]
-              .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+              .sort((a, b) => {
+                const dateDiff = new Date(b.date).getTime() - new Date(a.date).getTime();
+                if (dateDiff !== 0) return dateDiff;
+                return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+              })
               .map((log) => (
               <tr key={log.id} className="hover:bg-gray-50 transition-colors">
                 <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap">
