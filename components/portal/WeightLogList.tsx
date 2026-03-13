@@ -96,10 +96,18 @@ export default function WeightLogList({ logs, onDeleted }: WeightLogListProps) {
               .map((log) => (
               <tr key={log.id} className="hover:bg-gray-50 transition-colors">
                 <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap">
-                  {new Date(log.date).toLocaleDateString(
-                    locale === "fr" ? "fr-FR" : "en-US",
-                    { day: "numeric", month: "short", year: "numeric" }
-                  )}
+                  <span className="block">
+                    {new Date(log.date).toLocaleDateString(
+                      locale === "fr" ? "fr-FR" : "en-US",
+                      { day: "numeric", month: "short", year: "numeric" }
+                    )}
+                  </span>
+                  <span className="text-xs text-gray-400">
+                    {new Date(log.created_at).toLocaleTimeString(
+                      locale === "fr" ? "fr-FR" : "en-US",
+                      { hour: "2-digit", minute: "2-digit" }
+                    )}
+                  </span>
                 </td>
                 <td className="px-4 py-3 text-sm font-semibold text-heading">
                   {Number(log.weight_kg)} kg
