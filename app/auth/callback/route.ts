@@ -43,6 +43,8 @@ export async function GET(request: Request) {
             user.user_metadata?.picture ||
             null,
         });
+        // New user — redirect to programs page so they discover the offers
+        return NextResponse.redirect(`${origin}/?welcome=1#offres`);
       }
     }
   } catch (profileError) {
