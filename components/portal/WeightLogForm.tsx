@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/lib/i18n/useLanguage";
+import type { WeightEntry } from "@/components/portal/WeightTip";
 
 interface WeightLogFormProps {
-  onAdded: () => void;
+  onAdded: (entry: WeightEntry) => void;
 }
 
 export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
@@ -75,7 +76,14 @@ export default function WeightLogForm({ onAdded }: WeightLogFormProps) {
       setNotes("");
       setSuccess(true);
       setSaving(false);
-      onAdded();
+      onAdded({
+        weight_kg: parseFloat(weightKg),
+        body_fat_pct: bodyFatPct ? parseFloat(bodyFatPct) : null,
+        visceral_fat: visceralFat ? parseFloat(visceralFat) : null,
+        muscle_mass_kg: muscleMassKg ? parseFloat(muscleMassKg) : null,
+        water_pct: waterPct ? parseFloat(waterPct) : null,
+        bmi: bmi ? parseFloat(bmi) : null,
+      });
       setTimeout(() => setSuccess(false), 4000);
     } catch (err) {
       console.error("Weight submit error:", err);

@@ -6,6 +6,8 @@ import { useLanguage } from "@/lib/i18n/useLanguage";
 const WeightChart = dynamic(() => import("@/components/portal/WeightChart"), { ssr: false });
 import WeightLogForm from "@/components/portal/WeightLogForm";
 import WeightLogList from "@/components/portal/WeightLogList";
+import WeightTip from "@/components/portal/WeightTip";
+import type { WeightEntry } from "@/components/portal/WeightTip";
 import type { WeightLog } from "@/lib/supabase/database.types";
 
 export default function WeightPage() {
@@ -13,6 +15,7 @@ export default function WeightPage() {
   const [logs, setLogs] = useState<WeightLog[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [tipEntry, setTipEntry] = useState<WeightEntry | null>(null);
 
   const fetchLogs = useCallback(async () => {
     try {
@@ -29,7 +32,7 @@ export default function WeightPage() {
 
   useEffect(() => { fetchLogs(); }, [fetchLogs]);
 
-  const handleAdded = () => { fetchLogs(); setShowForm(false); };
+  const handleAdded = (entry: WeightEntry) => { fetchLogs(); setShowForm(false); setTipEntry(entry); };
 
   const latestWeight = logs.length > 0 ? Number(logs[0].weight_kg) : null;
 
@@ -83,6 +86,11 @@ export default function WeightPage() {
           </h3>
           <WeightLogForm onAdded={handleAdded} />
         </div>
+      )}
+
+      {/* Activity tip after new entry */}
+      {tipEntry && (
+        <WeightTip entry={tipEntry} onDismiss={() => setTipEntry(null)} />
       )}
 
       {/* Empty state */}
