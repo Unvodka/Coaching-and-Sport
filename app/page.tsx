@@ -44,6 +44,7 @@ const faqJsonLd = {
 export default function Home() {
   return (
     <>
+      <Suspense fallback={null}><WelcomeBanner /></Suspense>
       <JsonLd data={faqJsonLd} />
       <Header />
       <main id="main-content">

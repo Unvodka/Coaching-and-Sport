@@ -391,6 +391,7 @@ export default function WellnessTip({ moodScore, energyLevel }: WellnessTipProps
           </div>
         </div>
       )}
+      <CoachContactButton />
     </div>
   );
 }
