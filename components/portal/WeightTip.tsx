@@ -11,12 +11,17 @@ export interface WeightEntry {
   bmi?: number | null;
 }
 
+interface Activity {
+  fr: string;
+  en: string;
+}
+
 interface Tip {
   emoji: string;
   title: { fr: string; en: string };
   body: { fr: string; en: string };
-  activities: { fr: string; en: string }[];
-  color: string; // tailwind bg class for accent
+  activities: Activity[];
+  color: string;
 }
 
 function getTip(entry: WeightEntry): Tip {
@@ -31,124 +36,130 @@ function getTip(entry: WeightEntry): Tip {
       emoji: "🔥",
       color: "bg-red-50 border-red-200",
       title: {
-        fr: "Graisse viscérale élevée — priorité cardio",
-        en: "High visceral fat — cardio priority",
+        fr: "Graisse viscérale élevée — priorité cardio outdoor",
+        en: "High visceral fat — outdoor cardio priority",
       },
       body: {
-        fr: "La graisse viscérale est la plus dangereuse pour la santé cardiovasculaire. Le cardio modéré est la méthode la plus efficace pour la réduire rapidement.",
-        en: "Visceral fat is the most dangerous for cardiovascular health. Moderate cardio is the most effective method to reduce it quickly.",
+        fr: "Le cardio modéré en plein air est la méthode la plus efficace pour réduire la graisse viscérale. Visez 4 séances / semaine.",
+        en: "Moderate outdoor cardio is the most effective method to reduce visceral fat. Aim for 4 sessions / week.",
       },
       activities: [
-        { fr: "🚶 Marche rapide 45 min / jour (meilleur brûleur de graisse viscérale)", en: "🚶 Brisk walk 45 min / day (best visceral fat burner)" },
-        { fr: "🚴 Vélo ou natation 30 min à intensité modérée", en: "🚴 Cycling or swimming 30 min at moderate intensity" },
-        { fr: "⛔ Évitez les séances trop courtes — visez minimum 30 min en continu", en: "⛔ Avoid very short sessions — aim for minimum 30 min continuous" },
+        { fr: "🚶 Marche rapide en extérieur — 45 min × 2/semaine (brûleur de graisse viscérale n°1)", en: "🚶 Brisk outdoor walk — 45 min × 2/week (visceral fat burner #1)" },
+        { fr: "🚴 Vélo en plein air ou piste cyclable — 40 min × 1/semaine à rythme modéré", en: "🚴 Outdoor cycling or bike path — 40 min × 1/week at moderate pace" },
+        { fr: "🏃 Footing léger en forêt ou parc — 30 min × 1/semaine, pas de sprint", en: "🏃 Light jog in forest or park — 30 min × 1/week, no sprinting" },
+        { fr: "🏊 Option natation : cours particulier ou nage libre — 30 min × 1/semaine (remplace le vélo ou le footing)", en: "🏊 Swimming option: private lesson or free swim — 30 min × 1/week (replaces cycling or jogging)" },
       ],
     };
   }
 
-  // Priority 2 — Low muscle mass relative to weight (muscle < 30% of weight)
+  // Priority 2 — Low muscle mass (< 30% of body weight)
   if (muscle !== null && entry.weight_kg > 0 && (muscle / entry.weight_kg) < 0.30) {
     return {
       emoji: "💪",
       color: "bg-blue-50 border-blue-200",
       title: {
-        fr: "Masse musculaire faible — priorité musculation",
-        en: "Low muscle mass — strength training priority",
+        fr: "Masse musculaire faible — force + activités outdoor",
+        en: "Low muscle mass — strength + outdoor activities",
       },
       body: {
-        fr: "Plus de muscles = métabolisme plus rapide au repos. La musculation est votre meilleur allié pour recomposer votre corps durablement.",
-        en: "More muscle = faster resting metabolism. Strength training is your best ally for durable body recomposition.",
+        fr: "Combinez renforcement musculaire et activités en plein air pour bâtir votre masse tout en restant actif. 4 séances / semaine idéales.",
+        en: "Combine strength training and outdoor activities to build mass while staying active. 4 sessions / week ideal.",
       },
       activities: [
-        { fr: "🏋️ Musculation 3× / semaine : squats, tractions, développé couché", en: "🏋️ Strength training 3× / week: squats, pull-ups, bench press" },
-        { fr: "🥩 Apport protéique : 1.8–2g / kg de poids corporel par jour", en: "🥩 Protein intake: 1.8–2g / kg body weight per day" },
-        { fr: "😴 Dormez 7–8h : 70% de la synthèse musculaire se fait pendant le sommeil", en: "😴 Sleep 7–8h: 70% of muscle synthesis happens during sleep" },
+        { fr: "🏋️ Renforcement musculaire (salle ou parc) — 45 min × 2/semaine : squats, tractions, pompes", en: "🏋️ Strength training (gym or park) — 45 min × 2/week: squats, pull-ups, push-ups" },
+        { fr: "🧗 Escalade en plein air ou bloc — 1h × 1/semaine : excellent pour la force fonctionnelle", en: "🧗 Outdoor climbing or bouldering — 1h × 1/week: excellent for functional strength" },
+        { fr: "🚴 Vélo en côte — 40 min × 1/semaine : renforce les jambes et le cardio", en: "🚴 Uphill cycling — 40 min × 1/week: strengthens legs and cardio" },
+        { fr: "🏊 Option natation : cours particulier — 30 min × 1/semaine pour le gainage et la coordination", en: "🏊 Swimming option: private lesson — 30 min × 1/week for core and coordination" },
       ],
     };
   }
 
-  // Priority 3 — High body fat (men > 25%, women > 32% — use 28% as neutral threshold)
+  // Priority 3 — High body fat (≥ 28%)
   if (fat !== null && fat >= 28) {
     return {
       emoji: "🏃",
       color: "bg-orange-50 border-orange-200",
       title: {
-        fr: "Taux de masse graisseuse élevé — mix cardio + force",
-        en: "High body fat — cardio + strength mix",
+        fr: "Taux de graisse élevé — mix outdoor + renforcement",
+        en: "High body fat — outdoor mix + strength",
       },
       body: {
-        fr: "La combinaison cardio + musculation est la plus efficace pour perdre de la graisse tout en préservant le muscle. Évitez de ne faire que du cardio.",
-        en: "Combining cardio + strength training is the most effective way to lose fat while preserving muscle. Avoid cardio only.",
+        fr: "Alternez cardio outdoor et renforcement pour perdre de la graisse durablement. 4 séances / semaine, jamais deux jours de cardio consécutifs.",
+        en: "Alternate outdoor cardio and strength to lose fat sustainably. 4 sessions / week, never two consecutive cardio days.",
       },
       activities: [
-        { fr: "🔄 Alternez 1 jour musculation / 1 jour cardio modéré", en: "🔄 Alternate 1 day strength / 1 day moderate cardio" },
-        { fr: "🏊 Natation ou aquagym : brûle les graisses sans impact articulaire", en: "🏊 Swimming or aqua gym: burns fat with no joint impact" },
-        { fr: "🥗 Déficit calorique modéré : -300 à -500 kcal/jour maximum", en: "🥗 Moderate caloric deficit: -300 to -500 kcal/day maximum" },
+        { fr: "🚶 Marche nordique ou trail débutant — 50 min × 2/semaine : brûle les graisses et tonifie", en: "🚶 Nordic walking or beginner trail — 50 min × 2/week: burns fat and tones" },
+        { fr: "🏋️ Circuit training en plein air (parc) — 35 min × 1/semaine : pompes, fentes, squats, abdos", en: "🏋️ Outdoor circuit training (park) — 35 min × 1/week: push-ups, lunges, squats, abs" },
+        { fr: "🚴 Vélo ou randonnée — 45 min × 1/semaine à intensité modérée", en: "🚴 Cycling or hiking — 45 min × 1/week at moderate intensity" },
+        { fr: "🏊 Option natation : cours particulier ou aquagym — 30 min × 1/semaine (remplace le vélo)", en: "🏊 Swimming option: private lesson or aqua gym — 30 min × 1/week (replaces cycling)" },
       ],
     };
   }
 
-  // Priority 4 — Good body fat (< 18%) → performance focus
+  // Priority 4 — Athletic body fat (< 18%) → performance
   if (fat !== null && fat < 18) {
     return {
       emoji: "⚡",
       color: "bg-green-50 border-green-200",
       title: {
-        fr: "Excellente composition corporelle — optimisation performance",
-        en: "Excellent body composition — performance optimisation",
+        fr: "Composition athlétique — performance outdoor",
+        en: "Athletic composition — outdoor performance",
       },
       body: {
-        fr: "Votre taux de graisse est dans la zone athlétique. Concentrez-vous sur la performance, la puissance et la récupération.",
-        en: "Your body fat is in the athletic zone. Focus on performance, power output, and recovery.",
+        fr: "Vous êtes dans la zone athlétique. Maximisez votre performance avec des activités outdoor exigeantes. 4 séances / semaine dont 1 récupération.",
+        en: "You're in the athletic zone. Maximize performance with demanding outdoor activities. 4 sessions / week including 1 recovery.",
       },
       activities: [
-        { fr: "🏋️ Entraînement en force : séries lourdes 3–5 reps pour la puissance", en: "🏋️ Heavy strength training: 3–5 rep sets for power" },
-        { fr: "🏊 Natation technique : travaillez la vitesse et l'efficacité", en: "🏊 Technical swimming: work on speed and efficiency" },
-        { fr: "🧘 1 séance mobilité / semaine pour prévenir les blessures", en: "🧘 1 mobility session / week to prevent injury" },
+        { fr: "🏃 Trail ou fractionné en extérieur — 45 min × 1/semaine : sprints en côte ou interval running", en: "🏃 Trail or outdoor intervals — 45 min × 1/week: hill sprints or interval running" },
+        { fr: "🧗 Escalade ou accrobranche — 1h × 1/semaine : puissance et gainage fonctionnel", en: "🧗 Climbing or high ropes — 1h × 1/week: power and functional core" },
+        { fr: "🚴 Vélo de route ou VTT — 1h × 1/semaine à haute intensité", en: "🚴 Road cycling or mountain biking — 1h × 1/week at high intensity" },
+        { fr: "🏊 Option natation : cours particulier technique — 45 min × 1/semaine (récupération active + technique)", en: "🏊 Swimming option: technical private lesson — 45 min × 1/week (active recovery + technique)" },
       ],
     };
   }
 
-  // Priority 5 — BMI-based fallback
-  if (bmi !== null) {
-    if (bmi >= 30) {
-      return {
-        emoji: "🌱",
-        color: "bg-amber-50 border-amber-200",
-        title: {
-          fr: "Commencez en douceur — activité à faible impact",
-          en: "Start gently — low-impact activity",
-        },
-        body: {
-          fr: "L'important est de bouger régulièrement. Commencez par des activités douces qui ne stressent pas les articulations et augmentez progressivement l'intensité.",
-          en: "The important thing is to move regularly. Start with gentle activities that don't stress the joints and progressively increase intensity.",
-        },
-        activities: [
-          { fr: "🚶 Marche quotidienne : commencez par 20 min, augmentez de 5 min / semaine", en: "🚶 Daily walk: start with 20 min, add 5 min / week" },
-          { fr: "🏊 Aquagym ou natation douce : idéal pour les articulations", en: "🏊 Aqua gym or gentle swimming: ideal for joints" },
-          { fr: "🧘 Yoga ou stretching : améliore la mobilité et réduit les douleurs", en: "🧘 Yoga or stretching: improves mobility and reduces pain" },
-        ],
-      };
-    }
-    if (bmi < 18.5) {
-      return {
-        emoji: "🥩",
-        color: "bg-purple-50 border-purple-200",
-        title: {
-          fr: "IMC bas — priorité prise de masse",
-          en: "Low BMI — mass gain priority",
-        },
-        body: {
-          fr: "Votre objectif principal est de construire de la masse musculaire. Combinez musculation et apport calorique suffisant.",
-          en: "Your main goal is to build muscle mass. Combine strength training with sufficient caloric intake.",
-        },
-        activities: [
-          { fr: "🏋️ Musculation 4× / semaine : focus sur les mouvements composés", en: "🏋️ Strength training 4× / week: focus on compound movements" },
-          { fr: "🍚 Surplus calorique : +300–500 kcal/jour au-dessus de votre métabolisme", en: "🍚 Caloric surplus: +300–500 kcal/day above your metabolism" },
-          { fr: "💤 Récupération prioritaire : repos actif entre les séances", en: "💤 Recovery first: active rest between sessions" },
-        ],
-      };
-    }
+  // Priority 5 — BMI ≥ 30 → gentle start
+  if (bmi !== null && bmi >= 30) {
+    return {
+      emoji: "🌱",
+      color: "bg-amber-50 border-amber-200",
+      title: {
+        fr: "Démarrez en douceur — activités outdoor à faible impact",
+        en: "Start gently — low-impact outdoor activities",
+      },
+      body: {
+        fr: "L'important est de bouger régulièrement dehors. Commencez doucement et augmentez de 5 min / semaine. 3–4 séances / semaine.",
+        en: "The key is to move regularly outdoors. Start gently and increase by 5 min / week. 3–4 sessions / week.",
+      },
+      activities: [
+        { fr: "🚶 Marche en plein air — 25 min × 2/semaine : augmentez de 5 min chaque semaine", en: "🚶 Outdoor walk — 25 min × 2/week: increase by 5 min each week" },
+        { fr: "🚴 Vélo plat (bord de mer ou piste cyclable) — 30 min × 1/semaine, rythme confortable", en: "🚴 Flat cycling (seafront or bike path) — 30 min × 1/week, comfortable pace" },
+        { fr: "🧘 Yoga ou stretching en plein air — 30 min × 1/semaine : mobilité et bien-être", en: "🧘 Outdoor yoga or stretching — 30 min × 1/week: mobility and well-being" },
+        { fr: "🏊 Option natation : aquagym ou cours débutant — 30 min × 1/semaine (zéro impact articulaire)", en: "🏊 Swimming option: aqua gym or beginner lesson — 30 min × 1/week (zero joint impact)" },
+      ],
+    };
+  }
+
+  // Priority 6 — BMI < 18.5 → mass gain
+  if (bmi !== null && bmi < 18.5) {
+    return {
+      emoji: "🥩",
+      color: "bg-purple-50 border-purple-200",
+      title: {
+        fr: "IMC bas — prise de masse + activités outdoor douces",
+        en: "Low BMI — mass gain + gentle outdoor activities",
+      },
+      body: {
+        fr: "Priorité à la musculation et à l'apport calorique. Limitez le cardio pour ne pas brûler vos réserves. 3–4 séances / semaine.",
+        en: "Priority is strength training and caloric intake. Limit cardio to avoid burning reserves. 3–4 sessions / week.",
+      },
+      activities: [
+        { fr: "🏋️ Musculation (salle ou parc) — 50 min × 2/semaine : focus mouvements composés", en: "🏋️ Strength training (gym or park) — 50 min × 2/week: focus on compound movements" },
+        { fr: "🚶 Marche en nature — 40 min × 1/semaine : récupération active sans dépense excessive", en: "🚶 Nature walk — 40 min × 1/week: active recovery without excessive calorie burn" },
+        { fr: "🧗 Escalade débutant — 45 min × 1/semaine : développe la force fonctionnelle naturellement", en: "🧗 Beginner climbing — 45 min × 1/week: naturally develops functional strength" },
+        { fr: "🏊 Option natation : cours particulier — 30 min × 1/semaine max (technique, pas d'endurance)", en: "🏊 Swimming option: private lesson — 30 min × 1/week max (technique, not endurance)" },
+      ],
+    };
   }
 
   // Default — healthy range
@@ -156,17 +167,18 @@ function getTip(entry: WeightEntry): Tip {
     emoji: "✅",
     color: "bg-emerald-50 border-emerald-200",
     title: {
-      fr: "Bonne forme générale — maintenez le cap !",
-      en: "Good overall shape — keep it up!",
+      fr: "Bonne forme — maintenez avec des activités outdoor",
+      en: "Good shape — maintain with outdoor activities",
     },
     body: {
-      fr: "Vos données sont dans une bonne fourchette. L'objectif est de maintenir cette composition et de progresser en performance.",
-      en: "Your data is in a good range. The goal is to maintain this composition and progress in performance.",
+      fr: "Vos données sont dans une bonne fourchette. Maintenez votre forme avec 4 séances / semaine en plein air.",
+      en: "Your data is in a good range. Maintain your fitness with 4 outdoor sessions / week.",
     },
     activities: [
-      { fr: "🏊 2–3 séances de natation / semaine pour le cardio et le maintien", en: "🏊 2–3 swimming sessions / week for cardio and maintenance" },
-      { fr: "🏋️ 2 séances de musculation / semaine pour maintenir la masse musculaire", en: "🏋️ 2 strength training sessions / week to maintain muscle mass" },
-      { fr: "🧘 1 séance de yoga ou stretching pour la récupération et la souplesse", en: "🧘 1 yoga or stretching session for recovery and flexibility" },
+      { fr: "🏃 Jogging ou trail léger — 35 min × 1/semaine en forêt ou bord de mer", en: "🏃 Jogging or light trail — 35 min × 1/week in forest or by the sea" },
+      { fr: "🚴 Vélo ou randonnée — 45 min × 1/semaine : entretien cardio et endurance", en: "🚴 Cycling or hiking — 45 min × 1/week: cardio and endurance maintenance" },
+      { fr: "🏋️ Renforcement musculaire (parc ou salle) — 40 min × 1/semaine : maintien de la masse", en: "🏋️ Strength training (park or gym) — 40 min × 1/week: muscle maintenance" },
+      { fr: "🏊 Option natation : cours particulier ou nage libre — 40 min × 1/semaine (récupération + cardio doux)", en: "🏊 Swimming option: private lesson or free swim — 40 min × 1/week (recovery + gentle cardio)" },
     ],
   };
 }
@@ -191,7 +203,7 @@ export default function WeightTip({ entry, onDismiss }: WeightTipProps) {
         </div>
         <button
           onClick={onDismiss}
-          className="text-gray-400 hover:text-gray-600 flex-shrink-0 text-lg leading-none"
+          className="text-gray-400 hover:text-gray-600 flex-shrink-0 text-xl leading-none"
           aria-label="Fermer"
         >
           ×
