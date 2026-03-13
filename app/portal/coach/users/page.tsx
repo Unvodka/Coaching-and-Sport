@@ -118,6 +118,11 @@ export default function CoachUsersPage() {
                   }`}>
                     {user.role}
                   </span>
+                  {user.is_privileged && (
+                    <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-amber-100 text-amber-700">
+                      ⭐
+                    </span>
+                  )}
                 </div>
                 <p className="text-sm text-gray-500 truncate">{user.email}</p>
               </div>

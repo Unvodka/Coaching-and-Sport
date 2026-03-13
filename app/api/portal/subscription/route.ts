@@ -85,6 +85,22 @@ export async function GET() {
       }
     }
 
-    return NextResponse.json({ subscription, payments: payments ?? [] });
+    // Check coach-granted privilege
+    const { data: profile } = await admin
+      .from("profiles")
+      .select("is_privileged")
+      .eq("id", user.id)
+      .single();
+
+    const isPrivileged = profile?.is_privileged ?? false;
+
+    // If privileged, inject a synthetic active subscription so all gates pass
+    const effectiveSubscription = isPrivileged && !subscription
+      ? { status: "active", is_privileged: true }
+      : subscription
+        ? { ...subscription, is_privileged: isPrivileged }
+        : null;
+
+    return NextResponse.json({ subscription: effectiveSubscription, payments: payments ?? [], is_privileged: isPrivileged });
   });
 }

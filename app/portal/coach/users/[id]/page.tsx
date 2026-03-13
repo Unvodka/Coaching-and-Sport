@@ -37,6 +37,8 @@ export default function CoachUserDetailPage() {
   const [loading, setLoading] = useState(true);
 
   const [showAssignForm, setShowAssignForm] = useState(false);
+  const [privileged, setPrivileged] = useState(false);
+  const [togglingPrivilege, setTogglingPrivilege] = useState(false);
   const [selectedProgramId, setSelectedProgramId] = useState("");
   const [assignMessage, setAssignMessage] = useState("");
   const [assigning, setAssigning] = useState(false);
@@ -47,6 +49,7 @@ export default function CoachUserDetailPage() {
       if (res.ok) {
         const json = await res.json();
         setProfile(json.profile);
+        setPrivileged(json.profile?.is_privileged ?? false);
         setAssignments(json.assignments || []);
         setWeightLogs(json.weightLogs || []);
         setMoodEntries(json.moodEntries || []);
@@ -102,6 +105,23 @@ export default function CoachUserDetailPage() {
       await fetchData();
     } catch (err) {
       console.error("Remove assignment error:", err);
+    }
+  };
+
+  const togglePrivilege = async () => {
+    if (!profile) return;
+    setTogglingPrivilege(true);
+    try {
+      const res = await fetch("/api/portal/coach/privilege", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: profile.id, is_privileged: !privileged }),
+      });
+      if (res.ok) setPrivileged((v) => !v);
+    } catch (err) {
+      console.error("Privilege toggle error:", err);
+    } finally {
+      setTogglingPrivilege(false);
     }
   };
 
@@ -174,7 +194,31 @@ export default function CoachUserDetailPage() {
               <span className="text-xs text-gray-400">
                 {t("portal.coach.users.joined")} {new Date(profile.created_at).toLocaleDateString(locale)}
               </span>
+              {privileged && (
+                <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-amber-100 text-amber-700">
+                  ⭐ {locale === "fr" ? "Accès privilégié" : "Privileged access"}
+                </span>
+              )}
             </div>
+            {/* Privilege toggle */}
+            <button
+              onClick={togglePrivilege}
+              disabled={togglingPrivilege}
+              className={`mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 ${
+                privileged
+                  ? "bg-amber-100 text-amber-700 hover:bg-amber-200"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+            >
+              {togglingPrivilege ? (
+                <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <span>{privileged ? "⭐" : "🔓"}</span>
+              )}
+              {privileged
+                ? (locale === "fr" ? "Révoquer l'accès privilégié" : "Revoke privileged access")
+                : (locale === "fr" ? "Accorder l'accès privilégié" : "Grant privileged access")}
+            </button>
           </div>
         </div>
       </div>
