@@ -242,6 +242,7 @@ const fr = {
   // Portal - Profile
   'portal.subscription': 'Mon abonnement',
   'portal.profile': 'Mon profil',
+  'portal.contact': 'Contacter le coach',
   'portal.profile.name': 'Prénom',
   'portal.profile.email': 'Email',
   'portal.profile.update': 'Mettre à jour',

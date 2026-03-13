@@ -238,6 +238,7 @@ const en: Record<TranslationKey, string> = {
   // Portal - Profile
   'portal.subscription': 'My subscription',
   'portal.profile': 'My Profile',
+  'portal.contact': 'Contact Coach',
   'portal.profile.name': 'First Name',
   'portal.profile.email': 'Email',
   'portal.profile.update': 'Update',

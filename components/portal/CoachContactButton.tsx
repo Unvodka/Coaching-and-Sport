@@ -9,7 +9,7 @@ export default function CoachContactButton() {
   return (
     <div className="mt-4 pt-3 border-t border-gray-100 flex justify-center">
       <Link
-        href="/#contact"
+        href="/portal/contact"
         className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-brand-blue transition-colors"
       >
         <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
