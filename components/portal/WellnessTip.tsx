@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/lib/i18n/useLanguage";
+import CoachContactButton from "@/components/portal/CoachContactButton";
 
 interface WellnessTipProps {
   moodScore: number;

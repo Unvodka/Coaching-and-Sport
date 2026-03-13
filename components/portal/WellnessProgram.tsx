@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
+import CoachContactButton from "@/components/portal/CoachContactButton";
 
 interface WellnessProgramProps {
   moodScore: number;
@@ -896,6 +897,11 @@ export default function WellnessProgram({ moodScore, energyLevel, sleepQuality, 
             {locale === "fr" ? program.bonusTip.fr : program.bonusTip.en}
           </p>
         </div>
+      </div>
+
+      {/* Coach contact */}
+      <div className="px-4">
+        <CoachContactButton />
       </div>
 
       {/* CTA */}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/lib/i18n/useLanguage";
+import CoachContactButton from "@/components/portal/CoachContactButton";
 
 export interface WeightEntry {
   weight_kg: number;
@@ -219,6 +220,7 @@ export default function WeightTip({ entry, onDismiss }: WeightTipProps) {
           </li>
         ))}
       </ul>
+    <CoachContactButton />
     </div>
   );
 }
