@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import WorkoutProgramCard from "@/components/portal/WorkoutProgramCard";
+import SubscriptionGate from "@/components/portal/SubscriptionGate";
 import type { WorkoutProgram } from "@/lib/supabase/database.types";
 
 interface WorkoutsClientProps {
@@ -23,6 +24,7 @@ export default function WorkoutsClient({
   const hasAny = hasAssigned || hasPublic;
 
   return (
+    <SubscriptionGate>
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <div />
@@ -92,5 +94,6 @@ export default function WorkoutsClient({
         </>
       )}
     </div>
+    </SubscriptionGate>
   );
 }

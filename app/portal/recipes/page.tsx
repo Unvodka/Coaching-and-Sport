@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useAuth } from "@/lib/supabase/AuthContext";
+import SubscriptionGate from "@/components/portal/SubscriptionGate";
 import RecipeCard from "@/components/portal/RecipeCard";
 import RecipeForm from "@/components/portal/RecipeForm";
 import type { Recipe } from "@/lib/supabase/database.types";
@@ -137,6 +138,7 @@ export default function RecipesPage() {
   }
 
   return (
+    <SubscriptionGate>
     <div className="max-w-6xl mx-auto">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div className="flex flex-wrap gap-2">
@@ -251,5 +253,6 @@ export default function RecipesPage() {
         </div>
       )}
     </div>
+    </SubscriptionGate>
   );
 }

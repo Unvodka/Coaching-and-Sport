@@ -7,6 +7,7 @@ import MoodEntryCard from "@/components/portal/MoodEntry";
 const MoodChart = dynamic(() => import("@/components/portal/MoodChart"), { ssr: false });
 import WellnessTip from "@/components/portal/WellnessTip";
 import WellnessProgram from "@/components/portal/WellnessProgram";
+import SubscriptionLockOverlay from "@/components/portal/SubscriptionLockOverlay";
 import MoodForm from "@/components/portal/MoodForm";
 import type { MoodEntry } from "@/lib/supabase/database.types";
 
@@ -94,13 +95,15 @@ export default function JournalPage() {
 
       {/* Wellness program — rendered outside form card so it's full width */}
       {program && (
-        <WellnessProgram
-          moodScore={program.mood}
-          energyLevel={program.energy}
-          sleepQuality={program.sleep}
-          stressLevel={program.stress}
-          onDismiss={() => setProgram(null)}
-        />
+        <SubscriptionLockOverlay>
+          <WellnessProgram
+            moodScore={program.mood}
+            energyLevel={program.energy}
+            sleepQuality={program.sleep}
+            stressLevel={program.stress}
+            onDismiss={() => setProgram(null)}
+          />
+        </SubscriptionLockOverlay>
       )}
 
       {entries.length === 0 && !showForm ? (
@@ -135,10 +138,12 @@ export default function JournalPage() {
             <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
               {locale === "fr" ? "Conseil du jour" : "Today's tip"}
             </h3>
-            <WellnessTip
-              moodScore={entries[0].mood_score}
-              energyLevel={entries[0].energy_level}
-            />
+            <SubscriptionLockOverlay>
+              <WellnessTip
+                moodScore={entries[0].mood_score}
+                energyLevel={entries[0].energy_level}
+              />
+            </SubscriptionLockOverlay>
           </div>
 
           <MoodChart entries={entries} />

@@ -6,6 +6,7 @@ import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useAuth } from "@/lib/supabase/AuthContext";
 import DashboardCard from "@/components/portal/DashboardCard";
 import InstallPWAButton from "@/components/portal/InstallPWAButton";
+import { useSubscription } from "@/hooks/useSubscription";
 
 interface DashboardStats {
   recipes: number;
@@ -17,6 +18,7 @@ interface DashboardStats {
 export default function DashboardPage() {
   const { t, locale } = useLanguage();
   const { profile: authProfile } = useAuth();
+  const subscriptionStatus = useSubscription();
   const [stats, setStats] = useState<DashboardStats>({
     recipes: 0,
     weightLogs: 0,
@@ -91,6 +93,31 @@ export default function DashboardPage() {
 
       {/* PWA install prompt — only shown on mobile when not yet installed */}
       <InstallPWAButton />
+
+      {/* Subscription upsell banner for non-subscribers */}
+      {subscriptionStatus === "none" && (
+        <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-5 mb-6 flex items-center gap-4">
+          <span className="text-3xl flex-shrink-0">⭐</span>
+          <div className="flex-1 min-w-0">
+            <p className="font-semibold text-amber-900 text-sm">
+              {locale === "fr"
+                ? "Abonnez-vous pour accéder à toutes les fonctionnalités"
+                : "Subscribe to access all features in your Dashboard"}
+            </p>
+            <p className="text-xs text-amber-700 mt-0.5">
+              {locale === "fr"
+                ? "Recettes, programmes, conseils du jour et suivi personnalisé."
+                : "Recipes, programs, daily tips and personalised tracking."}
+            </p>
+          </div>
+          <a
+            href="/programs"
+            className="flex-shrink-0 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold rounded-lg transition-colors whitespace-nowrap"
+          >
+            {locale === "fr" ? "Voir les offres" : "See plans"}
+          </a>
+        </div>
+      )}
 
       {/* Getting started section when no activity */}
       {totalActivity === 0 && (
