@@ -14,10 +14,10 @@ export default function AboutSection() {
     >
       <FadeInWhenVisible>
         <h2 className="font-heading text-center text-5xl mb-4 font-extrabold tracking-tight text-heading max-md:text-[2.2rem] max-[480px]:text-[1.8rem]">
-          Arnaud Chevallier
+          {t('about.heading.name')}
         </h2>
         <p className="text-center text-xl text-gray-500 font-semibold mb-6 max-md:text-lg">
-          Un coach dédié à votre réussite !
+          {t('about.heading.role')} !
         </p>
       </FadeInWhenVisible>
       <div className="flex flex-col items-center text-center max-w-[800px] mx-auto">
