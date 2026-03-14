@@ -40,7 +40,7 @@ export default function AboutPageContent() {
 
       {/* Main content */}
       <section className="py-20 px-16 max-md:py-12 max-md:px-6">
-        <div className="max-w-[800px] lg:max-w-[70%] mx-auto">
+        <div className="max-w-[800px] lg:max-w-[90%] xl:max-w-[1200px] mx-auto">
           {/* Bio */}
           <FadeInWhenVisible>
             <h2 className="font-heading text-heading text-[1.8rem] mb-8 font-bold text-center">
@@ -52,9 +52,30 @@ export default function AboutPageContent() {
             </h2>
           </FadeInWhenVisible>
 
-          {/* Photo */}
-          <FadeInWhenVisible delay={0.1}>
-            <div className="flex justify-center mb-10">
+          {/* Photo + Qualifications + Approach — 3-column grid on desktop */}
+          <div className="grid lg:grid-cols-3 gap-8 items-start mb-12">
+            {/* Qualifications — left on desktop, below photo on mobile */}
+            <FadeInWhenVisible delay={0.15} className="order-2 lg:order-1">
+              <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 border border-blue-100 h-full">
+                <h3 className="font-heading text-heading text-xl font-bold mb-4 flex items-center gap-3">
+                  🎓 {t("aboutPage.qualificationsTitle")}
+                </h3>
+                <ul className="space-y-3">
+                  {qualifications.map((q, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2 text-gray-600 text-[0.95rem] leading-relaxed"
+                    >
+                      <span className="text-brand-blue text-base mt-0.5 shrink-0">✓</span>
+                      {q}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeInWhenVisible>
+
+            {/* Photo — center on desktop, top on mobile */}
+            <FadeInWhenVisible delay={0.1} className="order-1 lg:order-2 flex justify-center">
               <div className="relative w-[280px] h-[320px] rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12)] border-4 border-white">
                 <Image
                   src="/images/Aquabike.jpg"
@@ -64,80 +85,60 @@ export default function AboutPageContent() {
                   sizes="280px"
                 />
               </div>
-            </div>
-          </FadeInWhenVisible>
+            </FadeInWhenVisible>
 
-          <FadeInWhenVisible delay={0.15}>
+            {/* Approach — right on desktop, below qualifications on mobile */}
+            <FadeInWhenVisible delay={0.2} className="order-3">
+              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-200 h-full">
+                <h3 className="font-heading text-heading text-xl font-bold mb-4 flex items-center gap-3">
+                  🎯 {t("aboutPage.approachTitle")}
+                </h3>
+                <ol className="space-y-3">
+                  {approaches.map((a, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2 text-gray-600 text-[0.95rem] leading-relaxed"
+                    >
+                      <span className="bg-brand-blue text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                        {i + 1}
+                      </span>
+                      {a}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </FadeInWhenVisible>
+          </div>
+
+          <FadeInWhenVisible delay={0.25}>
             <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
               {t("aboutPage.p1")}
             </p>
           </FadeInWhenVisible>
-          <FadeInWhenVisible delay={0.2}>
+          <FadeInWhenVisible delay={0.3}>
             <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
               {t("aboutPage.p2")}
             </p>
           </FadeInWhenVisible>
-          <FadeInWhenVisible delay={0.25}>
+          <FadeInWhenVisible delay={0.35}>
             <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
               {t("aboutPage.p3")}
             </p>
           </FadeInWhenVisible>
-          <FadeInWhenVisible delay={0.3}>
+          <FadeInWhenVisible delay={0.4}>
             <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
               {t("aboutPage.p4")}
             </p>
           </FadeInWhenVisible>
-          <FadeInWhenVisible delay={0.35}>
+          <FadeInWhenVisible delay={0.45}>
             <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
               {t("aboutPage.p5")}
             </p>
           </FadeInWhenVisible>
-          <FadeInWhenVisible delay={0.4}>
+          <FadeInWhenVisible delay={0.5}>
             <p className="text-gray-600 mb-12 leading-[1.8] text-[1.1rem]">
               {t("aboutPage.p6")}
             </p>
-          </FadeInWhenVisible>
-
-          {/* Qualifications */}
-          <FadeInWhenVisible delay={0.45}>
-            <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-10 mb-12 border border-blue-100">
-              <h3 className="font-heading text-heading text-2xl font-bold mb-6 flex items-center gap-3">
-                🎓 {t("aboutPage.qualificationsTitle")}
-              </h3>
-              <ul className="space-y-4">
-                {qualifications.map((q, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3 text-gray-600 text-[1.1rem] leading-relaxed"
-                  >
-                    <span className="text-brand-blue text-lg mt-0.5">✓</span>
-                    {q}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </FadeInWhenVisible>
-
-          {/* Approach */}
-          <FadeInWhenVisible delay={0.5}>
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-10 mb-12 border border-gray-200">
-              <h3 className="font-heading text-heading text-2xl font-bold mb-6 flex items-center gap-3">
-                🎯 {t("aboutPage.approachTitle")}
-              </h3>
-              <ol className="space-y-4">
-                {approaches.map((a, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3 text-gray-600 text-[1.1rem] leading-relaxed"
-                  >
-                    <span className="bg-brand-blue text-white text-sm font-bold w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5">
-                      {i + 1}
-                    </span>
-                    {a}
-                  </li>
-                ))}
-              </ol>
-            </div>
           </FadeInWhenVisible>
 
           {/* CTA */}
