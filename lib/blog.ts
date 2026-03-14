@@ -18,7 +18,7 @@ export interface BlogPost {
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: 'perdre-du-poids-avec-coach-sportif',
-    title: 'Comment perdre du poids durablement avec un coach sportif ?',
+    title: 'Comment perdre du poids durablement avec un éducateur sportif ?',
     titleEn: 'How to Lose Weight Sustainably with a Sports Coach',
     description:
       "Découvrez les clés d'une perte de poids durable grâce à un accompagnement sportif personnalisé. Conseils d'expert pour atteindre vos objectifs sans effet yoyo.",
@@ -31,15 +31,15 @@ export const BLOG_POSTS: BlogPost[] = [
     imageSrc:
       'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&q=80',
     imageAlt:
-      'Entraînement personnalisé avec un coach sportif pour perdre du poids',
+      'Entraînement personnalisé avec un éducateur sportif pour perdre du poids',
     imageAltEn: 'Personalized training with a sports coach for weight loss',
     content: [
-      "La perte de poids est l'un des objectifs les plus courants chez les personnes qui font appel à un coach sportif. Pourtant, beaucoup de gens se lancent dans des régimes drastiques ou des programmes d'entraînement trop intenses, ce qui mène souvent à l'abandon et à l'effet yoyo. Ayez les bonnes habitudes et abordez la perte de poids de manière intelligente et durable.",
-      "La première étape est de comprendre que la perte de poids repose sur un déficit calorique modéré, combiné à une activité physique adaptée. Il ne s'agit pas de se priver ou de s'épuiser, mais de trouver le bon équilibre entre alimentation et exercice. Un coach sportif vous aide à définir ce déficit de manière personnalisée, en tenant compte de votre métabolisme, votre mode de vie et vos préférences alimentaires.",
+      "La perte de poids est l'un des objectifs les plus courants chez les personnes qui font appel à un éducateur sportif. Pourtant, beaucoup de gens se lancent dans des régimes drastiques ou des programmes d'entraînement trop intenses, ce qui mène souvent à l'abandon et à l'effet yoyo. Ayez les bonnes habitudes et abordez la perte de poids de manière intelligente et durable.",
+      "La première étape est de comprendre que la perte de poids repose sur un déficit calorique modéré, combiné à une activité physique adaptée. Il ne s'agit pas de se priver ou de s'épuiser, mais de trouver le bon équilibre entre alimentation et exercice. Un éducateur sportif vous aide à définir ce déficit de manière personnalisée, en tenant compte de votre métabolisme, votre mode de vie et vos préférences alimentaires.",
       "L'entraînement en résistance (musculation, circuit training) est souvent sous-estimé dans un programme de perte de poids. Contrairement aux idées reçues, la musculation ne vous rendra pas « trop musclé(e) ». Au contraire, elle augmente votre métabolisme de base, ce qui signifie que vous brûlez plus de calories même au repos. Combinée avec du cardio modéré (natation, marche rapide, HIIT), cette approche donne des résultats visibles en quelques semaines.",
-      "La régularité est la clé du succès. Plutôt que de s'entraîner intensément 6 jours par semaine pendant un mois puis d'abandonner, il est bien plus efficace de maintenir 2 à 3 séances hebdomadaires sur le long terme. C'est exactement ce qu'un coach sportif vous aide à mettre en place : un programme réaliste, progressif et motivant.",
+      "La régularité est la clé du succès. Plutôt que de s'entraîner intensément 6 jours par semaine pendant un mois puis d'abandonner, il est bien plus efficace de maintenir 2 à 3 séances hebdomadaires sur le long terme. C'est exactement ce qu'un éducateur sportif vous aide à mettre en place : un programme réaliste, progressif et motivant.",
       "L'alimentation représente environ 70% des résultats en matière de perte de poids. Mais attention, il ne s'agit pas de suivre un régime strict. Mon approche est basée sur le rééquilibrage alimentaire : apprendre à mieux manger sans frustration, en comprenant les macronutriments et en adoptant des habitudes durables.",
-      "Enfin, le suivi régulier est essentiel. Les progrès ne sont pas toujours visibles sur la balance (la masse musculaire pèse plus que la graisse), c'est pourquoi un coach sportif utilise plusieurs indicateurs : tour de taille, photos de progression, performances sportives et bien-être général. Cette approche globale vous permet de rester motivé(e) et de voir vos véritables progrès.",
+      "Enfin, le suivi régulier est essentiel. Les progrès ne sont pas toujours visibles sur la balance (la masse musculaire pèse plus que la graisse), c'est pourquoi un éducateur sportif utilise plusieurs indicateurs : tour de taille, photos de progression, performances sportives et bien-être général. Cette approche globale vous permet de rester motivé(e) et de voir vos véritables progrès.",
     ],
     contentEn: [
       'Weight loss is one of the most common goals for people who work with a sports coach. Yet many people jump into drastic diets or overly intense training programs, which often leads to giving up and the yo-yo effect. Build the right habits and approach weight loss in an intelligent, sustainable way.',
@@ -140,7 +140,7 @@ export const BLOG_POSTS: BlogPost[] = [
     imageAltEn:
       'Balanced meal with proteins, vegetables and complex carbohydrates',
     content: [
-      "La nutrition est le pilier souvent négligé de tout programme sportif. On dit que les résultats se font à 30% à l'entraînement et à 70% dans l'assiette, et mon expérience de coach sportif à Valbonne confirme totalement cette proportion. Voici les bases de la nutrition sportive pour vous aider à optimiser vos performances et atteindre vos objectifs.",
+      "La nutrition est le pilier souvent négligé de tout programme sportif. On dit que les résultats se font à 30% à l'entraînement et à 70% dans l'assiette, et mon expérience de éducateur sportif à Valbonne confirme totalement cette proportion. Voici les bases de la nutrition sportive pour vous aider à optimiser vos performances et atteindre vos objectifs.",
       "Les macronutriments sont les trois grandes familles de nutriments dont votre corps a besoin : les protéines, les glucides et les lipides. Chacun joue un rôle essentiel. Les protéines réparent et construisent les muscles (visez 1,6 à 2g par kg de poids corporel si vous êtes actif). Les glucides fournissent l'énergie nécessaire à l'effort (privilégiez les glucides complexes comme les patates douces, le riz complet, les flocons d'avoine). Les lipides sont essentiels au bon fonctionnement hormonal et à l'absorption des vitamines.",
       "L'hydratation est souvent sous-estimée mais elle est cruciale. Une déshydratation de seulement 2% peut réduire vos performances de 10 à 20%. Visez au minimum 2 litres d'eau par jour, davantage les jours d'entraînement. Sur la Côte d'Azur, le climat chaud impose une vigilance particulière, surtout pour le fitness en plein air.",
       "Le timing de vos repas autour de l'entraînement fait une réelle différence. Avant l'effort (2-3h avant) : un repas complet avec glucides, protéines et peu de graisses. Juste après l'effort (dans les 30 minutes) : une collation riche en protéines et glucides rapides pour optimiser la récupération musculaire. C'est la fameuse « fenêtre anabolique » qui maximise l'absorption des nutriments par vos muscles.",
@@ -182,7 +182,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Le choix des activités est crucial. La natation est idéale pour reprendre en douceur car elle ne met aucun stress sur les articulations. La marche active et le fitness adapté en plein air sont également excellents pour reconditionner votre système cardiovasculaire. Le renforcement musculaire léger est essentiel pour prévenir la sarcopénie (perte de masse musculaire liée à l'âge).",
       "La récupération prend une importance majeure après 40 ans. Prévoyez au minimum 48 heures entre deux séances sollicitant les mêmes groupes musculaires. Le sommeil de qualité (7-8 heures par nuit), les étirements post-entraînement et une alimentation riche en protéines sont les trois piliers d'une bonne récupération.",
       "Les bénéfices sont rapides et concrets : après 4 semaines de pratique régulière, vous constaterez une amélioration de votre énergie, de votre sommeil et de votre humeur. Après 8 à 12 semaines, les changements physiques deviennent visibles. La pratique sportive régulière après 40 ans réduit le risque de diabète de type 2, de maladies cardiovasculaires et d'ostéoporose de 30 à 50%.",
-      "Le rôle d'un coach sportif est particulièrement précieux dans cette situation. Il adapte chaque exercice à votre condition physique, corrige votre posture pour éviter les blessures, et vous motive sur le long terme. Je vous propose des séances individuelles parfaitement adaptées aux besoins spécifiques des personnes de plus de 40 ans. Contactez-moi pour une évaluation personnalisée.",
+      "Le rôle d'un éducateur sportif est particulièrement précieux dans cette situation. Il adapte chaque exercice à votre condition physique, corrige votre posture pour éviter les blessures, et vous motive sur le long terme. Je vous propose des séances individuelles parfaitement adaptées aux besoins spécifiques des personnes de plus de 40 ans. Contactez-moi pour une évaluation personnalisée.",
     ],
     contentEn: [
       'It is never too late to start or return to physical activity. At 40, 50 or even 60, sport can transform your quality of life. I work with many clients in this age group, and the results are always remarkable. Here is how to approach returning to sport safely.',
@@ -201,7 +201,7 @@ export const BLOG_POSTS: BlogPost[] = [
     titleEn:
       'Sport and Mental Health: How Physical Activity Transforms Your Well-being',
     description:
-      "Découvrez comment le sport agit sur le stress, l'anxiété et la dépression. Études scientifiques, mécanismes biologiques et conseils pratiques par un coach sportif diplômé à Valbonne.",
+      "Découvrez comment le sport agit sur le stress, l'anxiété et la dépression. Études scientifiques, mécanismes biologiques et conseils pratiques par un éducateur sportif diplômé à Valbonne.",
     descriptionEn:
       'Discover how sport affects stress, anxiety and depression. Scientific studies, biological mechanisms and practical advice from a certified sports coach in Valbonne.',
     date: '2025-02-23',
@@ -230,7 +230,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
       "Quelles activités choisir pour maximiser les bienfaits sur le mental ? Toutes les formes d'exercice sont bénéfiques, mais certaines se distinguent. La natation combine les bienfaits du sport avec l'effet apaisant de l'eau — le contact aquatique réduit le cortisol et favorise un état méditatif naturel. Le fitness en plein air ajoute les bienfaits prouvés du contact avec la nature (réduction du stress de 16% en moyenne selon les études sur le « bain de forêt » japonais). Le yoga et les étirements activent le système nerveux parasympathique, celui qui favorise la détente. Le HIIT et la musculation libèrent un maximum d'endorphines en peu de temps.",
 
-      "La régularité prime sur l'intensité. L'OMS recommande au minimum 150 minutes d'activité modérée par semaine (soit environ 30 minutes, 5 fois par semaine) ou 75 minutes d'activité intense. Mais même en dessous de ces seuils, chaque minute compte. L'essentiel est de trouver une activité qui vous plaît et de l'intégrer durablement dans votre routine. C'est précisément le rôle d'un coach sportif : vous aider à trouver l'activité adaptée, vous accompagner dans la régularité et adapter les séances à votre état du jour — y compris les jours où la motivation est en berne.",
+      "La régularité prime sur l'intensité. L'OMS recommande au minimum 150 minutes d'activité modérée par semaine (soit environ 30 minutes, 5 fois par semaine) ou 75 minutes d'activité intense. Mais même en dessous de ces seuils, chaque minute compte. L'essentiel est de trouver une activité qui vous plaît et de l'intégrer durablement dans votre routine. C'est précisément le rôle d'un éducateur sportif : vous aider à trouver l'activité adaptée, vous accompagner dans la régularité et adapter les séances à votre état du jour — y compris les jours où la motivation est en berne.",
 
       "Un point important : le sport n'est pas un substitut aux soins médicaux ou psychologiques en cas de trouble mental diagnostiqué. C'est un complément puissant, reconnu par la communauté médicale. Si vous souffrez de dépression sévère, de troubles anxieux importants ou de toute autre condition psychique, consultez un professionnel de santé. Le sport viendra renforcer votre prise en charge, pas la remplacer.",
 
@@ -312,7 +312,7 @@ export const BLOG_POSTS: BlogPost[] = [
     imageAltEn:
       'Person walking on a sunny path, symbolizing the return of motivation',
     content: [
-      "Il y a des jours — parfois des semaines — où la motivation semble avoir disparu. Vous n'êtes pas vraiment mal, mais vous n'êtes pas bien non plus. Tout semble demander un effort considérable, et l'envie de progresser s'est éteinte. En tant que coach sportif à Valbonne, je rencontre régulièrement cette situation chez mes clients. C'est normal, et surtout, c'est temporaire. Voici comment relancer la machine.",
+      "Il y a des jours — parfois des semaines — où la motivation semble avoir disparu. Vous n'êtes pas vraiment mal, mais vous n'êtes pas bien non plus. Tout semble demander un effort considérable, et l'envie de progresser s'est éteinte. En tant que éducateur sportif à Valbonne, je rencontre régulièrement cette situation chez mes clients. C'est normal, et surtout, c'est temporaire. Voici comment relancer la machine.",
 
       "La règle des 5 minutes est la technique la plus efficace pour vaincre l'inertie. Le principe est simple : engagez-vous à faire l'activité pendant seulement 5 minutes. Pas 30, pas une heure — juste 5 minutes. Mettez vos chaussures de sport et marchez 5 minutes. Ouvrez votre tapis de yoga et faites 5 minutes d'étirements. Dans 80% des cas, une fois lancé, vous continuerez bien au-delà. Et si vous arrêtez après 5 minutes ? C'est 5 minutes de plus que zéro, et votre cerveau enregistre quand même une victoire.",
 
@@ -324,7 +324,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
       "Prenez soin de vos fondamentaux : sommeil, hydratation, alimentation. Un manque de motivation est souvent le symptôme d'un déséquilibre physiologique. Dormez-vous suffisamment (7-8h) ? Buvez-vous assez d'eau (2L/jour) ? Mangez-vous suffisamment de protéines et de glucides complexes pour alimenter votre cerveau et vos muscles ? Avant de chercher des solutions complexes, réglez les bases. Un client qui « manquait de motivation » a retrouvé toute son énergie simplement en passant de 5h30 à 7h de sommeil par nuit.",
 
-      "Enfin, soyez bienveillant avec vous-même. Les passages à vide font partie du parcours de progression. Ils ne signifient pas que vous avez échoué ou que vous êtes paresseux. Parfois, votre corps et votre esprit ont besoin de ralentir pour mieux repartir. Le rôle d'un coach sportif est justement de vous accompagner dans ces moments : adapter les séances à votre état du jour, maintenir le fil de la régularité même à basse intensité, et vous rappeler tout le chemin que vous avez déjà parcouru.",
+      "Enfin, soyez bienveillant avec vous-même. Les passages à vide font partie du parcours de progression. Ils ne signifient pas que vous avez échoué ou que vous êtes paresseux. Parfois, votre corps et votre esprit ont besoin de ralentir pour mieux repartir. Le rôle d'un éducateur sportif est justement de vous accompagner dans ces moments : adapter les séances à votre état du jour, maintenir le fil de la régularité même à basse intensité, et vous rappeler tout le chemin que vous avez déjà parcouru.",
     ],
     contentEn: [
       "There are days — sometimes weeks — when motivation seems to have disappeared. You're not really bad, but you're not really good either. Everything feels like a considerable effort, and the drive to progress has gone quiet. As a sports coach in Valbonne, I regularly encounter this situation with my clients. It is normal, and above all, it is temporary. Here is how to get the engine going again.",

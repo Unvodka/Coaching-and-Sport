@@ -34,14 +34,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
     default:
-      'Coach-Bluewave | Arnaud Chevallier - Coach Sportif & Maître-Nageur',
+      'Coach-Bluewave | Arnaud Chevallier - Éducateur Sportif & Maître-Nageur',
     template: '%s | Coach-Bluewave',
   },
   description:
-    "Coach-Bluewave par Arnaud Chevallier — coach sportif et maître-nageur diplômé d'État à Valbonne. Cours de natation (swimming lessons), fitness en plein air, musculation, HIIT et nutrition personnalisée. Personal trainer en personne (Côte d'Azur) et en ligne partout en France. Première séance découverte à 45€.",
+    "Coach-Bluewave par Arnaud Chevallier — éducateur sportif et maître-nageur diplômé d'État à Valbonne. Cours de natation (swimming lessons), fitness en plein air, musculation, HIIT et nutrition personnalisée. Personal trainer en personne (Côte d'Azur) et en ligne partout en France. Première séance découverte à 45€.",
   keywords: [
     'Coach-Bluewave',
-    'coach sportif Valbonne',
+    'éducateur sportif Valbonne',
     'maître-nageur',
     'cours de natation',
     'personal trainer French Riviera',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     alternateLocale: 'en_US',
     url: BASE_URL,
     siteName: 'Coach-Bluewave',
-    title: 'Coach-Bluewave | Arnaud Chevallier - Coach Sportif & Maître-Nageur',
+    title: 'Coach-Bluewave | Arnaud Chevallier - Éducateur Sportif & Maître-Nageur',
     description:
       "Coach-Bluewave par Arnaud Chevallier, maître-nageur diplômé d'État — coaching sportif, cours de natation, fitness, musculation, HIIT et nutrition personnalisée à Valbonne. Personal trainer en personne (Côte d'Azur) et en ligne.",
     images: [
@@ -73,9 +73,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Coach-Bluewave | Arnaud Chevallier - Coach Sportif & Maître-Nageur',
+    title: 'Coach-Bluewave | Arnaud Chevallier - Éducateur Sportif & Maître-Nageur',
     description:
-      "Coach-Bluewave — maître-nageur et coach sportif à Valbonne. Natation, fitness, musculation, HIIT et nutrition personnalisée par Arnaud Chevallier. Personal trainer Côte d'Azur.",
+      "Coach-Bluewave — maître-nageur et éducateur sportif à Valbonne. Natation, fitness, musculation, HIIT et nutrition personnalisée par Arnaud Chevallier. Personal trainer Côte d'Azur.",
     images: ['/images/hero-valbonne.jpg'],
   },
   robots: {
@@ -105,7 +105,7 @@ const professionalServiceJsonLd = {
   '@id': `${BASE_URL}/#business`,
   name: 'Coach-Bluewave | Arnaud Chevallier',
   description:
-    "Coach-Bluewave par Arnaud Chevallier — coach sportif (personal trainer) et maître-nageur diplômé d'État à Valbonne. Cours de natation (swimming lessons), fitness, musculation, HIIT, circuit training et nutrition personnalisée. Coaching en personne sur la Côte d'Azur (French Riviera) et en ligne partout en France. Spécialisé en perte de poids et remise en forme.",
+    "Coach-Bluewave par Arnaud Chevallier — éducateur sportif (personal trainer) et maître-nageur diplômé d'État à Valbonne. Cours de natation (swimming lessons), fitness, musculation, HIIT, circuit training et nutrition personnalisée. Coaching en personne sur la Côte d'Azur (French Riviera) et en ligne partout en France. Spécialisé en perte de poids et remise en forme.",
   url: BASE_URL,
   logo: `${BASE_URL}/images/logo-bluewave.png`,
   image: `${BASE_URL}/images/hero-valbonne.jpg`,
@@ -126,7 +126,7 @@ const professionalServiceJsonLd = {
   ],
   serviceType: [
     'Coaching sportif',
-    'Coach sportif',
+    'Éducateur sportif',
     'Personal trainer',
     'Cours de natation',
     'Swimming lessons',
@@ -244,9 +244,9 @@ const personJsonLd = {
   '@type': 'Person',
   '@id': `${BASE_URL}/#person`,
   name: 'Arnaud Chevallier',
-  jobTitle: 'Coach Sportif & Maître-Nageur',
+  jobTitle: 'Éducateur Sportif & Maître-Nageur',
   description:
-    "Fondateur de Coach-Bluewave. Maître-nageur diplômé d'État (certified swimming teacher) et coach sportif (personal trainer) à Valbonne. Cours de natation, fitness, musculation, HIIT et nutrition personnalisée. Coaching en personne sur la Côte d'Azur (French Riviera) et en ligne partout en France. Spécialisé en perte de poids et remise en forme.",
+    "Fondateur de Coach-Bluewave. Maître-nageur diplômé d'État (certified swimming teacher) et éducateur sportif (personal trainer) à Valbonne. Cours de natation, fitness, musculation, HIIT et nutrition personnalisée. Coaching en personne sur la Côte d'Azur (French Riviera) et en ligne partout en France. Spécialisé en perte de poids et remise en forme.",
   url: BASE_URL,
   image: `${BASE_URL}/images/hero-valbonne.jpg`,
   knowsAbout: [
@@ -289,7 +289,7 @@ const websiteJsonLd = {
   name: 'Coach-Bluewave',
   url: BASE_URL,
   description:
-    "Coach-Bluewave — site officiel d'Arnaud Chevallier, maître-nageur diplômé d'État (swimming teacher) et coach sportif (personal trainer) à Valbonne. Cours de natation, fitness, musculation et coaching en personne (Côte d'Azur) et en ligne.",
+    "Coach-Bluewave — site officiel d'Arnaud Chevallier, maître-nageur diplômé d'État (swimming teacher) et éducateur sportif (personal trainer) à Valbonne. Cours de natation, fitness, musculation et coaching en personne (Côte d'Azur) et en ligne.",
   inLanguage: ['fr', 'en'],
   publisher: {
     '@id': `${BASE_URL}/#person`,

@@ -6,10 +6,10 @@ import PacksPageContent from "./PacksPageContent";
 export const metadata: Metadata = {
   title: "Packs & Tarifs Cours Particuliers — Natation, Fitness, Musculation",
   description:
-    "Réservez vos packs de séances particulières avec Arnaud Chevallier, maître-nageur et coach sportif à Valbonne. Tarifs dégressifs de 1 à 20 séances. Natation, fitness, musculation. Paiement sécurisé Stripe.",
+    "Réservez vos packs de séances particulières avec Arnaud Chevallier, maître-nageur et éducateur sportif à Valbonne. Tarifs dégressifs de 1 à 20 séances. Natation, fitness, musculation. Paiement sécurisé Stripe.",
   keywords: [
     "pack cours particuliers",
-    "tarif coach sportif",
+    "tarif éducateur sportif",
     "tarif maître-nageur",
     "prix cours natation Valbonne",
     "cours particuliers fitness",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "Coach-Bluewave",
     title: "Packs & Tarifs Cours Particuliers | Coach-Bluewave",
     description:
-      "Packs de séances particulières avec coach sportif et maître-nageur diplômé à Valbonne. Tarifs dégressifs, paiement sécurisé.",
+      "Packs de séances particulières avec éducateur sportif et maître-nageur diplômé à Valbonne. Tarifs dégressifs, paiement sécurisé.",
     images: [
       {
         url: "/images/hero-valbonne.jpg",

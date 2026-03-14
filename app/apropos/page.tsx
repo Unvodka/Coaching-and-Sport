@@ -5,14 +5,14 @@ import JsonLd from "@/components/JsonLd";
 
 
 export const metadata: Metadata = {
-  title: "À Propos - Arnaud Chevallier, Coach Sportif & Maître-Nageur",
+  title: "À Propos - Arnaud Chevallier, Éducateur Sportif & Maître-Nageur",
   description:
-    "Découvrez le parcours d'Arnaud Chevallier, maître-nageur diplômé et coach sportif certifié à Valbonne. Spécialisé en perte de poids, remise en forme, natation et coaching personnalisé sur la Côte d'Azur.",
+    "Découvrez le parcours d'Arnaud Chevallier, maître-nageur diplômé et éducateur sportif certifié à Valbonne. Spécialisé en perte de poids, remise en forme, natation et coaching personnalisé sur la Côte d'Azur.",
   keywords: [
-    "coach sportif Valbonne",
+    "éducateur sportif Valbonne",
     "maître-nageur diplômé",
     "Arnaud Chevallier",
-    "coach sportif Côte d'Azur",
+    "éducateur sportif Côte d'Azur",
     "perte de poids",
     "remise en forme",
     "coaching personnalisé",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: `${BASE_URL}/apropos`,
     siteName: "Coach-Bluewave",
-    title: "À Propos - Arnaud Chevallier, Coach Sportif & Maître-Nageur",
+    title: "À Propos - Arnaud Chevallier, Éducateur Sportif & Maître-Nageur",
     description:
-      "Maître-nageur diplômé et coach sportif certifié à Valbonne. Spécialisé en perte de poids et remise en forme.",
+      "Maître-nageur diplômé et éducateur sportif certifié à Valbonne. Spécialisé en perte de poids et remise en forme.",
     images: [
       {
         url: "/images/hero-valbonne.jpg",

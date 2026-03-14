@@ -156,7 +156,7 @@ export default function PrivacyContent() {
         <p className="text-gray-700 leading-relaxed mb-3">
           {en
             ? `Personal data collected is intended solely for ${LEGAL_INFO.name} as a sports coach. Certain technical sub-processors may have access to the data:`
-            : `Les données personnelles collectées sont destinées uniquement à ${LEGAL_INFO.name} en tant que coach sportif. Certains sous-traitants techniques peuvent avoir accès aux données :`}
+            : `Les données personnelles collectées sont destinées uniquement à ${LEGAL_INFO.name} en tant que éducateur sportif. Certains sous-traitants techniques peuvent avoir accès aux données :`}
         </p>
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-gray-700 border-collapse">

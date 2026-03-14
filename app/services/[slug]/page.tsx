@@ -22,7 +22,7 @@ const SERVICE_KEYWORDS: Record<string, string[]> = {
     "apprendre à nager", "natation Côte d'Azur",
   ],
   "fitness-plein-air": [
-    "fitness plein air Valbonne", "coach sportif", "personal trainer",
+    "fitness plein air Valbonne", "éducateur sportif", "personal trainer",
     "HIIT outdoor", "musculation Côte d'Azur",
   ],
   "nutrition-equilibree": [
@@ -98,7 +98,7 @@ export default function ServicePage({ params }: Props) {
       "@type": "Person",
       "@id": `${BASE_URL}/#person`,
       name: "Arnaud Chevallier",
-      jobTitle: "Maître-Nageur Diplômé & Coach Sportif",
+      jobTitle: "Maître-Nageur Diplômé & Éducateur Sportif",
     },
     areaServed: [
       { "@type": "AdministrativeArea", name: "Côte d'Azur" },

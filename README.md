@@ -1,6 +1,6 @@
 # Coach-Bluewave 🏊‍♂️💪
 
-**Site web professionnel pour Arnaud Chevallier** — coach sportif et maître-nageur diplômé d'État à Valbonne, Côte d'Azur.
+**Site web professionnel pour Arnaud Chevallier** — éducateur sportif et maître-nageur diplômé d'État à Valbonne, Côte d'Azur.
 
 🌐 **Live:** [coach-bluewave.com](https://coach-bluewave.com)
 

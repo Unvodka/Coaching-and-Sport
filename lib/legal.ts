@@ -8,7 +8,7 @@ export const LEGAL_INFO = {
   name: 'Arnaud Chevallier',
   status: 'Micro-entrepreneur (Entreprise Individuelle)',
   brand: 'Coach-Bluewave',
-  activity: 'Coach sportif personnel, Maître-Nageur Sauveteur',
+  activity: 'Éducateur sportif personnel, Maître-Nageur Sauveteur',
   siret: '82243667100025',
   address: '131 allée des palmiers',
   city: 'Valbonne, 06560, France',

@@ -58,7 +58,7 @@ export default function AboutPageContent() {
               <div className="relative w-[280px] h-[320px] rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12)] border-4 border-white">
                 <Image
                   src="/images/Aquabike.jpg"
-                  alt="Arnaud Chevallier — Coach Sportif & Maître-Nageur"
+                  alt="Arnaud Chevallier — Éducateur Sportif & Maître-Nageur"
                   fill
                   className="object-cover"
                   sizes="280px"

@@ -8,7 +8,7 @@ const fr = {
 
   // Hero
   'hero.subtitle':
-    'Maître-nageur et éducateur sportif spécialisé en perte de poids, remise en forme et bien-être',
+    'Maître-nageur et éducateur sportif spécialisé en remise en forme, perte de poids et bien-être',
   'hero.cta': 'Commencer ma transformation',
 
   // Services section
@@ -64,15 +64,15 @@ const fr = {
   'aboutPage.title': 'Qui se cache derrière Coach-Bluewave ?',
   'aboutPage.subtitle':
     "Découvrez mon parcours et ma philosophie d'accompagnement",
-  'aboutPage.heading': 'Arnaud Chevallier — Coach Sportif & Maître-Nageur',
+  'aboutPage.heading': 'Arnaud Chevallier — Éducateur Sportif & Maître-Nageur',
   'aboutPage.headingName': 'Arnaud Chevallier',
-  'aboutPage.headingRole': 'Coach Sportif & Maître-Nageur',
+  'aboutPage.headingRole': 'Éducateur Sportif & Maître-Nageur',
   'aboutPage.p1':
     "J'ai grandi sur la Côte d'Azur, entre Antibes et ses alentours, entre mer et montagnes, une nature qui ne m'a jamais quitté. Très tôt, je me suis tourné vers le sport sous toutes ses formes — dans l'eau, sur terre, seul ou en équipe — avec cette envie constante de bouger, de comprendre mon corps et d'aller toujours un peu plus loin.",
   'aboutPage.p2':
     "Maître-nageur et éducateur sportif, je me consacre depuis plus de dix ans à accompagner les personnes dans leur parcours. J'ai eu la chance de travailler dans des endroits incroyables tels que les Thermes Marins de Monte-Carlo, le Maybourne Riviera, Thalazur, Aquavelo, Aquafit, les bassins de salles de sport parisiennes et dans bien d'autres endroits encore. J'ai aussi exercé dans d'autres domaines, dans d'autres pays, avec d'autres méthodes. Tout cela m'a appris à m'adapter, à écouter, et à me sentir à l'aise partout et avec tout le monde tout aussi bien qu'à acquérir une approche autant différente que technique.",
   'aboutPage.p3':
-    "Spécialisé dans la pratique multi-sports, la perte de poids, la remise en forme et le bien-être, j'ai développé au fil des années une approche globale qui combine plusieurs disciplines pour des résultats durables et harmonieux. Mais au-delà de la technique, ce qui me passionne vraiment, c'est l'humain. La psychologie, la manière dont les gens fonctionnent, ce qui les motive ou ce qui les bloque — tout ça me fascine. Et ça se ressent dans ma façon d'enseigner : je ne suis pas là pour balancer des consignes, j'écoute, j'observe, je m'adapte et c'est également ce que je voudrais vous transmettre à travers des exercices techniques et ludiques, des conseils, et des discussions passionnantes.",
+    "Spécialisé dans la pratique multi-sports, la perte de poids, la remise en forme et le bien-être, j'ai développé au fil des années une approche globale qui combine plusieurs disciplines pour des résultats durables et harmonieux. Mais au-delà de la technique, ce qui me passionne vraiment, c'est l'humain. La psychologie, la manière dont les gens fonctionnent, ce qui les motive ou ce qui les bloque et c'est également ce que j'enseigne à travers des exercices techniques et ludiques, des conseils, et des discussions passionnantes.",
   'aboutPage.p4':
     "L'équilibre est au cœur de tout ce que j'enseigne. Équilibre entre le corps et l'esprit, entre l'effort et le plaisir, et entre ce que l'on mange et ce que l'on dépense. Je suis convaincu que le bien-être ne se construit pas dans un seul domaine et qu'il ne vient pas des autres — il vient de nous, il vient quand on apprend l'équilibre de la vie, l'équilibre entre le mouvement, l'alimentation et le mental. C'est cette vision-là que je porte au quotidien, aussi bien dans mes cours que dans mes échanges.",
   'aboutPage.p5':
@@ -121,7 +121,7 @@ const fr = {
 
   // Footer
   'footer.text':
-    'Coach-Bluewave | Arnaud Chevallier - Coach Sportif & Maître-Nageur - Tous droits réservés',
+    'Coach-Bluewave | Arnaud Chevallier - Éducateur Sportif & Maître-Nageur - Tous droits réservés',
   'footer.legal': 'Mentions légales',
   'footer.privacy': 'Politique de confidentialité',
   'footer.cgv': 'CGV',
@@ -270,7 +270,7 @@ const fr = {
   'blog.readMore': 'Lire →',
   'blog.cta.title': "Prêt à passer à l'action ?",
   'blog.cta.subtitle':
-    "Bénéficiez d'un accompagnement personnalisé avec un coach sportif diplômé à Valbonne.",
+    "Bénéficiez d'un accompagnement personnalisé avec un éducateur sportif diplômé à Valbonne.",
   'blog.cta.button': 'Réserver une séance découverte',
 } as const;
 

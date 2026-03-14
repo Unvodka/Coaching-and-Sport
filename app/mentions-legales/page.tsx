@@ -6,7 +6,7 @@ import MentionsLegalesContent from "@/components/legal/MentionsLegalesContent";
 export const metadata: Metadata = {
   title: "Mentions Légales",
   description:
-    "Mentions légales du site Coach-Bluewave — Arnaud Chevallier, coach sportif et maître-nageur diplômé à Valbonne.",
+    "Mentions légales du site Coach-Bluewave — Arnaud Chevallier, éducateur sportif et maître-nageur diplômé à Valbonne.",
   alternates: {
     canonical: `${BASE_URL}/mentions-legales`,
   },
