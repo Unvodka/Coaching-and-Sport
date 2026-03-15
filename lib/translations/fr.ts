@@ -80,10 +80,10 @@ const fr = {
   'aboutPage.p6':
     "Amoureux de la nature, curieux de tout, souriant et plein d'énergie, je fais partie de ceux qui donnent envie de se bouger et de prendre soin de soi — sans se prendre la tête. Basé à Valbonne, j'interviens sur toute la Côte d'Azur et le Var pour vous offrir le meilleur accompagnement possible. Que ce soit au bord d'un bassin, en plein air, à votre domicile ou autour d'une conversation, j'aime transmettre avec simplicité, sincérité et bonne humeur.",
   'aboutPage.qualificationsTitle': 'Mes Atouts',
-  'aboutPage.q1': 'BPJEPS Activités Aquatiques et de la Natation (RNCP Niv. IV)',
-  'aboutPage.q2': 'Carte professionnelle d\'éducateur sportif N° 07520ED0375',
-  'aboutPage.q3': 'PSE2 — Équipier secouriste (Croix Blanche, 2023)',
-  'aboutPage.q4': 'Conseiller en nutrition sportive & coaching en ligne',
+  'aboutPage.q1': "Brevet d'État de Maître-Nageur Sauveteur",
+  'aboutPage.q2': 'Éducateur sportif spécialisé',
+  'aboutPage.q3': 'Perte de poids, remise en forme, bien-être et santé mentale',
+  'aboutPage.q4': 'Conseiller en nutrition sportive',
   'aboutPage.approachTitle': 'Mon Approche',
   'aboutPage.approach1':
     'Évaluation initiale complète de votre condition physique et de vos objectifs',
