@@ -86,13 +86,13 @@ const fr = {
   'aboutPage.q4': 'Conseils en nutrition',
   'aboutPage.approachTitle': 'Mon Approche',
   'aboutPage.approach1':
-    'Évaluation initiale complète de votre condition physique et de vos objectifs',
+    'Évaluation initiale pour un programme 100% personnalisé adapté à votre rythme, vos objectifs et vos contraintes',
   'aboutPage.approach2':
-    'Programmes 100% personnalisés adaptés à votre rythme et vos contraintes',
+    'Améliorations de la qualité de vie (nutrition, énergie, sommeil, stress…) pour une amélioration des performances',
   'aboutPage.approach3':
-    'Suivi régulier et ajustements pour garantir votre progression',
+    'Motivation dans un cadre ludique ou technique selon les circonstances',
   'aboutPage.approach4':
-    'Accompagnement bienveillant et motivant à chaque étape',
+    'Accompagnement bienveillant sur toute la ligne',
   'aboutPage.ctaTitle': 'Prêt à commencer ?',
   'aboutPage.ctaText': 'Contactez-moi',
   'aboutPage.backHome': "← Retour à l'accueil",

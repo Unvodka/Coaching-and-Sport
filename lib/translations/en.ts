@@ -85,12 +85,12 @@ const en: Record<TranslationKey, string> = {
   'aboutPage.q4': 'Nutrition advice',
   'aboutPage.approachTitle': 'My Approach',
   'aboutPage.approach1':
-    'Complete initial assessment of your fitness level and goals',
+    'Initial assessment for a 100% personalised programme adapted to your pace, goals and constraints',
   'aboutPage.approach2':
-    '100% personalized programs adapted to your pace and constraints',
+    'Quality of life improvements (nutrition, energy, sleep, stress…) for better performance',
   'aboutPage.approach3':
-    'Regular follow-up and adjustments to ensure your progress',
-  'aboutPage.approach4': 'Supportive and motivating guidance at every step',
+    'Motivation in a fun or technical setting depending on the circumstances',
+  'aboutPage.approach4': 'Caring support all the way through',
   'aboutPage.ctaTitle': 'Ready to get started?',
   'aboutPage.ctaText': 'Contact me',
   'aboutPage.backHome': '← Back to home',
