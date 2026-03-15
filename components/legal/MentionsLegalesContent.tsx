@@ -205,10 +205,44 @@ export default function MentionsLegalesContent() {
         </p>
       </section>
 
-      {/* Section 7 - Droit applicable / Applicable Law */}
+      {/* Section 7 - Médiation / Mediation */}
+      <section className="mb-10">
+        <h2 className="text-xl font-semibold text-brand-dark mb-4">
+          7. {en ? "Consumer Mediation" : "Médiation de la consommation"}
+        </h2>
+        <p className="text-gray-700 leading-relaxed mb-3">
+          {en
+            ? "In accordance with articles L.616-1 and R.616-1 of the French Consumer Code, the following consumer mediator has been designated:"
+            : "Conformément aux articles L.616-1 et R.616-1 du Code de la consommation, le médiateur de la consommation désigné est :"}
+        </p>
+        <div className="space-y-1 text-gray-700 leading-relaxed mb-3">
+          <p>
+            <strong>{en ? "Mediator" : "Médiateur"} :</strong> {LEGAL_INFO.mediatorName}
+          </p>
+          <p>
+            <strong>{en ? "Address" : "Adresse"} :</strong> {LEGAL_INFO.mediatorAddress}
+          </p>
+          <p>
+            <strong>{en ? "Website" : "Site web"} :</strong>{" "}
+            <a href={LEGAL_INFO.mediatorUrl} target="_blank" rel="noopener noreferrer" className="text-brand-blue hover:underline">
+              {LEGAL_INFO.mediatorUrl}
+            </a>
+          </p>
+        </div>
+        <p className="text-gray-700 leading-relaxed">
+          {en
+            ? "European online dispute resolution platform:"
+            : "Plateforme européenne de règlement en ligne des litiges :"}{" "}
+          <a href={LEGAL_INFO.odrUrl} target="_blank" rel="noopener noreferrer" className="text-brand-blue hover:underline">
+            {LEGAL_INFO.odrUrl}
+          </a>
+        </p>
+      </section>
+
+      {/* Section 8 - Droit applicable / Applicable Law */}
       <section>
         <h2 className="text-xl font-semibold text-brand-dark mb-4">
-          7. {en ? "Applicable Law" : "Droit applicable"}
+          8. {en ? "Applicable Law" : "Droit applicable"}
         </h2>
         <p className="text-gray-700 leading-relaxed">
           {en

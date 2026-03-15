@@ -30,7 +30,13 @@ export const LEGAL_INFO = {
 
   // ─── Business Details ──────────────────────────────────────
   maxKmRadius: '25',
-  otherPaymentMethods: 'Chėque',
+  otherPaymentMethods: 'Chèque',
+
+  // ─── Mediation ─────────────────────────────────────────────
+  mediatorName: 'CM2C – Centre de la Médiation de la Consommation de Conciliateurs de Justice',
+  mediatorAddress: '49 rue de Ponthieu, 75008 Paris',
+  mediatorUrl: 'https://cm2c.net',
+  odrUrl: 'https://ec.europa.eu/consumers/odr',
 
   // ─── Third Parties ─────────────────────────────────────────
   emailjsLocation: 'États-Unis / UE',

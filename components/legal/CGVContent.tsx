@@ -288,10 +288,49 @@ export default function CGVContent() {
         </p>
       </section>
 
-      {/* Article 13 — Acceptation / Acceptance */}
+      {/* Article 13 — Médiation / Mediation */}
+      <section className="mb-10">
+        <h2 className="text-xl font-semibold text-brand-dark mb-4">
+          {en ? "Article 13 — Consumer Mediation" : "Article 13 — Médiation de la consommation"}
+        </h2>
+        <p className="text-gray-700 leading-relaxed mb-3">
+          {en
+            ? "In accordance with article L.616-1 of the French Consumer Code, the Client may, in the event of a dispute that could not be resolved amicably, have free recourse to the following consumer mediator:"
+            : "Conformément à l'article L.616-1 du Code de la consommation, le Client peut, en cas de litige n'ayant pas pu être résolu à l'amiable, recourir gratuitement au médiateur de la consommation suivant :"}
+        </p>
+        <div className="space-y-1 text-gray-700 leading-relaxed mb-3">
+          <p>
+            <strong>{en ? "Mediator" : "Médiateur"} :</strong> {LEGAL_INFO.mediatorName}
+          </p>
+          <p>
+            <strong>{en ? "Address" : "Adresse"} :</strong> {LEGAL_INFO.mediatorAddress}
+          </p>
+          <p>
+            <strong>{en ? "Website" : "Site web"} :</strong>{" "}
+            <a href={LEGAL_INFO.mediatorUrl} target="_blank" rel="noopener noreferrer" className="text-brand-blue hover:underline">
+              {LEGAL_INFO.mediatorUrl}
+            </a>
+          </p>
+        </div>
+        <p className="text-gray-700 leading-relaxed mb-3">
+          {en
+            ? "To submit a mediation request, the Client must first have attempted to resolve the dispute directly with the Coach in writing. The Client then has 1 year from this written complaint to refer the matter to the mediator."
+            : "Pour soumettre une demande de médiation, le Client doit au préalable avoir tenté de résoudre son litige directement auprès du Coach par réclamation écrite. Le Client dispose ensuite d'un délai d'1 an à compter de cette réclamation écrite pour saisir le médiateur."}
+        </p>
+        <p className="text-gray-700 leading-relaxed">
+          {en
+            ? "The Client may also use the European online dispute resolution platform:"
+            : "Le Client peut également recourir à la plateforme européenne de règlement en ligne des litiges :"}{" "}
+          <a href={LEGAL_INFO.odrUrl} target="_blank" rel="noopener noreferrer" className="text-brand-blue hover:underline">
+            {LEGAL_INFO.odrUrl}
+          </a>
+        </p>
+      </section>
+
+      {/* Article 14 — Acceptation / Acceptance */}
       <section>
         <h2 className="text-xl font-semibold text-brand-dark mb-4">
-          {en ? "Article 13 — Acceptance" : "Article 13 — Acceptation"}
+          {en ? "Article 14 — Acceptance" : "Article 14 — Acceptation"}
         </h2>
         <p className="text-gray-700 leading-relaxed">
           {en

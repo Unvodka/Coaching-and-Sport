@@ -195,6 +195,13 @@ export default function PrivacyContent() {
                 </td>
               </tr>
               <tr className="border-b border-gray-100">
+                <td className="py-2 pr-4">Stripe Inc.</td>
+                <td className="py-2 pr-4">
+                  {en ? "Online payment processing" : "Traitement des paiements en ligne"}
+                </td>
+                <td className="py-2">{en ? "United States" : "États-Unis"}</td>
+              </tr>
+              <tr className="border-b border-gray-100">
                 <td className="py-2 pr-4">EmailJS</td>
                 <td className="py-2 pr-4">
                   {en ? "Form delivery" : "Envoi des formulaires"}
