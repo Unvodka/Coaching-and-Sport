@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 
 export default function AboutPageContent() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   const qualifications = [
     t("aboutPage.q1"),
