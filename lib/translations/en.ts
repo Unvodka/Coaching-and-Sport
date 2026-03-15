@@ -79,10 +79,10 @@ const en: Record<TranslationKey, string> = {
   'aboutPage.p6':
     "A nature lover, curious about everything, smiling and full of energy, I'm one of those people who make you want to get moving and take care of yourself — without overthinking it. Based in Valbonne, I work across the entire French Riviera and the Var to offer you the best possible support. Whether it's by a pool, outdoors, at your home, or over a good conversation, I love to share with simplicity, sincerity and good humor.",
   'aboutPage.qualificationsTitle': 'My Strengths',
-  'aboutPage.q1': 'State-certified Lifeguard',
-  'aboutPage.q2': 'Specialized sports educator',
-  'aboutPage.q3': 'Weight loss, fitness, well-being and mental health',
-  'aboutPage.q4': 'Sports nutrition advisor',
+  'aboutPage.q1': 'BPJEPS Aquatics & Swimming — French State Diploma (EQF Level 4)',
+  'aboutPage.q2': 'Professional Sports Educator Card N° 07520ED0375',
+  'aboutPage.q3': 'PSE2 First Responder Certificate (Croix Blanche, 2023)',
+  'aboutPage.q4': 'Sports nutrition advisor & online coaching',
   'aboutPage.approachTitle': 'My Approach',
   'aboutPage.approach1':
     'Complete initial assessment of your fitness level and goals',

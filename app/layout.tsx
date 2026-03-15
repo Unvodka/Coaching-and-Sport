@@ -273,10 +273,37 @@ const personJsonLd = {
     'Coaching en ligne',
     'Online coaching',
   ],
-  hasCredential: {
-    '@type': 'EducationalOccupationalCredential',
-    name: "Brevet d'État Maître-Nageur Sauveteur",
-  },
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'BPJEPS Activités Aquatiques et de la Natation',
+      description: 'Brevet Professionnel de la Jeunesse, de l\'Éducation Populaire et du Sport — RNCP Niveau IV / EQF Niveau 4',
+      credentialCategory: 'degree',
+      recognizedBy: {
+        '@type': 'GovernmentOrganization',
+        name: 'Ministère de la Jeunesse, de l\'Éducation Populaire et du Sport',
+      },
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'Carte Professionnelle d\'Éducateur Sportif N° 07520ED0375',
+      description: 'Valide jusqu\'au 19/11/2030 — Préfecture des Alpes-Maritimes',
+      credentialCategory: 'license',
+      recognizedBy: {
+        '@type': 'GovernmentOrganization',
+        name: 'Ministère chargé des Sports',
+      },
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'PSE2 — Équipier Secouriste Niveau 2',
+      credentialCategory: 'certificate',
+      recognizedBy: {
+        '@type': 'Organization',
+        name: 'Secouristes Français Croix Blanche',
+      },
+    },
+  ],
   makesOffer: {
     '@id': `${BASE_URL}/#business`,
   },
