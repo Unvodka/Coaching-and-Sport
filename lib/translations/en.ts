@@ -82,7 +82,7 @@ const en: Record<TranslationKey, string> = {
   'aboutPage.q1': '10 years of experience as a professional, a life of experience of training',
   'aboutPage.q2': 'Specialized sports educator',
   'aboutPage.q3': 'Weight loss, fitness, well-being and mental health',
-  'aboutPage.q4': 'Sports nutrition advisor',
+  'aboutPage.q4': 'Nutrition advice',
   'aboutPage.approachTitle': 'My Approach',
   'aboutPage.approach1':
     'Complete initial assessment of your fitness level and goals',

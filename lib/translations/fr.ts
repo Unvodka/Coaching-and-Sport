@@ -83,7 +83,7 @@ const fr = {
   'aboutPage.q1': '10 ans d\'expérience professionnelle, une vie d\'expérience de l\'entraînement',
   'aboutPage.q2': 'Éducateur sportif spécialisé',
   'aboutPage.q3': 'Perte de poids, remise en forme, bien-être et santé mentale',
-  'aboutPage.q4': 'Conseiller en nutrition sportive',
+  'aboutPage.q4': 'Conseils en nutrition',
   'aboutPage.approachTitle': 'Mon Approche',
   'aboutPage.approach1':
     'Évaluation initiale complète de votre condition physique et de vos objectifs',
