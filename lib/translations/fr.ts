@@ -80,7 +80,7 @@ const fr = {
   'aboutPage.p6':
     "Amoureux de la nature, curieux de tout, souriant et plein d'énergie, je fais partie de ceux qui donnent envie de se bouger et de prendre soin de soi — sans se prendre la tête. Basé à Valbonne, j'interviens sur toute la Côte d'Azur et le Var pour vous offrir le meilleur accompagnement possible. Que ce soit au bord d'un bassin, en plein air, à votre domicile ou autour d'une conversation, j'aime transmettre avec simplicité, sincérité et bonne humeur.",
   'aboutPage.qualificationsTitle': 'Mes Atouts',
-  'aboutPage.q1': "Brevet d'État de Maître-Nageur Sauveteur",
+  'aboutPage.q1': '10 ans d\'expérience professionnelle, une vie d\'expérience de l\'entraînement',
   'aboutPage.q2': 'Éducateur sportif spécialisé',
   'aboutPage.q3': 'Perte de poids, remise en forme, bien-être et santé mentale',
   'aboutPage.q4': 'Conseiller en nutrition sportive',
