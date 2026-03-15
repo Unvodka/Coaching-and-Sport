@@ -145,7 +145,7 @@ export default function AboutPageContent() {
           <FadeInWhenVisible delay={0.5}>
             <div className="mb-12">
               <h2 className="font-heading text-heading text-[1.6rem] font-bold mb-6 text-center">
-                🏅 {t("locale") === "en" ? "Diplomas & Certifications" : "Diplômes & Certifications"}
+                🏅 {locale === "en" ? "Diplomas & Certifications" : "Diplômes & Certifications"}
               </h2>
               <div className="grid sm:grid-cols-2 gap-4">
 
