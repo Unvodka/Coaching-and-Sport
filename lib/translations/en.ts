@@ -80,7 +80,7 @@ const en: Record<TranslationKey, string> = {
     "A nature lover, curious about everything, smiling and full of energy, I'm one of those people who make you want to get moving and take care of yourself — without overthinking it. Based in Valbonne, I work across the entire French Riviera and the Var to offer you the best possible support. Whether it's by a pool, outdoors, at your home, or over a good conversation, I love to share with simplicity, sincerity and good humor.",
   'aboutPage.qualificationsTitle': 'My Strengths',
   'aboutPage.q1': '10 years of experience as a professional, a life of experience of training',
-  'aboutPage.q2': 'Specialized sports educator',
+  'aboutPage.q2': 'Swimming lessons, aquafitness (group), fitness and aquabike. Introductory pilates and freediving.',
   'aboutPage.q3': 'Weight loss, fitness, well-being and mental health',
   'aboutPage.q4': 'Nutrition advice',
   'aboutPage.approachTitle': 'My Approach',
