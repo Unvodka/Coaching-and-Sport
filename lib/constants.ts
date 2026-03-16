@@ -475,7 +475,8 @@ const PROGRAMS_FR: Program[] = [
     goals: [
       'Amélioration des performances',
       'Développer force, endurance et puissance',
-      'Atteindre un niveau sportif avancé',
+      'Atteindre un niveau avancé et devenir un sportif confirmé',
+      'Devenir indépendant grâce à vos progrès techniques et physiques',
     ],
     price: '149€/mois',
     priceNumeric: 149,
@@ -579,7 +580,8 @@ const PROGRAMS_EN: Program[] = [
     goals: [
       'Break through your performance plateau',
       'Build strength, endurance and power',
-      'Reach an advanced athletic level',
+      'Reach an advanced level and become a confirmed athlete',
+      'Become independent through your technical and physical progress',
     ],
     price: '149€/month',
     priceNumeric: 149,
