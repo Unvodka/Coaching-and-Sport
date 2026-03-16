@@ -495,6 +495,7 @@ const PROGRAMS_FR: Program[] = [
       "Programme d'entraînement complet",
       'Plan nutritionnel complet avec recettes',
       'Analyses corporelles régulières',
+      '1 appel visio/téléphonique par semaine',
       'Support prioritaire 7j/7',
     ],
     goals: [
@@ -601,6 +602,7 @@ const PROGRAMS_EN: Program[] = [
       'Daily personalized training program',
       'Complete nutrition plan with recipes',
       'Bi-monthly body analysis',
+      '1 video/phone call per week',
       'Priority support 7 days/week',
     ],
     goals: [
