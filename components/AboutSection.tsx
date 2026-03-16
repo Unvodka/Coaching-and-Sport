@@ -27,8 +27,12 @@ export default function AboutSection() {
           </p>
         </FadeInWhenVisible>
         <FadeInWhenVisible delay={0.3}>
-          <p className="text-gray-600 mb-8 leading-[1.8] text-[1.1rem]">
+          <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
             {t('about.p2')}
+          </p>
+        </FadeInWhenVisible>
+        <FadeInWhenVisible delay={0.35}>
+          <p className="text-gray-600 mb-8 leading-[1.8] text-[1.1rem]">
             {t('about.p3')}
           </p>
         </FadeInWhenVisible>
