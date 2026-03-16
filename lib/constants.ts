@@ -455,8 +455,6 @@ const PROGRAMS_FR: Program[] = [
     priceUnit: '/mois',
     priceDetails: 'Engagement de 3 mois minimum',
     ctaText: 'Commencer maintenant',
-    isFeatured: true,
-    featuredBadge: '⭐ POPULAIRE',
   },
   {
     imageSrc:
@@ -483,6 +481,8 @@ const PROGRAMS_FR: Program[] = [
     priceUnit: '/mois',
     priceDetails: 'Engagement de 3 mois minimum',
     ctaText: 'Passer au niveau supérieur',
+    isFeatured: true,
+    featuredBadge: '⭐ POPULAIRE',
   },
   {
     imageSrc:
@@ -562,8 +562,6 @@ const PROGRAMS_EN: Program[] = [
     priceUnit: '/month',
     priceDetails: '3-month minimum commitment',
     ctaText: 'Start now',
-    isFeatured: true,
-    featuredBadge: '⭐ POPULAR',
   },
   {
     imageSrc:
@@ -590,6 +588,8 @@ const PROGRAMS_EN: Program[] = [
     priceUnit: '/month',
     priceDetails: '3-month minimum commitment',
     ctaText: 'Level up',
+    isFeatured: true,
+    featuredBadge: '⭐ POPULAR',
   },
   {
     imageSrc:
