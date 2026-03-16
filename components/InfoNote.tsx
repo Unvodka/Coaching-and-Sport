@@ -6,7 +6,7 @@ export default function InfoNote() {
   const { t } = useLanguage();
 
   return (
-    <div className="bg-white p-8 rounded-xl mt-12 border border-gray-200 text-center">
+    <div className="bg-white p-8 rounded-xl mt-12 border-2 border-gray-200 text-center">
       <p className="my-3 text-gray-600 leading-[1.7] text-[0.9375rem]">
         💡 <strong className="text-heading">{t("info.programsInclude")}</strong>{" "}
         {t("info.programsDetails")}
