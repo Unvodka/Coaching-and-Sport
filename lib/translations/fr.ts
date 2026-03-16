@@ -9,6 +9,8 @@ const fr = {
   // Hero
   'hero.subtitle':
     'Maître-nageur et éducateur sportif spécialisé en remise en forme, perte de poids et bien-être',
+  'hero.subtitle.line1': 'Maître-nageur et éducateur sportif',
+  'hero.subtitle.line2': 'Natation, fitness et bien-être',
   'hero.cta': 'Commencer ma transformation',
 
   // Services section
@@ -53,11 +55,11 @@ const fr = {
   'about.heading.name': 'Arnaud Chevallier',
   'about.heading.role': 'Un coach dédié à votre réussite',
   'about.p1':
-    "Je me consacre depuis plusieurs années à l'enseignement de la natation et des pratiques sportives.",
+    "Je me consacre depuis une dizaine d'années à l'enseignement de la natation et des pratiques sportives.",
   'about.p2':
-    "Spécialisé dans la remise en forme, la perte de poids et le bien-être, j'ai développé une approche globale qui combine plusieurs disciplines sportives pour des résultats durables et harmonieux.",
+    "Spécialisé dans la remise en forme, la perte de poids, le bien-être et la santé mentale, j'ai développé une approche globale qui combine plusieurs disciplines sportives pour des résultats durables et harmonieux.",
   'about.p3':
-    " Je peux vous reçevoir à domicile et j'interviens également dans toute la région des Alpes-Maritimes pour vous offrir le meilleur service possible.",
+    "Je peux vous recevoir à domicile et j'interviens également dans toute la région des Alpes-Maritimes pour vous offrir le service qui vous convient.",
   'about.cta': 'En savoir plus',
 
   // About page (dedicated /apropos)

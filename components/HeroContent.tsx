@@ -10,7 +10,7 @@ export function HeroContent() {
       <h1
         className="font-heading text-[2rem] mb-10 font-bold animate-hero-title max-md:text-[1.65rem] max-[480px]:text-[1.4rem]"
       >
-        {t("hero.subtitle")}
+        {t("hero.subtitle.line1")}<br />{t("hero.subtitle.line2")}
       </h1>
       <a
         href="#contact"

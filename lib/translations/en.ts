@@ -11,6 +11,8 @@ const en: Record<TranslationKey, string> = {
   // Hero
   'hero.subtitle':
     'Lifeguard and sports educator specializing in weight loss, fitness and well-being',
+  'hero.subtitle.line1': 'Lifeguard and sports educator',
+  'hero.subtitle.line2': 'Swimming, fitness and well-being',
   'hero.cta': 'Start my transformation',
 
   // Services section
@@ -53,11 +55,11 @@ const en: Record<TranslationKey, string> = {
   'about.heading.name': 'Arnaud Chevallier',
   'about.heading.role': 'A coach dedicated to your success',
   'about.p1':
-    'State-certified lifeguard and sports educator, I have been dedicated for several years to teaching swimming and sports activities.',
+    'For over a decade I have dedicated myself to teaching swimming and sports activities.',
   'about.p2':
-    'Specializing in fitness, weight loss and well-being, I have developed a holistic approach that combines multiple sports disciplines for lasting and balanced results.',
+    'Specializing in fitness, weight loss, well-being and mental health, I have developed a holistic approach that combines multiple sports disciplines for lasting and balanced results.',
   'about.p3':
-    ' I can welcome you at home and also work throughout the Alpes-Maritimes region to offer you the best possible service.',
+    'I can welcome you at home and also work throughout the Alpes-Maritimes region to offer you the service that suits you.',
   'about.cta': 'Learn more',
 
   // About page (dedicated /apropos)
