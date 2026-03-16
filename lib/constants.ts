@@ -412,7 +412,7 @@ const PROGRAMS_FR: Program[] = [
       'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80',
     title: 'Cours Particuliers',
     description:
-      'Un accompagnement 100% personnalisé pour atteindre vos objectifs pas à pas avec des corrections techniques dans un cadre ludique.',
+      'Un accompagnement technique et pratique. Apprenez une nouvelle discipline et atteignez vos objectifs pas à pas dans un cadre privilégié.',
     features: [
       "Séances individuelles d'une heure",
       'Programme entièrement sur mesure',
@@ -514,7 +514,7 @@ const PROGRAMS_EN: Program[] = [
       'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80',
     title: 'Private Lessons',
     description:
-      '100% personalized coaching to reach your goals quickly with quality individual follow-up.',
+      'Technical and practical coaching. Learn a new discipline and reach your goals step by step in a privileged setting.',
     features: [
       '1-hour individual sessions',
       'Fully customized program',
