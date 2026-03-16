@@ -468,9 +468,9 @@ const PROGRAMS_FR: Program[] = [
       '4 séances individuelles par mois',
       "Programme d'entraînement personnalisé",
       'Plan nutritionnel détaillé avec recettes',
-      'Support prioritaire 7j/7',
       'Analyses corporelles régulières',
       '1 appel visio/téléphonique par semaine',
+      'Support prioritaire 7j/7',
     ],
     goals: [
       'Amélioration des performances',
@@ -494,8 +494,8 @@ const PROGRAMS_FR: Program[] = [
       '8 séances individuelles par mois',
       "Programme d'entraînement complet",
       'Plan nutritionnel complet avec recettes',
-      'Support prioritaire 7j/7',
       'Analyses corporelles régulières',
+      'Support prioritaire 7j/7',
     ],
     goals: [
       'Transformation physique complète',
@@ -574,9 +574,9 @@ const PROGRAMS_EN: Program[] = [
       '4 private sessions per month',
       'Complete daily training program',
       'Detailed nutrition plan with recipes',
-      'Priority support 7 days/week',
       'Regular body analysis',
       '1 video/phone call per week',
+      'Priority support 7 days/week',
     ],
     goals: [
       'Break through your performance plateau',
@@ -600,8 +600,8 @@ const PROGRAMS_EN: Program[] = [
       '8 private sessions per month',
       'Daily personalized training program',
       'Complete nutrition plan with recipes',
-      'Priority support 7 days/week',
       'Bi-monthly body analysis',
+      'Priority support 7 days/week',
     ],
     goals: [
       'Complete physical transformation',
