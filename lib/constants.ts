@@ -470,6 +470,7 @@ const PROGRAMS_FR: Program[] = [
       'Plan nutritionnel détaillé avec recettes',
       'Support prioritaire 7j/7',
       'Analyses corporelles régulières',
+      '1 appel visio/téléphonique par semaine',
     ],
     goals: [
       'Amélioration des performances',
@@ -573,7 +574,7 @@ const PROGRAMS_EN: Program[] = [
       'Detailed nutrition plan with recipes',
       'Priority support 7 days/week',
       'Regular body analysis',
-      'Performance improvement',
+      '1 video/phone call per week',
     ],
     goals: [
       'Break through your performance plateau',
