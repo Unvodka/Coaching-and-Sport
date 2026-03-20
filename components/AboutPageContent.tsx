@@ -111,32 +111,32 @@ export default function AboutPageContent() {
           </div>
 
           <FadeInWhenVisible delay={0.25}>
-            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
+            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.037rem] tracking-[-0.1px]">
               {t("aboutPage.p1")}
             </p>
           </FadeInWhenVisible>
           <FadeInWhenVisible delay={0.3}>
-            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
+            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.037rem] tracking-[-0.1px]">
               {t("aboutPage.p2")}
             </p>
           </FadeInWhenVisible>
           <FadeInWhenVisible delay={0.35}>
-            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
+            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.037rem] tracking-[-0.1px]">
               {t("aboutPage.p3")}
             </p>
           </FadeInWhenVisible>
           <FadeInWhenVisible delay={0.4}>
-            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
+            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.037rem] tracking-[-0.1px]">
               {t("aboutPage.p4")}
             </p>
           </FadeInWhenVisible>
           <FadeInWhenVisible delay={0.45}>
-            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.1rem]">
+            <p className="text-gray-600 mb-5 leading-[1.8] text-[1.037rem] tracking-[-0.1px]">
               {t("aboutPage.p5")}
             </p>
           </FadeInWhenVisible>
           <FadeInWhenVisible delay={0.5}>
-            <p className="text-gray-600 mb-12 leading-[1.8] text-[1.1rem]">
+            <p className="text-gray-600 mb-12 leading-[1.8] text-[1.037rem] tracking-[-0.1px]">
               {t("aboutPage.p6")}
             </p>
           </FadeInWhenVisible>
