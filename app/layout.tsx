@@ -303,6 +303,15 @@ const personJsonLd = {
         name: 'Secouristes Français Croix Blanche',
       },
     },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'Pilates Mat Fundamental',
+      credentialCategory: 'certificate',
+      recognizedBy: {
+        '@type': 'Organization',
+        name: 'Frugier Fitness School, Cannes',
+      },
+    },
   ],
   makesOffer: {
     '@id': `${BASE_URL}/#business`,

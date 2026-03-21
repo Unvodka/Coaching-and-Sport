@@ -221,6 +221,22 @@ export default function AboutPageContent() {
                   </div>
                 </div>
 
+                {/* Pilates Mat Fundamental */}
+                <div className="flex gap-4 items-start bg-gradient-to-br from-purple-50 to-white border border-purple-100 rounded-2xl p-5 shadow-sm">
+                  <div className="text-3xl shrink-0">🧘</div>
+                  <div>
+                    <p className="font-bold text-brand-dark text-[0.95rem] leading-snug">
+                      Pilates Mat Fundamental
+                    </p>
+                    <p className="text-gray-500 text-sm mt-1">
+                      Frugier Fitness School — Cannes
+                    </p>
+                    <p className="text-gray-400 text-xs mt-1">
+                      Formation 23h · Délivré le 20/12/2025
+                    </p>
+                  </div>
+                </div>
+
               </div>
             </div>
           </FadeInWhenVisible>
