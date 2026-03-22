@@ -53,7 +53,7 @@ export default function AboutPageContent() {
           </FadeInWhenVisible>
 
           {/* Photo + Qualifications + Approach — 3-column grid on desktop */}
-          <div className="grid lg:grid-cols-3 gap-8 items-start mb-12">
+          <div className="grid lg:grid-cols-3 gap-8 items-stretch mb-12">
             {/* Qualifications — left on desktop, below photo on mobile */}
             <FadeInWhenVisible delay={0.15} className="order-2 lg:order-1">
               <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 border border-blue-100 h-full">
@@ -75,7 +75,7 @@ export default function AboutPageContent() {
             </FadeInWhenVisible>
 
             {/* Photo — center on desktop, top on mobile */}
-            <FadeInWhenVisible delay={0.1} className="order-1 lg:order-2 flex justify-center">
+            <FadeInWhenVisible delay={0.1} className="order-1 lg:order-2 flex justify-center items-center">
               <div className="relative w-[280px] h-[320px] rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12)] border-4 border-white">
                 <Image
                   src="/images/arnaud-profile.jpg"

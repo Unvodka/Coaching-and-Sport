@@ -90,7 +90,7 @@ const fr = {
   'aboutPage.approach1':
     'Évaluation initiale pour un programme 100% personnalisé adapté à votre rythme, vos objectifs et vos contraintes',
   'aboutPage.approach2':
-    'Améliorations de la qualité de vie (nutrition, énergie, sommeil, stress…) pour une amélioration des performances',
+    'Amélioration de la qualité de vie pour une amélioration des performances',
   'aboutPage.approach3':
     'Motivation dans un cadre ludique ou technique selon les circonstances',
   'aboutPage.approach4':
