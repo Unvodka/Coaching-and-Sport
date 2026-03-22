@@ -149,91 +149,74 @@ export default function AboutPageContent() {
               </h2>
               <div className="grid sm:grid-cols-2 gap-4">
 
-                {/* BPJEPS AAN */}
-                <div className="flex gap-4 items-start bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-2xl p-5 shadow-sm">
-                  <div className="text-3xl shrink-0">🎓</div>
-                  <div>
-                    <p className="font-bold text-brand-dark text-[0.95rem] leading-snug">
-                      BPJEPS — Activités Aquatiques et de la Natation
-                    </p>
-                    <p className="text-gray-500 text-sm mt-1">
-                      Brevet Professionnel de la Jeunesse, de l&apos;Éducation Populaire et du Sport
-                    </p>
-                    <p className="text-gray-400 text-xs mt-1">
-                      RNCP Niveau IV · EQF Niveau 4 · N° BPNOR160280 · Délivré le 27/09/2016
-                    </p>
+              {/* BPJEPS AAN */}
+                <div className="flex flex-col bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-2xl overflow-hidden shadow-sm">
+                  <div className="relative h-[160px] overflow-hidden bg-gray-100">
+                    <Image src="/images/diplomas/bpjeps-aan.jpg" alt="Diplôme BPJEPS Activités Aquatiques et de la Natation" fill className="object-cover object-top" sizes="(max-width: 640px) 100vw, 50vw" />
+                  </div>
+                  <div className="flex gap-3 items-start p-4">
+                    <div className="text-2xl shrink-0">🎓</div>
+                    <div>
+                      <p className="font-bold text-brand-dark text-[0.9rem] leading-snug">BPJEPS — Activités Aquatiques et de la Natation</p>
+                      <p className="text-gray-400 text-xs mt-1">RNCP Niveau IV · EQF 4 · N° BPNOR160280 · 27/09/2016</p>
+                    </div>
                   </div>
                 </div>
 
                 {/* Carte Professionnelle */}
-                <div className="flex gap-4 items-start bg-gradient-to-br from-green-50 to-white border border-green-100 rounded-2xl p-5 shadow-sm">
-                  <div className="text-3xl shrink-0">🪪</div>
-                  <div>
-                    <p className="font-bold text-brand-dark text-[0.95rem] leading-snug">
-                      Carte Professionnelle d&apos;Éducateur Sportif
-                    </p>
-                    <p className="text-gray-500 text-sm mt-1">
-                      Délivrée par le Ministère chargé des Sports — Préfecture des Alpes-Maritimes
-                    </p>
-                    <p className="text-gray-400 text-xs mt-1">
-                      N° 07520ED0375 · Valide jusqu&apos;au 19/11/2030
-                    </p>
-                    <a
-                      href="https://recherche-educateur.sports.gouv.fr"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-brand-blue text-xs hover:underline mt-1 inline-block"
-                    >
-                      Vérifier sur recherche-educateur.sports.gouv.fr →
-                    </a>
+                <div className="flex flex-col bg-gradient-to-br from-green-50 to-white border border-green-100 rounded-2xl overflow-hidden shadow-sm">
+                  <div className="relative h-[160px] overflow-hidden bg-gray-100">
+                    <Image src="/images/diplomas/carte-pro.jpg" alt="Carte Professionnelle d'Éducateur Sportif N° 07520ED0375" fill className="object-cover object-top" sizes="(max-width: 640px) 100vw, 50vw" />
+                  </div>
+                  <div className="flex gap-3 items-start p-4">
+                    <div className="text-2xl shrink-0">🪪</div>
+                    <div>
+                      <p className="font-bold text-brand-dark text-[0.9rem] leading-snug">Carte Professionnelle d&apos;Éducateur Sportif</p>
+                      <p className="text-gray-400 text-xs mt-1">N° 07520ED0375 · Valide jusqu&apos;au 19/11/2030</p>
+                      <a href="https://recherche-educateur.sports.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-brand-blue text-xs hover:underline mt-1 inline-block">Vérifier →</a>
+                    </div>
                   </div>
                 </div>
 
                 {/* PSE2 */}
-                <div className="flex gap-4 items-start bg-gradient-to-br from-red-50 to-white border border-red-100 rounded-2xl p-5 shadow-sm">
-                  <div className="text-3xl shrink-0">🚑</div>
-                  <div>
-                    <p className="font-bold text-brand-dark text-[0.95rem] leading-snug">
-                      PSE2 — Équipier Secouriste Niveau 2
-                    </p>
-                    <p className="text-gray-500 text-sm mt-1">
-                      Secouristes Français Croix Blanche
-                    </p>
-                    <p className="text-gray-400 text-xs mt-1">
-                      N° PSE2-FSFCB-2023-199501-5 · Obtenu le 22/11/2023
-                    </p>
+                <div className="flex flex-col bg-gradient-to-br from-red-50 to-white border border-red-100 rounded-2xl overflow-hidden shadow-sm">
+                  <div className="relative h-[160px] overflow-hidden bg-gray-100">
+                    <Image src="/images/diplomas/pse2.jpg" alt="PSE2 Équipier Secouriste Niveau 2" fill className="object-cover object-top" sizes="(max-width: 640px) 100vw, 50vw" />
+                  </div>
+                  <div className="flex gap-3 items-start p-4">
+                    <div className="text-2xl shrink-0">🚑</div>
+                    <div>
+                      <p className="font-bold text-brand-dark text-[0.9rem] leading-snug">PSE2 — Équipier Secouriste Niveau 2</p>
+                      <p className="text-gray-400 text-xs mt-1">Secouristes Français Croix Blanche · 22/11/2023</p>
+                    </div>
                   </div>
                 </div>
 
                 {/* PSE1 */}
-                <div className="flex gap-4 items-start bg-gradient-to-br from-orange-50 to-white border border-orange-100 rounded-2xl p-5 shadow-sm">
-                  <div className="text-3xl shrink-0">🩺</div>
-                  <div>
-                    <p className="font-bold text-brand-dark text-[0.95rem] leading-snug">
-                      PSE1 — Premiers Secours en Équipe Niveau 1
-                    </p>
-                    <p className="text-gray-500 text-sm mt-1">
-                      CREPS Sud-Est — Site d&apos;Antibes
-                    </p>
-                    <p className="text-gray-400 text-xs mt-1">
-                      N° 06-2013-047 · Obtenu le 18/11/2013
-                    </p>
+                <div className="flex flex-col bg-gradient-to-br from-orange-50 to-white border border-orange-100 rounded-2xl overflow-hidden shadow-sm">
+                  <div className="relative h-[160px] overflow-hidden bg-gray-100">
+                    <Image src="/images/diplomas/pse1.jpg" alt="PSE1 Premiers Secours en Équipe Niveau 1" fill className="object-cover object-top" sizes="(max-width: 640px) 100vw, 50vw" />
+                  </div>
+                  <div className="flex gap-3 items-start p-4">
+                    <div className="text-2xl shrink-0">🩺</div>
+                    <div>
+                      <p className="font-bold text-brand-dark text-[0.9rem] leading-snug">PSE1 — Premiers Secours en Équipe Niveau 1</p>
+                      <p className="text-gray-400 text-xs mt-1">CREPS Sud-Est Antibes · N° 06-2013-047 · 18/11/2013</p>
+                    </div>
                   </div>
                 </div>
 
                 {/* Pilates Mat Fundamental */}
-                <div className="flex gap-4 items-start bg-gradient-to-br from-purple-50 to-white border border-purple-100 rounded-2xl p-5 shadow-sm">
-                  <div className="text-3xl shrink-0">🧘</div>
-                  <div>
-                    <p className="font-bold text-brand-dark text-[0.95rem] leading-snug">
-                      Pilates Mat Fundamental
-                    </p>
-                    <p className="text-gray-500 text-sm mt-1">
-                      Frugier Fitness School — Cannes
-                    </p>
-                    <p className="text-gray-400 text-xs mt-1">
-                      Formation 23h · Délivré le 20/12/2025
-                    </p>
+                <div className="flex flex-col bg-gradient-to-br from-purple-50 to-white border border-purple-100 rounded-2xl overflow-hidden shadow-sm">
+                  <div className="relative h-[160px] overflow-hidden bg-gray-100">
+                    <Image src="/images/diplomas/pilates.jpg" alt="Certificat Pilates Mat Fundamental" fill className="object-cover object-top" sizes="(max-width: 640px) 100vw, 50vw" />
+                  </div>
+                  <div className="flex gap-3 items-start p-4">
+                    <div className="text-2xl shrink-0">🧘</div>
+                    <div>
+                      <p className="font-bold text-brand-dark text-[0.9rem] leading-snug">Pilates Mat Fundamental</p>
+                      <p className="text-gray-400 text-xs mt-1">Frugier Fitness School — Cannes · 20/12/2025</p>
+                    </div>
                   </div>
                 </div>
 
