@@ -54,7 +54,7 @@ export default function SubscriptionGate({ children, ghost }: Props) {
               : "Subscribe to access recipes, programs, daily tips, and much more."}
           </p>
           <Link
-            href="/programs"
+            href="/packs"
             className="block w-full px-6 py-3 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity"
           >
             {locale === "fr" ? "Voir les programmes" : "See programs"}

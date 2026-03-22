@@ -36,7 +36,7 @@ export default function SubscriptionLockOverlay({ children }: Props) {
               : "Subscribe to unlock your personalised tips and programs."}
           </p>
           <Link
-            href="/programs"
+            href="/packs"
             className="inline-block px-5 py-2 bg-gradient-to-r from-brand-blue to-brand-navy text-white rounded-lg text-xs font-semibold hover:opacity-90 transition-opacity"
           >
             {locale === "fr" ? "Voir les offres" : "See plans"}

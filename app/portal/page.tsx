@@ -111,7 +111,7 @@ export default function DashboardPage() {
             </p>
           </div>
           <a
-            href="/programs"
+            href="/packs"
             className="flex-shrink-0 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold rounded-lg transition-colors whitespace-nowrap"
           >
             {locale === "fr" ? "Voir les offres" : "See plans"}
