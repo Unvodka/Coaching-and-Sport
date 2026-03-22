@@ -78,11 +78,12 @@ export default function AboutPageContent() {
             <FadeInWhenVisible delay={0.1} className="order-1 lg:order-2 flex justify-center">
               <div className="relative w-[280px] h-[320px] rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12)] border-4 border-white">
                 <Image
-                  src="/images/Aquabike.jpg"
+                  src="/images/arnaud-profile.jpg"
                   alt="Arnaud Chevallier — Éducateur Sportif & Maître-Nageur"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                   sizes="280px"
+                  priority
                 />
               </div>
             </FadeInWhenVisible>
