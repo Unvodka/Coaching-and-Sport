@@ -89,7 +89,7 @@ const en: Record<TranslationKey, string> = {
   'aboutPage.approach1':
     'Initial assessment for a 100% personalised programme adapted to your pace, goals and constraints',
   'aboutPage.approach2':
-    'Quality of life improvements for better performance',
+    'Quality of life improvement for better performance',
   'aboutPage.approach3':
     'Motivation in a fun or technical setting depending on the circumstances',
   'aboutPage.approach4': 'Caring support all the way through',

@@ -55,7 +55,7 @@ export default function AboutPageContent() {
           {/* Photo + Qualifications + Approach — 3-column grid on desktop */}
           <div className="grid lg:grid-cols-3 gap-8 items-stretch mb-12">
             {/* Qualifications — left on desktop, below photo on mobile */}
-            <FadeInWhenVisible delay={0.15} className="order-2 lg:order-1">
+            <FadeInWhenVisible delay={0.15} className="order-2 lg:order-1 h-full">
               <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 border border-blue-100 h-full">
                 <h3 className="font-heading text-heading text-xl font-bold mb-4 flex items-center gap-3">
                   🎓 {t("aboutPage.qualificationsTitle")}
@@ -75,7 +75,7 @@ export default function AboutPageContent() {
             </FadeInWhenVisible>
 
             {/* Photo — center on desktop, top on mobile */}
-            <FadeInWhenVisible delay={0.1} className="order-1 lg:order-2 flex justify-center items-center">
+            <FadeInWhenVisible delay={0.1} className="order-1 lg:order-2 flex justify-center items-center h-full">
               <div className="relative w-[280px] h-[320px] rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12)] border-4 border-white">
                 <Image
                   src="/images/arnaud-profile.jpg"
@@ -89,7 +89,7 @@ export default function AboutPageContent() {
             </FadeInWhenVisible>
 
             {/* Approach — right on desktop, below qualifications on mobile */}
-            <FadeInWhenVisible delay={0.2} className="order-3">
+            <FadeInWhenVisible delay={0.2} className="order-3 h-full">
               <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-200 h-full">
                 <h3 className="font-heading text-heading text-xl font-bold mb-4 flex items-center gap-3">
                   🎯 {t("aboutPage.approachTitle")}
