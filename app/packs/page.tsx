@@ -28,7 +28,7 @@ export const metadata: Metadata = {
       "Packs de séances particulières avec éducateur sportif et maître-nageur diplômé à Valbonne. Tarifs dégressifs, paiement sécurisé.",
     images: [
       {
-        url: "/images/hero-valbonne.jpg",
+        url: "/images/hero-lifeguard.jpg",
         width: 1200,
         height: 630,
         alt: "Coach-Bluewave - Packs & Tarifs",

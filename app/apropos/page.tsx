@@ -30,7 +30,7 @@ export const metadata: Metadata = {
       "Maître-nageur diplômé et éducateur sportif certifié à Valbonne. Spécialisé en perte de poids et remise en forme.",
     images: [
       {
-        url: "/images/hero-valbonne.jpg",
+        url: "/images/hero-lifeguard.jpg",
         width: 1200,
         height: 630,
         alt: "Coach-Bluewave - Arnaud Chevallier",

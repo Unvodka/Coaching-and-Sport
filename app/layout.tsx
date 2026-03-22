@@ -64,7 +64,7 @@ export const metadata: Metadata = {
       "Coach-Bluewave par Arnaud Chevallier, maître-nageur diplômé d'État — coaching sportif, cours de natation, fitness, musculation, HIIT et nutrition personnalisée à Valbonne. Personal trainer en personne (Côte d'Azur) et en ligne.",
     images: [
       {
-        url: '/images/hero-valbonne.jpg',
+        url: '/images/hero-lifeguard.jpg',
         width: 1200,
         height: 630,
         alt: 'Coach-Bluewave - Coaching sportif par Arnaud Chevallier',
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     title: 'Coach-Bluewave | Arnaud Chevallier - Éducateur Sportif & Maître-Nageur',
     description:
       "Coach-Bluewave — maître-nageur et éducateur sportif à Valbonne. Natation, fitness, musculation, HIIT et nutrition personnalisée par Arnaud Chevallier. Personal trainer Côte d'Azur.",
-    images: ['/images/hero-valbonne.jpg'],
+    images: ['/images/hero-lifeguard.jpg'],
   },
   robots: {
     index: true,
@@ -108,7 +108,7 @@ const professionalServiceJsonLd = {
     "Coach-Bluewave par Arnaud Chevallier — éducateur sportif (personal trainer) et maître-nageur diplômé d'État à Valbonne. Cours de natation (swimming lessons), fitness, musculation, HIIT, circuit training et nutrition personnalisée. Coaching en personne sur la Côte d'Azur (French Riviera) et en ligne partout en France. Spécialisé en perte de poids et remise en forme.",
   url: BASE_URL,
   logo: `${BASE_URL}/images/logo-bluewave.png`,
-  image: `${BASE_URL}/images/hero-valbonne.jpg`,
+  image: `${BASE_URL}/images/hero-lifeguard.jpg`,
   areaServed: [
     {
       '@type': 'GeoCircle',
@@ -248,7 +248,7 @@ const personJsonLd = {
   description:
     "Fondateur de Coach-Bluewave. Maître-nageur diplômé d'État (certified swimming teacher) et éducateur sportif (personal trainer) à Valbonne. Cours de natation, fitness, musculation, HIIT et nutrition personnalisée. Coaching en personne sur la Côte d'Azur (French Riviera) et en ligne partout en France. Spécialisé en perte de poids et remise en forme.",
   url: BASE_URL,
-  image: `${BASE_URL}/images/hero-valbonne.jpg`,
+  image: `${BASE_URL}/images/hero-lifeguard.jpg`,
   knowsAbout: [
     'Natation',
     'Swimming',
@@ -359,7 +359,7 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/images/hero-valbonne.webp"
+          href="/images/hero-lifeguard.webp"
           type="image/webp"
         />
 

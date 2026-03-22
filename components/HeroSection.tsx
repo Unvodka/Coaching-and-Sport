@@ -11,7 +11,7 @@ export default function HeroSection() {
     >
       {/* Background Image — server-rendered for fast LCP */}
       <Image
-        src="/images/hero-valbonne.webp"
+        src="/images/hero-lifeguard.webp"
         alt="Vue côte d'Azur - Valbonne"
         fill
         className="object-cover"
