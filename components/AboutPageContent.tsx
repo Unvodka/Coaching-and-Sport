@@ -76,12 +76,12 @@ export default function AboutPageContent() {
 
             {/* Photo — center on desktop, top on mobile */}
             <FadeInWhenVisible delay={0.1} className="order-1 lg:order-2 flex justify-center items-center h-full">
-              <div className="relative w-[280px] h-[320px] rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12)] border-4 border-white">
+              <div className="relative w-[280px] h-[380px] rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12)] border-4 border-white">
                 <Image
                   src="/images/arnaud-profile.jpg"
                   alt="Arnaud Chevallier — Éducateur Sportif & Maître-Nageur"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover object-center"
                   sizes="280px"
                   priority
                 />
