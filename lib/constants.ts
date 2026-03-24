@@ -101,13 +101,13 @@ const SERVICES_FR: Service[] = [
   },
   {
     slug: 'aquafitness-fitness-plein-air',
-    imageSrc: '/images/Running-medium.jpg',
+    imageSrc: '/images/arnaud-fitness-mat.jpg',
     imageAlt: 'Fitness & Plein Air',
     title: 'Aquafitness/Fitness & Plein Air',
     description:
       'Entraînements personnalisés à domicile ou en extérieur : musculation, HIIT, circuit training et exercices fonctionnels pour sculpter votre corps et vous dépasser.',
     detail: {
-      heroImageSrc: '/images/Running-medium.jpg',
+      heroImageSrc: '/images/arnaud-fitness-mat.jpg',
       heroImageAlt: 'Entraînement fitness en plein air ou à domicile',
       subtitle: 'Sculptez votre corps, en plein air ou chez vous',
       longDescription: [
@@ -277,13 +277,13 @@ const SERVICES_EN: Service[] = [
   },
   {
     slug: 'fitness-plein-air',
-    imageSrc: '/images/Running-medium.jpg',
+    imageSrc: '/images/arnaud-squat.jpg',
     imageAlt: 'Fitness & Outdoor Training',
     title: 'Fitness & Outdoor Training',
     description:
       'Personalized workouts indoors or outdoors: weight training, HIIT, circuit training and functional exercises to sculpt your body and push your limits.',
     detail: {
-      heroImageSrc: '/images/Running-medium.jpg',
+      heroImageSrc: '/images/arnaud-squat.jpg',
       heroImageAlt: 'Fitness training indoors and outdoors',
       subtitle: 'Sculpt your body, indoors or outdoors',
       longDescription: [
