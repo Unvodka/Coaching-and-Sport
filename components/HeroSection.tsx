@@ -11,8 +11,8 @@ export default function HeroSection() {
     >
       {/* Background Image — server-rendered for fast LCP */}
       <Image
-        src="/images/hero-lifeguard.webp"
-        alt="Vue côte d'Azur - Valbonne"
+        src="/images/hero-valbonne.webp"
+        alt="Arnaud Chevallier, coach sportif à Valbonne — handstand au bord de la piscine"
         fill
         className="object-cover"
         priority
