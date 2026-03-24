@@ -458,7 +458,7 @@ const PROGRAMS_FR: Program[] = [
   },
   {
     imageSrc:
-      'https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=800&q=80',
+      '/images/arnaud-pushup.jpg',
     title: 'Advanced Training',
     description:
       'La formule premium combinant coaching en ligne ET séances en personne pour repousser vos limites.',
@@ -565,7 +565,7 @@ const PROGRAMS_EN: Program[] = [
   },
   {
     imageSrc:
-      'https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=800&q=80',
+      '/images/arnaud-pushup.jpg',
     title: 'Advanced Training',
     description:
       'The premium formula combining online coaching AND in-person sessions to push your limits.',
