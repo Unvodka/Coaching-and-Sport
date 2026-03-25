@@ -31,6 +31,7 @@ export interface Service {
   slug: string;
   imageSrc: string;
   imageAlt: string;
+  imagePosition?: string;
   title: string;
   description: string;
   detail: ServiceDetail;

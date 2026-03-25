@@ -9,6 +9,7 @@ export default function ServiceCard({
   slug,
   imageSrc,
   imageAlt,
+  imagePosition = "center",
   title,
   description,
 }: Service) {
@@ -25,6 +26,7 @@ export default function ServiceCard({
         width={800}
         height={220}
         className="w-full h-[220px] object-cover"
+        style={{ objectPosition: imagePosition }}
         quality={75}
         loading="lazy"
         sizes="(max-width: 768px) 100vw, 33vw"

@@ -103,6 +103,7 @@ const SERVICES_FR: Service[] = [
     slug: 'aquafitness-fitness-plein-air',
     imageSrc: '/images/arnaud-pushup-pool.jpg',
     imageAlt: 'Fitness & Plein Air',
+    imagePosition: 'center 60%',
     title: 'Aquafitness/Fitness & Plein Air',
     description:
       'Entraînements personnalisés à domicile ou en extérieur : musculation, HIIT, circuit training et exercices fonctionnels pour sculpter votre corps et vous dépasser.',
