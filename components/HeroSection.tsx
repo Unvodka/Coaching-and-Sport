@@ -9,7 +9,7 @@ export default function HeroSection() {
       style={{ minHeight: "100dvh" }}
     >
       {/* Background Image — <picture> for responsive small/large variants */}
-      <picture>
+      <picture className="absolute inset-0 w-full h-full">
         <source
           media="(min-width: 768px)"
           srcSet="/images/swimmer-large.jpg"
@@ -17,7 +17,7 @@ export default function HeroSection() {
         <img
           src="/images/swimmer-small.jpg"
           alt="Arnaud Chevallier, coach sportif à Valbonne"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="w-full h-full object-cover object-[center_30%]"
           fetchPriority="high"
         />
       </picture>
