@@ -14,7 +14,7 @@ export default function HeroSection() {
         src="/images/hero-valbonne.webp"
         alt="Arnaud Chevallier, coach sportif à Valbonne — handstand au bord de la piscine"
         fill
-        className="object-cover object-top"
+        className="object-cover object-[center_35%]"
         priority
         sizes="100vw"
         quality={75}
