@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { HeroContent } from "./HeroContent";
 
 export default function HeroSection() {
@@ -9,18 +8,19 @@ export default function HeroSection() {
       className="text-white p-0 text-center relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{ minHeight: "100dvh" }}
     >
-      {/* Background Image — server-rendered for fast LCP */}
-      <Image
-        src="/images/hero-valbonne.webp"
-        alt="Arnaud Chevallier, coach sportif à Valbonne — handstand au bord de la piscine"
-        fill
-        className="object-cover object-[center_35%]"
-        priority
-        sizes="100vw"
-        quality={75}
-        placeholder="blur"
-        blurDataURL="data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAACwAQCdASoKAAYABUB8JYwAAuX7+ExAAP51xsPWSfKpChEssNMYyFejKt3UtY7tGzKcMd/AB/AAAA=="
-      />
+      {/* Background Image — <picture> for responsive small/large variants */}
+      <picture>
+        <source
+          media="(min-width: 768px)"
+          srcSet="/images/swimmer-large.jpg"
+        />
+        <img
+          src="/images/swimmer-small.jpg"
+          alt="Arnaud Chevallier, coach sportif à Valbonne"
+          className="absolute inset-0 w-full h-full object-cover"
+          fetchPriority="high"
+        />
+      </picture>
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-black/50 z-[1]" />
 
