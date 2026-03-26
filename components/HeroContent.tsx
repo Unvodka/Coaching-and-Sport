@@ -8,7 +8,7 @@ export function HeroContent() {
   return (
     <div className="relative z-10 max-w-[900px] p-8">
       <h1
-        className="font-heading text-[2rem] mb-10 font-bold animate-hero-title max-md:text-[1.65rem] max-[480px]:text-[1.4rem]"
+        className="font-heading text-[2rem] mb-16 font-bold animate-hero-title max-md:text-[1.65rem] max-[480px]:text-[1.4rem]"
       >
         {t("hero.subtitle.line1")}<br />{t("hero.subtitle.line2")}
       </h1>
