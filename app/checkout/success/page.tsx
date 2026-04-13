@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { getStripe } from "@/lib/stripe";
+import CheckoutSuccessTracker from "@/components/CheckoutSuccessTracker";
 
 export const metadata: Metadata = {
   title: "Paiement confirmé - Coach-Bluewave",
@@ -52,6 +53,10 @@ export default async function CheckoutSuccess({ searchParams }: Props) {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center px-8">
       <div className="bg-white p-12 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-gray-200 text-center max-w-lg w-full">
         <div className="text-6xl mb-6">✅</div>
+        <CheckoutSuccessTracker
+          value={session.amount_total ? session.amount_total / 100 : 0}
+          transactionId={session.id}
+        />
         <h1 className="font-heading text-3xl font-bold text-heading mb-4">
           Paiement confirmé !
         </h1>

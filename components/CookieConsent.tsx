@@ -3,12 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/useLanguage";
-
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-  }
-}
+import { grantFullConsent, grantAnalyticsConsent } from "@/components/Analytics";
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -17,31 +12,25 @@ export default function CookieConsent() {
   useEffect(() => {
     const consent = localStorage.getItem("cookie-consent");
     if (!consent) {
-      // Small delay so it doesn't flash on load
       const timer = setTimeout(() => setVisible(true), 1000);
       return () => clearTimeout(timer);
     }
     if (consent === "accepted") {
-      grantConsent();
+      grantFullConsent();
+    } else if (consent === "refused") {
+      grantAnalyticsConsent();
     }
   }, []);
 
-  function grantConsent() {
-    if (typeof window.gtag === "function") {
-      window.gtag("consent", "update", {
-        analytics_storage: "granted",
-      });
-    }
-  }
-
   function handleAccept() {
     localStorage.setItem("cookie-consent", "accepted");
-    grantConsent();
+    grantFullConsent();
     setVisible(false);
   }
 
   function handleRefuse() {
     localStorage.setItem("cookie-consent", "refused");
+    grantAnalyticsConsent();
     setVisible(false);
   }
 

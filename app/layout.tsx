@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from 'next';
 import { headers } from 'next/headers';
-import Script from 'next/script';
 import { Inter, Playfair_Display } from 'next/font/google';
 import { LanguageProvider } from '@/lib/i18n/LanguageContext';
 import { AuthProvider } from '@/lib/supabase/AuthContext';
 import { BASE_URL } from '@/lib/config';
 import JsonLd from '@/components/JsonLd';
 import CookieConsent from '@/components/CookieConsent';
+import Analytics from '@/components/Analytics';
 import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration';
 import './globals.css';
 
@@ -392,32 +392,8 @@ export default function RootLayout({
           <ServiceWorkerRegistration />
         </LanguageProvider>
 
-        {/* Google Analytics 4 — lazy loaded to avoid blocking render */}
-        <Script id="ga-consent-default" strategy="lazyOnload" nonce={nonce}>
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('consent', 'default', {
-              'analytics_storage': 'denied',
-              'ad_storage': 'denied',
-              'ad_user_data': 'denied',
-              'ad_personalization': 'denied',
-            });
-          `}
-        </Script>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-GEJXN9BH9R"
-          strategy="lazyOnload"
-          nonce={nonce}
-        />
-        <Script id="google-analytics" strategy="lazyOnload" nonce={nonce}>
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-GEJXN9BH9R', { 'anonymize_ip': true });
-          `}
-        </Script>
+        {/* Analytics — GA4 + Google Ads + Meta Pixel (consent-aware) */}
+        <Analytics />
       </body>
     </html>
   );

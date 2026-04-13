@@ -5,6 +5,7 @@ import emailjs from "@emailjs/browser";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import FadeInWhenVisible from "./animations/FadeInWhenVisible";
 import Toast from "./Toast";
+import { trackContactFormSubmit } from "@/components/Analytics";
 
 export default function ContactSection() {
   const [fromName, setFromName] = useState("");
@@ -58,6 +59,7 @@ export default function ContactSection() {
     emailjs.send(serviceId, templateId, templateParams).then(
       () => {
         setToast({ message: t("contact.success"), type: "success" });
+        trackContactFormSubmit(formule);
         setFromName("");
         setFromEmail("");
         setPhone("");
