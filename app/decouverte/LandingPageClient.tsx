@@ -199,7 +199,7 @@ export default function LandingPageClient() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/30 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            Éducateur sportif diplômé d'État · Valbonne, Côte d'Azur
+            Éducateur sportif diplômé d&apos;État · Valbonne, Côte d&apos;Azur
           </div>
 
           <h1 className="font-heading text-4xl md:text-6xl font-extrabold leading-tight mb-4 tracking-tight">
@@ -208,7 +208,7 @@ export default function LandingPageClient() {
           </h1>
 
           <p className="text-lg md:text-xl text-white/85 mb-8 leading-relaxed max-w-2xl mx-auto">
-            Natation · Fitness · Aquafitness — à domicile ou en extérieur sur toute la Côte d'Azur.
+            Natation · Fitness · Aquafitness — à domicile ou en extérieur sur toute la Côte d&apos;Azur.
             Coaching 100% personnalisé avec un maître-nageur certifié.
           </p>
 
@@ -219,7 +219,7 @@ export default function LandingPageClient() {
               <span className="text-5xl font-extrabold text-white">499€</span>
               <div className="text-left">
                 <p className="text-green-300 font-bold text-sm leading-tight">→ 249,50€ net</p>
-                <p className="text-white/60 text-xs leading-tight">après crédit d'impôt SAP</p>
+                <p className="text-white/60 text-xs leading-tight">après crédit d&apos;impôt SAP</p>
               </div>
             </div>
           </div>
@@ -259,11 +259,11 @@ export default function LandingPageClient() {
         <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-6 text-sm font-medium text-center">
           <span>⭐ 5/5 sur Google</span>
           <span className="hidden sm:block opacity-40">|</span>
-          <span>🏅 Diplômé d'État BPJEPS AAN</span>
+          <span>🏅 Diplômé d&apos;État BPJEPS AAN</span>
           <span className="hidden sm:block opacity-40">|</span>
           <span>📍 Valbonne · Sophia · Antibes · Mougins</span>
           <span className="hidden sm:block opacity-40">|</span>
-          <span>💶 -50% crédit d'impôt SAP</span>
+          <span>💶 -50% crédit d&apos;impôt SAP</span>
         </div>
       </div>
 
@@ -334,7 +334,7 @@ export default function LandingPageClient() {
             {TESTIMONIALS.map((t, i) => (
               <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                 <Stars count={t.stars} />
-                <p className="text-gray-600 leading-relaxed mt-3 mb-4 text-sm italic">"{t.text}"</p>
+                <p className="text-gray-600 leading-relaxed mt-3 mb-4 text-sm italic">&ldquo;{t.text}&rdquo;</p>
                 <div>
                   <p className="font-bold text-gray-900 text-sm">{t.name}</p>
                   <p className="text-gray-400 text-xs">{t.location}</p>
@@ -362,12 +362,12 @@ export default function LandingPageClient() {
               </div>
               <div className="text-3xl text-white/40">→</div>
               <div>
-                <p className="text-green-300 text-sm font-semibold">Après crédit d'impôt SAP</p>
+                <p className="text-green-300 text-sm font-semibold">Après crédit d&apos;impôt SAP</p>
                 <p className="text-4xl font-extrabold text-green-300">249,50€</p>
               </div>
             </div>
             <p className="text-white/70 text-sm">
-              50% remboursé via votre déclaration d'impôts (Service à la Personne agréé)
+              50% remboursé via votre déclaration d&apos;impôts (Service à la Personne agréé)
             </p>
           </div>
           <ul className="text-left space-y-3 mb-8 max-w-sm mx-auto">

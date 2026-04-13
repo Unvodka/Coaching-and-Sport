@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import { headers } from 'next/headers';
 import { Inter, Playfair_Display } from 'next/font/google';
 import { LanguageProvider } from '@/lib/i18n/LanguageContext';
 import { AuthProvider } from '@/lib/supabase/AuthContext';
@@ -337,7 +336,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const nonce = headers().get('x-nonce') ?? '';
 
   return (
     <html lang="fr" className="scroll-smooth">

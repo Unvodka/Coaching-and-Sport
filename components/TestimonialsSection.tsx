@@ -111,7 +111,7 @@ export default function TestimonialsSection() {
               <Stars count={t.stars} />
 
               <blockquote className="text-gray-600 leading-[1.75] text-[1rem] italic flex-1 mb-5">
-                "{t.text}"
+                &ldquo;{t.text}&rdquo;
               </blockquote>
 
               <footer className="flex items-center gap-3">

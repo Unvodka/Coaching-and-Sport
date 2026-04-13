@@ -20,7 +20,7 @@ export default function Analytics() {
   return (
     <>
       {/* ── Consent Mode v2 default (denied until user accepts) ────────── */}
-      <Script id="consent-default" strategy="beforeInteractive">
+      <Script id="consent-default" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
