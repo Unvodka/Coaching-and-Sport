@@ -71,9 +71,6 @@ export default function TestimonialsSection() {
   const { locale } = useLanguage();
   const testimonials = locale === 'en' ? TESTIMONIALS_EN : TESTIMONIALS_FR;
   const title = locale === 'en' ? 'What my clients say' : 'Ce que disent mes clients';
-  const subtitle = locale === 'en'
-    ? 'Real results, real people — on the French Riviera'
-    : 'Des résultats concrets, des vraies personnes — sur la Côte d\'Azur';
   const googleLabel = locale === 'en' ? 'Verified reviews' : 'Avis vérifiés';
 
   return (

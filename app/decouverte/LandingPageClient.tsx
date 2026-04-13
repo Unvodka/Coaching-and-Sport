@@ -107,16 +107,12 @@ export default function LandingPageClient() {
   const [honeypot, setHoneypot] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [toast, setToast] = useState<ToastType>(null);
-  const [scrolled, setScrolled] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
     if (publicKey) emailjs.init(publicKey);
 
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   function scrollToForm() {
