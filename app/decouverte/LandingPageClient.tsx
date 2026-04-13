@@ -201,7 +201,7 @@ export default function LandingPageClient() {
 
           <h1 className="font-heading text-4xl md:text-6xl font-extrabold leading-tight mb-4 tracking-tight">
             Transformez votre corps<br />
-            <span className="text-brand-blue">en 10 séances</span>
+            <span className="text-white">en 10 séances</span>
           </h1>
 
           <p className="text-lg md:text-xl text-white/85 mb-8 leading-relaxed max-w-2xl mx-auto">
@@ -221,7 +221,7 @@ export default function LandingPageClient() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <button
               onClick={scrollToForm}
               className="bg-brand-blue hover:bg-blue-700 text-white font-bold text-lg px-10 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(37,99,235,0.4)] active:scale-95"
@@ -243,8 +243,8 @@ export default function LandingPageClient() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/50 text-xs animate-bounce">
-          <span>Découvrir</span>
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/80 text-xs animate-bounce z-10">
+          <span className="font-medium tracking-widest uppercase text-[10px]">Découvrir</span>
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
