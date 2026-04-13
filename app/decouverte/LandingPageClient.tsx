@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client';
 
 import { useState, FormEvent, useEffect, useRef } from 'react';
@@ -306,8 +307,8 @@ export default function LandingPageClient() {
             <p className="text-brand-blue font-semibold text-sm uppercase tracking-widest mb-2">Votre coach</p>
             <h2 className="font-heading text-3xl font-extrabold text-gray-900 mb-4">Arnaud Chevallier</h2>
             <p className="text-gray-600 leading-relaxed mb-4">
-              Maître-nageur et éducateur sportif diplômé d'État, je suis passionné par le sport et la transmission. 
-              Basé à Valbonne, j'interviens sur toute la Côte d'Azur — au bord d'un bassin, en plein air ou à domicile.
+              Maître-nageur et éducateur sportif diplômé d&apos;État, je suis passionné par le sport et la transmission.
+              Basé à Valbonne, j&apos;interviens sur toute la Côte d&apos;Azur — au bord d&apos;un bassin, en plein air ou à domicile.
             </p>
             <p className="text-gray-600 leading-relaxed mb-6">
               Mon approche : bienveillance, progressivité et résultats concrets. Pas de méthode générique — 
