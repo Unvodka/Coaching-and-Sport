@@ -181,7 +181,7 @@ export default function LandingPageClient() {
       </div>
 
       {/* ── Hero ─────────────────────────────────────────────────── */}
-      <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden pt-20">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
         <Image
           src="/images/arnaud-pushup-pool.jpg"
           alt="Arnaud Chevallier coach sportif Valbonne"
@@ -190,62 +190,66 @@ export default function LandingPageClient() {
           priority
           quality={90}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
+        {/* Gradient plus doux en bas pour lisibilité */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/75" />
 
-        <div className="relative z-10 text-center text-white px-6 max-w-3xl mx-auto">
+        <div className="relative z-10 text-center text-white px-6 max-w-2xl mx-auto py-12">
+
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/30 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            Éducateur sportif diplômé d&apos;État · Valbonne, Côte d&apos;Azur
+          <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5 text-xs font-medium mb-5 md:text-sm md:mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+            Éducateur sportif diplômé d&apos;État · Valbonne
           </div>
 
-          <h1 className="font-heading text-4xl md:text-6xl font-extrabold leading-tight mb-4 tracking-tight">
+          {/* Titre */}
+          <h1 className="font-heading text-[2.6rem] md:text-6xl font-extrabold leading-[1.1] mb-4 tracking-tight">
             Transformez votre corps<br />
-            <span className="text-white">en 10 séances</span>
+            <span className="text-white opacity-90">en 10 séances</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-white/85 mb-8 leading-relaxed max-w-2xl mx-auto">
-            Natation · Fitness · Aquafitness — à domicile ou en extérieur sur toute la Côte d&apos;Azur.
-            Coaching 100% personnalisé avec un maître-nageur certifié.
+          {/* Sous-titre — masqué sur très petit mobile */}
+          <p className="hidden sm:block text-base md:text-xl text-white/80 mb-6 leading-relaxed">
+            Natation · Fitness · Aquafitness<br className="md:hidden" />
+            <span className="hidden md:inline"> — </span>à domicile ou en extérieur, Côte d&apos;Azur.
           </p>
 
-          {/* Price block */}
-          <div className="inline-flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/25 rounded-2xl px-6 py-4 mb-6 md:px-8 md:py-5 md:mb-8">
-            <p className="text-xs text-white/70 mb-1 md:text-sm">Pack 10 séances particulières</p>
-            <div className="flex items-baseline gap-3">
-              <span className="text-4xl md:text-5xl font-extrabold text-white">499€</span>
-              <div className="text-left">
-                <p className="text-green-300 font-bold text-sm leading-tight">→ 249,50€ net</p>
-                <p className="text-white/60 text-xs leading-tight">après crédit d&apos;impôt SAP</p>
-              </div>
+          {/* Prix inline épuré */}
+          <div className="flex items-center justify-center gap-3 mb-7">
+            <span className="text-4xl md:text-5xl font-extrabold">499€</span>
+            <div className="text-left border-l border-white/30 pl-3">
+              <p className="text-green-300 font-bold text-sm leading-tight">→ 249,50€ net</p>
+              <p className="text-white/55 text-xs">après crédit d&apos;impôt SAP</p>
             </div>
           </div>
 
-          {/* CTA buttons — stacked on mobile, side by side on desktop */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <button
-              onClick={scrollToForm}
-              className="bg-brand-blue hover:bg-blue-700 text-white font-bold text-lg px-10 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(37,99,235,0.4)] active:scale-95"
-            >
-              Je veux mes 10 séances →
-            </button>
+          {/* CTA principal — un seul bouton sur mobile */}
+          <button
+            onClick={scrollToForm}
+            className="w-full sm:w-auto bg-brand-blue hover:bg-blue-700 text-white font-bold text-lg px-10 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(37,99,235,0.4)] active:scale-95 mb-3"
+          >
+            Je veux mes 10 séances →
+          </button>
+
+          {/* WhatsApp — secondaire, plus discret */}
+          <div className="flex items-center justify-center gap-2">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold text-lg px-10 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 active:scale-95"
+              className="inline-flex items-center gap-2 text-white/70 hover:text-white text-sm font-medium transition-colors py-2"
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
               </svg>
-              WhatsApp
+              Ou contacter par WhatsApp
             </a>
           </div>
+
         </div>
 
-        {/* Scroll indicator — hidden on mobile where content already fills screen */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1 text-white/80 text-xs animate-bounce z-10">
-          <span className="font-medium tracking-widest uppercase text-[10px]">Découvrir</span>
+        {/* Scroll indicator — desktop uniquement */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1 text-white/60 text-xs animate-bounce z-10">
+          <span className="tracking-widest uppercase text-[10px]">Découvrir</span>
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
