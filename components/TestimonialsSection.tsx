@@ -88,7 +88,6 @@ export default function TestimonialsSection() {
         >
           {title}
         </h2>
-        <p className="text-center text-gray-500 text-lg mb-2">{subtitle}</p>
 
         {/* Google rating badge */}
         <div className="flex justify-center mb-12">
