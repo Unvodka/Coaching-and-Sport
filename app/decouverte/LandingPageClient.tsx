@@ -157,7 +157,9 @@ export default function LandingPageClient() {
       {/* ── Sticky top bar ───────────────────────────────────────── */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md py-3">
         <div className="max-w-5xl mx-auto px-6 flex items-center justify-between">
-          <Image src="/images/logo-bluewave.png" alt="Coach Bluewave" width={120} height={40} className="h-9 w-auto object-contain" />
+          <a href="https://coachbluewave.fr" aria-label="Retour au site principal">
+            <Image src="/images/logo-bluewave.png" alt="Coach Bluewave" width={120} height={40} className="h-9 w-auto object-contain" />
+          </a>
           <div className="flex items-center gap-3">
             <a
               href={WHATSAPP_URL}
