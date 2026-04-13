@@ -172,12 +172,12 @@ export default function LandingPageClient() {
               </svg>
               WhatsApp
             </a>
-            <button
-              onClick={scrollToForm}
+            <a
+              href="https://coach-bluewave.com"
               className="bg-brand-blue text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
             >
-              Je réserve
-            </button>
+              Voir le site complet
+            </a>
           </div>
         </div>
       </div>
