@@ -343,55 +343,6 @@ export default function LandingPageClient() {
         </div>
       </section>
 
-      {/* ── Pricing highlight ─────────────────────────────────────── */}
-      <section className="py-16 px-6 bg-brand-blue text-white">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="font-heading text-3xl md:text-4xl font-extrabold mb-4">
-            Pack 10 séances particulières
-          </h2>
-          <p className="text-white/80 mb-8 text-lg">
-            Natation · Fitness · Aquafitness — ou un mix selon vos objectifs
-          </p>
-          <div className="bg-white/10 backdrop-blur rounded-2xl p-8 mb-8 border border-white/20">
-            <div className="flex items-center justify-center gap-6 mb-4">
-              <div>
-                <p className="text-white/60 text-sm">Prix total</p>
-                <p className="text-4xl font-extrabold">499€</p>
-              </div>
-              <div className="text-3xl text-white/40">→</div>
-              <div>
-                <p className="text-green-300 text-sm font-semibold">Après crédit d&apos;impôt SAP</p>
-                <p className="text-4xl font-extrabold text-green-300">249,50€</p>
-              </div>
-            </div>
-            <p className="text-white/70 text-sm">
-              50% remboursé via votre déclaration d&apos;impôts (Service à la Personne agréé)
-            </p>
-          </div>
-          <ul className="text-left space-y-3 mb-8 max-w-sm mx-auto">
-            {[
-              '10 séances d\'1 heure chacune',
-              'Bilan initial offert',
-              'Programme sur mesure',
-              'Suivi entre les séances',
-              'Conseils nutrition inclus',
-              'Attestation fiscale fournie',
-            ].map((item) => (
-              <li key={item} className="flex items-center gap-3 text-sm">
-                <span className="text-green-300 text-lg shrink-0">✓</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-          <button
-            onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-white text-brand-blue font-extrabold text-lg px-12 py-4 rounded-xl hover:bg-gray-50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-95"
-          >
-            Réserver mon pack →
-          </button>
-        </div>
-      </section>
-
       {/* ── FAQ ──────────────────────────────────────────────────── */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-2xl mx-auto">
