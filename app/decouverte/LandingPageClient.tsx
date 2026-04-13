@@ -277,9 +277,11 @@ export default function LandingPageClient() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {BENEFITS.map((b, i) => (
               <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div className="text-3xl mb-3">{b.icon}</div>
-                <h3 className="font-bold text-gray-900 mb-2 text-[1rem]">{b.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{b.desc}</p>
+                <div className="flex items-start gap-3 mb-2">
+                  <span className="text-2xl shrink-0">{b.icon}</span>
+                  <h3 className="font-bold text-gray-900 text-[1rem] leading-snug">{b.title}</h3>
+                </div>
+                <p className="text-gray-500 text-sm leading-relaxed pl-9">{b.desc}</p>
               </div>
             ))}
           </div>
