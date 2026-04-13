@@ -239,6 +239,32 @@ export default function CGVContent() {
         </p>
       </section>
 
+      {/* Article SAP — Services à la Personne */}
+      <section className="mb-10">
+        <h2 className="text-xl font-semibold text-brand-dark mb-4">
+          {en ? "SAP — Personal Services Declaration" : "SAP — Déclaration de services à la personne"}
+        </h2>
+        <div className="space-y-1 text-gray-700 leading-relaxed">
+          <p>
+            <strong>{en ? "Declaration number" : "Numéro de déclaration"} :</strong>{" "}
+            {LEGAL_INFO.sapNumber}
+          </p>
+          <p>
+            <strong>{en ? "Effective date" : "Date d'effet"} :</strong>{" "}
+            {LEGAL_INFO.sapDeclarationDate}
+          </p>
+          <p>
+            <strong>{en ? "Declared address" : "Adresse de déclaration"} :</strong>{" "}
+            {LEGAL_INFO.sapAddress}
+          </p>
+        </div>
+        <p className="text-gray-700 leading-relaxed mt-3">
+          {en
+            ? `${LEGAL_INFO.brand} is registered as a personal services provider (SAP). Clients may benefit from a 50% tax credit on eligible services, in accordance with Article 199 sexdecies of the French General Tax Code. A fiscal certificate is issued annually upon request.`
+            : `${LEGAL_INFO.brand} est enregistré en tant que prestataire de services à la personne (SAP). Les clients peuvent bénéficier d'un crédit d'impôt de 50% sur les prestations éligibles, conformément à l'article 199 sexdecies du Code Général des Impôts. Une attestation fiscale est délivrée annuellement sur demande.`}
+        </p>
+      </section>
+
       {/* Article 10 — Force majeure / Force Majeure */}
       <section className="mb-10">
         <h2 className="text-xl font-semibold text-brand-dark mb-4">

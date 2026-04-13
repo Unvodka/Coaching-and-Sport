@@ -102,6 +102,38 @@ export default function MentionsLegalesContent() {
         </p>
       </section>
 
+      {/* Section SAP — Services à la Personne */}
+      <section className="mb-10">
+        <h2 className="text-xl font-semibold text-brand-dark mb-4">
+          {en ? "Personal Services (SAP) Registration" : "Déclaration de services à la personne (SAP)"}
+        </h2>
+        <div className="space-y-1 text-gray-700 leading-relaxed">
+          <p>
+            <strong>{en ? "Declaration number" : "Numéro de déclaration"} :</strong>{" "}
+            {LEGAL_INFO.sapNumber}
+          </p>
+          <p>
+            <strong>{en ? "Effective date" : "Date d'effet"} :</strong>{" "}
+            {LEGAL_INFO.sapDeclarationDate}
+          </p>
+          <p>
+            <strong>{en ? "Declared address" : "Adresse déclarée"} :</strong>{" "}
+            {LEGAL_INFO.sapAddress}
+          </p>
+          <p>
+            <strong>{en ? "Issued by" : "Délivré par"} :</strong>{" "}
+            {en
+              ? "Direction Départementale de l'Emploi, du Travail et des Solidarités des Alpes-Maritimes (DDETS 06)"
+              : "Direction Départementale de l'Emploi, du Travail et des Solidarités des Alpes-Maritimes (DDETS 06)"}
+          </p>
+        </div>
+        <p className="text-gray-600 text-sm mt-3">
+          {en
+            ? "This registration entitles clients to a 50% tax credit on eligible personal coaching services, in accordance with Article 199 sexdecies of the French General Tax Code."
+            : "Cet enregistrement ouvre droit pour les clients à un crédit d'impôt de 50% sur les prestations de coaching éligibles, conformément à l'article 199 sexdecies du Code Général des Impôts."}
+        </p>
+      </section>
+
       {/* Section 3 - Hébergement / Hosting */}
       <section className="mb-10">
         <h2 className="text-xl font-semibold text-brand-dark mb-4">

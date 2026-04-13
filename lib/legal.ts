@@ -9,9 +9,9 @@ export const LEGAL_INFO = {
   status: 'Micro-entrepreneur (Entreprise Individuelle)',
   brand: 'Coach-Bluewave',
   activity: 'Éducateur sportif personnel, Maître-Nageur Sauveteur',
-  siret: '82243667100025',
-  address: '131 allée des palmiers',
-  city: 'Valbonne, 06560, France',
+  siret: '822 436 671 00025',
+  address: '265 Avenue Maréchal Alphonse Juin',
+  city: 'Mougins, 06250, France',
   phone: '0749486203',
   email: 'chevallier.a06@gmail.com',
 
@@ -22,7 +22,9 @@ export const LEGAL_INFO = {
   carteProExpiry: '19/11/2030',
 
   // ─── SAP (Services à la Personne) ─────────────────────────
-  sapNumber: '[SAP_NUMBER]',
+  sapNumber: 'SAP822436671',
+  sapDeclarationDate: '24/02/2026',
+  sapAddress: '265 Avenue Maréchal Alphonse Juin, 06250 Mougins',
 
   // ─── Insurance ─────────────────────────────────────────────
   insuranceCompany: 'SNPMNS',
