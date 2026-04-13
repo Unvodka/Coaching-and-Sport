@@ -183,7 +183,10 @@ export default function LandingPageClient() {
       </div>
 
       {/* ── Hero ─────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex flex-col justify-between overflow-hidden">
+      <section
+        className="relative flex flex-col justify-between overflow-hidden"
+        style={{ minHeight: '100dvh' }}
+      >
         <Image
           src="/images/arnaud-pushup-pool.jpg"
           alt="Arnaud Chevallier coach sportif Valbonne"
@@ -195,21 +198,21 @@ export default function LandingPageClient() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/80" />
 
         {/* ── Haut : badge + titre ── */}
-        <div className="relative z-10 text-center text-white px-6 max-w-2xl mx-auto w-full pt-24 md:pt-32">
-          <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5 text-xs font-medium mb-4">
+        <div className="relative z-10 text-center text-white px-6 max-w-2xl mx-auto w-full pt-20">
+          <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5 text-xs font-medium mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
             Éducateur sportif diplômé d&apos;État · Valbonne
           </div>
-          <h1 className="font-heading text-[2.6rem] md:text-6xl font-extrabold leading-[1.1] tracking-tight">
+          <h1 className="font-heading text-[2.2rem] md:text-6xl font-extrabold leading-[1.1] tracking-tight">
             Transformez votre corps<br />en 10 séances
           </h1>
         </div>
 
         {/* ── Bas : prix + CTA ── */}
-        <div className="relative z-10 text-center text-white px-6 max-w-2xl mx-auto w-full pb-10 md:pb-16">
+        <div className="relative z-10 text-center text-white px-6 max-w-2xl mx-auto w-full pb-8">
           {/* Prix */}
-          <div className="flex items-center justify-center gap-3 mb-5">
-            <span className="text-4xl md:text-5xl font-extrabold">499€</span>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <span className="text-3xl md:text-5xl font-extrabold">499€</span>
             <div className="text-left border-l border-white/30 pl-3">
               <p className="text-green-300 font-bold text-sm leading-tight">→ 249,50€ net</p>
               <p className="text-white/55 text-xs">après crédit d&apos;impôt SAP</p>
@@ -219,7 +222,7 @@ export default function LandingPageClient() {
           {/* CTA */}
           <button
             onClick={scrollToForm}
-            className="w-full sm:w-auto bg-brand-blue hover:bg-blue-700 text-white font-bold text-lg px-10 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(37,99,235,0.4)] active:scale-95 mb-3"
+            className="w-full sm:w-auto bg-brand-blue hover:bg-blue-700 text-white font-bold text-lg px-10 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(37,99,235,0.4)] active:scale-95 mb-2"
           >
             Je veux mes 10 séances →
           </button>
