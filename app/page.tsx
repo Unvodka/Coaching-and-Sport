@@ -6,6 +6,8 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
 import OffersSection from "@/components/OffersSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 import JsonLd from "@/components/JsonLd";
 import { FAQ_FR } from "@/lib/faq";
 import { BASE_URL } from "@/lib/config";
@@ -52,11 +54,13 @@ export default function Home() {
       <AboutSection />
       <ServicesSection />
       <OffersSection />
+      <TestimonialsSection />
       <ContactSection />
       <FAQSection />
       <TrustBar />
       </main>
       <Footer />
+      <WhatsAppFloat />
     </>
   );
 }
