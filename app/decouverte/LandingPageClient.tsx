@@ -181,19 +181,18 @@ export default function LandingPageClient() {
       </div>
 
       {/* ── Hero ─────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+      <section className="relative min-h-screen flex items-end md:items-center justify-center overflow-hidden pt-16">
         <Image
           src="/images/arnaud-pushup-pool.jpg"
           alt="Arnaud Chevallier coach sportif Valbonne"
           fill
-          className="object-cover object-[center_55%]"
+          className="object-cover object-[center_40%]"
           priority
           quality={90}
         />
-        {/* Gradient plus doux en bas pour lisibilité */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/75" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/80" />
 
-        <div className="relative z-10 text-center text-white px-6 max-w-2xl mx-auto py-12">
+        <div className="relative z-10 text-center text-white px-6 max-w-2xl mx-auto pb-10 md:py-12">
 
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5 text-xs font-medium mb-5 md:text-sm md:mb-6">
