@@ -16,11 +16,15 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-GEJXN9BH9R';
 const GADS_ID = process.env.NEXT_PUBLIC_GADS_ID || '';
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || '';
 
-export default function Analytics() {
+interface AnalyticsProps {
+  nonce?: string;
+}
+
+export default function Analytics({ nonce }: AnalyticsProps) {
   return (
     <>
       {/* ── Consent Mode v2 default (denied until user accepts) ────────── */}
-      <Script id="consent-default" strategy="afterInteractive">
+      <Script id="consent-default" strategy="afterInteractive" nonce={nonce}>
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -39,8 +43,9 @@ export default function Analytics() {
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
         strategy="afterInteractive"
+        nonce={nonce}
       />
-      <Script id="ga4-init" strategy="afterInteractive">
+      <Script id="ga4-init" strategy="afterInteractive" nonce={nonce}>
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -55,7 +60,7 @@ export default function Analytics() {
 
       {/* ── Meta Pixel ─────────────────────────────────────────────────── */}
       {META_PIXEL_ID && (
-        <Script id="meta-pixel" strategy="afterInteractive">
+        <Script id="meta-pixel" strategy="afterInteractive" nonce={nonce}>
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
