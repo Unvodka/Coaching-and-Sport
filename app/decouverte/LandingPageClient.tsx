@@ -210,10 +210,10 @@ export default function LandingPageClient() {
           </p>
 
           {/* Price block */}
-          <div className="inline-flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/25 rounded-2xl px-8 py-5 mb-8">
-            <p className="text-sm text-white/70 mb-1">Pack 10 séances particulières</p>
+          <div className="inline-flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/25 rounded-2xl px-6 py-4 mb-6 md:px-8 md:py-5 md:mb-8">
+            <p className="text-xs text-white/70 mb-1 md:text-sm">Pack 10 séances particulières</p>
             <div className="flex items-baseline gap-3">
-              <span className="text-5xl font-extrabold text-white">499€</span>
+              <span className="text-4xl md:text-5xl font-extrabold text-white">499€</span>
               <div className="text-left">
                 <p className="text-green-300 font-bold text-sm leading-tight">→ 249,50€ net</p>
                 <p className="text-white/60 text-xs leading-tight">après crédit d&apos;impôt SAP</p>
@@ -221,7 +221,8 @@ export default function LandingPageClient() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          {/* CTA buttons — stacked on mobile, side by side on desktop */}
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={scrollToForm}
               className="bg-brand-blue hover:bg-blue-700 text-white font-bold text-lg px-10 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(37,99,235,0.4)] active:scale-95"
@@ -242,8 +243,8 @@ export default function LandingPageClient() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/80 text-xs animate-bounce z-10">
+        {/* Scroll indicator — hidden on mobile where content already fills screen */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1 text-white/80 text-xs animate-bounce z-10">
           <span className="font-medium tracking-widest uppercase text-[10px]">Découvrir</span>
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
