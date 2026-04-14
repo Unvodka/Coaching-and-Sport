@@ -197,12 +197,8 @@ export default function LandingPageClient() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/80" />
 
-        {/* ── Haut : badge + titre ── */}
+        {/* ── Haut : titre ── */}
         <div className="relative z-10 text-center text-white px-6 max-w-2xl mx-auto w-full pt-20">
-          <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5 text-xs font-medium mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-            Éducateur sportif diplômé d&apos;État · Valbonne
-          </div>
           <h1 className="font-heading text-[2.2rem] md:text-6xl font-extrabold leading-[1.1] tracking-tight">
             Transformez votre corps<br />en 10 séances
           </h1>
