@@ -32,6 +32,12 @@ export default function Footer() {
           >
             {t("footer.cgv")}
           </Link>
+          <Link
+            href="/avance-immediate"
+            className="hover:text-white/90 transition-colors"
+          >
+            Avance Immédiate
+          </Link>
         </div>
       </footer>
     </FadeInWhenVisible>
