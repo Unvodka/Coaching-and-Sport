@@ -60,13 +60,18 @@ export default function AvanceImmediateContent() {
         <h2 className="text-xl font-semibold text-brand-dark mb-4">
           2. Caractère non obligatoire
         </h2>
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-gray-700 leading-relaxed">
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-gray-700 leading-relaxed space-y-2">
           <p>
             ⚠️ L&apos;Avance Immédiate est un service{" "}
             <strong>entièrement facultatif</strong>. Vous n&apos;êtes en aucun
             cas obligé(e) d&apos;y adhérer pour bénéficier des prestations de
             Coach Bluewave. Le paiement classique reste disponible à tout
             moment.
+          </p>
+          <p>
+            💶 Ce service est <strong>entièrement gratuit</strong> pour le
+            client. Aucun frais supplémentaire n&apos;est appliqué au titre de
+            l&apos;utilisation de l&apos;Avance Immédiate.
           </p>
         </div>
       </section>
