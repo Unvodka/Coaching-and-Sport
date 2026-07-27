@@ -101,14 +101,14 @@ const SERVICES_FR: Service[] = [
   },
   {
     slug: 'aquafitness-fitness-plein-air',
-    imageSrc: '/images/arnaud-pushup-pool.jpg',
+    imageSrc: '/images/duo-pushup.jpg',
     imageAlt: 'Fitness & Plein Air',
     imagePosition: 'center 60%',
     title: 'Aquafitness/Fitness & Plein Air',
     description:
       'Entraînements personnalisés à domicile ou en extérieur : musculation, HIIT, circuit training et exercices fonctionnels pour sculpter votre corps et vous dépasser.',
     detail: {
-      heroImageSrc: '/images/arnaud-pushup-pool.jpg',
+      heroImageSrc: '/images/duo-pushup.jpg',
       heroImageAlt: 'Entraînement fitness en plein air ou à domicile',
       subtitle: 'Sculptez votre corps, en plein air ou chez vous',
       longDescription: [
@@ -458,8 +458,7 @@ const PROGRAMS_FR: Program[] = [
     ctaText: 'Commencer maintenant',
   },
   {
-    imageSrc:
-      '/images/arnaud-pushup.jpg',
+    imageSrc: '/images/arnaud-pushup.jpg',
     title: 'Advanced Training',
     description:
       'La formule premium combinant coaching en ligne ET séances en personne pour repousser vos limites.',
@@ -565,8 +564,7 @@ const PROGRAMS_EN: Program[] = [
     ctaText: 'Start now',
   },
   {
-    imageSrc:
-      '/images/arnaud-pushup.jpg',
+    imageSrc: '/images/arnaud-pushup.jpg',
     title: 'Advanced Training',
     description:
       'The premium formula combining online coaching AND in-person sessions to push your limits.',
