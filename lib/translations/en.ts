@@ -93,6 +93,7 @@ const en: Record<TranslationKey, string> = {
   'aboutPage.approach3':
     'Motivation in a fun or technical setting depending on the circumstances',
   'aboutPage.approach4': 'Caring support all the way through',
+  'aboutPage.galleryTitle': 'In Action',
   'aboutPage.ctaTitle': 'Ready to get started?',
   'aboutPage.ctaText': 'Contact me',
   'aboutPage.backHome': '← Back to home',

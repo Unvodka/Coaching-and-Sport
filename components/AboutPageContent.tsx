@@ -142,6 +142,44 @@ export default function AboutPageContent() {
             </p>
           </FadeInWhenVisible>
 
+          {/* En Action — Photo Gallery */}
+          <FadeInWhenVisible delay={0.45}>
+            <div className="mb-12">
+              <h2 className="font-heading text-heading text-[1.6rem] font-bold mb-6 text-center">
+                📸 {t("aboutPage.galleryTitle")}
+              </h2>
+              <div className="grid sm:grid-cols-3 gap-4">
+                <div className="relative h-[260px] rounded-2xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.1)]">
+                  <Image
+                    src="/images/duo-pushup.jpg"
+                    alt="Séance de pompes en duo au bord de la piscine"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                  />
+                </div>
+                <div className="relative h-[260px] rounded-2xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.1)]">
+                  <Image
+                    src="/images/duo-squat.jpg"
+                    alt="Séance de squats en duo au bord de la piscine"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                  />
+                </div>
+                <div className="relative h-[260px] rounded-2xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.1)]">
+                  <Image
+                    src="/images/duo-stretching.jpg"
+                    alt="Séance d'étirements en duo au bord de la piscine"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                  />
+                </div>
+              </div>
+            </div>
+          </FadeInWhenVisible>
+
           {/* Diplômes & Certifications */}
           <FadeInWhenVisible delay={0.5}>
             <div className="mb-12">

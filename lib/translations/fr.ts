@@ -95,6 +95,7 @@ const fr = {
     'Motivation dans un cadre ludique ou technique selon les circonstances',
   'aboutPage.approach4':
     'Accompagnement bienveillant sur toute la ligne',
+  'aboutPage.galleryTitle': 'En Action',
   'aboutPage.ctaTitle': 'Prêt à commencer ?',
   'aboutPage.ctaText': 'Contactez-moi',
   'aboutPage.backHome': "← Retour à l'accueil",
